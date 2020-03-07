@@ -12,7 +12,15 @@ output:
 knitr::opts_chunk$set(eval = FALSE,
                       message = FALSE,
                       warning = FALSE)
+
+library(ggplot2)
+library(dplyr)
+library(showtext) # Link donde estan las fuentes Google (http://www.google.com/fonts)
+font_add_google('Gochi Hand', 'gochi')
+showtext.auto()
 ```
+
+---
 
 <h1><p class="text-primary">Modelo de efectos mixtos, machine learning y deep learning</p></h1>
 <h2><p class="text-primary"><strong>Resumen de trabajos de interés</strong></p></h2>
@@ -39,16 +47,13 @@ knitr::opts_chunk$set(eval = FALSE,
 
 ---
 
-<h3><p class="text-primary"><strong>Un pequeño repaso</strong></p></h2>
+<h2><p class="text-primary"><strong>Un pequeño repaso</strong></p></h2>
 
 <div class = "row">
 
 <div class = "col-md-6">
 
-
-<section style="text-align: justify;"><p class="text-secondary">El <font color="black"><u>machine learning</u></font> es una rama de la inteligencia artificial que viene ganando popularidad. Ha sido ampliamente utilizado en muchas aplicaciones, por ejemplo, ingeniería, ciencias, salud y negocios.
-</p>
-
+<section style="text-align: justify;"><p class="text-secondary">La <font color="black"><u>inteligencia artificial</u></font> es el nombre de todo un campo de conocimiento, similar a la biología o la química. El <font color="black"><u>machine learning</u></font> es una rama de la inteligencia artificial que viene ganando popularidad.</p></section>
 
 </div>
 
@@ -58,10 +63,120 @@ knitr::opts_chunk$set(eval = FALSE,
 
 <div class = "col-md-5">
 
-```{r, echo = FALSE, eval = TRUE, fig.align = "center", fig.cap = "", out.width = "340"}
+```{r, echo = FALSE, eval = TRUE, fig.showtext = TRUE, fig.align = "center", fig.cap = ""}
 
-knitr::include_graphics("Imagenes/ML_3.png")
+data.frame(
+  x = c(1:8), y = c(1:8)
+) %>%
+  ggplot(aes(x, y)) +
+  geom_blank() +
+  annotate(geom = 'rect', xmin = 1.5, xmax = 7.5, ymin = 1.5, ymax = 7.5, colour = 'yellow', fill = 'yellow', alpha = 0.4) +
+  annotate(geom = 'text', x = 3.2, y = 7.0, label = 'Inteligencia artificial', family = 'gochi', size = 17.4, colour = 'black') +
+  annotate(geom = 'rect', xmin = 2.5, xmax = 7.0, ymin = 2.0, ymax = 6.5, colour = 'cyan', fill = 'cyan', alpha = 0.4) +
+  annotate(geom = 'text', x = 4.0, y = 6.0, label = 'Machine learning', family = 'gochi', size = 17.4, colour = 'black') +
+  annotate(geom = 'rect', xmin = 3.5, xmax = 6.5, ymin = 2.5, ymax = 5.5, colour = 'red', fill = 'red', alpha = 0.4) +
+  annotate(geom = 'text', x = 4.8, y = 5.0, label = 'Redes neuronales', family = 'gochi', size = 17.4, colour = 'black') +
+  annotate(geom = 'rect', xmin = 4.5, xmax = 6.0, ymin = 3.0, ymax = 4.5, colour = 'black', fill = 'black', alpha = 0.4) +
+  annotate(geom = 'text', x = 5.6, y = 3.5, label = 'Deep learning', family = 'gochi', size = 17.4, colour = 'black') +
+  theme_void() +
+  theme(axis.text = element_blank(),
+        axis.ticks = element_blank(),
+        axis.title = element_blank())
 ```
+
+</div>
+
+</div>
+
+<section style="text-align: justify;"><p class="text-secondary">Las <font color="black"><u>redes neuronales</font></u> son uno de los tipos de machine learning. Uno popular, pero hay otros también muy buenos. El <font color="black"><u>deep learning</u></font> es un método moderno de construcción, capacitación y uso de redes neuronales. Básicamente, es una nueva arquitectura.</p></section>
+
+---
+
+<h2><p class="text-primary"><strong>Un pequeño repaso</strong></p></h2>
+
+<div class = "row">
+
+<div class = "col-md-5">
+
+<section style="text-align: justify;"><p class="text-secondary"><font color="black"><u>Nunca</u></font> hay una única forma de resolver un problema en el mundo del machine learning. Siempre hay varios algoritmos que se ajustan, y se debe elegir el mejor.</p></section>
+
+```{r Imagen, fig.align = 'center', eval = TRUE, echo = FALSE, message = FALSE, out.width = "140"}
+
+knitr::include_graphics('Imagenes/mapa_mundo_ML.jpg')
+```
+
+</div>
+
+<div class = "col-md-1">
+
+</div>
+
+<div class = "col-md-6">
+
+<section style="text-align: justify;"><p class="text-secondary">Hoy en día hay cuatro tipos principales de machine learning:</p></section>
+
+```{r, echo = FALSE, eval = TRUE, fig.showtext = TRUE, fig.align = "center", fig.cap = ""}
+
+data.frame(
+  x = c(1:8), y = c(1:8)
+) %>%
+  ggplot(aes(x, y)) +
+  geom_blank() +
+  annotate(geom = 'text', x = 4.4, y = 7.0, label = 'Los principales tipos de machine learning', family = 'gochi', size = 20.4, colour = 'black') +
+  annotate(geom = 'text', x = 2.4, y = 6.2, label = 'datos simples', family = 'gochi', size = 16.4, colour = 'gray24') +
+  annotate(geom = 'text', x = 2.4, y = 5.8, label = 'características claras', family = 'gochi', size = 16.4, colour = 'gray24') +
+  annotate(geom = 'segment', x = 2.4, xend = 2.3, y = 6.8, yend = 6.4, colour = 'black', size = 1.2) +
+  geom_curve(x = 2.2, xend = 2.1, y = 5.6, yend = 4.8, arrow = arrow(length = unit(0.1, 'inch')), size = 1.2, color = 'black', curvature = 0.0) +
+  annotate(geom = 'text', x = 2.4, y = 4.6, label = 'ML clásico', family = 'gochi', size = 20.4, colour = 'black') +
+  annotate(geom = 'text', x = 3.4, y = 3.8, label = 'sin datos,', family = 'gochi', size = 16.4, colour = 'gray24') +
+  annotate(geom = 'text', x = 3.4, y = 3.4, label = 'pero se tiene', family = 'gochi', size = 16.4, colour = 'gray24') +
+  annotate(geom = 'text', x = 3.4, y = 3.0, label = 'un entorno', family = 'gochi', size = 16.4, colour = 'gray24') +
+  annotate(geom = 'text', x = 3.4, y = 2.6, label = 'para interactuar', family = 'gochi', size = 16.4, colour = 'gray24') +
+  annotate(geom = 'text', x = 3.4, y = 1.4, label = 'Reiforcement learning', family = 'gochi', size = 20.4, colour = 'black') +
+  annotate(geom = 'segment', x = 4.2, xend = 3.5, y = 6.8, yend = 4.0, colour = 'black', size = 1.2) +
+  geom_curve(x = 3.3, xend = 3.2, y = 2.4, yend = 1.6, arrow = arrow(length = unit(0.1, 'inch')), size = 1.2, color = 'black', curvature = 0.0) +
+  annotate(geom = 'text', x = 5.2, y = 6.2, label = 'cuando la', family = 'gochi', size = 16.4, colour = 'gray24') +
+  annotate(geom = 'text', x = 5.2, y = 5.8, label = 'calidad es un', family = 'gochi', size = 16.4, colour = 'gray24') +
+  annotate(geom = 'text', x = 5.2, y = 5.4, label = 'problema real', family = 'gochi', size = 16.4, colour = 'gray24') +
+  annotate(geom = 'text', x = 5.2, y = 4.2, label = 'Ensembles', family = 'gochi', size = 20.4, colour = 'black') +
+  annotate(geom = 'segment', x = 4.6, xend = 4.7, y = 6.8, yend = 6.4, colour = 'black', size = 1.2) +
+  geom_curve(x = 4.9, xend = 5.0, y = 5.3, yend = 4.4, arrow = arrow(length = unit(0.1, 'inch')), size = 1.2, color = 'black', curvature = 0.0) +
+  annotate(geom = 'text', x = 6.4, y = 3.4, label = 'datos complicados', family = 'gochi', size = 16.4, colour = 'gray24') +
+  annotate(geom = 'text', x = 6.4, y = 3.0, label = 'características poco claras', family = 'gochi', size = 16.4, colour = 'gray24') +
+  annotate(geom = 'text', x = 6.4, y = 2.2, label = 'Redes neuronales', family = 'gochi', size = 20.4, colour = 'black') +
+  annotate(geom = 'text', x = 6.4, y = 1.8, label = 'y deep learning', family = 'gochi', size = 20.4, colour = 'black') +
+  annotate(geom = 'segment', x = 6.1, xend = 6.7, y = 6.8, yend = 3.6, colour = 'black', size = 1.2) +
+  geom_curve(x = 6.9, xend = 7.0, y = 2.8, yend = 2.4, arrow = arrow(length = unit(0.1, 'inch')), size = 1.2, color = 'black', curvature = 0.0) +
+  
+  theme_void() +
+  theme(axis.text = element_blank(),
+        axis.ticks = element_blank(),
+        axis.title = element_blank())
+```
+
+</div>
+
+</div>
+
+---
+
+<h3><p class="text-primary"><strong><u>Trabajo:</u> <a href="ML_DL/Documentos/Trabajo_1.pdf" class="download" title="PDF" target="_blank"><font color="black">compare machine learning methods and linear mixed models with random effects of longitudinal data prediction</font></a></strong></p></h3>
+
+<div class = "row">
+
+<div class = "col-md-6">
+
+<section style="text-align: justify;"><p class="text-secondary"><u>Problema</u>: Los autores mencionan que los modelos comunmente usados (en este caso, con datos longitudinales) trabajan bajo supuestos hechos en la distribución de los datos y del modelo... los métodos tradicionales tienen una fuerte dependencia de los supuestos.</p></section>
+
+</div>
+
+<div class = "col-md-1">
+
+</div>
+
+<div class = "col-md-5">
+
+<section style="text-align: justify;"><p class="text-secondary">En comparación con los métodos tradicionales, los métodos de <font color="black"><u>machine learning</u></font> no requieren suposiciones sobre la distribución de los datos, y utilizan la validación cruzada para juzgar la calidad del modelo en su lugar.</p></section>
 
 </div>
 
