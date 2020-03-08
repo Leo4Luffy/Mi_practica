@@ -100,7 +100,7 @@ data.frame(
 
 <section style="text-align: justify;"><p class="text-secondary"><font color="black"><u>Nunca</u></font> hay una única forma de resolver un problema en el mundo del machine learning. Siempre hay varios algoritmos que se ajustan, y se debe elegir el mejor.</p></section>
 
-```{r Imagen, fig.align = 'center', eval = TRUE, echo = FALSE, message = FALSE, out.width = "140"}
+```{r Imagen, fig.align = 'center', eval = FALSE, echo = FALSE, message = FALSE, out.width = "140"}
 
 knitr::include_graphics('Imagenes/mapa_mundo_ML.jpg')
 ```
@@ -113,7 +113,7 @@ knitr::include_graphics('Imagenes/mapa_mundo_ML.jpg')
 
 <div class = "col-md-6">
 
-<section style="text-align: justify;"><p class="text-secondary">Hoy en día hay cuatro tipos principales de machine learning:</p></section>
+<!-- Hoy en día hay cuatro tipos principales de machine learning: -->
 
 ```{r, echo = FALSE, eval = TRUE, fig.showtext = TRUE, fig.align = "center", fig.cap = ""}
 
@@ -147,7 +147,6 @@ data.frame(
   annotate(geom = 'text', x = 6.4, y = 1.8, label = 'y deep learning', family = 'gochi', size = 20.4, colour = 'black') +
   annotate(geom = 'segment', x = 6.1, xend = 6.7, y = 6.8, yend = 3.6, colour = 'black', size = 1.2) +
   geom_curve(x = 6.9, xend = 7.0, y = 2.8, yend = 2.4, arrow = arrow(length = unit(0.1, 'inch')), size = 1.2, color = 'black', curvature = 0.0) +
-  
   theme_void() +
   theme(axis.text = element_blank(),
         axis.ticks = element_blank(),
@@ -158,15 +157,23 @@ data.frame(
 
 </div>
 
+<section style="text-align: justify;"><p class="text-secondary">Las técnicas y métodos de machine learning pueden funcionar con una gran cantidad de datos complejos, de alta dimensión y enormes, y <font color="black"><u>pueden usarse para desarrollar modelos de regresión</u></font> y clasificación.</p></section>
+
 ---
 
-<h3><p class="text-primary"><strong><u>Trabajo:</u> <a href="ML_DL/Documentos/Trabajo_1.pdf" class="download" title="PDF" target="_blank"><font color="black">compare machine learning methods and linear mixed models with random effects of longitudinal data prediction</font></a></strong></p></h3>
+<h2><p class="text-primary"><strong>Un pequeño repaso</strong></p></h2>
+
+
+
+---
+
+<h3><p class="text-primary"><strong><u>Trabajo:</u> <a href="/Documentos/Trabajo_1.pdf" class="download" title="PDF" target="_blank"><font color="black">compare machine learning methods and linear mixed models with random effects of longitudinal data prediction</font></a></strong></p></h3>
 
 <div class = "row">
 
 <div class = "col-md-6">
 
-<section style="text-align: justify;"><p class="text-secondary"><u>Problema</u>: Los autores mencionan que los modelos comunmente usados (en este caso, con datos longitudinales) trabajan bajo supuestos hechos en la distribución de los datos y del modelo... los métodos tradicionales tienen una fuerte dependencia de los supuestos.</p></section>
+<section style="text-align: justify;"><p class="text-secondary"><font color="black"><u>Problema</u></font>: Los autores mencionan que los modelos comunmente usados (en este caso, con datos longitudinales) trabajan bajo supuestos hechos en la distribución de los datos y del modelo... los métodos tradicionales tienen una fuerte dependencia de los supuestos.</p></section>
 
 </div>
 
