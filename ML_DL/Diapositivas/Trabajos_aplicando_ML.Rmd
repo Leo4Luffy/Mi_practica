@@ -163,7 +163,59 @@ data.frame(
 
 <h2><p class="text-primary"><strong>Un pequeño repaso</strong></p></h2>
 
+<!--
+<section style="text-align: justify;"><p class="text-secondary">El machine learning clásico a menudo se divide en dos categorías: <font color="black"><u>supervisado</u></font> y <font color="black"><u>no supervisado</u></font>.</p></section>
+-->
 
+```{r, echo = FALSE, eval = TRUE, fig.showtext = TRUE, fig.align = "center", fig.cap = ""}
+
+data.frame(
+  x = c(1:8), y = c(1:8)
+) %>%
+  ggplot(aes(x, y)) +
+  geom_blank() +
+  annotate(geom = 'text', x = 4.4, y = 7.0, label = 'Machine learning clásico', family = 'gochi', size = 20.4, colour = 'black') +
+  annotate(geom = 'text', x = 2.2, y = 6.2, label = 'los datos son', family = 'gochi', size = 10.4, colour = 'gray24') +
+  annotate(geom = 'text', x = 2.2, y = 5.8, label = 'precategorizados o', family = 'gochi', size = 10.4, colour = 'gray24') +
+  annotate(geom = 'text', x = 2.2, y = 5.4, label = 'numéricos', family = 'gochi', size = 10.4, colour = 'gray24') +
+  annotate(geom = 'segment', x = 4.0, xend = 2.2, y = 6.8, yend = 4.4, colour = 'black', size = 1.2) +
+  annotate(geom = 'text', x = 2.0, y = 4.2, label = 'Supervisado', family = 'gochi', size = 20.4, colour = 'black') +
+  annotate(geom = 'text', x = 1.4, y = 3.4, label = 'predice una', family = 'gochi', size = 10.4, colour = 'gray24') +
+  annotate(geom = 'text', x = 1.4, y = 3.0, label = 'categoría', family = 'gochi', size = 10.4, colour = 'gray24') +
+  annotate(geom = 'segment', x = 2.4, xend = 1.6, y = 4.0, yend = 2.4, colour = 'black', size = 1.2) +
+  annotate(geom = 'text', x = 1.6, y = 2.2, label = 'Clasificación', family = 'gochi', size = 16.4, colour = 'black') +
+  annotate(geom = 'text', x = 3.6, y = 3.4, label = 'predice un', family = 'gochi', size = 10.4, colour = 'gray24') +
+  annotate(geom = 'text', x = 3.6, y = 3.0, label = 'número', family = 'gochi', size = 10.4, colour = 'gray24') +
+  annotate(geom = 'segment', x = 2.6, xend = 3.4, y = 4.0, yend = 2.4, colour = 'black', size = 1.2) +
+  annotate(geom = 'text', x = 3.4, y = 2.2, label = 'Regresión', family = 'gochi', size = 16.4, colour = 'black') +
+  annotate(geom = 'text', x = 6.4, y = 6.2, label = 'los datos no', family = 'gochi', size = 10.4, colour = 'gray24') +
+  annotate(geom = 'text', x = 6.4, y = 5.8, label = 'están etiquetados de', family = 'gochi', size = 10.4, colour = 'gray24') +
+  annotate(geom = 'text', x = 6.4, y = 5.4, label = 'ninguna manera', family = 'gochi', size = 10.4, colour = 'gray24') +
+  annotate(geom = 'segment', x = 4.4, xend = 6.2, y = 6.8, yend = 4.4, colour = 'black', size = 1.2) +
+  annotate(geom = 'text', x = 6.2, y = 4.2, label = 'No supervisado', family = 'gochi', size = 20.4, colour = 'black') +
+  theme_void() +
+  theme(axis.text = element_blank(),
+        axis.ticks = element_blank(),
+        axis.title = element_blank())
+```
+
+---
+
+<h2><p class="text-primary"><strong>Un pequeño repaso</strong></p></h2>
+
+<section style="text-align: justify;"><p class="text-secondary">En el <font color="black"><u>aprendizaje supervisado</u></font>, el modelo simplemente aprende a mapear las características de entrada dadas o la variable predictora $x$ y la variable de salida o respuesta $y$ en los conjuntos de datos de entrenamiento. La muestra de entrenamiento actúa como supervisor en el proceso de aprendizaje.</p>
+
+<p class="text-secondary">En el aprendizaje supervisado, cuando la variable de salida es un valor categórico o discreto, entonces es <font color="black"><u>clasificación</u></font>, pero cuando la variable de salida es un valor continuo, entonces es una <font color="black"><u>regresión.</u></font></p></section>
+
+---
+
+<h2><p class="text-primary"><strong>Un pequeño repaso</strong></p></h2>
+
+<section style="text-align: justify;"><p class="text-secondary">La fórmula simple para explicar el problema de regresión (en el estudio a desarrollar se esta interesado en el problema de regresión) viene dada por la ecuación:</p>
+
+$$y = f(x) + b$$
+
+</section>
 
 ---
 
