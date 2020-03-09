@@ -206,7 +206,7 @@ data.frame(
 
 <section style="text-align: justify;"><p class="text-secondary">En el <font color="black"><u>aprendizaje supervisado</u></font>, el modelo simplemente aprende a mapear las características de entrada dadas o la variable predictora $x$ y la variable de salida o respuesta $y$ en los conjuntos de datos de entrenamiento. La muestra de entrenamiento actúa como supervisor en el proceso de aprendizaje.</p>
 
-<p class="text-secondary">En el aprendizaje supervisado, cuando la variable de salida es un valor categórico o discreto, entonces es <font color="black"><u>clasificación</u></font>, pero cuando la variable de salida es un valor continuo, entonces es una <font color="black"><u>regresión.</u></font></p></section>
+<p class="text-secondary">En el aprendizaje supervisado, cuando la variable de salida es un valor categórico o discreto, entonces es <font color="black"><u>clasificación</u></font>, pero cuando la variable de salida es un valor continuo, entonces es una <font color="black"><u>regresión.</u></font> [Aquí](https://www.youtube.com/watch?v=LliMpfMtjEo) un video sobre esto.</p></section>
 
 ---
 
@@ -240,7 +240,7 @@ $$y = f(x) + b$$
 
 <section style="text-align: justify;"><p class="text-secondary">Se pueden usar muchos algoritmos de regresión de machine learning para predecir la salida continua:</p>
 
-<p class="text-info"><strong><u>Support vector regression forest (regresión de vector de soporte)</u></strong></p>
+<p class="text-info"><strong><u>Support vector regression (regresión de vector de soporte)</u></strong></p>
 
 
 
@@ -315,7 +315,7 @@ gridExtra::grid.arrange(a, b, ncol = 2)
 
 <h2><p class="text-primary"><strong>Un pequeño repaso</strong></p></h2>
 
-<section style="text-align: justify;"><p class="text-secondary">Se han propuesto un enfoque para manejar el clúster en los datos, el <font color="black"><u>machine learning de efectos mixtos</u></font>.</p>
+<section style="text-align: justify;"><p class="text-secondary">Se ha propuesto un enfoque para manejar el clúster en los datos, el <font color="black"><u>machine learning de efectos mixtos</u></font>.</p>
 
 <br>
 
@@ -323,6 +323,22 @@ gridExtra::grid.arrange(a, b, ncol = 2)
 
 knitr::include_graphics('Imagenes/asombro.gif')
 ```
+
+</section>
+
+---
+
+<h2><p class="text-primary"><strong>Un pequeño repaso</strong></p></h2>
+
+<section style="text-align: justify;"><p class="text-warning"><strong><u>Random forest</u> de efectos mixtos</strong></p>
+
+</section>
+
+---
+
+<h2><p class="text-primary"><strong>Un pequeño repaso</strong></p></h2>
+
+<section style="text-align: justify;"><p class="text-info"><strong><u>Support vector regression</u> de efectos mixtos</strong></p>
 
 </section>
 
