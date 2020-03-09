@@ -13,8 +13,9 @@ knitr::opts_chunk$set(eval = FALSE,
                       message = FALSE,
                       warning = FALSE)
 
-library(ggplot2)
 library(dplyr)
+library(ggplot2)
+library(ggforce)
 library(showtext) # Link donde estan las fuentes Google (http://www.google.com/fonts)
 font_add_google('Gochi Hand', 'gochi')
 showtext.auto()
@@ -211,9 +212,117 @@ data.frame(
 
 <h2><p class="text-primary"><strong>Un pequeño repaso</strong></p></h2>
 
-<section style="text-align: justify;"><p class="text-secondary">La fórmula simple para explicar el problema de regresión (en el estudio a desarrollar se esta interesado en el problema de regresión) viene dada por la ecuación:</p>
+<section style="text-align: justify;"><p class="text-secondary">La fórmula simple para explicar el problema de regresión (<font color="black"><u>en el estudio a desarrollar se esta interesado en el problema de regresión</u></font>) viene dada por la ecuación:</p>
 
 $$y = f(x) + b$$
+
+<p class="text-secondary">El propósito de la regresión es estimar el valor de la variable respuesta $y$ utilizando la función $f(x)$ a partir de conjuntos de datos de entrada dados y su término de errores.</p>
+
+<p class="text-secondary">En la regresión, el modelo aprende de los datos en diversas técnicas para minimizar el sesgo y la varianza hasta que en algún momento la predicción del modelo haya logrado el mejor ajuste.</p>
+
+</section>
+
+---
+
+<h2><p class="text-primary"><strong>Un pequeño repaso</strong></p></h2>
+
+<section style="text-align: justify;"><p class="text-secondary">Se pueden usar muchos algoritmos de regresión de machine learning para predecir la salida continua:</p>
+
+<p class="text-warning"><strong><u>Random forest (árboles de decisión)</u></strong></p>
+
+
+
+</section>
+
+---
+
+<h2><p class="text-primary"><strong>Un pequeño repaso</strong></p></h2>
+
+<section style="text-align: justify;"><p class="text-secondary">Se pueden usar muchos algoritmos de regresión de machine learning para predecir la salida continua:</p>
+
+<p class="text-info"><strong><u>Support vector regression forest (regresión de vector de soporte)</u></strong></p>
+
+
+
+</section>
+
+---
+
+<h2><p class="text-primary"><strong>Un pequeño repaso</strong></p></h2>
+
+<section style="text-align: justify;"><p class="text-secondary">El <font color="black"><u>modelo mixto</u></font> es un modelo estadístico que comprende efectos fijos y efectos aleatorios.</p>
+
+<div class = "row">
+
+<div class = "col-md-5">
+
+<p class="text-secondary">Los modelos de efectos mixtos son adecuados para conjuntos de datos que tienen estructura de clúster. La estructura del clúster puede ser longitudinal (imagen a la izquierda) o jerárquica (imagen a la derecha).</p>
+
+<!--
+La estructura longitudinal se da cuando la observación se mide múltiples veces dentro de un mismo grupo. En cuanto a la estructura jerárquica, consiste de observaciones que tienen similitudes y se pueden clasificar en un mismo grupo.
+-->
+
+</div>
+
+<div class = "col-md-1">
+
+</div>
+
+<div class = "col-md-6">
+
+```{r, echo = FALSE, eval = TRUE, fig.showtext = TRUE, fig.align = "center", fig.cap = ""}
+
+a <- data.frame(
+  x = c(0.5, 1.5, 0.5, 2.5, 1.5), 
+  y = c(1, 1.5, 2, 1, 2.5),
+  grupo = c('A', 'B', 'C', 'D', 'E')
+) %>%
+  ggplot(aes(x0 = x, y0 = y, r = 0.4, fill = grupo, colour = grupo)) +
+  geom_circle(alpha = 0.4, size = 0.8) +
+  theme_bw() +
+  theme(legend.position = 'none') +
+  scale_fill_manual(values = c('black', 'cyan', 'red', 'yellow', 'gray')) +
+  scale_colour_manual(values = c('black', 'cyan', 'red', 'yellow', 'gray')) +
+  theme(axis.text = element_blank(),
+        axis.ticks = element_blank(),
+        axis.title = element_blank())
+
+b <- data.frame(
+  x = c(0.5, 0.5, 1.5, 1.5, 0.5), 
+  y = c(1, 1, 1.5, 1.5, 2.0),
+  grupo = c('A', 'B', 'C', 'D', 'E')
+) %>%
+  ggplot(aes(x0 = x, y0 = y, r = c(0.4, 0.2, 0.5, 0.2, 0.3), fill = grupo, colour = grupo)) +
+  geom_circle(alpha = 0.4, size = 0.8) +
+  theme_bw() +
+  theme(legend.position = 'none') +
+  scale_fill_manual(values = c('cyan', 'black', 'yellow', 'red', 'gray')) +
+  scale_colour_manual(values = c('cyan', 'black', 'yellow', 'red', 'gray')) +
+  theme(axis.text = element_blank(),
+        axis.ticks = element_blank(),
+        axis.title = element_blank())
+
+gridExtra::grid.arrange(a, b, ncol = 2)
+```
+
+</div>
+
+</div>
+
+</section>
+
+---
+
+<h2><p class="text-primary"><strong>Un pequeño repaso</strong></p></h2>
+
+<section style="text-align: justify;"><p class="text-secondary">Se han propuesto un enfoque para manejar el clúster en los datos, el <font color="black"><u>machine learning de efectos mixtos</u></font>.</p>
+
+<br>
+
+```{r, fig.align = 'center', out.width = "400", eval = TRUE, echo = FALSE, message = FALSE}
+
+knitr::include_graphics('Imagenes/asombro.gif')
+```
 
 </section>
 
