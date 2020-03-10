@@ -228,9 +228,60 @@ $$y = f(x) + b$$
 
 <section style="text-align: justify;"><p class="text-secondary">Se pueden usar muchos algoritmos de regresión de machine learning para predecir la salida continua:</p>
 
-<p class="text-warning"><strong><u>Random forest (árboles de decisión)</u></strong></p>
+<p class="text-warning"><strong><u>Random forest (bosque al azar)</u></strong></p>
 
+<div class = "row">
 
+<div class = "col-md-5">
+
+<p class="text-secondary">Para entender los clasificadores de bosques al azar se necesita primero introducir el concepto de <font color="black"><u>árboles de decisión</u></font>.</p>
+
+</div>
+
+<div class = "col-md-1">
+
+</div>
+
+<div class = "col-md-6">
+
+```{r, echo = FALSE, eval = TRUE, fig.showtext = TRUE, fig.align = "center", fig.cap = ""}
+
+data.frame(
+  x = c(-1.5:6.0), y = c(-1.5:6.0)
+) %>%
+  ggplot(aes(x, y)) +
+  geom_blank() +
+  annotate(geom = 'rect', xmin = 0.4, xmax = 3.6, ymin = 4.2, ymax = 4.8, colour = 'yellow', fill = 'yellow', alpha = 0.4) +
+  annotate(geom = 'text', x = 2.0, y = 4.5, label = 'Nodo de decisión', family = 'gochi', size = 20.4, colour = 'black') +
+  geom_curve(x = 1.6, xend = 0.6, y = 4.1, yend = 3.4, arrow = arrow(length = unit(0.1, 'inch')), size = 1.2, color = 'black', curvature = 0.0) +
+  geom_curve(x = 2.5, xend = 3.5, y = 4.1, yend = 3.4, arrow = arrow(length = unit(0.1, 'inch')), size = 1.2, color = 'black', curvature = 0.0) +
+  annotate(geom = 'rect', xmin = -1.6, xmax = 1.6, ymin = 2.7, ymax = 3.3, colour = 'yellow', fill = 'yellow', alpha = 0.4) +
+  annotate(geom = 'text', x = 0.0, y = 3.0, label = 'Nodo de decisión', family = 'gochi', size = 20.4, colour = 'black') +
+  annotate(geom = 'rect', xmin = 2.5, xmax = 5.7, ymin = 2.7, ymax = 3.3, colour = 'yellow', fill = 'yellow', alpha = 0.4) +
+  annotate(geom = 'text', x = 4.1, y = 3.0, label = 'Nodo de decisión', family = 'gochi', size = 20.4, colour = 'black') +
+  annotate(geom = 'rect', xmin = -1.9, xmax = -0.1, ymin = 0.9, ymax = 1.7, colour = 'red', fill = 'red', alpha = 0.4) +
+  annotate(geom = 'text', x = -1.0, y = 1.5, label = 'Nodo de', family = 'gochi', size = 20.4, colour = 'black') +
+  annotate(geom = 'text', x = -1.0, y = 1.1, label = 'hoja', family = 'gochi', size = 20.4, colour = 'black') +
+  annotate(geom = 'rect', xmin = 0.1, xmax = 1.9, ymin = 0.9, ymax = 1.7, colour = 'yellow', fill = 'yellow', alpha = 0.4) +
+  annotate(geom = 'text', x = 1.0, y = 1.5, label = 'Nodo de', family = 'gochi', size = 20.4, colour = 'black') +
+  annotate(geom = 'text', x = 1.0, y = 1.1, label = 'decisión', family = 'gochi', size = 20.4, colour = 'black') +
+  theme_void() +
+  theme(axis.text = element_blank(),
+        axis.ticks = element_blank(),
+        axis.title = element_blank())
+```
+
+</div>
+
+</div>
+
+</section>
+
+---
+
+<h2><p class="text-primary"><strong>Un pequeño repaso</strong></p></h2>
+
+<section style="text-align: justify;"><p class="text-secondary">Un árbol de decisión (como se pudo observar en la imagen anterior) es una estructura similar a un diagrama de flujo, en la que cada nodo interno representa una prueba sobre un atributo del conjunto de datos, cada marca representa el resultado de la prueba y cada hoja representa una etiqueta de clase. </p>
 
 </section>
 
