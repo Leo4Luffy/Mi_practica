@@ -228,13 +228,13 @@ $$y = f(x) + b$$
 
 <section style="text-align: justify;"><p class="text-secondary">Se pueden usar muchos algoritmos de regresión de machine learning para predecir la salida continua:</p>
 
-<p class="text-warning"><strong><u>Random forest (bosque al azar)</u></strong></p>
+<p class="text-warning"><strong><u>Random forest (bosque aleatorio)</u></strong></p>
 
 <div class = "row">
 
 <div class = "col-md-5">
 
-<p class="text-secondary">Para entender los clasificadores de bosques al azar se necesita primero introducir el concepto de <font color="black"><u>árboles de decisión</u></font>.</p>
+<p class="text-secondary">Para entender el bosque aleatorio se necesita primero introducir el concepto de <font color="black"><u>árboles de decisión</u></font>.</p>
 
 </div>
 
@@ -277,10 +277,8 @@ data.frame(
   annotate(geom = 'rect', xmin = 4.1, xmax = 5.9, ymin = 0.9, ymax = 1.7, colour = 'red', fill = 'red', alpha = 0.4) +
   annotate(geom = 'text', x = 5.0, y = 1.5, label = 'Nodo de', family = 'gochi', size = 20.4, colour = 'black') +
   annotate(geom = 'text', x = 5.0, y = 1.1, label = 'hoja', family = 'gochi', size = 20.4, colour = 'black') +
-  
   geom_curve(x = 2.8, xend = 2.5, y = 0.9, yend = 0.3, arrow = arrow(length = unit(0.1, 'inch')), size = 1.2, color = 'black', curvature = 0.0) +
   geom_curve(x = 3.4, xend = 3.7, y = 0.9, yend = 0.3, arrow = arrow(length = unit(0.1, 'inch')), size = 1.2, color = 'black', curvature = 0.0) +
-  
   annotate(geom = 'rect', xmin = 1.3, xmax = 3.1, ymin = -0.7, ymax = 0.1, colour = 'red', fill = 'red', alpha = 0.4) +
   annotate(geom = 'text', x = 2.2, y = -0.1, label = 'Nodo de', family = 'gochi', size = 20.4, colour = 'black') +
   annotate(geom = 'text', x = 2.2, y = -0.5, label = 'hoja', family = 'gochi', size = 20.4, colour = 'black') +
@@ -303,9 +301,139 @@ data.frame(
 
 <h2><p class="text-primary"><strong>Un pequeño repaso</strong></p></h2>
 
-<section style="text-align: justify;"><p class="text-secondary">Un árbol de decisión (como se pudo observar en la imagen anterior) es una estructura similar a un diagrama de flujo, en la que cada nodo interno representa una prueba sobre un atributo del conjunto de datos, cada marca representa el resultado de la prueba y cada hoja representa una etiqueta de clase. </p>
+<section style="text-align: justify;"><p class="text-secondary">Un árbol de decisión (como se pudo observar en la imagen anterior) es una estructura similar a un diagrama de flujo, en la que cada nodo interno representa una prueba sobre un atributo del conjunto de datos, cada rama representa el resultado de la prueba y cada hoja representa una etiqueta de clase. </p>
+
+<p class="text-secondary">Así que el algoritmo hará las pruebas sobre los datos, descubriendo cuáles son las características más relevantes del conjunto de datos para predecir un determinado resultado, y separando en consecuencia el conjunto de datos.</p>
 
 </section>
+
+---
+
+<h2><p class="text-primary"><strong>Un pequeño repaso</strong></p></h2>
+
+<section style="text-align: justify;"><p class="text-secondary">Los <font color="black"><u>bosque aleatorio</u></font> se componen de árboles de decisión de distinta profundidad y hojas generadas dada la cantidad de características en los datos. RF utiliza aleatoriamente un subconjunto de características en lugar de todas ellas.</p>
+
+<div class = "row">
+
+<div class = "col-md-5">
+
+<p class="text-secondary">El número de ramas en cada árbol, puede medirse comenzando desde la parte superior o la raíz hasta el círculo rojo a través de varios niveles de nodos divididos (L1, L2, ..., Ln).</p>
+
+</div>
+
+<div class = "col-md-1">
+
+</div>
+
+<div class = "col-md-6">
+
+```{r, echo = FALSE, eval = TRUE, fig.showtext = TRUE, fig.align = "center", fig.cap = ""}
+
+data.frame(
+  x = c(1.0, 0.5, 1.5, 1.0, 2.0, 1.5, 2.5, 2.0, 3.0), 
+  y = c(1.0, 0.5, 0.5, 0.0, 0.0, -0.5, -0.5, -1.0, -1.0),
+  grupo = c('A', 'B', 'C', 'E', 'F', 'G', 'H', 'I', 'J')
+) %>%
+  ggplot(aes(x0 = x, y0 = y, r = 0.2, fill = grupo, colour = grupo)) +
+  geom_circle(alpha = 0.4, size = 0.8) +
+  geom_blank() +
+  geom_curve(x = 0.85, xend = 0.65, y = 0.85, yend = 0.65, arrow = arrow(length = unit(0.1, 'inch')), size = 1.2, color = 'black', curvature = 0.0) +
+  geom_curve(x = 1.15, xend = 1.35, y = 0.85, yend = 0.65, arrow = arrow(length = unit(0.1, 'inch')), size = 1.2, color = 'black', curvature = 0.0) +
+  geom_curve(x = 1.35, xend = 1.15, y = 0.35, yend = 0.15, arrow = arrow(length = unit(0.1, 'inch')), size = 1.2, color = 'black', curvature = 0.0) +
+  geom_curve(x = 1.65, xend = 1.85, y = 0.35, yend = 0.15, arrow = arrow(length = unit(0.1, 'inch')), size = 1.2, color = 'black', curvature = 0.0) +
+  geom_curve(x = 1.85, xend = 1.65, y = -0.15, yend = -0.35, arrow = arrow(length = unit(0.1, 'inch')), size = 1.2, color = 'black', curvature = 0.0) +
+  geom_curve(x = 2.15, xend = 2.35, y = -0.15, yend = -0.35, arrow = arrow(length = unit(0.1, 'inch')), size = 1.2, color = 'black', curvature = 0.0) +
+  geom_curve(x = 2.35, xend = 2.15, y = -0.65, yend = -0.85, arrow = arrow(length = unit(0.1, 'inch')), size = 1.2, color = 'black', curvature = 0.0) +
+  geom_curve(x = 2.65, xend = 2.85, y = -0.65, yend = -0.85, arrow = arrow(length = unit(0.1, 'inch')), size = 1.2, color = 'black', curvature = 0.0) +
+  annotate(geom = 'text', x = 1.0, y = 1.0, label = 'Raíz', family = 'gochi', size = 20.4, colour = 'black') +
+  annotate(geom = 'text', x = 1.5, y = 0.5, label = 'L1', family = 'gochi', size = 20.4, colour = 'black') +
+  annotate(geom = 'text', x = 2.0, y = 0.0, label = 'L2', family = 'gochi', size = 20.4, colour = 'black') +
+  annotate(geom = 'text', x = 2.5, y = -0.5, label = '...', family = 'gochi', size = 20.4, colour = 'black') +
+  annotate(geom = 'text', x = 3.0, y = -1.0, label = 'Ln', family = 'gochi', size = 20.4, colour = 'black') +
+  theme_void() +
+  theme(legend.position = 'none') +
+  scale_fill_manual(values = c('yellow', 'cyan', 'yellow', 'cyan', 'yellow', 'cyan', 'yellow', 'cyan', 'red')) +
+  scale_colour_manual(values = c('yellow', 'cyan', 'yellow', 'cyan', 'yellow', 'cyan', 'yellow', 'cyan', 'red')) +
+  theme(axis.text = element_blank(),
+        axis.ticks = element_blank(),
+        axis.title = element_blank())
+```
+
+</div>
+
+</div>
+
+</section>
+
+---
+
+<h2><p class="text-primary"><strong>Un pequeño repaso</strong></p></h2>
+
+<div class = "row">
+
+<div class = "col-md-5">
+
+<section style="text-align: justify;"><p class="text-secondary">Cuantas más divisiones tenga el árbol, más información de profundidad se puede capturar de los datos, lo que reduce el sesgo. Cada nodo de decisión tiene varios números de muestras, pero al menos tiene una muestra. Como es un árbol en la naturaleza, también tiene una hoja.</p></section>
+
+</div>
+
+<div class = "col-md-1">
+
+</div>
+
+<div class = "col-md-6">
+
+<section style="text-align: justify;"><p class="text-secondary">Similar al nodo de decisión, la hoja dividida requiere mínimo una muestra. A diferencia del nodo de decisión, el nodo de hoja no tiene hijos.</p></section>
+
+```{r, echo = FALSE, eval = TRUE, fig.showtext = TRUE, fig.align = "center", fig.cap = ""}
+
+data.frame(
+  x = c(1.0, 0.5, 1.5, 1.0, 2.0, 1.5, 2.5, 2.0, 3.0), 
+  y = c(1.0, 0.5, 0.5, 0.0, 0.0, -0.5, -0.5, -1.0, -1.0),
+  grupo = c('A', 'B', 'C', 'E', 'F', 'G', 'H', 'I', 'J')
+) %>%
+  ggplot(aes(x0 = x, y0 = y, r = 0.2, fill = grupo, colour = grupo)) +
+  geom_circle(alpha = 0.4, size = 0.8) +
+  geom_blank() +
+  geom_curve(x = 0.85, xend = 0.65, y = 0.85, yend = 0.65, arrow = arrow(length = unit(0.1, 'inch')), size = 1.2, color = 'black', curvature = 0.0) +
+  geom_curve(x = 1.15, xend = 1.35, y = 0.85, yend = 0.65, arrow = arrow(length = unit(0.1, 'inch')), size = 1.2, color = 'black', curvature = 0.0) +
+  geom_curve(x = 1.35, xend = 1.15, y = 0.35, yend = 0.15, arrow = arrow(length = unit(0.1, 'inch')), size = 1.2, color = 'black', curvature = 0.0) +
+  geom_curve(x = 1.65, xend = 1.85, y = 0.35, yend = 0.15, arrow = arrow(length = unit(0.1, 'inch')), size = 1.2, color = 'black', curvature = 0.0) +
+  geom_curve(x = 1.85, xend = 1.65, y = -0.15, yend = -0.35, arrow = arrow(length = unit(0.1, 'inch')), size = 1.2, color = 'black', curvature = 0.0) +
+  geom_curve(x = 2.15, xend = 2.35, y = -0.15, yend = -0.35, arrow = arrow(length = unit(0.1, 'inch')), size = 1.2, color = 'black', curvature = 0.0) +
+  geom_curve(x = 2.35, xend = 2.15, y = -0.65, yend = -0.85, arrow = arrow(length = unit(0.1, 'inch')), size = 1.2, color = 'black', curvature = 0.0) +
+  geom_curve(x = 2.65, xend = 2.85, y = -0.65, yend = -0.85, arrow = arrow(length = unit(0.1, 'inch')), size = 1.2, color = 'black', curvature = 0.0) +
+  annotate(geom = 'text', x = 1.0, y = 1.0, label = 'Raíz', family = 'gochi', size = 20.4, colour = 'black') +
+  annotate(geom = 'text', x = 1.5, y = 0.5, label = 'L1', family = 'gochi', size = 20.4, colour = 'black') +
+  annotate(geom = 'text', x = 2.0, y = 0.0, label = 'L2', family = 'gochi', size = 20.4, colour = 'black') +
+  annotate(geom = 'text', x = 2.5, y = -0.5, label = '...', family = 'gochi', size = 20.4, colour = 'black') +
+  annotate(geom = 'text', x = 3.0, y = -1.0, label = 'Ln', family = 'gochi', size = 20.4, colour = 'black') +
+  theme_void() +
+  theme(legend.position = 'none') +
+  scale_fill_manual(values = c('yellow', 'cyan', 'yellow', 'cyan', 'yellow', 'cyan', 'yellow', 'cyan', 'red')) +
+  scale_colour_manual(values = c('yellow', 'cyan', 'yellow', 'cyan', 'yellow', 'cyan', 'yellow', 'cyan', 'red')) +
+  theme(axis.text = element_blank(),
+        axis.ticks = element_blank(),
+        axis.title = element_blank())
+```
+
+---
+
+<h2><p class="text-primary"><strong>Un pequeño repaso</strong></p></h2>
+
+<section style="text-align: justify;"><p class="text-secondary">El estimador de regresión de bosque aleatorio es igual a:</p>
+
+$$\hat{f^{I}}(x) = \frac{\sum^{I}_{i = 1}t^{*}_{i}(x)}{I}$$
+
+<p class="text-secondary">donde <font color="black">$\hat{f^{I}}(x)$</font> es un estimador de bosque aleatorio, bootstrap individual de la muestra <font color="black">$i$</font>, <font color="black">$I$</font> es el número total de árboles que representan el número de estimadores, y <font color="black">$t^{*}_{i}(x)$</font> es la función del árbol de decisión individual igual a <font color="black">$t^{*}_{i}(x) = t(X; Z^{*}_{i1},... Z^{*}_{in})$</font></p>
+
+<p class="text-secondary">donde <font color="black">$Z^{*}_{in} (n = 1, ..., N)$</font> es la n-ésima muestra de entrenamiento de conjuntos de datos dados con <font color="black">$x$</font> características de entrada y respuesta <font color="black">$y$</font>.</p>
+
+</section>
+
+---
+
+<h2><p class="text-primary"><strong>Un pequeño repaso</strong></p></h2>
 
 ---
 
@@ -403,7 +531,7 @@ knitr::include_graphics('Imagenes/asombro.gif')
 
 <h2><p class="text-primary"><strong>Un pequeño repaso</strong></p></h2>
 
-<section style="text-align: justify;"><p class="text-warning"><strong><u>Random forest</u> de efectos mixtos</strong></p>
+<section style="text-align: justify;"><p class="text-warning"><strong>Bosque aleatorio de <u>efectos mixtos</u></strong></p>
 
 </section>
 
@@ -411,7 +539,7 @@ knitr::include_graphics('Imagenes/asombro.gif')
 
 <h2><p class="text-primary"><strong>Un pequeño repaso</strong></p></h2>
 
-<section style="text-align: justify;"><p class="text-info"><strong><u>Support vector regression</u> de efectos mixtos</strong></p>
+<section style="text-align: justify;"><p class="text-info"><strong>Regresión de vector de soporte de <u>efectos mixtos</u></strong></p>
 
 </section>
 
