@@ -16,7 +16,10 @@ knitr::opts_chunk$set(eval = FALSE,
 library(dplyr)
 library(ggplot2)
 library(ggforce)
+library(gridExtra)
 library(emojifont)
+library(jpeg)
+library(gridGraphics)
 library(showtext) # Link donde estan las fuentes Google (http://www.google.com/fonts)
 font_add_google('Gochi Hand', 'gochi')
 showtext.auto()
@@ -312,7 +315,7 @@ data.frame(
 
 <h2><p class="text-primary"><strong>Un pequeño repaso</strong></p></h2>
 
-<section style="text-align: justify;"><p class="text-secondary">Los <font color="black"><u>bosque aleatorio</u></font> se componen de árboles de decisión de distinta profundidad y hojas generadas dada la cantidad de características en los datos. RF utiliza aleatoriamente un subconjunto de características en lugar de todas ellas.</p>
+<section style="text-align: justify;"><p class="text-secondary">El <font color="black"><u>bosque aleatorio</u></font> se compone de árboles de decisión de distinta profundidad y hojas generadas dada la cantidad de características en los datos. RF utiliza aleatoriamente un subconjunto de características en lugar de todas ellas.</p>
 
 <div class = "row">
 
@@ -504,7 +507,7 @@ $$\hat{f^{I}}(x) = \frac{\sum^{I}_{i = 1}t^{*}_{i}(x)}{I}$$
 
 <h2><p class="text-primary"><strong>Un pequeño repaso</strong></p></h2>
 
-<section style="text-align: justify;"><p class="text-info"><strong>2. <u>Support vector regression (regresión de vector de soporte)</u></strong></p>
+<section style="text-align: justify;"><p class="text-info"><strong>2. <u>Support vector regression (regresión de vector de soporte)</u></strong></p><!-- Resumen sacado de https://community.alteryx.com/t5/Data-Science-Blog/And-For-My-Next-Trick-An-Introduction-to-Support-Vector-Machines/ba-p/360762?lightbox-message-images-360762=53849i4EA7A8C209968E60 -->
 
 <br>
 
@@ -544,6 +547,217 @@ knitr::include_graphics('Imagenes/ML_6.png')
 ---
 
 <h2><p class="text-primary"><strong>Un pequeño repaso</strong></p></h2>
+
+<section style="text-align: justify;"><p class="text-secondary"><font color="black"><u>La máquina de vector de soporte</u></font> (abreviada como SVM) son algoritmos supervisados de machine learning que encuentran un límite o línea que describe efectivamente los datos de entrenamiento, ya sea dando la mayor separación posible entre el límite y los puntos de datos de entrenamiento en cada lado (clasificación) o encontrando la línea lo más cerca posible del mayor número de puntos de entrenamiento (<font color="black"><u>regresión</u></font>).</p>
+
+```{r, fig.align = 'center', out.width = "580", eval = TRUE, echo = FALSE, message = FALSE}
+
+knitr::include_graphics('Imagenes/ML_7.png')
+```
+
+</section>
+
+---
+
+<h2><p class="text-primary"><strong>Un pequeño repaso</strong></p></h2>
+
+<div class = "row">
+
+<div class = "col-md-5">
+
+<section style="text-align: justify;"><p class="text-secondary">Una máquina de vector de soporte piensa en observaciones individuales (filas) en un conjunto de datos como puntos trazados en un <font color="black"><u>espacio n-dimensional</u></font>, donde n es el número de variables predictoras que se está utilizando para describir la variable respuesta.</p></section>
+
+</div>
+
+<div class = "col-md-1">
+
+</div>
+
+<div class = "col-md-6">
+
+<section style="text-align: justify;"><p class="text-secondary">Por ejemplo, si se tiene dos variables, A y B, los puntos se trazarán en un espacio bidimensional en función de los valores de cada variable predictiva:</p></section>
+
+```{r, fig.align = 'center', out.width = "320", eval = TRUE, echo = FALSE, message = FALSE}
+
+knitr::include_graphics('Imagenes/ML_8.png')
+```
+
+</div>
+
+</div>
+
+---
+
+<h2><p class="text-primary"><strong>Un pequeño repaso</strong></p></h2>
+
+<div class = "row">
+
+<div class = "col-md-5">
+
+<section style="text-align: justify;"><p class="text-secondary">Después de determinar dónde existen las observaciones en el espacio n-dimensional, un SVM identifica un hiperplano llamado <font color="black"><u>límite de decisión</u></font> que separa los datos. Por definición, un hiperplano siempre tendrá una dimensión menos que el espacio de datos en el que está construido.</p></section>
+
+</div>
+
+<div class = "col-md-1">
+
+</div>
+
+<div class = "col-md-6">
+
+<section style="text-align: justify;"><p class="text-secondary">Por ejemplo, si se está trabajando en un espacio tridimensional, el hiperplano tendrá dos dimensiones, y si el espacio es bidimensional, el hiperplano será una línea.</p></section>
+
+```{r, fig.align = 'center', out.width = "320", eval = TRUE, echo = FALSE, message = FALSE}
+
+knitr::include_graphics('Imagenes/ML_9.png')
+```
+
+</div>
+
+</div>
+
+---
+
+<h2><p class="text-primary"><strong>Un pequeño repaso</strong></p></h2>
+
+<section style="text-align: justify;"><p class="text-secondary">Un SVM intenta identificar un límite de decisión óptimo que separe claramente las diferentes clasificaciones de la variable respuesta. El límite de decisión de un SVM está determinado por <font color="black"><u>vectores de soporte</u></font>. Este admite puntos de vectores que están más cerca del borde de cada clase, los cuales son los puntos más difíciles de clasificar correctamente.</p>
+
+```{r, fig.align = 'center', out.width = "520", eval = TRUE, echo = FALSE, message = FALSE}
+
+knitr::include_graphics('Imagenes/ML_10.png')
+```
+
+</section>
+
+---
+
+<h2><p class="text-primary"><strong>Un pequeño repaso</strong></p></h2>
+
+<div class = "row">
+
+<div class = "col-md-6">
+
+<section style="text-align: justify;"><p class="text-secondary">La distancia entre el hiperplano y los vectores de soporte se llaman <font color="black"><u>márgenes</u></font>.</section>
+
+<section style="text-align: justify;"><p class="text-secondary">El <font color="black"><u>objetivo de un SVM en regresión</u></font> consiste en intentar ajustar todos los puntos dentro del margen del hiperplano y minimizar el número de puntos que quedan fuera del margen.</p></section>
+
+</div>
+
+<div class = "col-md-1">
+
+</div>
+
+<div class = "col-md-5">
+
+<br>
+
+```{r, fig.align = 'center', out.width = "680", eval = TRUE, echo = FALSE, message = FALSE}
+
+knitr::include_graphics('Imagenes/ML_12.png')
+```
+
+</div>
+
+</div>
+
+<!-- 
+En clasificación,  de una máquina de vectores de soporte es maximizar los márgenes. Así es como el modelo determina el límite de decisión óptimo. Cuanto mayor sea el ancho de los márgenes, mayor será la probabilidad de estimar correctamente el valor de las observaciones incluidas. Del mismo modo, cuanto más lejos del hiperplano esté un punto de datos, más confianza hay en el punto que se identifica correctamente.
+
+```{r, fig.align = 'center', out.width = "680", eval = TRUE, echo = FALSE, message = FALSE}
+
+knitr::include_graphics('Imagenes/ML_11.png')
+```
+
+Para resumir un SVM de clasificación (a veces llamado clasificador de vector de soporte o SVC), los puntos en el borde de cada grupo de clasificación se usan para determinar un límite de soporte maximizando la distancia entre esos puntos y el hiperplano divisorio. -->
+
+---
+
+<h2><p class="text-primary"><strong>Un pequeño repaso</strong></p></h2>
+
+<section style="text-align: justify;"><p class="text-secondary">Cuando el conjunto de datos no se puede separar por una línea recta, se suele emplear una <font color="black"><u>función de kernel</u></font>.</p>
+
+<div class = "row">
+
+<div class = "col-md-6">
+
+<p class="text-secondary">Esta función se usa para transformar los datos en un espacio de dimensión superior para separarlos linealmente. Convierte un problema no separable en uno separable al aumentar el número de dimensiones en el espacio del problema y mapear los puntos de datos a un nuevo espacio.</p>
+
+<!--
+La estructura longitudinal se da cuando la observación se mide múltiples veces dentro de un mismo grupo. En cuanto a la estructura jerárquica, consiste de observaciones que tienen similitudes y se pueden clasificar en un mismo grupo.
+-->
+
+</div>
+
+<div class = "col-md-1">
+
+</div>
+
+<div class = "col-md-5">
+
+<p class="text-secondary">El hiperplano que separa efectivamente los puntos en un espacio problemático de mayor dimensión se asigna nuevamente al espacio problema original, lo que da como resultado una solución no lineal: → </p>
+
+</div>
+
+</div>
+
+</section>
+
+---
+
+<h2><p class="text-primary"><strong>Un pequeño repaso</strong></p></h2>
+
+<br>
+
+```{r, fig.align = 'center', out.width = "720", eval = TRUE, echo = FALSE, message = FALSE}
+
+Imagen_1 <- readJPEG('Imagenes/ML_13.jpg', native = TRUE)
+Imagen_1 <- rasterGrob(Imagen_1, interpolate = FALSE)
+Graf_imagen_1 <- data.frame(
+  x = c(1:2), y = c(1:2)
+) %>%
+  ggplot(aes(x, y)) +
+  geom_blank() +
+  theme_void() +
+  theme(axis.text = element_blank(),
+        axis.ticks = element_blank(),
+        axis.title = element_blank()) +
+  annotation_custom(Imagen_1, xmin = 1.0, xmax = 2.0, ymin = 1.0, ymax = 2.0)
+
+Imagen_2 <- readJPEG('Imagenes/ML_14.jpg', native = TRUE)
+Imagen_2 <- rasterGrob(Imagen_2, interpolate = FALSE)
+Graf_imagen_2 <- data.frame(
+  x = c(1:2), y = c(1:2)
+) %>%
+  ggplot(aes(x, y)) +
+  geom_blank() +
+  theme_void() +
+  theme(axis.text = element_blank(),
+        axis.ticks = element_blank(),
+        axis.title = element_blank()) +
+  annotation_custom(Imagen_2, xmin = 1.0, xmax = 2.0, ymin = 1.0, ymax = 2.0)
+
+Imagen_3 <- readJPEG('Imagenes/ML_15.jpg', native = TRUE)
+Imagen_3 <- rasterGrob(Imagen_3, interpolate=FALSE)
+Graf_imagen_3 <- data.frame(
+  x = c(1:2), y = c(1:2)
+) %>%
+  ggplot(aes(x, y)) +
+  geom_blank() +
+  theme_void() +
+  theme(axis.text = element_blank(),
+        axis.ticks = element_blank(),
+        axis.title = element_blank()) +
+  annotation_custom(Imagen_3, xmin = 1.0, xmax = 2.0, ymin = 1.0, ymax = 2.0)
+
+grid.arrange(Graf_imagen_1, Graf_imagen_2, Graf_imagen_3, ncol = 2)
+```
+
+<!-- Lo que realmente hace el truco del núcleo es calcular los productos de puntos por pares, realizar una transformación implícita sin consumir memoria adicional y minimizar el efecto en el tiempo de cálculo general. Esto permite que SVM aprenda de manera efectiva los límites no lineales al reemplazar los productos de puntos en SVM con la función del núcleo. -->
+
+---
+
+<h2><p class="text-primary"><strong>Un pequeño repaso</strong></p></h2>
+
+<section style="text-align: justify;"><p class="text-secondary">Matemáticamente, la SVR no lineal se formula dada por:</p></section>
 
 
 
@@ -603,7 +817,7 @@ b <- data.frame(
         axis.ticks = element_blank(),
         axis.title = element_blank())
 
-gridExtra::grid.arrange(a, b, ncol = 2)
+grid.arrange(a, b, ncol = 2)
 ```
 
 </div>
