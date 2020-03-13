@@ -757,9 +757,15 @@ grid.arrange(Graf_imagen_1, Graf_imagen_2, Graf_imagen_3, ncol = 2)
 
 <h2><p class="text-primary"><strong>Un pequeño repaso</strong></p></h2>
 
-<section style="text-align: justify;"><p class="text-secondary">Matemáticamente, la SVR no lineal se formula dada por:</p></section>
+<section style="text-align: justify;"><p class="text-secondary">Matemáticamente, la SVR no lineal se formula dado por:</p>
 
+$$y = f(x) = \langle w, \varphi(x) \rangle + b$$
 
+<p class="text-secondary">donde <font color="black">$w$</font> es un vector de peso, <font color="black">$\varphi(.)$</font> es la función de mapeo de características y <font color="black">$b$</font> es el error independiente e idénticamente distribuido o el término de sesgo. Además, SVR utiliza la función de pérdida <font color="black">$\epsilon$</font> de Vapnik que define un margen o tolerancia a errores. A mayor valor de <font color="black">$\epsilon$</font>, se toleran los errores más grandes. En contraste, establecer el valor <font color="black">$\epsilon$</font> en cero significa que cada error será penalizado.</p>
+
+$$L_{E}(y_{i}, f \langle x_{i}, w \rangle) = \{ $$
+
+</section>
 
 ---
 
