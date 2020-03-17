@@ -208,7 +208,7 @@ data.frame(
 
 <h2><p class="text-primary"><strong>Un pequeño repaso</strong></p></h2>
 
-<section style="text-align: justify;"><p class="text-secondary">En el <font color="black"><u>aprendizaje supervisado</u></font>, el modelo simplemente aprende a mapear las características de entrada dadas o la variable predictora <font color="black">$x$</font> y la variable de salida o respuesta <font color="black">$y$</font> en los conjuntos de datos de entrenamiento. La muestra de entrenamiento actúa como supervisor en el proceso de aprendizaje.</p>
+<section style="text-align: justify;"><p class="text-secondary">En el <font color="black"><u>aprendizaje supervisado</u></font>, el modelo simplemente aprende a mapear las características de entrada dadas o la variable predictora <font color="black">$\small x$</font> y la variable de salida o respuesta <font color="black">$\small y$</font> en los conjuntos de datos de entrenamiento. La muestra de entrenamiento actúa como supervisor en el proceso de aprendizaje.</p>
 
 <p class="text-secondary">En el aprendizaje supervisado, cuando la variable de salida es un valor categórico o discreto, entonces es <font color="black"><u>clasificación</u></font>, pero cuando la variable de salida es un valor continuo, entonces es una <font color="black"><u>regresión.</u></font> [Aquí](https://www.youtube.com/watch?v=LliMpfMtjEo) un video sobre esto.</p></section>
 
@@ -218,9 +218,9 @@ data.frame(
 
 <section style="text-align: justify;"><p class="text-secondary">La fórmula simple para explicar el problema de regresión (<font color="black"><u>en el estudio a desarrollar se esta interesado en el problema de regresión</u></font>) viene dada por la ecuación:</p>
 
-$$y = f(x) + b$$
+$$\small y = f(x) + b$$
 
-<p class="text-secondary">El propósito de la regresión es estimar el valor de la variable respuesta <font color="black">$y$</font> utilizando la función <font color="black">$f(x)$</font> a partir de conjuntos de datos de entrada dados y su término de errores.</p>
+<p class="text-secondary">El propósito de la regresión es estimar el valor de la variable respuesta <font color="black">$\small y$</font> utilizando la función <font color="black">$\small f(x)$</font> a partir de conjuntos de datos de entrada dados y su término de errores.</p>
 
 <p class="text-secondary">En la regresión, el modelo aprende de los datos en diversas técnicas para minimizar el sesgo y la varianza hasta que en algún momento la predicción del modelo haya logrado el mejor ajuste.</p>
 
@@ -489,11 +489,11 @@ data.frame(
 
 <section style="text-align: justify;"><p class="text-secondary">El estimador de regresión de bosque aleatorio es igual a:</p>
 
-$$\hat{f^{I}}(x) = \frac{\sum^{I}_{i = 1}t^{*}_{i}(x)}{I}$$
+$$\small \hat{f^{I}}(x) = \frac{\sum^{I}_{i = 1}t^{*}_{i}(x)}{I}$$
 
-<p class="text-secondary">donde <font color="black">$\hat{f^{I}}(x)$</font> es un estimador de bosque aleatorio, bootstrap individual de la muestra <font color="black">$i$</font>, <font color="black">$I$</font> es el número total de árboles que representan el número de estimadores, y <font color="black">$t^{*}_{i}(x)$</font> es la función del árbol de decisión individual que es igual a <font color="black">$t^{*}_{i}(x) = t(X; Z^{*}_{i1},... Z^{*}_{in})$</font></p>
+<p class="text-secondary">donde <font color="black">$\small \hat{f^{I}}(x)$</font> es un estimador de bosque aleatorio, bootstrap individual de la muestra <font color="black">$\small i$</font>, <font color="black">$\small I$</font> es el número total de árboles que representan el número de estimadores, y <font color="black">$\small t^{*}_{i}(x)$</font> es la función del árbol de decisión individual que es igual a <font color="black">$\small t^{*}_{i}(x) = t(X; Z^{*}_{i1},... Z^{*}_{in})$</font></p>
 
-<p class="text-secondary">donde <font color="black">$Z^{*}_{in} (n = 1, ..., N)$</font> es la n-ésima muestra de entrenamiento del conjuntos de datos con <font color="black">$x$</font> características de entrada y respuesta <font color="black">$y$</font>.</p>
+<p class="text-secondary">donde <font color="black">$\small Z^{*}_{in} (n = 1, ..., N)$</font> es la n-ésima muestra de entrenamiento del conjuntos de datos con <font color="black">$\small x$</font> características de entrada y respuesta <font color="black">$\small y$</font>.</p>
 
 </section>
 
@@ -501,7 +501,7 @@ $$\hat{f^{I}}(x) = \frac{\sum^{I}_{i = 1}t^{*}_{i}(x)}{I}$$
 
 <h2><p class="text-primary"><strong>Un pequeño repaso</strong></p></h2>
 
-<section style="text-align: justify;"><p class="text-secondary">El valor óptimo del parámetro de bosque aleatorio, así como el número de ramas, muestras divididas y el nodo de hoja de la muestra, se requiere para averiguar mediante el ajuste de hiperparámetros. Sin embargo, los creadores de este método recomiendan usar <font color="black">$nfeatures = \frac{1}{3}m$</font> donde <font color="black">$m$</font> es el número de características de los datos y el nodo dividido mínimo es cinco.</p></section>
+<section style="text-align: justify;"><p class="text-secondary">El valor óptimo del parámetro de bosque aleatorio, así como el número de ramas, muestras divididas y el nodo de hoja de la muestra, se requiere para averiguar mediante el ajuste de hiperparámetros. Sin embargo, los creadores de este método recomiendan usar <font color="black">$\small nfeatures = \frac{1}{3}m$</font> donde <font color="black">$\small m$</font> es el número de características de los datos y el nodo dividido mínimo es cinco.</p></section>
 
 ---
 
@@ -751,7 +751,7 @@ Graf_imagen_3 <- data.frame(
 grid.arrange(Graf_imagen_1, Graf_imagen_2, Graf_imagen_3, ncol = 2)
 ```
 
-<!-- Lo que realmente hace el truco del núcleo es calcular los productos de puntos por pares, realizar una transformación implícita sin consumir memoria adicional y minimizar el efecto en el tiempo de cálculo general. Esto permite que SVM aprenda de manera efectiva los límites no lineales al reemplazar los productos de puntos en SVM con la función del núcleo. -->
+<!-- Lo que realmente hace el truco del kernel es calcular los productos de puntos por pares, realizar una transformación implícita sin consumir memoria adicional y minimizar el efecto en el tiempo de cálculo general. Esto permite que SVM aprenda de manera efectiva los límites no lineales al reemplazar los productos de puntos en SVM con la función de kernel. -->
 
 ---
 
@@ -759,11 +759,16 @@ grid.arrange(Graf_imagen_1, Graf_imagen_2, Graf_imagen_3, ncol = 2)
 
 <section style="text-align: justify;"><p class="text-secondary">Matemáticamente, la SVR no lineal se formula dado por:</p>
 
-$$y = f(x) = \langle w, \varphi(x) \rangle + b$$
+$$\small y = f(x) = \langle w, \varphi(x) \rangle + b$$
 
-<p class="text-secondary">donde <font color="black">$w$</font> es un vector de peso, <font color="black">$\varphi(.)$</font> es la función de mapeo de características y <font color="black">$b$</font> es el error independiente e idénticamente distribuido o el término de sesgo. Además, SVR utiliza la función de pérdida <font color="black">$\epsilon$</font> de Vapnik que define un margen o tolerancia a errores. A mayor valor de <font color="black">$\epsilon$</font>, se toleran los errores más grandes. En contraste, establecer el valor <font color="black">$\epsilon$</font> en cero significa que cada error será penalizado.</p>
+<p class="text-secondary">donde <font color="black">$\small w$</font> es un vector de peso, <font color="black">$\small \varphi(.)$</font> es la función de mapeo de características y <font color="black">$\small b$</font> es el error independiente e idénticamente distribuido o el término de sesgo. Además, SVR utiliza la función de pérdida <font color="black">$\small \epsilon$</font> de Vapnik que define un margen o tolerancia a errores. A mayor valor de <font color="black">$\small \epsilon$</font>, se toleran los errores más grandes. En contraste, establecer el valor <font color="black">$\small \epsilon$</font> en cero significa que cada error será penalizado.</p>
 
-$$L_{E}(y_{i}, f \langle x_{i}, w \rangle) = \{ $$
+\[\small L_{\epsilon}(y_{i}, f \langle x_{i}, w \rangle) = 
+  \begin{cases}
+     \;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\; 0,  \;\;si |y_{i} - f\langle x_{i}, w \rangle| \leqslant \epsilon \\
+    |y_{i} - f\langle x_{i}, w \rangle|,  \;\;si |y_{i} - f\langle x_{i}, w \rangle| \geqslant \epsilon
+  \end{cases}
+\]
 
 </section>
 
@@ -771,7 +776,58 @@ $$L_{E}(y_{i}, f \langle x_{i}, w \rangle) = \{ $$
 
 <h2><p class="text-primary"><strong>Un pequeño repaso</strong></p></h2>
 
-<section style="text-align: justify;"><p class="text-secondary">El <font color="black"><u>modelo mixto</u></font> es un modelo estadístico que comprende efectos fijos y efectos aleatorios.</p>
+<section style="text-align: justify;"><p class="text-secondary">SVR resuelve la regresión lineal en datos n-dimensionales con <font color="black">$\small n>1$</font> utilizando la función de pérdida y reduciendo la complejidad del modelo al minimizar el vector <font color="black">$\small |w|$</font> que se induce la variable de holgura <font color="black">$\small \xi_{i}$</font>, para <font color="black">$\small i = 1, ..., n$</font> para estimar la desviación de las muestras de entrenamiento ubicadas fuera del margen <font color="black">$\small \epsilon$</font>, de modo que:</p>
+
+$$\small minimizar\left(\frac{1}{2}||w||^{2} + C \sum_{i}^{n}(\xi_{i} + \xi_{i}^{*}) \right)$$
+
+\[ \small sujeto \; a 
+  \begin{cases}
+    y_{i} - f\langle x_{i}, w\rangle - b \leqslant \epsilon + \xi_{i} \\
+    f\langle x_{i}, w\rangle + b - y_{i} \leqslant \epsilon + \xi_{i}^{*}  \\
+    \xi_{i}, \xi_{i}^{*} \geqslant 0
+  \end{cases}
+\]
+
+→
+
+</section>
+
+---
+
+<h2><p class="text-primary"><strong>Un pequeño repaso</strong></p></h2>
+
+<section style="text-align: justify;">
+
+\[ \small |\xi|_{\epsilon} :=
+  \begin{cases}
+  \;\;\;\;0 \;\;\;\;\;\;si \; |\xi| \leqslant \epsilon \\
+  |\xi| - \epsilon \;\;\;\;de \; otra \; manera
+  \end{cases}
+\]
+
+<p class="text-secondary">Donde se introduce <font color="black">$\small C$</font> como parámetros de regularización. Se usa como factor de penalización; un valor constante enorme de <font color="black">$\small C$</font> puede inducir un sobreajuste, mientras que un valor mínimo de <font color="black">$\small C$</font> puede inducir un ajuste insuficiente. La fórmula de optimización se puede transformar en un problema dual <font color="black">$\small \alpha_{p}$</font> y <font color="black">$\small \alpha_{p}^{*}$</font> para cada punto de datos de la siguiente manera:</p>
+
+$$\small f(x_{i}) = \sum_{p, q = 1}^{n}(\alpha_{pi}-\alpha_{pi}^{*})k(x_{pi}, x_{qi})+b$$
+
+→
+
+</section>
+
+---
+
+<h2><p class="text-primary"><strong>Un pequeño repaso</strong></p></h2>
+
+<section style="text-align: justify;"><p class="text-secondary">donde <font color="black">$\small \alpha_{i} \geqslant 0$ y $\small C \geqslant \alpha_{i}^{*}$</font> y <font color="black">$\small K(x_{pi}, x_{qi})$</font> es la función de kernel para <font color="black">$\small i, p, q = 1, ..., n$</font>. Hay tres kernel de uso común; a saber, la base radial lineal, polinómica y gaussiana.</p>
+
+<p class="text-secondary">Es <font color="black"><u>importante</u></font> seleccionar los hiperparámetros (<font color="black">$\small C$</font>, <font color="black">$\small \epsilon$</font> y <font color="black">$\small \gamma$</font>, por ejemplo) más apropiados de SVR para garantizar una buena generalización del modelo.</p>
+
+</section>
+
+---
+
+<h2><p class="text-primary"><strong>Un pequeño repaso</strong></p></h2>
+
+<section style="text-align: justify;"><p class="text-secondary">El <font color="red"><u>modelo mixto</u></font> es un modelo estadístico que comprende efectos fijos y efectos aleatorios.</p>
 
 <div class = "row">
 
@@ -836,6 +892,28 @@ grid.arrange(a, b, ncol = 2)
 
 <h2><p class="text-primary"><strong>Un pequeño repaso</strong></p></h2>
 
+<section style="text-align: justify;"><p class="text-secondary">Matemáticamente, el algoritmo de efectos lineales mixtos está formulado por:</p>
+
+$$\small y_{i} = X_{i}\beta + Z_{i}b_{i} + \epsilon_{i}$$
+
+<p class="text-secondary">donde <font color="black">$\small y_{i} = [y_{i1}, ..., y_{in_{i}}]^{T}$</font> es un vector para las $\small n_{i}$ observaciones en el cluster <font color="black">$\small i$, $\small X_{i} = [X_{i1}, ..., X_{in_{i}}]^{T}$</font> es una matriz de características de efectos fijos, <font color="black">$\small Z_{i} = [Z_{i1}, ..., Z_{in_{i}}]^{T}$</font> es una matriz de características de efectos aleatorios, <font color="black">$\small \epsilon_{i} = [\epsilon_{i1}, ..., \epsilon_{in_{i}}]^{T}$</font> es un de vector error desconocido, <font color="black">$\small b_{i} = (b_{i1}, ..., b_{in_{i}})^T$</font> es un vector desconocido de coeficientes de efectos aleatorios en el grupo <font color="black">$\small i$</font>, y <font color="black">$\small \beta$</font> es un vector desconocido de coeficientes de efectos fijos.</p>
+
+</section>
+
+---
+
+<h2><p class="text-primary"><strong>Un pequeño repaso</strong></p></h2>
+
+<section style="text-align: justify;"><p class="text-secondary">
+
+En los efectos lineales mixtos de la formula anterior, se supone que <font color="black">$\small b_{i}$</font> y <font color="black">$\small \epsilon_{i}$</font> son independientes e idénticamentes distribuidos como <font color="black">$\small b_{i} \sim N (0, D)$</font> y <font color="black">$\small \epsilon_{i} \sim N(0, R_{i})$</font> donde <font color="black">$\small N$</font> se refiere a la distribución normal, mientras que <font color="black">$\small D$</font> y <font color="black">$\small R_{i}$</font> son matrices diagonales de <font color="black">$\small b_{i}$</font> y <font color="black">$\small \epsilon_{i}$</font> respectivamente.</p>
+
+</section>
+
+---
+
+<h2><p class="text-primary"><strong>Un pequeño repaso</strong></p></h2>
+
 <section style="text-align: justify;"><p class="text-secondary">Se ha propuesto un enfoque para manejar el clúster en los datos, el <font color="black"><u>machine learning de efectos mixtos</u></font>.</p>
 
 <br>
@@ -851,7 +929,7 @@ knitr::include_graphics('Imagenes/asombro.gif')
 
 <h2><p class="text-primary"><strong>Un pequeño repaso</strong></p></h2>
 
-<section style="text-align: justify;"><p class="text-warning"><strong>Bosque aleatorio de <u>efectos mixtos</u></strong></p>
+<section style="text-align: justify;"><p class="text-warning"><strong>1. Bosque aleatorio de <u>efectos mixtos</u></strong></p>
 
 </section>
 
@@ -859,7 +937,7 @@ knitr::include_graphics('Imagenes/asombro.gif')
 
 <h2><p class="text-primary"><strong>Un pequeño repaso</strong></p></h2>
 
-<section style="text-align: justify;"><p class="text-info"><strong>Regresión de vector de soporte de <u>efectos mixtos</u></strong></p>
+<section style="text-align: justify;"><p class="text-info"><strong>2. Regresión de vector de soporte de <u>efectos mixtos</u></strong></p>
 
 </section>
 
