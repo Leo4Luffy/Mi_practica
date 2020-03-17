@@ -929,9 +929,19 @@ knitr::include_graphics('Imagenes/asombro.gif')
 
 <h2><p class="text-primary"><strong>Un pequeño repaso</strong></p></h2>
 
-<section style="text-align: justify;"><p class="text-warning"><strong>1. Bosque aleatorio de <u>efectos mixtos</u></strong></p>
+<section style="text-align: justify;"><p class="text-warning"><strong>1. Bosque aleatorio de <u>efectos mixtos</u> (MERF)</strong></p>
+
+<p class="text-secondary">El <font color="black"><u>algoritmo MERF</u></font> fue propuesto para abordar mediciones repetibles agrupadas y no balanceadas en los conjuntos de datos. MERF es como el modelo de efectos mixtos, excepto que lo efectos fijos <font color="black">$\small X_{i}\beta$</font> en la ecuación son reemplazados por la función aleatoria del bosque <font color="black">$\small \hat{f^{I}}(x)$</font> para estimar coeficientes fijos:</p>
+
+$$\small y_{i} = \hat{f^{I}}(x) + Z_{i}b_{i} + \epsilon_{i}$$
 
 </section>
+
+---
+
+<h2><p class="text-primary"><strong>Un pequeño repaso</strong></p></h2>
+
+
 
 ---
 
@@ -964,3 +974,75 @@ knitr::include_graphics('Imagenes/asombro.gif')
 </div>
 
 </div>
+
+---
+
+<h3><p class="text-primary"><strong><u>Trabajo:</u> <a href="/Documentos/Trabajo_1.pdf" class="download" title="PDF" target="_blank"><font color="black">compare machine learning methods and linear mixed models with random effects of longitudinal data prediction</font></a></strong></p></h3>
+
+<section style="text-align: justify;"><p class="text-secondary"><!-- Los datos del artículo son del sitio web http://faculty.washington.edu/heagerty/Books/AnalysisLongitudinal/milk.data -->Los datos consisten de 79 vacas que comen tres alimentos diferentes: alimento con cebada, alimento con lupino blanco, y un mixto de cebada y lupino blanco. Se observa luego el contenido proteico de la leche producida en cada vaca en diferentes periodos.</p>
+
+<div class = "row">
+
+<div class = "col-md-8">
+
+<p class="text-secondary">Las variables de los datos son dieta, vaca, semana y proteína.</p>
+
+</div>
+
+<div class = "col-md-1">
+
+</div>
+
+<div class = "col-md-3">
+
+```{r, fig.align = 'center', out.width = "200", eval = TRUE, echo = FALSE, message = FALSE}
+
+knitr::include_graphics('Imagenes/vaca.gif')
+```
+
+</div>
+
+</div>
+
+</section>
+
+---
+
+<h3><p class="text-primary"><strong><u>Trabajo:</u> <a href="/Documentos/Trabajo_1.pdf" class="download" title="PDF" target="_blank"><font color="black">compare machine learning methods and linear mixed models with random effects of longitudinal data prediction</font></a></strong></p></h3>
+
+<section style="text-align: justify;"><p class="text-secondary">Se uso el enfoque del modelo mixto de efectos aleatorios. Este modelo agregará las diferencias entre diferentes individuos como una parte aleatoria, para reflejar el efecto del individuo en sus mediciones repetidas. Su forma general es:</p>
+
+
+$$\small y_{i} = X_{i}\beta_{i} + Z_{i}b_{i} + \epsilon_{i}, \;\;\;\; i = 1, 2, ..., N$$
+
+<p class="text-secondary">La variable proteína se uso como variable dependiente, y las otras como independientes. Las variables independientes semana y dieta fueron efectos fijos y efectos aleatorios. La expresión del modelo es: →</p>
+
+</section>
+
+---
+
+<h3><p class="text-primary"><strong><u>Trabajo:</u> <a href="/Documentos/Trabajo_1.pdf" class="download" title="PDF" target="_blank"><font color="black">compare machine learning methods and linear mixed models with random effects of longitudinal data prediction</font></a></strong></p></h3>
+
+<br>
+```{r, echo = FALSE, eval = TRUE, message = FALSE, warning = FALSE, error = FALSE}
+
+library(demoR)
+library(nlme)
+library(data.table)
+w <- fread('http://faculty.washington.edu/heagerty/Books/AnalysisLongitudinal/milk.data')
+
+w <- w %>%
+  rename('diet' = V1, 'cow' = V2, 'week' = V3, 'protein' = V4)
+
+demo_code('
+a = lme(protein ~ week + diet, random = ~ week + diet | cow, w)
+') %>%
+  hlt_args(color = 'gray') %>%
+  hlt_funs(color = 'deeppink', underline = TRUE)
+```
+
+<section style="text-align: justify;"><p class="text-secondary">Aquí `lme` es una función del modelo mixto de efectos aleatorios lineales y `w` es el nombre de los datos.</p>
+
+<p class="text-secondary">El <font color="black"><u>conjunto de entrenamiento</u></font> se establece hasta la quinta semana, y las observaciones de las otras semanas se usan como <font color="black"><u>conjunto de prueba</font></u> y se cambia el conjunto de entrenamiento (el conjunto de entrenamiento se incrementa gradualmente) para hacer predicciones.</p>
+
+</section>
