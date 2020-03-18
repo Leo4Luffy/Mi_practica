@@ -1043,6 +1043,85 @@ a = lme(protein ~ week + diet, random = ~ week + diet | cow, w)
 
 <section style="text-align: justify;"><p class="text-secondary">Aquí `lme` es una función del modelo mixto de efectos aleatorios lineales y `w` es el nombre de los datos.</p>
 
-<p class="text-secondary">El <font color="black"><u>conjunto de entrenamiento</u></font> se establece hasta la quinta semana, y las observaciones de las otras semanas se usan como <font color="black"><u>conjunto de prueba</font></u> y se cambia el conjunto de entrenamiento (el conjunto de entrenamiento se incrementa gradualmente) para hacer predicciones.</p>
+<p class="text-secondary">El <font color="black"><u>conjunto de entrenamiento</u></font> se establece desde la quinta semana, y las observaciones de las otras semanas se usan como <font color="black"><u>conjunto de prueba</font></u> y se cambia el conjunto de entrenamiento (el conjunto de entrenamiento se incrementa gradualmente) para hacer predicciones.</p>
 
 </section>
+
+---
+
+<h3><p class="text-primary"><strong><u>Trabajo:</u> <a href="/Documentos/Trabajo_1.pdf" class="download" title="PDF" target="_blank"><font color="black">compare machine learning methods and linear mixed models with random effects of longitudinal data prediction</font></a></strong></p></h3>
+
+<section style="text-align: justify;"><p class="text-secondary">El error usado en el artículo es el <font color="black"><u>error cuadrático medio normalizado (NMSE)</u></font>:</p>
+
+$$\small NMSE = \frac{(y - \hat y)^2}{(y - \bar y)^2} = \frac{\sum(y - \hat y)^2}{\sum(y - \bar y)^2}$$
+
+<div class = "row">
+
+<div class = "col-md-6">
+
+<p class="text-secondary">En la figura 1 los autores vieron una tendencia obvia: a medida que el conjunto de entrenamiento era más grande, el NMSE era menor (el</p>
+
+</div>
+
+<div class = "col-md-1">
+
+</div>
+
+<div class = "col-md-5">
+
+<p class="text-secondary">efecto de predicción era mejor).<!-- Por ejemplo, cuando se uso las primeras cinco semanas de los datos como un conjunto de entrenamiento para construir un modelo de efectos mixtos, el error cuadratico medio de la predicción fue igual a 27.184230, mientras que al usar lo datos de las primeras 11 semanas de cada vaca como conjunto de enternamiento, el error cuadrático medio de la predicción fue 1.802646. Se puede explicar que para reducir errores, aumentar el conjunto de entrenamiento también es un método efectivo. --></p>
+
+```{r, fig.align = 'center', out.width = "240", eval = TRUE, echo = FALSE, message = FALSE}
+
+knitr::include_graphics('Imagenes/Fig_1_1er_trabajo.png')
+```
+
+</div>
+
+</div>
+
+</section>
+
+---
+
+<h3><p class="text-primary"><strong><u>Trabajo:</u> <a href="/Documentos/Trabajo_1.pdf" class="download" title="PDF" target="_blank"><font color="black">compare machine learning methods and linear mixed models with random effects of longitudinal data prediction</font></a></strong></p></h3>
+
+<div class = "row">
+
+<div class = "col-md-6">
+
+<section style="text-align: justify;"><p class="text-secondary">En el articulo, los autores mencionan que el <font color="black"><u>poder interpretativo</u></font> de los métodos de machine learning es peor que los métodos tradicionales:</p></section>
+
+```{r, fig.align = 'center', out.width = "340", eval = TRUE, echo = FALSE, message = FALSE}
+
+knitr::include_graphics('Imagenes/Fig_2_1er_trabajo.png')
+```
+
+</div>
+
+<div class = "col-md-1">
+
+</div>
+
+<div class = "col-md-5">
+
+<section style="text-align: justify;"><p class="text-secondary">... sin embargo su <font color="black"><u>capacidad de predicción</u></font> es mucho mejor.</p></section>
+
+```{r, fig.align = 'center', out.width = "420", eval = TRUE, echo = FALSE, message = FALSE}
+
+knitr::include_graphics('Imagenes/asombro_2.gif')
+```
+
+</div>
+
+</div>
+
+---
+
+<h3><p class="text-primary"><strong><u>Trabajo:</u> <a href="/Documentos/Trabajo_1.pdf" class="download" title="PDF" target="_blank"><font color="black">compare machine learning methods and linear mixed models with random effects of longitudinal data prediction</font></a></strong></p></h3>
+
+<!-- 
+A continuación, los autores explican cada método de machine learning empleado:
+
+El proceso de construcción de un arbol de decisión es, en cualquier nodo, cada variable independiente elige un punto de división que divide 
+-->
