@@ -953,7 +953,7 @@ $$\small y_{i} = \hat{f^{I}}(x) + Z_{i}b_{i} + \epsilon_{i}$$
 
 ---
 
-<h3><p class="text-primary"><strong><u>Trabajo:</u> <a href="/Documentos/Trabajo_1.pdf" class="download" title="PDF" target="_blank"><font color="black">compare machine learning methods and linear mixed models with random effects of longitudinal data prediction</font></a></strong></p></h3>
+<h3><p class="text-primary"><strong><u>Trabajo 1:</u> <a href="/Documentos/Trabajo_1.pdf" class="download" title="PDF" target="_blank"><font color="black">compare machine learning methods and linear mixed models with random effects of longitudinal data prediction</font></a></strong></p></h3>
 
 <div class = "row">
 
@@ -977,7 +977,7 @@ $$\small y_{i} = \hat{f^{I}}(x) + Z_{i}b_{i} + \epsilon_{i}$$
 
 ---
 
-<h3><p class="text-primary"><strong><u>Trabajo:</u> <a href="/Documentos/Trabajo_1.pdf" class="download" title="PDF" target="_blank"><font color="black">compare machine learning methods and linear mixed models with random effects of longitudinal data prediction</font></a></strong></p></h3>
+<h3><p class="text-primary"><strong><u>Trabajo 1:</u> <a href="/Documentos/Trabajo_1.pdf" class="download" title="PDF" target="_blank"><font color="black">compare machine learning methods and linear mixed models with random effects of longitudinal data prediction</font></a></strong></p></h3>
 
 <section style="text-align: justify;"><p class="text-secondary"><!-- Los datos del artículo son del sitio web http://faculty.washington.edu/heagerty/Books/AnalysisLongitudinal/milk.data -->Los datos consisten de 79 vacas que comen tres alimentos diferentes: alimento con cebada, alimento con lupino blanco, y un mixto de cebada y lupino blanco. Se observa luego el contenido proteico de la leche producida en cada vaca en diferentes periodos.</p>
 
@@ -1008,7 +1008,7 @@ knitr::include_graphics('Imagenes/vaca.gif')
 
 ---
 
-<h3><p class="text-primary"><strong><u>Trabajo:</u> <a href="/Documentos/Trabajo_1.pdf" class="download" title="PDF" target="_blank"><font color="black">compare machine learning methods and linear mixed models with random effects of longitudinal data prediction</font></a></strong></p></h3>
+<h3><p class="text-primary"><strong><u>Trabajo 1:</u> <a href="/Documentos/Trabajo_1.pdf" class="download" title="PDF" target="_blank"><font color="black">compare machine learning methods and linear mixed models with random effects of longitudinal data prediction</font></a></strong></p></h3>
 
 <section style="text-align: justify;"><p class="text-secondary">Se uso el enfoque del modelo mixto de efectos aleatorios. Este modelo agregará las diferencias entre diferentes individuos como una parte aleatoria, para reflejar el efecto del individuo en sus mediciones repetidas. Su forma general es:</p>
 
@@ -1021,7 +1021,7 @@ $$\small y_{i} = X_{i}\beta_{i} + Z_{i}b_{i} + \epsilon_{i}, \;\;\;\; i = 1, 2, 
 
 ---
 
-<h3><p class="text-primary"><strong><u>Trabajo:</u> <a href="/Documentos/Trabajo_1.pdf" class="download" title="PDF" target="_blank"><font color="black">compare machine learning methods and linear mixed models with random effects of longitudinal data prediction</font></a></strong></p></h3>
+<h3><p class="text-primary"><strong><u>Trabajo 1:</u> <a href="/Documentos/Trabajo_1.pdf" class="download" title="PDF" target="_blank"><font color="black">compare machine learning methods and linear mixed models with random effects of longitudinal data prediction</font></a></strong></p></h3>
 
 <br>
 ```{r, echo = FALSE, eval = TRUE, message = FALSE, warning = FALSE, error = FALSE}
@@ -1049,7 +1049,7 @@ a = lme(protein ~ week + diet, random = ~ week + diet | cow, w)
 
 ---
 
-<h3><p class="text-primary"><strong><u>Trabajo:</u> <a href="/Documentos/Trabajo_1.pdf" class="download" title="PDF" target="_blank"><font color="black">compare machine learning methods and linear mixed models with random effects of longitudinal data prediction</font></a></strong></p></h3>
+<h3><p class="text-primary"><strong><u>Trabajo 1:</u> <a href="/Documentos/Trabajo_1.pdf" class="download" title="PDF" target="_blank"><font color="black">compare machine learning methods and linear mixed models with random effects of longitudinal data prediction</font></a></strong></p></h3>
 
 <section style="text-align: justify;"><p class="text-secondary">El error usado en el artículo es el <font color="black"><u>error cuadrático medio normalizado (NMSE)</u></font>:</p>
 
@@ -1084,7 +1084,7 @@ knitr::include_graphics('Imagenes/Fig_1_1er_trabajo.png')
 
 ---
 
-<h3><p class="text-primary"><strong><u>Trabajo:</u> <a href="/Documentos/Trabajo_1.pdf" class="download" title="PDF" target="_blank"><font color="black">compare machine learning methods and linear mixed models with random effects of longitudinal data prediction</font></a></strong></p></h3>
+<h3><p class="text-primary"><strong><u>Trabajo 1:</u> <a href="/Documentos/Trabajo_1.pdf" class="download" title="PDF" target="_blank"><font color="black">compare machine learning methods and linear mixed models with random effects of longitudinal data prediction</font></a></strong></p></h3>
 
 <div class = "row">
 
@@ -1118,7 +1118,7 @@ knitr::include_graphics('Imagenes/asombro_2.gif')
 
 ---
 
-<h3><p class="text-primary"><strong><u>Trabajo:</u> <a href="/Documentos/Trabajo_1.pdf" class="download" title="PDF" target="_blank"><font color="black">compare machine learning methods and linear mixed models with random effects of longitudinal data prediction</font></a></strong></p></h3>
+<h3><p class="text-primary"><strong><u>Trabajo 1:</u> <a href="/Documentos/Trabajo_1.pdf" class="download" title="PDF" target="_blank"><font color="black">compare machine learning methods and linear mixed models with random effects of longitudinal data prediction</font></a></strong></p></h3>
 
 <!-- 
 A continuación, los autores explican cada método de machine learning empleado:
@@ -1161,7 +1161,7 @@ knitr::include_graphics('Imagenes/Fig_3_1er_trabajo.png')
 
 ---
 
-<h3><p class="text-primary"><strong><u>Trabajo:</u> <a href="/Documentos/Trabajo_1.pdf" class="download" title="PDF" target="_blank"><font color="black">compare machine learning methods and linear mixed models with random effects of longitudinal data prediction</font></a></strong></p></h3>
+<h3><p class="text-primary"><strong><u>Trabajo 1:</u> <a href="/Documentos/Trabajo_1.pdf" class="download" title="PDF" target="_blank"><font color="black">compare machine learning methods and linear mixed models with random effects of longitudinal data prediction</font></a></strong></p></h3>
 
 <section style="text-align: justify;"><p class="text-secondary">En la figura anterior, la predicción de los modelos lineales no es tan buena como la de los métodos de machine learning. Sin embargo, la predicción del modelo lineal funciona mejor a medida que aumenta el conjunto de entrenamiento, siendo muy cercano al método de machine learning cuando se utilizan las primeras 12 semanas como conjunto de entrenamiento para construir el modelo.</p>
 
@@ -1171,7 +1171,7 @@ knitr::include_graphics('Imagenes/Fig_3_1er_trabajo.png')
 
 ---
 
-<h3><p class="text-primary"><strong><u>Trabajo:</u> <a href="/Documentos/Trabajo_1.pdf" class="download" title="PDF" target="_blank"><font color="black">compare machine learning methods and linear mixed models with random effects of longitudinal data prediction</font></a></strong></p></h3>
+<h3><p class="text-primary"><strong><u>Trabajo 1:</u> <a href="/Documentos/Trabajo_1.pdf" class="download" title="PDF" target="_blank"><font color="black">compare machine learning methods and linear mixed models with random effects of longitudinal data prediction</font></a></strong></p></h3>
 
 <section style="text-align: justify;"><p class="text-secondary">El siguiente es el valor de NMSE y el gráfico de NMSE para los modelos empleados en `R`.</p>
 
@@ -1207,10 +1207,17 @@ knitr::include_graphics('Imagenes/Fig_4_1er_trabajo.png')
 
 ---
 
-<h3><p class="text-primary"><strong><u>Trabajo:</u> <a href="/Documentos/Trabajo_1.pdf" class="download" title="PDF" target="_blank"><font color="black">compare machine learning methods and linear mixed models with random effects of longitudinal data prediction</font></a></strong></p></h3>
+<h3><p class="text-primary"><strong><u>Trabajo 1:</u> <a href="/Documentos/Trabajo_1.pdf" class="download" title="PDF" target="_blank"><font color="black">compare machine learning methods and linear mixed models with random effects of longitudinal data prediction</font></a></strong></p></h3>
 
 <section style="text-align: justify;"><h3><p class="text-primary"><strong><u>Conlusión</u></strong></p></h3>
 
-<section style="text-align: justify;"><p class="text-secondary">El efecto de predicción de los métodos de machine learning es mucho mejor que el modelo lineal tradicional y el de efectos mixtos. Pero si el propósito de los datos es para inferencia, los métodos tradicionales pueden ser más explicativos. En la práctica, el modelo óptimo debe seleccionarse de acuerdo con las características de los datos.</p>
+<p class="text-secondary">El efecto de predicción de los métodos de machine learning es mucho mejor que el modelo lineal tradicional y el de efectos mixtos. Pero si el propósito de los datos es para inferencia, los métodos tradicionales pueden ser más explicativos. En la práctica, el modelo óptimo debe seleccionarse de acuerdo con las características de los datos.</p>
 
-</secion>
+</section>
+
+---
+
+<h3><p class="text-primary"><strong><u>Trabajo 2:</u> <a href="/Documentos/Trabajo_2.pdf" class="download" title="PDF" target="_blank"><font color="black">Using artificial neural network to predict body weights of rabbits</font></a></strong></p></h3>
+
+
+
