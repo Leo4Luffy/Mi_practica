@@ -1123,5 +1123,94 @@ knitr::include_graphics('Imagenes/asombro_2.gif')
 <!-- 
 A continuación, los autores explican cada método de machine learning empleado:
 
-El proceso de construcción de un arbol de decisión es, en cualquier nodo, cada variable independiente elige un punto de división que divide 
+El proceso de construcción de un arbol de decisión es: en cualquier nodo, cada variable elige un punto de división que divide el nivel de la variable dependiente. Luego, las variables independientes compiten entre sí (incluidas las posibles variables independientes categóricas) para ver qué variable puede dividir los niveles de la variable dependiente en las observaciones del nodo más ampliamente (es decir, el porcentaje de cada nivel tiene la "diferencia" más grande, y hay varios métricas). La variable seleccionada se convierte en la variable dividida del nodo. Luego, el árbol de decisión se bifurca de acuerdo con el punto de división de la variable dividida, y la observación se divide en dos partes, es decir, dos nodos nuevos. En cada nuevo nodo, la competencia interna y mutua de las auto variables comienza nuevamente, y se genera una nueva variable dividida. Esto continúa, hasta cuando al nodo solo le queda un nivel.
+
+El bosque aleatorio es un método combinado de árboles de decisión. El principio de funcionamiento del bosque aleatorio es: (1) extraer n observaciones de todas las (n) observaciones como una muestra. Es decir, hay muestras que se vuelven a colocar para el mismo tamaño de muestra que los datos originales. Luego, con base en esta nueva muestra, se construye un árbol de decisión (clasificación). En el proceso de construcción del árbol, no todas las variables se utilizan como variables divididas candidatas, pero algunas variables se seleccionan al azar para competir por las variables divididas. De esta forma, no solo se extraen aleatoriamente los datos utilizados por cada árbol, y la elección de las variables de división para cada nodo también es aleatoria; (2) Repita el paso (1) continuamente hasta que el árbol de decisión construido sea igual al número especificado; (3) Si llegan nuevos datos, cada árbol da un valor predicho, entonces todos los árboles usan un voto mayoritario simple para determinar el valor predicho de su variable dependiente.
+
+En el método de bagging (bootstrap aggregating) basado en modelos, el cual se puede traducir como "método de integración de autoayuda", utiliza el método de autoayuda (bootstrap) para volver a colocar la muestra. Realiza muchas muestras de muestras de entrenamiento (como k veces) y vuelve a colocar las muestras cada vez. Las observaciones con el mismo tamaño de muestra se extraen cada vez. Dado que las muestras se vuelven a colocar, hay k muestras diferentes. Luego, se genera un árbol de decisión para cada muestra. De esta manera, cada árbol produce una predicción para una nueva observación.
+
+El método de máquina de vectores de soporte es un nuevo método de clasificación para análisis de datos lineales y no lineales. En los últimos años, se han logrado avances en su investigación teórica e implementación de algoritmos, y se ha convertido en un poderoso medio para resolver problemas tradicionales como "problemas dimensionales" y "sobreaprendizaje".
+
+Un modelo de red neuronal es una imitación de una red neuronal natural, y puede resolver efectivamente problemas de regresión y clasificación muy complejos con una gran cantidad de variables interrelacionadas. El principio de la red neuronal es enviar el promedio ponderado de los valores de los nodos de la capa superior a los nodos de la capa inferior, y finalmente a los nodos de la capa de salida, y luego retroalimentar a la capa anterior de acuerdo con el tamaño del error. Los autores en el articulo muestran una fórmula que puede ilustrar el proceso de ponderación de una red neuronal general con una capa oculta. Donde w_ik es el peso de la variable independiente x_i en el k-ésimo nodo de la capa oculta, w_kj es el peso del k-ésimo nodo de la capa oculta para la j-ésima variable dependiente, z_k es el valor del k-ésimo nodo de la capa oculta, y f y f∗ son funciones de activación.
 -->
+
+<div class = "row">
+
+<div class = "col-md-6">
+
+<section style="text-align: justify;"><p class="text-secondary">Para los métodos de machine learning, se elimino la variable vaca dado que dichos métodos son inútiles para los números de serie. De manera cíclica, los métodos de machine learning y los modelos lineales se utilizaron para modelar, y el conjunto de entrenamiento se cambio para la validación cruzada.</p></section>
+
+</div>
+
+<div class = "col-md-1">
+
+</div>
+
+<div class = "col-md-5">
+
+<section style="text-align: justify;"><p class="text-secondary">El gráfico de NMSE resultante se muestra en la figura a continuación.</p></section>
+
+```{r, fig.align = 'center', out.width = "440", eval = TRUE, echo = FALSE, message = FALSE}
+
+knitr::include_graphics('Imagenes/Fig_3_1er_trabajo.png')
+```
+
+</div>
+
+</div>
+
+---
+
+<h3><p class="text-primary"><strong><u>Trabajo:</u> <a href="/Documentos/Trabajo_1.pdf" class="download" title="PDF" target="_blank"><font color="black">compare machine learning methods and linear mixed models with random effects of longitudinal data prediction</font></a></strong></p></h3>
+
+<section style="text-align: justify;"><p class="text-secondary">En la figura anterior, la predicción de los modelos lineales no es tan buena como la de los métodos de machine learning. Sin embargo, la predicción del modelo lineal funciona mejor a medida que aumenta el conjunto de entrenamiento, siendo muy cercano al método de machine learning cuando se utilizan las primeras 12 semanas como conjunto de entrenamiento para construir el modelo.</p>
+
+<p class="text-secondary">No importa el método de machine learning, la predicción de estos datos es similar y es robusta (apenas cambia con el cambio del conjunto de entrenamiento).</p>
+
+</section>
+
+---
+
+<h3><p class="text-primary"><strong><u>Trabajo:</u> <a href="/Documentos/Trabajo_1.pdf" class="download" title="PDF" target="_blank"><font color="black">compare machine learning methods and linear mixed models with random effects of longitudinal data prediction</font></a></strong></p></h3>
+
+<section style="text-align: justify;"><p class="text-secondary">El siguiente es el valor de NMSE y el gráfico de NMSE para los modelos empleados en `R`.</p>
+
+<div class = "row">
+
+<div class = "col-md-5">
+
+```{r, fig.align = 'center', out.width = "440", eval = TRUE, echo = FALSE, message = FALSE}
+
+knitr::include_graphics('Imagenes/Fig_5_1er_trabajo.png')
+```
+
+</div>
+
+<div class = "col-md-1">
+
+</div>
+
+<div class = "col-md-6">
+
+```{r, fig.align = 'center', out.width = "300", eval = TRUE, echo = FALSE, message = FALSE}
+
+knitr::include_graphics('Imagenes/Fig_4_1er_trabajo.png')
+```
+
+</div>
+
+</div>
+
+<p class="text-secondary">Se puede ver que la predicción de los datos por el método de machine learning es <font color="black"><u>mucho mejor</u></font> que el método tradicional.</p>
+
+</section>
+
+---
+
+<h3><p class="text-primary"><strong><u>Trabajo:</u> <a href="/Documentos/Trabajo_1.pdf" class="download" title="PDF" target="_blank"><font color="black">compare machine learning methods and linear mixed models with random effects of longitudinal data prediction</font></a></strong></p></h3>
+
+<section style="text-align: justify;"><h3><p class="text-primary"><strong><u>Conlusión</u></strong></p></h3>
+
+<section style="text-align: justify;"><p class="text-secondary">El efecto de predicción de los métodos de machine learning es mucho mejor que el modelo lineal tradicional y el de efectos mixtos. Pero si el propósito de los datos es para inferencia, los métodos tradicionales pueden ser más explicativos. En la práctica, el modelo óptimo debe seleccionarse de acuerdo con las características de los datos.</p>
+
+</secion>
