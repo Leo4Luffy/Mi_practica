@@ -1219,5 +1219,93 @@ knitr::include_graphics('Imagenes/Fig_4_1er_trabajo.png')
 
 <h3><p class="text-primary"><strong><u>Trabajo 2:</u> <a href="/Documentos/Trabajo_2.pdf" class="download" title="PDF" target="_blank"><font color="black">Using artificial neural network to predict body weights of rabbits</font></a></strong></p></h3>
 
+<div class = "row">
 
+<div class = "col-md-6">
+
+<section style="text-align: justify;"><p class="text-secondary"><font color="black"><u>Problema</u></font>: Los métodos tradicionales de predicción estadística y clasificación <!-- (como la regresión lineal, la regresión logística, el análisis de componentes principales, el análisis discriminante, la clasificación del vecino más cercano, etc.) --> tienen varias limitaciones, como los supuestos en lo que se basan, y sus resultados a menudo no son los mejores posibles.</p>
+
+<p class="text-secondary">Las <font color="black"><u>redes neuronales artificiales</u></font> se basan en supuestos menos numerosos y</p>
+
+</section>
+
+</div>
+
+<div class = "col-md-1">
+
+</div>
+
+<div class = "col-md-5">
+
+<section style="text-align: justify;"><p class="text-secondary">permiten resolver problemas en los que los métodos estadísticos tradicionales no proporcionan soluciones aceptables.</p>
+
+<p class="text-secondary">Sin embargo, <font color="black"><u>el uso de redes neuronales todavía es escaso en la ciencia animal</u></font>. <!-- A diferencia de los métodos estadísticos tradicionales, las redes neuronales artificiales intentan resolver problemas a través del aprendizaje explícito. Esto a menudo lo hace más computacionalmente intensivo. Sin embargo, sus puntos fuertes trascienden esta limitación leve. --></p>
+
+</section>
+
+</div>
+
+</div>
+
+---
+
+<h3><p class="text-primary"><strong><u>Trabajo 2:</u> <a href="/Documentos/Trabajo_2.pdf" class="download" title="PDF" target="_blank"><font color="black">Using artificial neural network to predict body weights of rabbits</font></a></strong></p></h3>
+
+<div class = "row">
+
+<div class = "col-md-6">
+
+<section style="text-align: justify;"><p class="text-secondary">Se utilizaron 144 conejos F1 de ocho semanas de edad. Los conejos fueron manejados intensivamente con aire acondicionado para minimizar el estrés por calor. Se les alimentó con una dieta granulada por las mañanas y se les dio pasto verde como la guinea (*Panicum maximum*) por las tardes.</p></section>
+
+</div>
+
+<div class = "col-md-1">
+
+</div>
+
+<div class = "col-md-5">
+
+<section style="text-align: justify;"><p class="text-secondary">Con una balanza digital se tomó el peso corporal. Se determinaron tres rasgos biométricos con una cinta métrica. Los componentes del cuerpo medidos fueron: →</p></section>
+
+```{r, fig.align = 'center', out.width = "200", eval = TRUE, echo = FALSE, message = FALSE}
+
+knitr::include_graphics('Imagenes/conejo.gif')
+```
+
+</div>
+
+</div>
+
+---
+
+<h3><p class="text-primary"><strong><u>Trabajo 2:</u> <a href="/Documentos/Trabajo_2.pdf" class="download" title="PDF" target="_blank"><font color="black">Using artificial neural network to predict body weights of rabbits</font></a></strong></p></h3>
+
+<br>
+
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th scope="col">Rasgo</th>
+      <th scope="col">Descripción</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr class="table-danger">
+      <th scope="row">Longitud del cuerpo (BL)</th>
+      <td>distancia diagonal desde los puntos del hombro hasta los puntos de la cadera o las primeras vértebras torácicas hasta la base de la cola o el hueso de la cadera.</td>
+    </tr>
+    <tr class="table-warning">
+      <th scope="row">Circuferencia del corazón (HG)</th>
+      <td>se refiere a la circunferencia del cuerpo y se midió justo detrás de las patas delanteras.</td>
+    </tr>
+    <tr class="table-info">
+      <th scope="row">Altura a la cruz (HW)</th>
+      <td>corresponde a la altura o distancia existente entre el suelo y las primeras vértebras torácicas, que forman una cruz imaginaria con la vertical.</td>
+    </tr>
+  </tbody>
+</table>
+
+---
+
+<h3><p class="text-primary"><strong><u>Trabajo 2:</u> <a href="/Documentos/Trabajo_2.pdf" class="download" title="PDF" target="_blank"><font color="black">Using artificial neural network to predict body weights of rabbits</font></a></strong></p></h3>
 
