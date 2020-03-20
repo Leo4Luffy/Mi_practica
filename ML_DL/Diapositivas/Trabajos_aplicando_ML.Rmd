@@ -1313,7 +1313,7 @@ knitr::include_graphics('Imagenes/conejo.gif')
 
 <div class = "col-md-6">
 
-<section style="text-align: justify;"><p class="text-secondary">Se implemento una red neuronal artificial de tres capas con propagación hacia atras en Python. La capa de entrada tenía cinco nodos (raza, sexo, HG, BL y HW), mientras que la capa oculta se hizo para contener cinco nodos (para simplificar y facilitar el entrenamiento del modelo). <!-- No se incluyo la edad en el modelo ya que los animales tenían la misma edad (8 semanas). --></p></section>
+<section style="text-align: justify;"><p class="text-secondary">Se implemento una red neuronal artificial de tres capas con propagación hacia atras en Python. La capa de entrada tenia cinco nodos (raza, sexo, HG, BL y HW), mientras que la capa oculta se hizo para contener cinco nodos (para simplificar y facilitar el entrenamiento del modelo). <!-- No se incluyo la edad en el modelo ya que los animales tenían la misma edad (8 semanas). --></p></section>
 
 </div>
 
@@ -1394,6 +1394,34 @@ data.frame(
 
 <h3><p class="text-primary"><strong><u>Trabajo 2:</u> <a href="/Documentos/Trabajo_2.pdf" class="download" title="PDF" target="_blank"><font color="black">Using artificial neural network to predict body weights of rabbits</font></a></strong></p></h3>
 
+<section style="text-align: justify;"><p class="text-secondary">El conjunto de datos se dividio aleatoriamente en dos subconjuntos: entrenamiento (75% del conjunto de datos completo) y prueba (25%). La red se probó en 1 y 2 capas ocultas con 3 a 25 neuronas en cada capa oculta. Los pesos iniciales y la matriz de sesgo se iniciaron aleatoriamente entre -1 a 1. Se uso una función de transformación no lineal (o activación) tangente sigmoidea (Ecuación [1]) para calcular la salida de la suma de entradas ponderadas de neuronas en cada capa oculta. Se utilizaron funciones de transformación lineal como capa de salida para obtener la respuesta de la red.</p>
 
+$$\small f^{(x)} = \frac{1}{1 + e^{-\alpha_{x}}} \;\;\;\; ecuación\;[1]$$
 
+<!-- donde $x$ es la suma ponderada de las entradas y $\alpha$ es una constante -->
 
+</section>
+
+---
+
+<h3><p class="text-primary"><strong><u>Trabajo 2:</u> <a href="/Documentos/Trabajo_2.pdf" class="download" title="PDF" target="_blank"><font color="black">Using artificial neural network to predict body weights of rabbits</font></a></strong></p></h3>
+
+<section style="text-align: justify;"><p class="text-secondary">Para tener un buen entrenamiento del modelo de red neuronal artificial, se estableció la tasa de aprendizaje en 0.005 y el factor de impulso en 0.001. Primero se realizó 10 mil iteraciones de entrenamiento, utilizando el modelo obtenido (es decir, los pesos de la red neuronal) para predecir los pesos corporales, y se guardo los resultados.</p>
+
+<p class="text-secondary">En aras de la comparación, se ajustó un modelo de regresión lineal multivariante <!--(asegurando que el modelo pasara varios diagnósticos del modelo, como la distribución normal de los residuos de regresión)--> después de confirmar que el modelo era estadísticamente significativo en p < 0.0001 <!-- (tabla 1) -->.</p>
+
+</section>
+
+---
+
+<h3><p class="text-primary"><strong><u>Trabajo 2:</u> <a href="/Documentos/Trabajo_2.pdf" class="download" title="PDF" target="_blank"><font color="black">Using artificial neural network to predict body weights of rabbits</font></a></strong></p></h3>
+
+<section style="text-align: justify;"><p class="text-secondary"> Al comparar los resultados de la red neuronal artificial con los del modelo de regresión lineal multivariante ajustado, los resultados fueron alentadores. Por lo tanto se fue más allá, y se ejecuto un millon de iteraciones de entrenamiento para mejorar aún más los pesos de la red neuronal artificial.</p>
+
+<p class="text-secondary">El <font color="black">$\small R^{2}$</font> se determinó usando la siguiente fórmula:</p>
+
+$$\small R^{2} = 1 - \left[ \sum_{1}^{N} \left( \frac{Q_{exp} - Q_{cal}}{Q_{exp^{2}}} \right)^{2} \right]$$
+
+<p class="text-secondary">donde <font color="black">$\small Q_{exp}$</font> es el valor observado, <font color="black">$\small Q_{cal}$</font> es el valor predicho y <font color="black">$\small N$</font> es el número de observaciones.</p>
+
+</section>
