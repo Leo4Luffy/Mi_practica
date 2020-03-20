@@ -1285,22 +1285,22 @@ knitr::include_graphics('Imagenes/conejo.gif')
 <table class="table table-hover">
   <thead>
     <tr>
-      <th scope="col">Rasgo</th>
+      <th scope="col">Rasgo en cm</th>
       <th scope="col">Descripción</th>
     </tr>
   </thead>
   <tbody>
     <tr class="table-danger">
       <th scope="row">Longitud del cuerpo (BL)</th>
-      <td>distancia diagonal desde los puntos del hombro hasta los puntos de la cadera o las primeras vértebras torácicas hasta la base de la cola o el hueso de la cadera.</td>
+      <td>Distancia diagonal desde los puntos del hombro hasta los puntos de la cadera o las primeras vértebras torácicas hasta la base de la cola o el hueso de la cadera.</td>
     </tr>
     <tr class="table-warning">
       <th scope="row">Circuferencia del corazón (HG)</th>
-      <td>se refiere a la circunferencia del cuerpo y se midió justo detrás de las patas delanteras.</td>
+      <td>Se refiere a la circunferencia del cuerpo y se midió justo detrás de las patas delanteras.</td>
     </tr>
     <tr class="table-info">
       <th scope="row">Altura a la cruz (HW)</th>
-      <td>corresponde a la altura o distancia existente entre el suelo y las primeras vértebras torácicas, que forman una cruz imaginaria con la vertical.</td>
+      <td>Corresponde a la altura o distancia existente entre el suelo y las primeras vértebras torácicas, que forman una cruz imaginaria con la vertical.</td>
     </tr>
   </tbody>
 </table>
@@ -1308,4 +1308,92 @@ knitr::include_graphics('Imagenes/conejo.gif')
 ---
 
 <h3><p class="text-primary"><strong><u>Trabajo 2:</u> <a href="/Documentos/Trabajo_2.pdf" class="download" title="PDF" target="_blank"><font color="black">Using artificial neural network to predict body weights of rabbits</font></a></strong></p></h3>
+
+<div class = "row">
+
+<div class = "col-md-6">
+
+<section style="text-align: justify;"><p class="text-secondary">Se implemento una red neuronal artificial de tres capas con propagación hacia atras en Python. La capa de entrada tenía cinco nodos (raza, sexo, HG, BL y HW), mientras que la capa oculta se hizo para contener cinco nodos (para simplificar y facilitar el entrenamiento del modelo). <!-- No se incluyo la edad en el modelo ya que los animales tenían la misma edad (8 semanas). --></p></section>
+
+</div>
+
+<div class = "col-md-1">
+
+</div>
+
+<div class = "col-md-5">
+
+<section style="text-align: justify;"><p class="text-secondary">La capa de salida tenia un solo nodo: el peso corporal.</p></section>
+
+```{r, echo = FALSE, eval = TRUE, fig.showtext = TRUE, fig.align = "center", fig.cap = ""}
+
+data.frame(
+  x = c(1.5, 1.5, 1.5, 1.5, 1.5, 2.2, 2.2, 2.2, 2.2, 2.2, 2.9), 
+  y = c(1.0, 0.0, -1.0, -2.0, -3.0, 1.0, 0.0, -1.0, -2.0, -3.0, -1.0),
+  grupo = c('A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'k')
+) %>%
+  ggplot(aes(x0 = x, y0 = y, r = 0.2, fill = grupo, colour = grupo)) +
+  geom_circle(alpha = 0.4, size = 0.8) +
+  geom_blank() +
+  geom_curve(x = 1.1, xend = 1.28, y = 1.0, yend = 1.0, arrow = arrow(length = unit(0.1, 'inch')), size = 1.2, color = 'black', curvature = 0.0) +
+  geom_curve(x = 1.1, xend = 1.28, y = 0.0, yend = 0.0, arrow = arrow(length = unit(0.1, 'inch')), size = 1.2, color = 'black', curvature = 0.0) +
+  geom_curve(x = 1.1, xend = 1.28, y = -1.0, yend = -1.0, arrow = arrow(length = unit(0.1, 'inch')), size = 1.2, color = 'black', curvature = 0.0) +
+  geom_curve(x = 1.1, xend = 1.28, y = -2.0, yend = -2.0, arrow = arrow(length = unit(0.1, 'inch')), size = 1.2, color = 'black', curvature = 0.0) +
+  geom_curve(x = 1.1, xend = 1.28, y = -3.0, yend = -3.0, arrow = arrow(length = unit(0.1, 'inch')), size = 1.2, color = 'black', curvature = 0.0) +
+  geom_curve(x = 1.72, xend = 1.98, y = 1.0, yend = 1.0, arrow = arrow(length = unit(0.1, 'inch')), size = 1.2, color = 'black', curvature = 0.0) +
+  geom_curve(x = 1.72, xend = 1.98, y = 0.0, yend = 0.0, arrow = arrow(length = unit(0.1, 'inch')), size = 1.2, color = 'black', curvature = 0.0) +
+  geom_curve(x = 1.72, xend = 1.98, y = -1.0, yend = -1.0, arrow = arrow(length = unit(0.1, 'inch')), size = 1.2, color = 'black', curvature = 0.0) +
+  geom_curve(x = 1.72, xend = 1.98, y = -2.0, yend = -2.0, arrow = arrow(length = unit(0.1, 'inch')), size = 1.2, color = 'black', curvature = 0.0) +
+  geom_curve(x = 1.72, xend = 1.98, y = -3.0, yend = -3.0, arrow = arrow(length = unit(0.1, 'inch')), size = 1.2, color = 'black', curvature = 0.0) +
+  geom_curve(x = 1.72, xend = 1.98, y = 1.0, yend = 0.0, arrow = arrow(length = unit(0.1, 'inch')), size = 1.2, color = 'black', curvature = 0.0) +
+  geom_curve(x = 1.72, xend = 1.98, y = 1.0, yend = -1.0, arrow = arrow(length = unit(0.1, 'inch')), size = 1.2, color = 'black', curvature = 0.0) +
+  geom_curve(x = 1.72, xend = 1.98, y = 1.0, yend = -2.0, arrow = arrow(length = unit(0.1, 'inch')), size = 1.2, color = 'black', curvature = 0.0) +
+  geom_curve(x = 1.72, xend = 1.98, y = 1.0, yend = -3.0, arrow = arrow(length = unit(0.1, 'inch')), size = 1.2, color = 'black', curvature = 0.0) +
+  geom_curve(x = 1.72, xend = 1.98, y = 0.0, yend = 1.0, arrow = arrow(length = unit(0.1, 'inch')), size = 1.2, color = 'black', curvature = 0.0) +
+  geom_curve(x = 1.72, xend = 1.98, y = 0.0, yend = -1.0, arrow = arrow(length = unit(0.1, 'inch')), size = 1.2, color = 'black', curvature = 0.0) +
+  geom_curve(x = 1.72, xend = 1.98, y = 0.0, yend = -2.0, arrow = arrow(length = unit(0.1, 'inch')), size = 1.2, color = 'black', curvature = 0.0) +
+  geom_curve(x = 1.72, xend = 1.98, y = 0.0, yend = -3.0, arrow = arrow(length = unit(0.1, 'inch')), size = 1.2, color = 'black', curvature = 0.0) +
+  geom_curve(x = 1.72, xend = 1.98, y = -1.0, yend = 1.0, arrow = arrow(length = unit(0.1, 'inch')), size = 1.2, color = 'black', curvature = 0.0) +
+  geom_curve(x = 1.72, xend = 1.98, y = -1.0, yend = 0.0, arrow = arrow(length = unit(0.1, 'inch')), size = 1.2, color = 'black', curvature = 0.0) +
+  geom_curve(x = 1.72, xend = 1.98, y = -1.0, yend = -2.0, arrow = arrow(length = unit(0.1, 'inch')), size = 1.2, color = 'black', curvature = 0.0) +
+  geom_curve(x = 1.72, xend = 1.98, y = -1.0, yend = -3.0, arrow = arrow(length = unit(0.1, 'inch')), size = 1.2, color = 'black', curvature = 0.0) +
+  geom_curve(x = 1.72, xend = 1.98, y = -2.0, yend = 1.0, arrow = arrow(length = unit(0.1, 'inch')), size = 1.2, color = 'black', curvature = 0.0) +
+  geom_curve(x = 1.72, xend = 1.98, y = -2.0, yend = 0.0, arrow = arrow(length = unit(0.1, 'inch')), size = 1.2, color = 'black', curvature = 0.0) +
+  geom_curve(x = 1.72, xend = 1.98, y = -2.0, yend = -1.0, arrow = arrow(length = unit(0.1, 'inch')), size = 1.2, color = 'black', curvature = 0.0) +
+  geom_curve(x = 1.72, xend = 1.98, y = -2.0, yend = -3.0, arrow = arrow(length = unit(0.1, 'inch')), size = 1.2, color = 'black', curvature = 0.0) +
+  geom_curve(x = 1.72, xend = 1.98, y = -3.0, yend = 1.0, arrow = arrow(length = unit(0.1, 'inch')), size = 1.2, color = 'black', curvature = 0.0) +
+  geom_curve(x = 1.72, xend = 1.98, y = -3.0, yend = 0.0, arrow = arrow(length = unit(0.1, 'inch')), size = 1.2, color = 'black', curvature = 0.0) +
+  geom_curve(x = 1.72, xend = 1.98, y = -3.0, yend = -1.0, arrow = arrow(length = unit(0.1, 'inch')), size = 1.2, color = 'black', curvature = 0.0) +
+  geom_curve(x = 1.72, xend = 1.98, y = -3.0, yend = -2.0, arrow = arrow(length = unit(0.1, 'inch')), size = 1.2, color = 'black', curvature = 0.0) +
+  geom_curve(x = 2.42, xend = 2.68, y = 0.0, yend = -1.0, arrow = arrow(length = unit(0.1, 'inch')), size = 1.2, color = 'black', curvature = 0.0) +
+  geom_curve(x = 2.42, xend = 2.68, y = 1.0, yend = -1.0, arrow = arrow(length = unit(0.1, 'inch')), size = 1.2, color = 'black', curvature = 0.0) +
+  geom_curve(x = 2.42, xend = 2.68, y = -1.0, yend = -1.0, arrow = arrow(length = unit(0.1, 'inch')), size = 1.2, color = 'black', curvature = 0.0) +
+  geom_curve(x = 2.42, xend = 2.68, y = -2.0, yend = -1.0, arrow = arrow(length = unit(0.1, 'inch')), size = 1.2, color = 'black', curvature = 0.0) +
+  geom_curve(x = 2.42, xend = 2.68, y = -3.0, yend = -1.0, arrow = arrow(length = unit(0.1, 'inch')), size = 1.2, color = 'black', curvature = 0.0) +
+  annotate(geom = 'text', x = 1.0, y = 1.0, label = 'Raza', family = 'gochi', size = 16.4, colour = 'black') +
+  annotate(geom = 'text', x = 1.0, y = 0.0, label = 'Sexo', family = 'gochi', size = 16.4, colour = 'black') +
+  annotate(geom = 'text', x = 1.0, y = -1.0, label = 'HG', family = 'gochi', size = 16.4, colour = 'black') +
+  annotate(geom = 'text', x = 1.0, y = -2.0, label = 'BL', family = 'gochi', size = 16.4, colour = 'black') +
+  annotate(geom = 'text', x = 1.0, y = -3.0, label = 'HW', family = 'gochi', size = 16.4, colour = 'black') +
+  annotate(geom = 'text', x = 2.9, y = -1.4, label = 'Peso', family = 'gochi', size = 16.4, colour = 'black') +
+  annotate(geom = 'text', x = 2.9, y = -1.6, label = 'corporal', family = 'gochi', size = 16.4, colour = 'black') +
+  theme_void() +
+  theme(legend.position = 'none') +
+  scale_fill_manual(values = c('yellow', 'yellow', 'yellow', 'yellow', 'yellow', 'red', 'red', 'red', 'red', 'red', 'black')) +
+  scale_colour_manual(values = c('yellow', 'yellow', 'yellow', 'yellow', 'yellow', 'red', 'red', 'red', 'red', 'red', 'black')) +
+  theme(axis.text = element_blank(),
+        axis.ticks = element_blank(),
+        axis.title = element_blank())
+```
+
+</div>
+
+</div>
+
+---
+
+<h3><p class="text-primary"><strong><u>Trabajo 2:</u> <a href="/Documentos/Trabajo_2.pdf" class="download" title="PDF" target="_blank"><font color="black">Using artificial neural network to predict body weights of rabbits</font></a></strong></p></h3>
+
+
+
 
