@@ -1416,7 +1416,7 @@ $$\small f^{(x)} = \frac{1}{1 + e^{-\alpha_{x}}} \;\;\;\; ecuación\;[1]$$
 
 <h3><p class="text-primary"><strong><u>Trabajo 2:</u> <a href="/Documentos/Trabajo_2.pdf" class="download" title="PDF" target="_blank"><font color="black">Using artificial neural network to predict body weights of rabbits</font></a></strong></p></h3>
 
-<section style="text-align: justify;"><p class="text-secondary"> Al comparar los resultados de la red neuronal artificial con los del modelo de regresión lineal multivariante ajustado, los resultados fueron alentadores. Por lo tanto se fue más allá, y se ejecuto un millon de iteraciones de entrenamiento para mejorar aún más los pesos de la red neuronal artificial.</p>
+<section style="text-align: justify;"><p class="text-secondary">Al comparar los resultados de la red neuronal artificial con los del modelo de regresión lineal multivariante ajustado, los resultados fueron alentadores. Por lo tanto se fue más allá, y se ejecuto 1 millon de iteraciones de entrenamiento para mejorar aún más los pesos de la red neuronal artificial.</p>
 
 <p class="text-secondary">El <font color="black">$\small R^{2}$</font> se determinó usando la siguiente fórmula:</p>
 
@@ -1425,3 +1425,49 @@ $$\small R^{2} = 1 - \left[ \sum_{1}^{N} \left( \frac{Q_{exp} - Q_{cal}}{Q_{exp^
 <p class="text-secondary">donde <font color="black">$\small Q_{exp}$</font> es el valor observado, <font color="black">$\small Q_{cal}$</font> es el valor predicho y <font color="black">$\small N$</font> es el número de observaciones.</p>
 
 </section>
+
+---
+
+<h3><p class="text-primary"><strong><u>Trabajo 2:</u> <a href="/Documentos/Trabajo_2.pdf" class="download" title="PDF" target="_blank"><font color="black">Using artificial neural network to predict body weights of rabbits</font></a></strong></p></h3>
+
+<section style="text-align: justify;"><p class="text-secondary">Estadísticas resumidas de los pesos observados y predichos en 10 mil, y en 1 millón de iteraciones de entrenamiento de la red neuronal artificial:</p>
+
+```{r, fig.align = 'center', out.width = "440", eval = TRUE, echo = FALSE, message = FALSE}
+
+knitr::include_graphics('Imagenes/Fig_1_2do_trabajo.png')
+```
+
+<p class="text-secondary">Comparación de la red neuronal <!--(en 10 mil y en 1 millón de iteraciones de entrenamiento)--> y el modelo de regresión lineal multivariante de los pesos observados y los pesos predichos:</p>
+
+```{r, fig.align = 'center', out.width = "440", eval = TRUE, echo = FALSE, message = FALSE}
+
+knitr::include_graphics('Imagenes/Fig_2_2do_trabajo.png')
+```
+
+</section>
+
+---
+
+<h3><p class="text-primary"><strong><u>Trabajo 2:</u> <a href="/Documentos/Trabajo_2.pdf" class="download" title="PDF" target="_blank"><font color="black">Using artificial neural network to predict body weights of rabbits</font></a></strong></p></h3>
+
+<section style="text-align: justify;"><p class="text-secondary">Correlación de Pearson entre los pesos observados y los pesos predichos en 10 mil, y en 1 millón de iteraciones de entrenamiento de la red neuronal:</p>
+
+```{r, fig.align = 'center', out.width = "440", eval = TRUE, echo = FALSE, message = FALSE}
+
+knitr::include_graphics('Imagenes/Fig_3_2do_trabajo.png')
+```
+
+<p class="text-secondary">La red neuronal artificial implementada y los resultados son alentadores, ya que supera la regresión lineal multivariada. El <font color="black">$\small R^{2}$</font> de cada uno de los resultados de los modelos de la red (0.679 para 10 mil iteraciones<!--, Figura 2-->; y 0.71 de 1 millón de iteraciones<!--, Figura 3-->) es mucho mejor que el de la regresión lineal multivariada (0.659, Tabla 2).</p>
+
+</section>
+
+---
+
+<h3><p class="text-primary"><strong><u>Trabajo 2:</u> <a href="/Documentos/Trabajo_2.pdf" class="download" title="PDF" target="_blank"><font color="black">Using artificial neural network to predict body weights of rabbits</font></a></strong></p></h3>
+
+<section style="text-align: justify;"><p class="text-secondary">La precisión de la predicción se validó utilizando los conjuntos de datos de prueba. Los modelos de red neuronal dieron valores de <font color="black">$\small R^{2}$</font> más altos que la regresión lineal multivariada, lo que indica que la predicción del modelo de red neuronal fue capaz de describir una mayor variación en el peso corporal de los conejos en comparación con la regresión lineal multivariada. <!-- Las estimaciones de correlación entre los pesos observados y predichos para valores iterados (10 mil y 1 millón) fueron positivos y altamente significativos (p <0.001). --></p>
+
+<p class="text-secondary">Se concluye que la red neuronal artificial es más robusta y podría utilizarse para predecir el peso corporal de los animales con mayor precisión que la regresión lineal multivariada.</p>
+
+</section>
+
