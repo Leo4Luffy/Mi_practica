@@ -941,7 +941,45 @@ $$\small y_{i} = \hat{f^{I}}(x) + Z_{i}b_{i} + \epsilon_{i}$$
 
 <h2><p class="text-primary"><strong>Un pequeño repaso</strong></p></h2>
 
+<section style="text-align: justify;"><p class="text-secondary">MERF utiliza la predicción out of bag para estimar el modelo no lineal utilizando bootstrap. Además, también implementa la maximización de expectativas (EM) para estimar la variable respuesta <font color="black">$\small y_{i}$</font>.</p>
 
+<p class="text-secondary"><!-- El algoritmo EM se usa para estimar parámetros para múltiples características para resolver el desequilibrio en los datos.--> El algoritmo EM para encontrar el valor óptimo es el siguiente:</p>
+
+<p class="text-danger">Establezca el índice de iteración <font color="black">$\small r$</font> como <font color="black">$\small r = 0, 1, 2, ..., n$</font>.</p>
+
+<p class="text-danger">Paso 0. Establezca <font color="black">$\small r = 0, \hat \sigma^{2}_{0} = 1, \hat b_{i(0)} = 0, \hat D_{0} = I_{q}$</font>.</p>
+
+<p class="text-danger">Paso 1. Establezca <font color="black">$\small r = r + 1$</font>, estime <font color="black">$\small y^{*}_{i(r)}, \hat f^{I}(X_{i})_{r}$</font> y <font color="black">$\small \hat b_{i(r)}$</font> usando:<font color="black"> →</font></p>
+
+</section>
+
+---
+
+<h2><p class="text-primary"><strong>Un pequeño repaso</strong></p></h2>
+
+<section style="text-align: justify;"><p class="text-danger">$i.$ <font color="black">$\small y^{*}_{i(r)} = y_{i} - Z_{i} \hat b_{i(r - 1)}, i = 1, ..., n$</font>.</p>
+
+<p class="text-danger">$ii.$ Construya múltiples árboles en el bosque usando un algoritmo de bosque aleatorio con <font color="black">$\small y^{*}_{ij(r)}$</font> como conjunto de respuesta para las características <font color="black">$\small x_{ij}$</font> usando una muestra de entrenamiento bootstrap de los conjuntos de entrenamiento <font color="black">$\small (y^{*}_{ij(r)}, x_{ij}), i = 1, ..., n, j = 1, ..., n_{i}$</font>.</p>
+
+<p class="text-danger">$iii.$ Obtenga un bosque aleatorio <font color="black">$\small \hat f^{I}(x_{ij})_{r}$</font> del modelo <font color="black">$\small f(x_{ij})$</font> utilizando la predicción out of bag. Sea <font color="black">$\small \hat f^{I}(X_{i})_{r} = [\hat f^{I}(x_{i1})_{(r)}, ..., \hat f^{I}(x_{in_{i}})_{(r)}]^{T}, i = 1, ..., n$</font>.</p>
+
+</section>
+
+---
+
+<h2><p class="text-primary"><strong>Un pequeño repaso</strong></p></h2>
+
+<section style="text-align: justify;"><p class="text-danger">$iv.$ Calcule <font color="black">$\small \hat b_{i(r)}$</font> como <font color="black">$\small \hat b_{i(r)} = \hat D_{r - 1}Z^{T}_{i} \hat V^{-1}_{i(r - 1)}(y_{i} - \hat f^{I}(X_{i})_{r})$</font>, donde <font color="black">$\small \hat V_{i(r - 1)} = Z_{i} \hat D_{(r - 1)}Z^{T}_{i} + \hat \sigma^{2}_{r - 1} I_{ni}, i = 1, ..., n$</font>.</p>
+
+<br>
+
+<p class="text-danger">Paso 2. Actualice <font color="black">$\small \hat \sigma^{2}_{(r)}$</font> y <font color="black">$\small \hat D_{(r)}$</font> como <font color="black">$\small \hat \sigma^{2}_{(r)} = N^{-1} \sum_{n = 1}^{n} \{ \hat \epsilon_{i(r)}^{T} \hat \epsilon_{i(r)} + \hat \sigma^{2}_{(r - 1)} [n_{i} - \hat \sigma^{2}_{(r - 1)} trace(\hat V_{i(r - 1)})] \}$</font>, donde <font color="black">$\small \hat \epsilon_{i(r)} = y_{i} - \hat f^{I}(X_{i})_{r} - Z_{i} \hat b_{i(r - 1)}$</font>, y <font color="black">$\hat D_{(r)} = N^{-1} \sum_{n = 1}^{n} \{ \hat b^{T}_{i(r)} \hat b_{i(r)} + [\hat D_{(r - 1)} - \hat D_{(r - 1)}Z_{i}^{T} \hat V_{i(r - 1)}^{-1} Z_{i}\hat D_{(r - 1)}] \}$</font>.</p>
+
+<br>
+
+<p class="text-danger">Paso 3. Haz el paso 1 y 2 hasta la convergencia.</p>
+
+</section>
 
 ---
 
@@ -1467,7 +1505,7 @@ knitr::include_graphics('Imagenes/Fig_3_2do_trabajo.png')
 
 <section style="text-align: justify;"><p class="text-secondary">La precisión de la predicción se validó utilizando los conjuntos de datos de prueba. Los modelos de red neuronal dieron valores de <font color="black">$\small R^{2}$</font> más altos que la regresión lineal multivariada, lo que indica que la predicción del modelo de red neuronal fue capaz de describir una mayor variación en el peso corporal de los conejos en comparación con la regresión lineal multivariada. <!-- Las estimaciones de correlación entre los pesos observados y predichos para valores iterados (10 mil y 1 millón) fueron positivos y altamente significativos (p <0.001). --></p>
 
-<p class="text-secondary">Se concluye que la red neuronal artificial es más robusta y podría utilizarse para predecir el peso corporal de los animales con mayor precisión que la regresión lineal multivariada.</p>
+<p class="text-secondary">Se <font color="black"><u>concluye</u></font> que la red neuronal artificial es más robusta y podría utilizarse para predecir el peso corporal de los animales con mayor precisión que la regresión lineal multivariada.</p>
 
 </section>
 
