@@ -945,23 +945,11 @@ $$\small y_{i} = \hat{f^{I}}(x) + Z_{i}b_{i} + \epsilon_{i}$$
 
 <p class="text-secondary"><!-- El algoritmo EM se usa para estimar parámetros para múltiples características para resolver el desequilibrio en los datos.--> El algoritmo EM para encontrar el valor óptimo es el siguiente:</p>
 
-<p class="text-danger">Establezca el índice de iteración <font color="black">$\small r$</font> como <font color="black">$\small r = 0, 1, 2, ..., n$</font>.</p>
+<p class="text-secondary">Establezca el índice de iteración <font color="black">$\small r$</font> como <font color="black">$\small r = 0, 1, 2, ..., n$</font>.</p>
 
-<p class="text-danger">Paso 0. Establezca <font color="black">$\small r = 0, \hat \sigma^{2}_{0} = 1, \hat b_{i(0)} = 0, \hat D_{0} = I_{q}$</font>.</p>
+<p class="text-secondary">Paso 0. Establezca <font color="black">$\small r = 0, \hat \sigma^{2}_{0} = 1, \hat b_{i(0)} = 0, \hat D_{0} = I_{q}$</font>.</p>
 
-<p class="text-danger">Paso 1. Establezca <font color="black">$\small r = r + 1$</font>, estime <font color="black">$\small y^{*}_{i(r)}, \hat f^{I}(X_{i})_{r}$</font> y <font color="black">$\small \hat b_{i(r)}$</font> usando:<font color="black"> →</font></p>
-
-</section>
-
----
-
-<h2><p class="text-primary"><strong>Un pequeño repaso</strong></p></h2>
-
-<section style="text-align: justify;"><p class="text-danger">$i.$ <font color="black">$\small y^{*}_{i(r)} = y_{i} - Z_{i} \hat b_{i(r - 1)}, i = 1, ..., n$</font>.</p>
-
-<p class="text-danger">$ii.$ Construya múltiples árboles en el bosque usando un algoritmo de bosque aleatorio con <font color="black">$\small y^{*}_{ij(r)}$</font> como conjunto de respuesta para las características <font color="black">$\small x_{ij}$</font> usando una muestra de entrenamiento bootstrap de los conjuntos de entrenamiento <font color="black">$\small (y^{*}_{ij(r)}, x_{ij}), i = 1, ..., n, j = 1, ..., n_{i}$</font>.</p>
-
-<p class="text-danger">$iii.$ Obtenga un bosque aleatorio <font color="black">$\small \hat f^{I}(x_{ij})_{r}$</font> del modelo <font color="black">$\small f(x_{ij})$</font> utilizando la predicción out of bag. Sea <font color="black">$\small \hat f^{I}(X_{i})_{r} = [\hat f^{I}(x_{i1})_{(r)}, ..., \hat f^{I}(x_{in_{i}})_{(r)}]^{T}, i = 1, ..., n$</font>.</p>
+<p class="text-secondary">Paso 1. Establezca <font color="black">$\small r = r + 1$</font>, estime <font color="black">$\small y^{*}_{i(r)}, \hat f^{I}(X_{i})_{r}$</font> y <font color="black">$\small \hat b_{i(r)}$</font> usando:<font color="black"> →</font></p>
 
 </section>
 
@@ -969,15 +957,27 @@ $$\small y_{i} = \hat{f^{I}}(x) + Z_{i}b_{i} + \epsilon_{i}$$
 
 <h2><p class="text-primary"><strong>Un pequeño repaso</strong></p></h2>
 
-<section style="text-align: justify;"><p class="text-danger">$iv.$ Calcule <font color="black">$\small \hat b_{i(r)}$</font> como <font color="black">$\small \hat b_{i(r)} = \hat D_{r - 1}Z^{T}_{i} \hat V^{-1}_{i(r - 1)}(y_{i} - \hat f^{I}(X_{i})_{r})$</font>, donde <font color="black">$\small \hat V_{i(r - 1)} = Z_{i} \hat D_{(r - 1)}Z^{T}_{i} + \hat \sigma^{2}_{r - 1} I_{ni}, i = 1, ..., n$</font>.</p>
+<section style="text-align: justify;"><p class="text-secondary">$i.$ <font color="black">$\small y^{*}_{i(r)} = y_{i} - Z_{i} \hat b_{i(r - 1)}, i = 1, ..., n$</font>.</p>
+
+<p class="text-secondary">$ii.$ Construya múltiples árboles en el bosque usando un algoritmo de bosque aleatorio con <font color="black">$\small y^{*}_{ij(r)}$</font> como conjunto de respuesta para las características <font color="black">$\small x_{ij}$</font> usando una muestra de entrenamiento bootstrap de los conjuntos de entrenamiento <font color="black">$\small (y^{*}_{ij(r)}, x_{ij}), i = 1, ..., n, j = 1, ..., n_{i}$</font>.</p>
+
+<p class="text-secondary">$iii.$ Obtenga un bosque aleatorio <font color="black">$\small \hat f^{I}(x_{ij})_{r}$</font> del modelo <font color="black">$\small f(x_{ij})$</font> utilizando la predicción out of bag. Sea <font color="black">$\small \hat f^{I}(X_{i})_{r} = [\hat f^{I}(x_{i1})_{(r)}, ..., \hat f^{I}(x_{in_{i}})_{(r)}]^{T}, i = 1, ..., n$</font>.</p>
+
+</section>
+
+---
+
+<h2><p class="text-primary"><strong>Un pequeño repaso</strong></p></h2>
+
+<section style="text-align: justify;"><p class="text-secondary">$iv.$ Calcule <font color="black">$\small \hat b_{i(r)}$</font> como <font color="black">$\small \hat b_{i(r)} = \hat D_{r - 1}Z^{T}_{i} \hat V^{-1}_{i(r - 1)}(y_{i} - \hat f^{I}(X_{i})_{r})$</font>, donde <font color="black">$\small \hat V_{i(r - 1)} = Z_{i} \hat D_{(r - 1)}Z^{T}_{i} + \hat \sigma^{2}_{r - 1} I_{ni}, i = 1, ..., n$</font>.</p>
 
 <br>
 
-<p class="text-danger">Paso 2. Actualice <font color="black">$\small \hat \sigma^{2}_{(r)}$</font> y <font color="black">$\small \hat D_{(r)}$</font> como <font color="black">$\small \hat \sigma^{2}_{(r)} = N^{-1} \sum_{n = 1}^{n} \{ \hat \epsilon_{i(r)}^{T} \hat \epsilon_{i(r)} + \hat \sigma^{2}_{(r - 1)} [n_{i} - \hat \sigma^{2}_{(r - 1)} trace(\hat V_{i(r - 1)})] \}$</font>, donde <font color="black">$\small \hat \epsilon_{i(r)} = y_{i} - \hat f^{I}(X_{i})_{r} - Z_{i} \hat b_{i(r - 1)}$</font>, y <font color="black">$\hat D_{(r)} = N^{-1} \sum_{n = 1}^{n} \{ \hat b^{T}_{i(r)} \hat b_{i(r)} + [\hat D_{(r - 1)} - \hat D_{(r - 1)}Z_{i}^{T} \hat V_{i(r - 1)}^{-1} Z_{i}\hat D_{(r - 1)}] \}$</font>.</p>
+<p class="text-secondary">Paso 2. Actualice <font color="black">$\small \hat \sigma^{2}_{(r)}$</font> y <font color="black">$\small \hat D_{(r)}$</font> como <font color="black">$\small \hat \sigma^{2}_{(r)} = N^{-1} \sum_{n = 1}^{n} \{ \hat \epsilon_{i(r)}^{T} \hat \epsilon_{i(r)} + \hat \sigma^{2}_{(r - 1)} [n_{i} - \hat \sigma^{2}_{(r - 1)} trace(\hat V_{i(r - 1)})] \}$</font>, donde <font color="black">$\small \hat \epsilon_{i(r)} = y_{i} - \hat f^{I}(X_{i})_{r} - Z_{i} \hat b_{i(r - 1)}$</font>, y <font color="black">$\hat D_{(r)} = N^{-1} \sum_{n = 1}^{n} \{ \hat b^{T}_{i(r)} \hat b_{i(r)} + [\hat D_{(r - 1)} - \hat D_{(r - 1)}Z_{i}^{T} \hat V_{i(r - 1)}^{-1} Z_{i}\hat D_{(r - 1)}] \}$</font>.</p>
 
 <br>
 
-<p class="text-danger">Paso 3. Haz el paso 1 y 2 hasta la convergencia.</p>
+<p class="text-secondary">Paso 3. Haz el paso 1 y 2 hasta la convergencia.</p>
 
 </section>
 
@@ -985,9 +985,26 @@ $$\small y_{i} = \hat{f^{I}}(x) + Z_{i}b_{i} + \epsilon_{i}$$
 
 <h2><p class="text-primary"><strong>Un pequeño repaso</strong></p></h2>
 
-<section style="text-align: justify;"><p class="text-info"><strong>2. Regresión de vector de soporte de <u>efectos mixtos</u></strong></p>
+<section style="text-align: justify;"><p class="text-secondary">Los pasos EM en MERF se pueden explicar como: inicialmente, se establece el valor predeterminado para la varianza, el coeficiente de efectos aleatorios y la matriz diagonal de varianza desconocida <font color="black">$\small \hat D$</font>. El siguiente paso es calcular la variable respuesta en el cluster <font color="black">$\small i$</font> como <font color="black">$\small y_{i(r)}^{*}$</font> como <font color="black">$\small y_{i} - Z_{i} \hat b_{i(r − 1)}$</font>. Siguiente paso, es estimar los efectos fijos utilizando un bosque aleatorio con predicción out of bag dada <font color="black">$\small (y_{ij}^{*}, x_{ij})$</font>. Los estimados <font color="black">$\small \hat f^{I} (x_{ij})$</font> del bosque aleatorio se utilizan para encontrar los coeficientes de efectos aleatorios <font color="black">$\small \hat b_{i}$</font> en un cluster particular <font color="black">$\small i$</font>. El último paso es calcular la varianza <font color="black">$\small \hat \sigma^{2}$</font> y las matrices <font color="black">$\small \hat D$</font> a partir de los residuos estimados y los efectos aleatorios, respectivamente. <!-- Este algoritmo se ejecuta iterativamente hasta sus convergencias. --></p></section>
+
+<!-- Además, el algoritmo MERF utiliza la probabilidad generalizada (GLL) para calcular la pérdida de entrenamiento en el desarrollo del modelo. GLL eventualmente alcanzará la convergencia cuando el modelo logre el mejor ajuste como se muestra en la Figura a continuación de GLL en el proceso de capacitación alcanza la convergencia con 200 iteraciones. -->
+
+```{r, fig.align = 'center', out.width = "200", eval = FALSE, echo = FALSE, message = FALSE}
+
+knitr::include_graphics('Imagenes/Figura_7_tesis_guia.png')
+```
+
+---
+
+<h2><p class="text-primary"><strong>Un pequeño repaso</strong></p></h2>
+
+<section style="text-align: justify;"><p class="text-info"><strong>2. Regresión de vector de soporte de <u>efectos mixtos</u> (MESVR)</strong></p>
 
 </section>
+
+---
+
+<h2><p class="text-primary"><strong>Un pequeño repaso</strong></p></h2>
 
 ---
 
