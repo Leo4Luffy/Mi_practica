@@ -1,0 +1,117 @@
+---
+title: "Métodologia de machine learning"
+subtitle: "Aplicación en datos del bovino criollo colombiano Romosinuano"
+author: "Jorge Leonardo López Martínez; Freddy Hernandez Barajas"
+institute: ""
+date: ""
+output:
+  xaringan::moon_reader:
+    css: estilo.css
+---
+
+<section style="text-align: center;"><h2><p class="text-info">Objetivo y población de estudio</p></h2></section>
+
+<br>
+
+<div class = "row">
+
+<div class = "col-md-6">
+
+<section style="text-align: justify;"><p class="text-primary">Este estudio tuvo como objetivo aplicar la métodologia del <font color="black"><u>machine learning</u></font> en datos del bovino criollo colombiano Romosinuano.</p>
+
+<p class="text-primary">Dichos datos se obtuvieron del núcleo animal de la raza criolla colombiana Romosinuano, el cual se mantiene como banco de germoplasma. Este núcleo se encuentra ubicado en el centro de investigación Turipaná (AGROSAVIA), localizado en el Valle del Sinú en el nordeste de Colombia.</p>
+
+```{r Imagen, fig.align = 'center', eval = TRUE, echo = FALSE, message = FALSE, out.width = "280"}
+
+knitr::include_graphics('Imagenes/Romo.jpg')
+```
+
+</section>
+
+</div>
+
+<div class = "col-md-6">
+
+```{r Mapa, fig.align = 'center', eval = TRUE, echo = FALSE, message = FALSE, out.width="140"}
+
+library(dplyr)
+library(ggplot2) # Se va a usar el paquete ggplot2 el cual permitira hacer la gráfica
+library(ggforce)
+library(showtext) # Link donde estan las fuentes Google (http://www.google.com/fonts)
+font_add_google('Gochi Hand', 'gochi')
+showtext.auto()
+
+
+```
+
+</div>
+
+</div>
+
+---
+
+<section style="text-align: center;"><h2><p class="text-info">Los datos</p></h2></section>
+
+<br>
+
+<div class = "row">
+
+<div class = "col-md-6">
+
+<section style="text-align: justify;"><p class="text-primary">La base de datos comprende el registro informativo de la característica intervalo entre partos en bovino criollo colombiano Romosinuano.</p>
+
+<p class="text-primary">Dicha base de datos se caracteriza por presentar una <font color="black"><u>estructura de clúster de tipo longitudinal</u></font>, cuyo ejemplo se puede observar en la siguiente imagen:</p>
+
+</section>
+
+```{r Ejemplo estructura longitudinal, fig.align = 'center', eval = TRUE, echo = FALSE, message = FALSE, fig.showtext = TRUE, out.width="280"}
+
+data.frame(
+  x = c(0.5, 1.5, 0.5, 2.6, 2.0), 
+  y = c(1, 1.5, 2.3, 1.3, 2.5),
+  grupo = c('A', 'B', 'C', 'D', 'E')
+) %>%
+  ggplot(aes(x0 = x, y0 = y, r = 0.5, fill = grupo, colour = grupo)) +
+  geom_circle(alpha = 0.2, size = 1.0) +
+  annotate(geom = 'text', x = 0.4, y = 1.2, label = 'IEP 1', family = 'gochi', size = 8.4, colour = 'black') +
+  annotate(geom = 'text', x = 0.6, y = 1.0, label = 'IEP 2', family = 'gochi', size = 8.4, colour = 'black') +
+  annotate(geom = 'text', x = 0.5, y = 0.8, label = 'IEP 3', family = 'gochi', size = 8.4, colour = 'black') +
+  annotate(geom = 'text', x = 1.1, y = 0.5, label = 'Bovino A', family = 'gochi', size = 10.4, colour = 'black') +
+  annotate(geom = 'text', x = 1.4, y = 1.7, label = 'IEP 1', family = 'gochi', size = 8.4, colour = 'black') +
+  annotate(geom = 'text', x = 1.6, y = 1.5, label = '...', family = 'gochi', size = 8.4, colour = 'black') +
+  annotate(geom = 'text', x = 1.5, y = 1.3, label = 'IEP 5', family = 'gochi', size = 8.4, colour = 'black') +
+  annotate(geom = 'text', x = 1.6, y = 0.95, label = 'Bovino C', family = 'gochi', size = 10.4, colour = 'black') +
+  annotate(geom = 'text', x = 0.4, y = 2.5, label = 'IEP 3', family = 'gochi', size = 8.4, colour = 'black') +
+  annotate(geom = 'text', x = 0.6, y = 2.3, label = 'IEP 4', family = 'gochi', size = 8.4, colour = 'black') +
+  annotate(geom = 'text', x = 0.5, y = 2.1, label = 'IEP 5', family = 'gochi', size = 8.4, colour = 'black') +
+  annotate(geom = 'text', x = 0.9, y = 2.84, label = 'Bovino B', family = 'gochi', size = 10.4, colour = 'black') +
+  annotate(geom = 'text', x = 2.5, y = 1.5, label = 'IEP 1', family = 'gochi', size = 8.4, colour = 'black') +
+  annotate(geom = 'text', x = 2.7, y = 1.3, label = 'IEP 3', family = 'gochi', size = 8.4, colour = 'black') +
+  annotate(geom = 'text', x = 2.6, y = 1.1, label = 'IEP 6', family = 'gochi', size = 8.4, colour = 'black') +
+  annotate(geom = 'text', x = 2.7, y = 1.84, label = 'Bovino E', family = 'gochi', size = 10.4, colour = 'black') +
+  annotate(geom = 'text', x = 1.9, y = 2.7, label = 'IEP 1', family = 'gochi', size = 8.4, colour = 'black') +
+  annotate(geom = 'text', x = 2.1, y = 2.5, label = 'IEP 2', family = 'gochi', size = 8.4, colour = 'black') +
+  annotate(geom = 'text', x = 2.0, y = 2.3, label = 'IEP 3', family = 'gochi', size = 8.4, colour = 'black') +
+  annotate(geom = 'text', x = 2.5, y = 3.06, label = 'Bovino D', family = 'gochi', size = 10.4, colour = 'black') +
+  theme_void() +
+  theme(legend.position = 'none') +
+  scale_fill_manual(values = c('black', 'cyan', 'red', 'yellow', 'green')) +
+  scale_colour_manual(values = c('black', 'cyan', 'red', 'yellow', 'green')) +
+  theme(axis.text = element_blank(),
+        axis.ticks = element_blank(),
+        axis.title = element_blank())
+```
+
+<!--
+La estructura longitudinal se da cuando la observación se mide múltiples veces dentro de un mismo grupo.
+-->
+
+</div>
+
+<div class = "col-md-6">
+
+
+
+</div>
+
+</div>
