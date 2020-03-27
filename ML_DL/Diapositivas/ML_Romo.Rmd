@@ -44,16 +44,14 @@ showtext.auto()
 
 <div class = "col-md-6">
 
-<section style="text-align: justify;"><p class="text-primary">Este estudio tuvo como objetivo aplicar la métodologia del <font color="black"><u>machine learning</u></font> en datos del bovino criollo colombiano Romosinuano.</p>
+<section style="text-align: justify;"><p class="text-primary">Este estudio tuvo como objetivo aplicar la métodologia del <font color="black"><u>machine learning</u></font> en datos del bovino criollo colombiano Romosinuano.</p></section>
 
-<p class="text-primary">Dichos datos se obtuvieron del núcleo animal de la raza criolla colombiana Romosinuano, el cual se mantiene como banco de germoplasma. Este núcleo se encuentra ubicado en el centro de investigación Turipaná (AGROSAVIA), localizado en el Valle del Sinú en el nordeste de Colombia.</p>
+<section style="text-align: justify;"><p class="text-primary">Dichos datos se obtuvieron del núcleo animal de la raza criolla colombiana Romosinuano, el cual se mantiene como banco de germoplasma. Este núcleo se encuentra ubicado en el centro de investigación Turipaná (AGROSAVIA), localizado en el Valle del Sinú en el nordeste de Colombia.</p></section>
 
 ```{r Imagen, fig.align = 'center', eval = TRUE, echo = FALSE, message = FALSE, out.width = '280'}
 
 knitr::include_graphics('Imagenes/Romo.jpg')
 ```
-
-</section>
 
 </div>
 
@@ -97,11 +95,9 @@ ggplot(data = mapa_Col_sf) +
 
 <div class = "col-md-6">
 
-<section style="text-align: justify;"><p class="text-primary">La base de datos comprende el registro informativo de la característica intervalo entre partos en bovino criollo colombiano Romosinuano.</p>
+<section style="text-align: justify;"><p class="text-primary">La base de datos comprende el registro informativo de la característica intervalo entre partos en bovino criollo colombiano Romosinuano.</p></section>
 
-<p class="text-primary">Dicha base de datos se caracteriza por presentar una <font color="black"><u>estructura de clúster de tipo longitudinal</u></font>, cuyo ejemplo se puede observar en la siguiente imagen:</p>
-
-</section>
+<section style="text-align: justify;"><p class="text-primary">Dicha base de datos se caracteriza por presentar una <font color="black"><u>estructura de clúster de tipo longitudinal</u></font>, cuyo ejemplo se puede observar en la siguiente imagen:</p></section>
 
 ```{r Ejemplo estructura longitudinal, fig.align = 'center', eval = TRUE, echo = FALSE, message = FALSE, fig.showtext = TRUE, out.width = '280'}
 
@@ -149,9 +145,7 @@ La estructura longitudinal se da cuando la observación se mide múltiples veces
 
 <div class = "col-md-6">
 
-<section style="text-align: justify;"><p class="text-primary">Por lo cual es necesario emplear el <font color="black"><u>modelo mixto</u></font> para tratar este tipo de datos, usando de forma simultanea la metodología del machine learning.</p>
-
-</section>
+<section style="text-align: justify;"><p class="text-primary">Por lo cual es necesario emplear el <font color="black"><u>modelo mixto</u></font> para tratar este tipo de datos, usando de forma simultanea la metodología del machine learning.</p></section>
 
 ```{r, fig.align = 'center', out.width = "340", eval = TRUE, echo = FALSE, message = FALSE}
 
@@ -168,9 +162,7 @@ knitr::include_graphics('Imagenes/octocat.png')
 
 <br>
 
-<section style="text-align: justify;"><p class="text-primary">Se inicio previamente con el <font color="black"><u>pre-procesamiento de los datos</u></font>, cuyo objetivo consistió en proporcionar un conjunto de datos de entrenamiento de buena calidad. <!-- El rendimiento del modelo tiene una relación lineal con la calidad de los datos de muestra de entrenamiento que se incorporaron al modelo mismo.--> Los pasos principales del pre-procesamiento de datos, a saber, fueron la extracción de los datos y su limpieza.</p>
-
-</section>
+<section style="text-align: justify;"><p class="text-primary">Se inicio previamente con el <font color="black"><u>pre-procesamiento de los datos</u></font>, cuyo objetivo consistió en proporcionar un conjunto de datos de entrenamiento de buena calidad. <!-- El rendimiento del modelo tiene una relación lineal con la calidad de los datos de muestra de entrenamiento que se incorporaron al modelo mismo.--> Los pasos principales del pre-procesamiento de datos, a saber, fueron la extracción de los datos y su limpieza.</p></section>
 
 <div class = "row">
 
@@ -180,11 +172,9 @@ knitr::include_graphics('Imagenes/octocat.png')
   Extracción de los datos
 </div>
 
-<section style="text-align: justify;"><p class="text-primary">La <font color="black"><u>extracción de los datos</u></font> tiene un papel importante en mejorar el tiempo de aprendizaje y aumentar el tamaño de los datos. El objetivo de este proceso de extracción es adquirir la matriz de datos de entrada apropiada como muestra de aprendizaje.</p>
+<section style="text-align: justify;"><p class="text-primary">La <font color="black"><u>extracción de los datos</u></font> tiene un papel importante en mejorar el tiempo de aprendizaje y aumentar el tamaño de los datos. El objetivo de este proceso de extracción es adquirir la matriz de datos de entrada apropiada como muestra de aprendizaje.</p></section>
 
-<p class="text-primary">La extracción de información en el conjunto de datos de este estudio se realizó mediante la selección de aquellas variables (predictoras) que tuvieran relación con la variable respuesta intervalo entre partos.</p>
-
-</section>
+<section style="text-align: justify;"><p class="text-primary">La extracción de información en el conjunto de datos de este estudio se realizó mediante la selección de aquellas variables (predictoras) que tuvieran relación con la variable respuesta intervalo entre partos.</p></section>
 
 </div>
 
@@ -194,11 +184,9 @@ knitr::include_graphics('Imagenes/octocat.png')
 
 <br>
 
-<section style="text-align: justify;"><p class="text-primary">Esto debido a que el propósito de la metodología a emplear consiste en estimar el valor de dicha variable respuesta en base a las variables predictoras:</p></section>
+<section style="text-align: justify;"><p class="text-primary">Esto debido a que el propósito de la metodología a emplear consiste en estimar el valor de dicha variable respuesta en base a las variables predictoras, como se puede observar en la expresión $\small y = f(x) + b$.</p></section>
 
-\begin{aligned}
- y = f(x) + b
-\end{aligned}
+<section style="text-align: justify;"><p class="text-primary">Las variables de estudio usadas en la modelación se describen en la tabla a continuación: →</p></section>
 
 </div>
 
@@ -209,6 +197,14 @@ knitr::include_graphics('Imagenes/octocat.png')
 ```{r Exportación y selección de variables, echo = FALSE, eval = TRUE, message = FALSE}
 
 Base_datos <- read.csv2(file = '/home/leo/Documentos/Ossa/a1120.csv', sep = ',', header = TRUE) # Este conjunto de datos ya fue depurado previamente (en Depuración.R esta todo este proceso)... dicha depruración consistió, por ejemplo, en rastrear bovinos con registros de un mismo parto repetidos, e incluir información de posibles partos faltantes.
+
+Base_datos_2 <- Base_datos %>%
+  mutate(
+    Fech_parto = as.Date(as.character(Fech_parto, format = '%m/%d/%Y')),
+    Mes_parto = format(Fech_parto, '%m'),
+    Ano_parto = format(Fech_parto, '%Y')
+  ) %>%
+  dplyr::select(IEP, N_parto, Sexo_hija, Edad_parto, Mes_parto, Ano_parto, D_abierto)
 ```
 
 ---
@@ -217,21 +213,42 @@ Base_datos <- read.csv2(file = '/home/leo/Documentos/Ossa/a1120.csv', sep = ',',
 
 <br>
 
-<section style="text-align: justify;"><p class="text-primary">Se inicio previamente con el <font color="black"><u>pre-procesamiento de los datos</u></font>, cuyo objetivo consistió en proporcionar un conjunto de datos de entrenamiento de buena calidad. <!-- El rendimiento del modelo tiene una relación lineal con la calidad de los datos de muestra de entrenamiento que se incorporaron al modelo mismo.--> Los pasos principales del pre-procesamiento de datos, a saber, fueron la extracción de los datos y su limpieza.</p>
-
-</section>
+<section style="text-align: justify;"><p class="text-primary">Se inicio previamente con el <font color="black"><u>pre-procesamiento de los datos</u></font>, cuyo objetivo consistió en proporcionar un conjunto de datos de entrenamiento de buena calidad. <!-- El rendimiento del modelo tiene una relación lineal con la calidad de los datos de muestra de entrenamiento que se incorporaron al modelo mismo.--> Los pasos principales del pre-procesamiento de datos, a saber, fueron la extracción de los datos y su limpieza.</p></section>
 
 <div class = "row">
 
 <div class = "col-md-6">
 
-<div class="alert alert-dismissible alert-danger">
-  Limpieza de los datos
+<div class="alert alert-dismissible alert-warning">
+  Extracción de los datos
 </div>
 
 <section style="text-align: justify;"><p class="text-primary"></p>
 
-
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th scope="col">Nombre</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr class="table-danger">
+      <th scope="row">Intervalo entre partos</th>
+    </tr>
+    <tr class="table-warning">
+      <th scope="row">Orden de parto</th>
+    </tr>
+    <tr class="table-info">
+      <th scope="row">Sexo de la cría</th>
+    </tr>
+    <tr class="table-dark">
+      <th scope="row">Edad al parto</th>
+    </tr>
+    <tr class="table-light">
+      <th scope="row">Mes de parto</th>
+    </tr>
+  </tbody>
+</table>
 
 </section>
 
@@ -243,9 +260,23 @@ Base_datos <- read.csv2(file = '/home/leo/Documentos/Ossa/a1120.csv', sep = ',',
 
 <br>
 
-<section style="text-align: justify;"><p class="text-primary".</p>
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th scope="col">Nombre</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr class="table-secondary">
+      <th scope="row">Año de parto</th>
+    </tr>
+    <tr class="table-danger">
+      <th scope="row">Días abiertos</th>
+    </tr>
+  </tbody>
+</table>
 
-```{r, fig.align = 'center', out.width = '180', eval = TRUE, echo = FALSE, message = FALSE}
+```{r, fig.align = 'center', out.width = '160', eval = TRUE, echo = FALSE, message = FALSE}
 
 knitr::include_graphics('Imagenes/octocat_2.png')
 ```
@@ -254,5 +285,48 @@ knitr::include_graphics('Imagenes/octocat_2.png')
 
 </div>
 
+---
+
+<section style="text-align: center;"><h2><p class="text-info">Los datos</p></h2></section>
+
+<br>
+
+<section style="text-align: justify;"><p class="text-primary">Se inicio previamente con el <font color="black"><u>pre-procesamiento de los datos</u></font>, cuyo objetivo consistió en proporcionar un conjunto de datos de entrenamiento de buena calidad. <!-- El rendimiento del modelo tiene una relación lineal con la calidad de los datos de muestra de entrenamiento que se incorporaron al modelo mismo.--> Los pasos principales del pre-procesamiento de datos, a saber, fueron la extracción de los datos y su limpieza.</p></section>
+
+<div class = "row">
+
+<div class = "col-md-6">
+
+<div class="alert alert-dismissible alert-danger">
+  Limpieza de los datos
+</div>
+
+<section style="text-align: justify;"><p class="text-primary">La limpieza de los datos tiene el propósito de corregir los datos faltantes en los conjuntos de datos que provienen de varias fuentes, por ejemplo, error de datos de entrada, error de programación, error en la transferencia de datos, etc.</p></section>
+
+<section style="text-align: justify;"><p class="text-primary">En el caso de datos de interés zootecnico, la limpieza consiste también en no considerar animales con identificación dudosa, información fuera del rango normal de la variable respuesta o valores fisiológicamente anormales.</p></section>
+
+</div>
+
+<div class = "col-md-6">
+
+<p>&#8628;</p>
+
+<br>
+
+</div>
+
+</div>
+
+```{r Limpieza del conjunto de datos, echo = FALSE, eval = TRUE, message = FALSE}
+
+Base_datos_3 <- Base_datos_2 %>%
+  filter(
+    Sexo_hija %in% c('H', 'M') & # Habian bovinos identificado como " M", "h", "He:Rp", "m" y " "... estos no se consideraron.
+      IEP != 'is.na' & # No se consideraron valores faltantes para la variable respuesta intervalo entre partos.
+      IEP >= 300 & IEP <= 1278 & # Se limitaron los días entre partos de 300 a 1278 días ya que valores fuera de este rango pueden no ser normales.
+      D_abierto >= 21 & D_abierto <= 250 & # Los días abiertos fueron restringidos de 21 a 250 días, ya que valores fuera de éste rango pueden ser fisiológicamente anormales o estar registrados erróneamente.
+      N_parto != 'is.na' # No se consideraron valores faltantes para la variable predictora número de parto.
+  )
+```
 
 
