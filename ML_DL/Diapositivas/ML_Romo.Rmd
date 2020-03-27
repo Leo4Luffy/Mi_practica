@@ -15,6 +15,7 @@ library(dplyr)
 library(ggplot2)
 library(raster)
 library(sf)
+library(ggsflabel)
 library(ggforce)
 library(showtext) # Link donde estan las fuentes Google (http://www.google.com/fonts)
 font_add_google('Gochi Hand', 'gochi')
@@ -46,17 +47,18 @@ knitr::include_graphics('Imagenes/Romo.jpg')
 <div class = "col-md-6">
 
 <!-- 
-Con base en el tutorial https://statnmap.com/2018-04-18-draw-maps-like-paintings/ se creo el mapa.
+Con base en los tutoriales https://statnmap.com/2018-04-18-draw-maps-like-paintings/ y http://dlizcano.github.io/2018/05/23/Mapa-Animado-Fuegos.html se creo el mapa.
 -->
 
-```{r Mapa, fig.align = 'center', eval = TRUE, echo = FALSE, message = FALSE, out.width = '520', fig.showtext = TRUE}
+```{r Mapa, fig.align = 'center', eval = TRUE, echo = FALSE, message = FALSE, warning = FALSE, out.width = '520', fig.showtext = TRUE}
 
 mapa_Col <- getData('GADM', country = 'COL', level = 1) # Se accede a la información de Colombia.
 mapa_Col_sf <- st_as_sf(mapa_Col) # Se convierte el anterior a un objeto sf.
 
 ggplot(data = mapa_Col_sf) +
   geom_sf(data = mapa_Col_sf, aes(fill = NAME_1, colour = NAME_1), alpha = 0.4, colour = NA) +
-  annotate(geom = 'text', x = -77, y = 9.6, label = 'Córdoba', family = 'gochi', size = 5.4, colour = 'black') +
+  #annotate(geom = 'text', x = -77, y = 9.6, label = 'Córdoba', family = 'gochi', size = 5.4, colour = 'black') +
+  geom_sf_label_repel(aes(label = NAME_1), label.padding = unit(1, 'mm')) +
   scale_colour_manual(values = c('yellow', 'green', 'black', 'chartreuse', 'magenta', 'springgreen', 'green', 'gray54', 'yellow', 'green', 'black', 'chartreuse', 'magenta', 'springgreen', 'green', 'gray54', 'yellow', 'green', 'black', 'chartreuse', 'magenta', 'springgreen', 'green', 'gray54', 'yellow', 'green', 'black', 'chartreuse', 'magenta', 'springgreen', 'green', 'gray54')) +
   scale_fill_manual(values = c('yellow', 'green', 'black', 'chartreuse', 'magenta', 'springgreen', 'green', 'gray54', 'yellow', 'green', 'black', 'chartreuse', 'magenta', 'springgreen', 'green', 'gray54', 'yellow', 'green', 'black', 'chartreuse', 'magenta', 'springgreen', 'green', 'gray54', 'yellow', 'green', 'black', 'chartreuse', 'magenta', 'springgreen', 'green', 'gray54')) +
   scale_y_continuous(limits = c(-5.2, 12)) +
@@ -150,6 +152,86 @@ knitr::include_graphics('Imagenes/octocat.png')
 ---
 
 <section style="text-align: center;"><h2><p class="text-info">Los datos</p></h2></section>
+
+<br>
+
+<section style="text-align: justify;"><p class="text-primary">Se inicio luego con el <font color="black"><u>pre-procesamiento de los datos</u></font>, cuyo objetivo consistió en proporcionar un conjunto de datos de entrenamiento de buena calidad. <!-- El rendimiento del modelo tiene una relación lineal con la calidad de los datos de muestra de entrenamiento que se incorporaron al modelo mismo.--> Los pasos principales del pre-procesamiento de datos, a saber, fueron la extracción de los datos y su limpieza.</p>
+
+</section>
+
+<div class = "row">
+
+<div class = "col-md-6">
+
+<div class="alert alert-dismissible alert-warning">
+  Extracción de los datos
+</div>
+
+<section style="text-align: justify;"><p class="text-primary">La <font color="black"><u>extracción de los datos</u></font> tiene un papel importante en mejorar el tiempo de aprendizaje y aumentar el tamaño de los datos. El objetivo del proceso de extracción de los datos es adquirir la matriz de datos de entrada apropiada como muestra de aprendizaje.</p>
+
+<p class="text-primary">La extracción de información en el conjunto de datos de este estudio se realizó mediante la selección de aquellas variables...</p>
+
+</section>
+
+</div>
+
+<div class = "col-md-6">
+
+<p>&#8628;</p>
+
+<br>
+
+<section style="text-align: justify;"><p class="text-primary".</p>
+
+```{r, fig.align = 'center', out.width = '180', eval = TRUE, echo = FALSE, message = FALSE}
+
+knitr::include_graphics('Imagenes/octocat_2.png')
+```
+
+</div>
+
+</div>
+
+---
+
+<section style="text-align: center;"><h2><p class="text-info">Los datos</p></h2></section>
+
+<br>
+
+<section style="text-align: justify;"><p class="text-primary">Se inicio luego con el <font color="black"><u>pre-procesamiento de los datos</u></font>, cuyo objetivo consistió en proporcionar un conjunto de datos de entrenamiento de buena calidad. <!-- El rendimiento del modelo tiene una relación lineal con la calidad de los datos de muestra de entrenamiento que se incorporaron al modelo mismo.--> Los pasos principales del pre-procesamiento de datos, a saber, fueron la extracción de los datos y su limpieza.</p>
+
+</section>
+
+<div class = "row">
+
+<div class = "col-md-6">
+
+<div class="alert alert-dismissible alert-danger">
+  Limpieza de los datos
+</div>
+
+<section style="text-align: justify;"><p class="text-primary"></p>
+
+</section>
+
+</div>
+
+<div class = "col-md-6">
+
+<p>&#8628;</p>
+
+<br>
+
+<section style="text-align: justify;"><p class="text-primary".</p>
+
+```{r, fig.align = 'center', out.width = '180', eval = TRUE, echo = FALSE, message = FALSE}
+
+knitr::include_graphics('Imagenes/octocat_3.png')
+```
+
+</div>
+
+</div>
 
 
 
