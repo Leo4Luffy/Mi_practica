@@ -1,5 +1,5 @@
 ---
-title: "Métodologia de machine learning"
+title: "Metodología de machine learning"
 subtitle: "Aplicación en datos del bovino criollo colombiano Romosinuano"
 author: "Jorge Leonardo López Martínez; Freddy Hernandez Barajas"
 institute: ""
@@ -8,6 +8,19 @@ output:
   xaringan::moon_reader:
     css: estilo.css
 ---
+
+```{r Paquetes a usar, echo = FALSE, eval = TRUE, message = FALSE}
+
+library(dplyr)
+library(ggplot2)
+library(raster)
+library(sf)
+library(ggforce)
+library(showtext) # Link donde estan las fuentes Google (http://www.google.com/fonts)
+font_add_google('Gochi Hand', 'gochi')
+showtext.auto()
+```
+
 
 <section style="text-align: center;"><h2><p class="text-info">Objetivo y población de estudio</p></h2></section>
 
@@ -21,7 +34,7 @@ output:
 
 <p class="text-primary">Dichos datos se obtuvieron del núcleo animal de la raza criolla colombiana Romosinuano, el cual se mantiene como banco de germoplasma. Este núcleo se encuentra ubicado en el centro de investigación Turipaná (AGROSAVIA), localizado en el Valle del Sinú en el nordeste de Colombia.</p>
 
-```{r Imagen, fig.align = 'center', eval = TRUE, echo = FALSE, message = FALSE, out.width = "280"}
+```{r Imagen, fig.align = 'center', eval = TRUE, echo = FALSE, message = FALSE, out.width = '280'}
 
 knitr::include_graphics('Imagenes/Romo.jpg')
 ```
@@ -32,16 +45,27 @@ knitr::include_graphics('Imagenes/Romo.jpg')
 
 <div class = "col-md-6">
 
-```{r Mapa, fig.align = 'center', eval = TRUE, echo = FALSE, message = FALSE, out.width="140"}
+<!-- 
+Con base en el tutorial https://statnmap.com/2018-04-18-draw-maps-like-paintings/ se creo el mapa.
+-->
 
-library(dplyr)
-library(ggplot2) # Se va a usar el paquete ggplot2 el cual permitira hacer la gráfica
-library(ggforce)
-library(showtext) # Link donde estan las fuentes Google (http://www.google.com/fonts)
-font_add_google('Gochi Hand', 'gochi')
-showtext.auto()
+```{r Mapa, fig.align = 'center', eval = TRUE, echo = FALSE, message = FALSE, out.width = '520', fig.showtext = TRUE}
 
+mapa_Col <- getData('GADM', country = 'COL', level = 1) # Se accede a la información de Colombia.
+mapa_Col_sf <- st_as_sf(mapa_Col) # Se convierte el anterior a un objeto sf.
 
+ggplot(data = mapa_Col_sf) +
+  geom_sf(data = mapa_Col_sf, aes(fill = NAME_1, colour = NAME_1), alpha = 0.4, colour = NA) +
+  annotate(geom = 'text', x = -77, y = 9.6, label = 'Córdoba', family = 'gochi', size = 5.4, colour = 'black') +
+  scale_colour_manual(values = c('yellow', 'green', 'black', 'chartreuse', 'magenta', 'springgreen', 'green', 'gray54', 'yellow', 'green', 'black', 'chartreuse', 'magenta', 'springgreen', 'green', 'gray54', 'yellow', 'green', 'black', 'chartreuse', 'magenta', 'springgreen', 'green', 'gray54', 'yellow', 'green', 'black', 'chartreuse', 'magenta', 'springgreen', 'green', 'gray54')) +
+  scale_fill_manual(values = c('yellow', 'green', 'black', 'chartreuse', 'magenta', 'springgreen', 'green', 'gray54', 'yellow', 'green', 'black', 'chartreuse', 'magenta', 'springgreen', 'green', 'gray54', 'yellow', 'green', 'black', 'chartreuse', 'magenta', 'springgreen', 'green', 'gray54', 'yellow', 'green', 'black', 'chartreuse', 'magenta', 'springgreen', 'green', 'gray54')) +
+  scale_y_continuous(limits = c(-5.2, 12)) +
+  scale_x_continuous(limits = c(-80, -65)) +
+  theme_void() +
+  theme(legend.position = 'none') +
+  theme(axis.text = element_blank(),
+        axis.ticks = element_blank(),
+        axis.title = element_blank())
 ```
 
 </div>
@@ -64,7 +88,7 @@ showtext.auto()
 
 </section>
 
-```{r Ejemplo estructura longitudinal, fig.align = 'center', eval = TRUE, echo = FALSE, message = FALSE, fig.showtext = TRUE, out.width="280"}
+```{r Ejemplo estructura longitudinal, fig.align = 'center', eval = TRUE, echo = FALSE, message = FALSE, fig.showtext = TRUE, out.width = '280'}
 
 data.frame(
   x = c(0.5, 1.5, 0.5, 2.6, 2.0), 
@@ -110,8 +134,22 @@ La estructura longitudinal se da cuando la observación se mide múltiples veces
 
 <div class = "col-md-6">
 
+<section style="text-align: justify;"><p class="text-primary">Por lo cual es necesario emplear el <font color="black"><u>modelo mixto</u></font> para tratar este tipo de datos, usando de forma simultanea la metodología del machine learning.</p>
 
+</section>
+
+```{r, fig.align = 'center', out.width = "340", eval = TRUE, echo = FALSE, message = FALSE}
+
+knitr::include_graphics('Imagenes/octocat.png')
+```
 
 </div>
 
 </div>
+
+---
+
+<section style="text-align: center;"><h2><p class="text-info">Los datos</p></h2></section>
+
+
+
