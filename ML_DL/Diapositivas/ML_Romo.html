@@ -17,6 +17,19 @@ class: center, middle, inverse, title-slide
 ---
 
 
+&lt;!--- 
+Alguito de información sobre el paquete xaringan (https://bookdown.org/yihui/rmarkdown/xaringan.html) 
+
+1. Para realizar una presentación usando este paquete, se hace lo siguiente: File -&gt; New File -&gt; R Markdown -&gt; From Template -&gt; Ninja Presentation... aparecerá luego un ejemplo R markdown en el editor 
+
+2. Atajos de teclado: luego de abrir las diapositivas generadas, se puede presionar la tecla h (help) o ? para acceder al atajo de teclado que ayudaran a presentar mejor sus diapositivas, como por ejemplo: 
+  - Presione b para oscurecer una diapositiva, y m para invertir todo en la diapositiva. Estas técnicas pueden ser útiles cuando no desea que la audiencia lea la diapositiva, por ejemplo, cuando tiene soluciones en una diapositiva pero no quiere mostrarlas a sus alumnos de inmediato.
+  - Presione f para alternar el modo de pantalla completa.
+  - Presione p para alternar el modo de presentador, el cual mostrara miniaturas de la diapositiva actual y la siguiente diapositiva a la izquierda, notas del presentador a la derecha, y también un temporizador en la parte superior derecha. La tecla p pueden ser muy útil cuando se presenta con su propia computadora conectada a una segunda pantalla (como un proyector). Puede presionar t para reiniciar el temporizador en cualquier momento.
+
+3. Notas del presentador: Puede escribir notas para leer en el modo de presentador. Estas notas están escritas bajo tres signos de interrogación (?) después de una diapositiva, y la sintaxis también es en Markdown, lo que significa que puede escribir cualquier elemento compatible con Markdown, como párrafos, listas, imágenes, etc
+---&gt;
+
 
 
 
@@ -92,7 +105,7 @@ La estructura longitudinal se da cuando la observación se mide múltiples veces
 
 &lt;br&gt;
 
-&lt;section style="text-align: justify;"&gt;&lt;p class="text-primary"&gt;Se inicio luego con el &lt;font color="black"&gt;&lt;u&gt;pre-procesamiento de los datos&lt;/u&gt;&lt;/font&gt;, cuyo objetivo consistió en proporcionar un conjunto de datos de entrenamiento de buena calidad. &lt;!-- El rendimiento del modelo tiene una relación lineal con la calidad de los datos de muestra de entrenamiento que se incorporaron al modelo mismo.--&gt; Los pasos principales del pre-procesamiento de datos, a saber, fueron la extracción de los datos y su limpieza.&lt;/p&gt;
+&lt;section style="text-align: justify;"&gt;&lt;p class="text-primary"&gt;Se inicio previamente con el &lt;font color="black"&gt;&lt;u&gt;pre-procesamiento de los datos&lt;/u&gt;&lt;/font&gt;, cuyo objetivo consistió en proporcionar un conjunto de datos de entrenamiento de buena calidad. &lt;!-- El rendimiento del modelo tiene una relación lineal con la calidad de los datos de muestra de entrenamiento que se incorporaron al modelo mismo.--&gt; Los pasos principales del pre-procesamiento de datos, a saber, fueron la extracción de los datos y su limpieza.&lt;/p&gt;
 
 &lt;/section&gt;
 
@@ -104,9 +117,55 @@ La estructura longitudinal se da cuando la observación se mide múltiples veces
   Extracción de los datos
 &lt;/div&gt;
 
-&lt;section style="text-align: justify;"&gt;&lt;p class="text-primary"&gt;La &lt;font color="black"&gt;&lt;u&gt;extracción de los datos&lt;/u&gt;&lt;/font&gt; tiene un papel importante en mejorar el tiempo de aprendizaje y aumentar el tamaño de los datos. El objetivo del proceso de extracción de los datos es adquirir la matriz de datos de entrada apropiada como muestra de aprendizaje.&lt;/p&gt;
+&lt;section style="text-align: justify;"&gt;&lt;p class="text-primary"&gt;La &lt;font color="black"&gt;&lt;u&gt;extracción de los datos&lt;/u&gt;&lt;/font&gt; tiene un papel importante en mejorar el tiempo de aprendizaje y aumentar el tamaño de los datos. El objetivo de este proceso de extracción es adquirir la matriz de datos de entrada apropiada como muestra de aprendizaje.&lt;/p&gt;
 
-&lt;p class="text-primary"&gt;La extracción de información en el conjunto de datos de este estudio se realizó mediante la selección de aquellas variables...&lt;/p&gt;
+&lt;p class="text-primary"&gt;La extracción de información en el conjunto de datos de este estudio se realizó mediante la selección de aquellas variables (predictoras) que tuvieran relación con la variable respuesta intervalo entre partos.&lt;/p&gt;
+
+&lt;/section&gt;
+
+&lt;/div&gt;
+
+&lt;div class = "col-md-6"&gt;
+
+&lt;p&gt;&amp;#8628;&lt;/p&gt;
+
+&lt;br&gt;
+
+&lt;section style="text-align: justify;"&gt;&lt;p class="text-primary"&gt;Esto debido a que el propósito de la metodología a emplear consiste en estimar el valor de dicha variable respuesta en base a las variables predictoras:&lt;/p&gt;&lt;/section&gt;
+
+`\begin{aligned}
+ y = f(x) + b
+\end{aligned}`
+
+&lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;!-- A continuación, se exporta la base de datos a usar y se seleccionan un conjunto de variables predictoras --&gt;
+
+
+
+---
+
+&lt;section style="text-align: center;"&gt;&lt;h2&gt;&lt;p class="text-info"&gt;Los datos&lt;/p&gt;&lt;/h2&gt;&lt;/section&gt;
+
+&lt;br&gt;
+
+&lt;section style="text-align: justify;"&gt;&lt;p class="text-primary"&gt;Se inicio previamente con el &lt;font color="black"&gt;&lt;u&gt;pre-procesamiento de los datos&lt;/u&gt;&lt;/font&gt;, cuyo objetivo consistió en proporcionar un conjunto de datos de entrenamiento de buena calidad. &lt;!-- El rendimiento del modelo tiene una relación lineal con la calidad de los datos de muestra de entrenamiento que se incorporaron al modelo mismo.--&gt; Los pasos principales del pre-procesamiento de datos, a saber, fueron la extracción de los datos y su limpieza.&lt;/p&gt;
+
+&lt;/section&gt;
+
+&lt;div class = "row"&gt;
+
+&lt;div class = "col-md-6"&gt;
+
+&lt;div class="alert alert-dismissible alert-danger"&gt;
+  Limpieza de los datos
+&lt;/div&gt;
+
+&lt;section style="text-align: justify;"&gt;&lt;p class="text-primary"&gt;&lt;/p&gt;
+
+
 
 &lt;/section&gt;
 
@@ -121,44 +180,6 @@ La estructura longitudinal se da cuando la observación se mide múltiples veces
 &lt;section style="text-align: justify;"&gt;&lt;p class="text-primary".&lt;/p&gt;
 
 &lt;img src="Imagenes/octocat_2.png" width="180" style="display: block; margin: auto;" /&gt;
-
-&lt;/div&gt;
-
-&lt;/div&gt;
-
----
-
-&lt;section style="text-align: center;"&gt;&lt;h2&gt;&lt;p class="text-info"&gt;Los datos&lt;/p&gt;&lt;/h2&gt;&lt;/section&gt;
-
-&lt;br&gt;
-
-&lt;section style="text-align: justify;"&gt;&lt;p class="text-primary"&gt;Se inicio luego con el &lt;font color="black"&gt;&lt;u&gt;pre-procesamiento de los datos&lt;/u&gt;&lt;/font&gt;, cuyo objetivo consistió en proporcionar un conjunto de datos de entrenamiento de buena calidad. &lt;!-- El rendimiento del modelo tiene una relación lineal con la calidad de los datos de muestra de entrenamiento que se incorporaron al modelo mismo.--&gt; Los pasos principales del pre-procesamiento de datos, a saber, fueron la extracción de los datos y su limpieza.&lt;/p&gt;
-
-&lt;/section&gt;
-
-&lt;div class = "row"&gt;
-
-&lt;div class = "col-md-6"&gt;
-
-&lt;div class="alert alert-dismissible alert-danger"&gt;
-  Limpieza de los datos
-&lt;/div&gt;
-
-&lt;section style="text-align: justify;"&gt;&lt;p class="text-primary"&gt;&lt;/p&gt;
-
-&lt;/section&gt;
-
-&lt;/div&gt;
-
-&lt;div class = "col-md-6"&gt;
-
-&lt;p&gt;&amp;#8628;&lt;/p&gt;
-
-&lt;br&gt;
-
-&lt;section style="text-align: justify;"&gt;&lt;p class="text-primary".&lt;/p&gt;
-
-&lt;img src="Imagenes/octocat_3.png" width="180" style="display: block; margin: auto;" /&gt;
 
 &lt;/div&gt;
 

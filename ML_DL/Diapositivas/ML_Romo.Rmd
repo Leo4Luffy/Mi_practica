@@ -9,6 +9,19 @@ output:
     css: estilo.css
 ---
 
+<!--- 
+Alguito de información sobre el paquete xaringan (https://bookdown.org/yihui/rmarkdown/xaringan.html) 
+
+1. Para realizar una presentación usando este paquete, se hace lo siguiente: File -> New File -> R Markdown -> From Template -> Ninja Presentation... aparecerá luego un ejemplo R markdown en el editor 
+
+2. Atajos de teclado: luego de abrir las diapositivas generadas, se puede presionar la tecla h (help) o ? para acceder al atajo de teclado que ayudaran a presentar mejor sus diapositivas, como por ejemplo: 
+  - Presione b para oscurecer una diapositiva, y m para invertir todo en la diapositiva. Estas técnicas pueden ser útiles cuando no desea que la audiencia lea la diapositiva, por ejemplo, cuando tiene soluciones en una diapositiva pero no quiere mostrarlas a sus alumnos de inmediato.
+  - Presione f para alternar el modo de pantalla completa.
+  - Presione p para alternar el modo de presentador, el cual mostrara miniaturas de la diapositiva actual y la siguiente diapositiva a la izquierda, notas del presentador a la derecha, y también un temporizador en la parte superior derecha. La tecla p pueden ser muy útil cuando se presenta con su propia computadora conectada a una segunda pantalla (como un proyector). Puede presionar t para reiniciar el temporizador en cualquier momento.
+
+3. Notas del presentador: Puede escribir notas para leer en el modo de presentador. Estas notas están escritas bajo tres signos de interrogación (?) después de una diapositiva, y la sintaxis también es en Markdown, lo que significa que puede escribir cualquier elemento compatible con Markdown, como párrafos, listas, imágenes, etc
+--->
+
 ```{r Paquetes a usar, echo = FALSE, eval = TRUE, message = FALSE}
 
 library(dplyr)
@@ -155,7 +168,7 @@ knitr::include_graphics('Imagenes/octocat.png')
 
 <br>
 
-<section style="text-align: justify;"><p class="text-primary">Se inicio luego con el <font color="black"><u>pre-procesamiento de los datos</u></font>, cuyo objetivo consistió en proporcionar un conjunto de datos de entrenamiento de buena calidad. <!-- El rendimiento del modelo tiene una relación lineal con la calidad de los datos de muestra de entrenamiento que se incorporaron al modelo mismo.--> Los pasos principales del pre-procesamiento de datos, a saber, fueron la extracción de los datos y su limpieza.</p>
+<section style="text-align: justify;"><p class="text-primary">Se inicio previamente con el <font color="black"><u>pre-procesamiento de los datos</u></font>, cuyo objetivo consistió en proporcionar un conjunto de datos de entrenamiento de buena calidad. <!-- El rendimiento del modelo tiene una relación lineal con la calidad de los datos de muestra de entrenamiento que se incorporaron al modelo mismo.--> Los pasos principales del pre-procesamiento de datos, a saber, fueron la extracción de los datos y su limpieza.</p>
 
 </section>
 
@@ -167,9 +180,58 @@ knitr::include_graphics('Imagenes/octocat.png')
   Extracción de los datos
 </div>
 
-<section style="text-align: justify;"><p class="text-primary">La <font color="black"><u>extracción de los datos</u></font> tiene un papel importante en mejorar el tiempo de aprendizaje y aumentar el tamaño de los datos. El objetivo del proceso de extracción de los datos es adquirir la matriz de datos de entrada apropiada como muestra de aprendizaje.</p>
+<section style="text-align: justify;"><p class="text-primary">La <font color="black"><u>extracción de los datos</u></font> tiene un papel importante en mejorar el tiempo de aprendizaje y aumentar el tamaño de los datos. El objetivo de este proceso de extracción es adquirir la matriz de datos de entrada apropiada como muestra de aprendizaje.</p>
 
-<p class="text-primary">La extracción de información en el conjunto de datos de este estudio se realizó mediante la selección de aquellas variables...</p>
+<p class="text-primary">La extracción de información en el conjunto de datos de este estudio se realizó mediante la selección de aquellas variables (predictoras) que tuvieran relación con la variable respuesta intervalo entre partos.</p>
+
+</section>
+
+</div>
+
+<div class = "col-md-6">
+
+<p>&#8628;</p>
+
+<br>
+
+<section style="text-align: justify;"><p class="text-primary">Esto debido a que el propósito de la metodología a emplear consiste en estimar el valor de dicha variable respuesta en base a las variables predictoras:</p></section>
+
+\begin{aligned}
+ y = f(x) + b
+\end{aligned}
+
+</div>
+
+</div>
+
+<!-- A continuación, se exporta la base de datos a usar y se seleccionan un conjunto de variables predictoras -->
+
+```{r Exportación y selección de variables, echo = FALSE, eval = TRUE, message = FALSE}
+
+Base_datos <- read.csv2(file = '/home/leo/Documentos/Ossa/a1120.csv', sep = ',', header = TRUE) # Este conjunto de datos ya fue depurado previamente (en Depuración.R esta todo este proceso)... dicha depruración consistió, por ejemplo, en rastrear bovinos con registros de un mismo parto repetidos, e incluir información de posibles partos faltantes.
+```
+
+---
+
+<section style="text-align: center;"><h2><p class="text-info">Los datos</p></h2></section>
+
+<br>
+
+<section style="text-align: justify;"><p class="text-primary">Se inicio previamente con el <font color="black"><u>pre-procesamiento de los datos</u></font>, cuyo objetivo consistió en proporcionar un conjunto de datos de entrenamiento de buena calidad. <!-- El rendimiento del modelo tiene una relación lineal con la calidad de los datos de muestra de entrenamiento que se incorporaron al modelo mismo.--> Los pasos principales del pre-procesamiento de datos, a saber, fueron la extracción de los datos y su limpieza.</p>
+
+</section>
+
+<div class = "row">
+
+<div class = "col-md-6">
+
+<div class="alert alert-dismissible alert-danger">
+  Limpieza de los datos
+</div>
+
+<section style="text-align: justify;"><p class="text-primary"></p>
+
+
 
 </section>
 
@@ -186,47 +248,6 @@ knitr::include_graphics('Imagenes/octocat.png')
 ```{r, fig.align = 'center', out.width = '180', eval = TRUE, echo = FALSE, message = FALSE}
 
 knitr::include_graphics('Imagenes/octocat_2.png')
-```
-
-</div>
-
-</div>
-
----
-
-<section style="text-align: center;"><h2><p class="text-info">Los datos</p></h2></section>
-
-<br>
-
-<section style="text-align: justify;"><p class="text-primary">Se inicio luego con el <font color="black"><u>pre-procesamiento de los datos</u></font>, cuyo objetivo consistió en proporcionar un conjunto de datos de entrenamiento de buena calidad. <!-- El rendimiento del modelo tiene una relación lineal con la calidad de los datos de muestra de entrenamiento que se incorporaron al modelo mismo.--> Los pasos principales del pre-procesamiento de datos, a saber, fueron la extracción de los datos y su limpieza.</p>
-
-</section>
-
-<div class = "row">
-
-<div class = "col-md-6">
-
-<div class="alert alert-dismissible alert-danger">
-  Limpieza de los datos
-</div>
-
-<section style="text-align: justify;"><p class="text-primary"></p>
-
-</section>
-
-</div>
-
-<div class = "col-md-6">
-
-<p>&#8628;</p>
-
-<br>
-
-<section style="text-align: justify;"><p class="text-primary".</p>
-
-```{r, fig.align = 'center', out.width = '180', eval = TRUE, echo = FALSE, message = FALSE}
-
-knitr::include_graphics('Imagenes/octocat_3.png')
 ```
 
 </div>
