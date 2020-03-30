@@ -26,6 +26,7 @@ Alguito de información sobre el paquete xaringan (https://bookdown.org/yihui/rm
 
 library(dplyr)
 library(ggplot2)
+library(DT)
 library(raster)
 library(sf)
 library(ggsflabel)
@@ -186,7 +187,7 @@ knitr::include_graphics('Imagenes/octocat.png')
 
 <section style="text-align: justify;"><p class="text-primary">Esto debido a que el propósito de la metodología a emplear consiste en estimar el valor de dicha variable respuesta en base a las variables predictoras, como se puede observar en la expresión $\small y = f(x) + b$.</p></section>
 
-<section style="text-align: justify;"><p class="text-primary">Las variables de estudio usadas en la modelación se describen en la tabla a continuación: →</p></section>
+<section style="text-align: justify;"><p class="text-primary">Las variables de estudio usadas en la modelación se presentan en la tabla a continuación: →</p></section>
 
 </div>
 
@@ -245,7 +246,7 @@ Base_datos_2 <- Base_datos %>%
       <th scope="row">Edad al parto</th>
     </tr>
     <tr class="table-light">
-      <th scope="row">Mes de parto</th>
+      <th scope="row">Época de parto</th>
     </tr>
   </tbody>
 </table>
@@ -313,10 +314,6 @@ knitr::include_graphics('Imagenes/octocat_2.png')
 
 <br>
 
-</div>
-
-</div>
-
 ```{r Limpieza del conjunto de datos, echo = FALSE, eval = TRUE, message = FALSE}
 
 Base_datos_3 <- Base_datos_2 %>%
@@ -325,8 +322,86 @@ Base_datos_3 <- Base_datos_2 %>%
       IEP != 'is.na' & # No se consideraron valores faltantes para la variable respuesta intervalo entre partos.
       IEP >= 300 & IEP <= 1278 & # Se limitaron los días entre partos de 300 a 1278 días ya que valores fuera de este rango pueden no ser normales.
       D_abierto >= 21 & D_abierto <= 250 & # Los días abiertos fueron restringidos de 21 a 250 días, ya que valores fuera de éste rango pueden ser fisiológicamente anormales o estar registrados erróneamente.
-      N_parto != 'is.na' # No se consideraron valores faltantes para la variable predictora número de parto.
-  )
+      N_parto != 'is.na' & # No se consideraron valores faltantes para la variable predictora número de parto.
+      Edad_parto != 'is.na' & # A continuación no se consideran valores incosistentes para la edad al parto:
+      Edad_parto > 0 &
+      Edad_parto != 20746
+  ) %>%
+  mutate(
+    Mes_parto = as.integer(Mes_parto),
+    Epoca_parto = case_when( # Fueron formadas tres clases definidas como meses de época de lluvia (meses de julio a septiembre), de transición (meses de abril a junio y de octubre a diciembre) y de sequía (meses de enero a marzo).
+      Mes_parto %in% c(1:3) ~ 'Sequia',
+      Mes_parto %in% c(4:6) ~ 'Transición',
+      Mes_parto %in% c(7:9) ~ 'Lluvia',
+      Mes_parto %in% c(10:12) ~ 'Transición'
+      )
+    )
+
+edad_parto <- Base_datos_3 %>%
+  mutate(N_parto = as.factor(N_parto)) %>%
+  filter(
+    Edad_parto != 'is.na' &
+      Edad_parto > 0
+    ) %>%
+  group_by(N_parto) %>%
+  summarise(Promedio = mean(Edad_parto), N = length(N_parto), Mínimo = min(Edad_parto), Máximo = max(Edad_parto))
 ```
 
+<section style="text-align: justify;"><p class="text-primary">La limpieza de los datos en el conjunto de datos de este estudio consistió en limitar los días entre partos de 300 a 1278 días, los días abiertos de 21 a 250 días y no considerar datos faltantes (NA).</p></section>
 
+<section style="text-align: justify;"><p class="text-primary">Las variables de estudio usadas en la modelación se describen en la tabla a continuación: →</p></section>
+
+</div>
+
+</div>
+
+---
+
+<section style="text-align: center;"><h2><p class="text-info">Los datos</p></h2></section>
+
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th scope="col">Nombre</th>
+      <th scope="col">Tipo de variable estadística</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr class="table-danger">
+      <th scope="row">Intervalo entre partos</th>
+      <td>Continua, registrada entre 300 días (valor mínimo) a 826 días (valor máximo).
+      </td>
+    </tr>
+    <tr class="table-warning">
+      <th scope="row">Orden de parto</th>
+    </tr>
+    <tr class="table-info">
+      <th scope="row">Sexo de la cría</th>
+      <td>Discreta (nominal), formada por Hembra y Macho.
+      </td>
+    </tr>
+    <tr class="table-dark">
+      <th scope="row">Edad al parto</th>
+      <td>Continua, registrada entre los 472 (valor mínimo) a 6962 días (valor máximo).</td>
+    </tr>
+    <tr class="table-light">
+      <th scope="row">Época de parto</th>
+      <!--<td>Discreta (nominal), formada por época de sequía (de enero a marzo), de transición (de abril a junio y de octubre a diciembre) y de lluvia (de julio a septiembre).
+      </td>-->
+    </tr>
+    <tr class="table-secondary">
+      <th scope="row">Año de parto</th>
+    </tr>
+    <tr class="table-danger">
+      <th scope="row">Días abiertos</th>
+      <td>Continua, registrada entre los 21 (valor mínimo) a 250 días (valor máximo).
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+---
+
+<section style="text-align: center;"><h2><p class="text-info">Los datos</p></h2></section>
+
+<br>
