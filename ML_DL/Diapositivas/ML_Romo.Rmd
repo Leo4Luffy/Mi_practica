@@ -26,7 +26,6 @@ Alguito de información sobre el paquete xaringan (https://bookdown.org/yihui/rm
 
 library(dplyr)
 library(ggplot2)
-library(DT)
 library(raster)
 library(sf)
 library(ggsflabel)
@@ -205,7 +204,7 @@ Base_datos_2 <- Base_datos %>%
     Mes_parto = format(Fech_parto, '%m'),
     Ano_parto = format(Fech_parto, '%Y')
   ) %>%
-  dplyr::select(IEP, N_parto, Sexo_hija, Edad_parto, Mes_parto, Ano_parto, D_abierto)
+  dplyr::select(Hija, IEP, N_parto, Sexo_hija, Edad_parto, Mes_parto, Ano_parto, D_abierto)
 ```
 
 ---
@@ -246,7 +245,7 @@ Base_datos_2 <- Base_datos %>%
       <th scope="row">Edad al parto</th>
     </tr>
     <tr class="table-light">
-      <th scope="row">Época de parto</th>
+      <th scope="row">Mes de parto</th>
     </tr>
   </tbody>
 </table>
@@ -302,9 +301,11 @@ knitr::include_graphics('Imagenes/octocat_2.png')
   Limpieza de los datos
 </div>
 
-<section style="text-align: justify;"><p class="text-primary">La limpieza de los datos tiene el propósito de corregir los datos faltantes en los conjuntos de datos que provienen de varias fuentes, por ejemplo, error de datos de entrada, error de programación, error en la transferencia de datos, etc.</p></section>
+<!-- <section style="text-align: justify;"><p class="text-primary">La limpieza de los datos tiene el propósito de corregir los datos faltantes en los conjuntos de datos que provienen de varias fuentes, por ejemplo, error de datos de entrada, error de programación, error en la transferencia de datos, etc.</p></section> -->
 
-<section style="text-align: justify;"><p class="text-primary">En el caso de datos de interés zootecnico, la limpieza consiste también en no considerar animales con identificación dudosa, información fuera del rango normal de la variable respuesta o valores fisiológicamente anormales.</p></section>
+<section style="text-align: justify;"><p class="text-primary">En el caso de datos de interés zootecnico, la limpieza consiste en no considerar animales con identificación dudosa, información fuera del rango normal de la variable respuesta o valores fisiológicamente anormales.</p></section>
+
+<section style="text-align: justify;"><p class="text-primary">La limpieza de los datos en el conjunto de datos de este estudio consistió en limitar los días entre partos de 300 a 1278 días, los días abiertos de 21 a 250 días y no considerar datos faltantes (NA).</p></section>
 
 </div>
 
@@ -314,7 +315,15 @@ knitr::include_graphics('Imagenes/octocat_2.png')
 
 <br>
 
-```{r Limpieza del conjunto de datos, echo = FALSE, eval = TRUE, message = FALSE}
+<section style="text-align: justify;"><p class="text-primary">Luego los datos sin procesar se transforman en características. Así por ejemplo usando un método de codificación activa<!-- (Una codificación activa es un proceso que transforma características categóricas o discretas en una matriz numérica.)-->, el mes de parto se convierte en una característica denominada época de parto (sequía, transición y lluvia). La misma se convierte luego en valores numericos (1, 2 y 3, respectivamente) ya que la regresión de machine learning lo puede comprender mejor.</p></section>
+
+<section style="text-align: justify;"><p class="text-primary">El resultado completo se puede ver en la tabla a continuación: →</p></section>
+
+</div>
+
+</div>
+
+```{r Limpieza del conjunto de datos, echo = FALSE, eval = TRUE, message = FALSE, warning = FALSE}
 
 Base_datos_3 <- Base_datos_2 %>%
   filter(
@@ -330,14 +339,20 @@ Base_datos_3 <- Base_datos_2 %>%
   mutate(
     Mes_parto = as.integer(Mes_parto),
     Epoca_parto = case_when( # Fueron formadas tres clases definidas como meses de época de lluvia (meses de julio a septiembre), de transición (meses de abril a junio y de octubre a diciembre) y de sequía (meses de enero a marzo).
-      Mes_parto %in% c(1:3) ~ 'Sequia',
-      Mes_parto %in% c(4:6) ~ 'Transición',
-      Mes_parto %in% c(7:9) ~ 'Lluvia',
-      Mes_parto %in% c(10:12) ~ 'Transición'
+      Mes_parto %in% c(1:3) ~ '1',
+      Mes_parto %in% c(4:6) ~ '2',
+      Mes_parto %in% c(7:9) ~ '3',
+      Mes_parto %in% c(10:12) ~ '2'
+      ),
+    Sexo_hija = case_when(
+      Sexo_hija == 'H' ~ '2',
+      Sexo_hija == 'M' ~ '1'
       )
-    )
+    ) %>%
+  dplyr::select(Hija, IEP, N_parto, Sexo_hija, Edad_parto, Epoca_parto, Ano_parto, D_abierto) %>%
+  rename('Individuo' = Hija, 'IEP' = IEP, 'OP' = N_parto, 'SC' = Sexo_hija, 'EdP' = Edad_parto, 'ÉpP' = Epoca_parto, 'AP' = Ano_parto, 'DA' = D_abierto)
 
-edad_parto <- Base_datos_3 %>%
+edad_parto <- Base_datos_2 %>%
   mutate(N_parto = as.factor(N_parto)) %>%
   filter(
     Edad_parto != 'is.na' &
@@ -347,61 +362,26 @@ edad_parto <- Base_datos_3 %>%
   summarise(Promedio = mean(Edad_parto), N = length(N_parto), Mínimo = min(Edad_parto), Máximo = max(Edad_parto))
 ```
 
-<section style="text-align: justify;"><p class="text-primary">La limpieza de los datos en el conjunto de datos de este estudio consistió en limitar los días entre partos de 300 a 1278 días, los días abiertos de 21 a 250 días y no considerar datos faltantes (NA).</p></section>
-
-<section style="text-align: justify;"><p class="text-primary">Las variables de estudio usadas en la modelación se describen en la tabla a continuación: →</p></section>
-
-</div>
-
-</div>
-
 ---
 
 <section style="text-align: center;"><h2><p class="text-info">Los datos</p></h2></section>
 
-<table class="table table-hover">
-  <thead>
-    <tr>
-      <th scope="col">Nombre</th>
-      <th scope="col">Tipo de variable estadística</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr class="table-danger">
-      <th scope="row">Intervalo entre partos</th>
-      <td>Continua, registrada entre 300 días (valor mínimo) a 826 días (valor máximo).
-      </td>
-    </tr>
-    <tr class="table-warning">
-      <th scope="row">Orden de parto</th>
-    </tr>
-    <tr class="table-info">
-      <th scope="row">Sexo de la cría</th>
-      <td>Discreta (nominal), formada por Hembra y Macho.
-      </td>
-    </tr>
-    <tr class="table-dark">
-      <th scope="row">Edad al parto</th>
-      <td>Continua, registrada entre los 472 (valor mínimo) a 6962 días (valor máximo).</td>
-    </tr>
-    <tr class="table-light">
-      <th scope="row">Época de parto</th>
-      <!--<td>Discreta (nominal), formada por época de sequía (de enero a marzo), de transición (de abril a junio y de octubre a diciembre) y de lluvia (de julio a septiembre).
-      </td>-->
-    </tr>
-    <tr class="table-secondary">
-      <th scope="row">Año de parto</th>
-    </tr>
-    <tr class="table-danger">
-      <th scope="row">Días abiertos</th>
-      <td>Continua, registrada entre los 21 (valor mínimo) a 250 días (valor máximo).
-      </td>
-    </tr>
-  </tbody>
-</table>
+```{r eval = require('DT'), tidy = FALSE, echo = FALSE, eval = TRUE, message = FALSE}
+
+DT::datatable(
+  head(Base_datos_3, 7394), 
+  fillContainer = FALSE, options = list(pageLength = 5),
+  caption = htmltools::tags$caption(
+    style = 'caption-side: bottom; text-align: left;',
+    htmltools::em('IEP = Intervalo entre partos, OP = Orden de parto, SC = Sexo de la cría (macho: 1, hembra:2), EdP = Edad al parto, ÉpP = Época de parto (sequía: 1, transición: 2, lluvia: 3), AP = Año de parto, DA = Días abiertos.')
+    )
+  )
+```
 
 ---
 
-<section style="text-align: center;"><h2><p class="text-info">Los datos</p></h2></section>
+<section style="text-align: center;"><h2><p class="text-info">Escalado de características</p></h2></section>
 
-<br>
+
+
+
