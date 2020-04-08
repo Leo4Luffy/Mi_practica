@@ -1,7 +1,7 @@
 ---
 title: "Metodología de machine learning"
 subtitle: "Aplicación en datos del bovino criollo colombiano Romosinuano"
-author: "Jorge Leonardo López Martínez; Freddy Hernandez Barajas"
+author: "Jorge Leonardo López Martínez; Freddy Hernandez Barajas; Gustavo Alfonso Ossa Saraz"
 institute: ""
 date: ""
 output:
@@ -30,6 +30,7 @@ library(raster)
 library(sf)
 library(ggsflabel)
 library(ggforce)
+library(patchwork)
 library(showtext) # Link donde estan las fuentes Google (http://www.google.com/fonts)
 font_add_google('Gochi Hand', 'gochi')
 showtext.auto()
@@ -147,7 +148,7 @@ La estructura longitudinal se da cuando la observación se mide múltiples veces
 
 <section style="text-align: justify;"><p class="text-primary">Por lo cual es necesario emplear el <font color="black"><u>modelo mixto</u></font> para tratar este tipo de datos, usando de forma simultanea la metodología del machine learning.</p></section>
 
-```{r, fig.align = 'center', out.width = "340", eval = TRUE, echo = FALSE, message = FALSE}
+```{r Imagen octocat, fig.align = 'center', out.width = "340", eval = TRUE, echo = FALSE, message = FALSE}
 
 knitr::include_graphics('Imagenes/octocat.png')
 ```
@@ -315,9 +316,9 @@ knitr::include_graphics('Imagenes/octocat_2.png')
 
 <br>
 
-<section style="text-align: justify;"><p class="text-primary">Luego los datos sin procesar se transforman en características. Así por ejemplo usando un método de codificación activa<!-- (Una codificación activa es un proceso que transforma características categóricas o discretas en una matriz numérica.)-->, el mes de parto se convierte en una característica denominada época de parto (sequía, transición y lluvia). La misma se convierte luego en valores numericos (1, 2 y 3, respectivamente) ya que la regresión de machine learning lo puede comprender mejor.</p></section>
+<section style="text-align: justify;"><p class="text-primary">Luego los datos sin procesar se transforman en características. Así por ejemplo usando el método de codificación activa<!-- (Una codificación activa es un proceso que transforma características categóricas o discretas en una matriz numérica.)-->, el mes de parto se conviertió en una característica denominada época de parto (sequía, transición y lluvia). La misma se convierte luego en valores numericos (1, 2 y 3, respectivamente) para que la regresión de machine learning puede comprenderlo mejor.</p></section>
 
-<section style="text-align: justify;"><p class="text-primary">El resultado completo se puede ver en la tabla a continuación: →</p></section>
+<section style="text-align: justify;"><p class="text-primary">El resultado completo del pre-procesamiento de los datos se puede ver en la tabla a continuación: →</p></section>
 
 </div>
 
@@ -349,6 +350,7 @@ Base_datos_3 <- Base_datos_2 %>%
       Sexo_hija == 'M' ~ '1'
       )
     ) %>%
+  mutate_if(is.character, as.integer) %>% # Aquí, se cambia las variables tipo caracter a entero (numérico).
   dplyr::select(Hija, IEP, N_parto, Sexo_hija, Edad_parto, Epoca_parto, Ano_parto, D_abierto) %>%
   rename('Individuo' = Hija, 'IEP' = IEP, 'OP' = N_parto, 'SC' = Sexo_hija, 'EdP' = Edad_parto, 'ÉpP' = Epoca_parto, 'AP' = Ano_parto, 'DA' = D_abierto)
 
@@ -382,6 +384,168 @@ DT::datatable(
 
 <section style="text-align: center;"><h2><p class="text-info">Escalado de características</p></h2></section>
 
+<br>
+
+<section style="text-align: justify;"><p class="text-primary">Existen varios métodos para normalizar las características. La elección de dicho método depende de la distribución de los datos y la presencia de valores atípicos en los datos.</p></section>
+
+<div class = "row">
+
+<div class = "col-md-6">
+
+<div class="alert alert-dismissible alert-success">
+Valores atípicos
+</div>
+
+<section style="text-align: justify;"><p class="text-primary">Un valor atípico es una observación cuyo valor de la variable respuesta es condicionalmente inusual dado el valor de la variable predictora.</p></section>
+
+<section style="text-align: justify;"><p class="text-primary">Estos son problemáticos porque pueden cambiar drásticamente las estimaciones y predicciones de ajuste, y porque su presencia puede ser una señal de que el modelo no logra capturar características importantes de los datos.</p></section>
+
+<section style="text-align: justify;"><p class="text-primary">El boxplot es un método <!--típicamente representado por cuartiles e intercuartiles--> que ayuda a definir el límite superior e inferior más allá de los cuales cualquier dato que se encuentre será considerado como atípico. <!--El propósito mismo de este diagrama es identificar valores atípicos y descartarlos de la serie de datos antes de hacer cualquier observación adicional para que la conclusión del estudio proporcione resultados más precisos no influenciados por ningún extremo o valores anormales.--></p></section>
+
+</div>
+
+<div class = "col-md-6">
+
+<p>&#8628;</p>
+
+<br>
+
+<section style="text-align: justify;"><p class="text-primary">Según los estándares básicos seguidos por los estadísticos, una definición conveniente de un valor atípico es un punto que cae más de 1.5 veces el rango intercuartil (IQR) por encima del tercer cuartil (Q3) o por debajo del primer cuartil (Q1):</p></section>
+
+```{r Ejemplo de diagrama de caja y bigotes, fig.align = 'center', eval = FALSE, echo = FALSE, message = FALSE, fig.showtext = TRUE, out.width = '100%'}
+
+Val_atipicos <- data.frame(
+  x = c(1.1, 1.14, 3.9, 3.95, 3.84), y = c(2.5, 2.5, 2.5, 2.5, 2.5)
+)
+
+data.frame(
+  x = c(1:4), y =c(1:4)
+) %>%
+  ggplot(aes(x, y)) +
+  geom_blank() +
+  annotate(geom = 'rect', xmin = 1.8, xmax = 3.2, ymin = 2.4, ymax = 2.6, colour = 'yellow', fill = 'yellow', alpha = 0.4, size = 1.2) +
+  annotate(geom = 'segment', x = 2.4, xend = 2.4, y = 2.4, yend = 2.6, colour = 'yellow', size = 1.2) +
+  annotate(geom = 'segment', x = 1.8, xend = 1.2, y = 2.5, yend = 2.5, colour = 'yellow', size = 1.2) +
+  annotate(geom = 'segment', x = 3.2, xend = 3.8, y = 2.5, yend = 2.5, colour = 'yellow', size = 1.2) +
+  annotate(geom = 'text', x = 2.5, y = 2.0, label = 'IQR', family = 'gochi', size = 34.0, colour = 'black') +
+  geom_curve(x = 2.3, xend = 1.8, y = 2.0, yend = 2.0, arrow = arrow(length = unit(0.1, 'inch')), size = 0.8, color = 'black', curvature = 0.0) +
+  geom_curve(x = 2.7, xend = 3.2, y = 2.0, yend = 2.0, arrow = arrow(length = unit(0.1, 'inch')), size = 0.8, color = 'black', curvature = 0.0) +
+  annotate(geom = 'text', x = 1.5, y = 2.0, label = '1.5 IQR', family = 'gochi', size = 24.0, colour = 'black') +
+  geom_curve(x = 1.72, xend = 1.8, y = 2.0, yend = 2.0, arrow = arrow(length = unit(0.1, 'inch')), size = 0.8, color = 'black', curvature = 0.0) +
+  geom_curve(x = 1.28, xend = 1.2, y = 2.0, yend = 2.0, arrow = arrow(length = unit(0.1, 'inch')), size = 0.8, color = 'black', curvature = 0.0) +
+  annotate(geom = 'text', x = 3.5, y = 2.0, label = '1.5 IQR', family = 'gochi', size = 24.0, colour = 'black') +
+  geom_curve(x = 3.28, xend = 3.2, y = 2.0, yend = 2.0, arrow = arrow(length = unit(0.1, 'inch')), size = 0.8, color = 'black', curvature = 0.0) +
+  geom_curve(x = 3.72, xend = 3.8, y = 2.0, yend = 2.0, arrow = arrow(length = unit(0.1, 'inch')), size = 0.8, color = 'black', curvature = 0.0) +
+  annotate(geom = 'segment', x = 1.8, xend = 1.8, y = 2.2, yend = 1.8, colour = 'black', size = 1.2) +
+  annotate(geom = 'segment', x = 3.2, xend = 3.2, y = 2.2, yend = 1.8, colour = 'black', size = 1.2) +
+  annotate(geom = 'segment', x = 1.2, xend = 1.2, y = 2.8, yend = 1.8, colour = 'black', size = 1.2) +
+  annotate(geom = 'segment', x = 3.8, xend = 3.8, y = 2.8, yend = 1.8, colour = 'black', size = 1.2) +
+  annotate(geom = 'text', x = 1.2, y = 1.7, label = 'Límite', family = 'gochi', size = 30.0, colour = 'black') +
+  annotate(geom = 'text', x = 1.2, y = 1.5, label = 'inferior', family = 'gochi', size = 30.0, colour = 'black') +
+  annotate(geom = 'text', x = 3.8, y = 1.7, label = 'Límite', family = 'gochi', size = 30.0, colour = 'black') +
+  annotate(geom = 'text', x = 3.8, y = 1.5, label = 'superior', family = 'gochi', size = 30.0, colour = 'black') +
+  annotate(geom = 'text', x = 1.6, y = 3.0, label = 'Q1', family = 'gochi', size = 32.0, colour = 'black') +
+  annotate(geom = 'text', x = 2.5, y = 3.0, label = 'Q2', family = 'gochi', size = 32.0, colour = 'black') +
+  annotate(geom = 'text', x = 3.4, y = 3.0, label = 'Q3', family = 'gochi', size = 32.0, colour = 'black') +
+  geom_curve(x = 1.6, xend = 1.8, y = 2.9, yend = 2.65, arrow = arrow(length = unit(0.1, 'inch')), size = 0.8, color = 'black', curvature = 0.0) +
+  geom_curve(x = 3.4, xend = 3.2, y = 2.9, yend = 2.65, arrow = arrow(length = unit(0.1, 'inch')), size = 0.8, color = 'black', curvature = 0.0) +
+  geom_curve(x = 2.5, xend = 2.5, y = 2.9, yend = 2.65, arrow = arrow(length = unit(0.1, 'inch')), size = 0.8, color = 'black', curvature = 0.0) +
+  geom_point(data = Val_atipicos, aes(x = x, y = y), colour = 'gray54', alpha = 0.4, size = 4.4) +
+  geom_curve(x = 1.14, xend = 1.1, y = 2.9, yend = 2.65, arrow = arrow(length = unit(0.1, 'inch')), size = 0.8, color = 'black', curvature = 0.0) +
+  annotate(geom = 'text', x = 1.1, y = 3.2, label = 'Valor', family = 'gochi', size = 30.0, colour = 'black') +
+  annotate(geom = 'text', x = 1.1, y = 3.0, label = 'atípico', family = 'gochi', size = 30.0, colour = 'black') +
+  theme_void() +
+  theme(axis.text = element_blank(),
+        axis.ticks = element_blank(),
+        axis.title = element_blank()) +
+  ggsave(filename = '/home/leo/Escritorio/github/Mi_practica/ML_DL/Diapositivas/Imagenes/boxplot.png')
+```
+
+```{r Imagen boxplot, fig.align = 'center', out.width = "320", eval = TRUE, echo = FALSE, message = FALSE}
+
+knitr::include_graphics('Imagenes/boxplot.png')
+```
+
+</div>
+
+</div>
+
+---
+
+<section style="text-align: center;"><h2><p class="text-info">Escalado de características</p></h2></section>
+
+```{r Diagrama de caja y bigotes para identificar valores atípicos, echo = FALSE, eval = TRUE, message = FALSE, fig.align = 'center', out.width = '570'}
+
+is_outlier <- function(x) {
+  return(x < quantile(x, 0.25) - 1.5 * IQR(x) | x > quantile(x, 0.75) + 1.5 * IQR(x))
+  } # Los valores atípicos son aquellas observaciones que se encuentran 1.5 veces IQR, donde IQR (el rango intercuartil) es la diferencia entre lo cuartiles 75 y 25... esta función permite identificar dentro del conjunto de datos aquellos valores atípicos
+
+boxplot_OP <- Base_datos_3 %>%
+  dplyr::select(IEP, OP) %>%
+  mutate(OP = as.factor(OP),
+  Val_atipico = ifelse(is_outlier(IEP), IEP, as.numeric(NA))) %>%
+  ggplot(aes(x = OP, y = IEP, colour = OP, fill = OP)) +
+  #geom_jitter(colour = 'gray38', alpha = 0.4, size = 2.0, position = position_jitter(width = 0.1, height = 0.1)) +
+  geom_boxplot(alpha = 0.4, outlier.colour = 'gray14', outlier.fill = 'gray14', outlier.size = 2.4) +
+  stat_summary(fun = 'mean', geom = 'point', shape = '*', size = 5.8, color = 'black', fill = 'black') +
+  #geom_text(aes(label = Val_atipico), na.rm = TRUE, hjust = -0.4, colour = 'gray54') +
+  scale_colour_manual(values = c('yellow', 'turquoise1', 'violetred1', 'chartreuse', 'magenta', 'springgreen', 'green', 'black', 'yellow', 'turquoise1', 'violetred1', 'chartreuse', 'magenta', 'springgreen', 'green', 'black')) +
+  scale_fill_manual(values = c('yellow', 'turquoise1', 'violetred1', 'chartreuse', 'magenta', 'springgreen', 'green', 'black', 'yellow', 'turquoise1', 'violetred1', 'chartreuse', 'magenta', 'springgreen', 'green', 'black')) +
+  theme_bw() +
+  labs(x = 'Orden de parto', y = 'Intervalo entre partos') +
+  theme(legend.position = 'none',
+        axis.text = element_text(size = 10, face = 'bold'),
+        axis.title = element_text(size = 12, face = 'bold'))
+
+boxplot_SC <- Base_datos_3 %>%
+  dplyr::select(IEP, SC) %>%
+  mutate(SC = case_when(
+    SC == 1 ~ 'Macho',
+    SC == 2 ~ 'Hembra'
+  ),
+  Val_atipico = ifelse(is_outlier(IEP), IEP, as.numeric(NA))) %>%
+  ggplot(aes(x = SC, y = IEP, colour = SC, fill = SC)) +
+  #geom_jitter(colour = 'gray38', alpha = 0.4, size = 2.0, position = position_jitter(width = 0.1, height = 0.1)) +
+  geom_boxplot(alpha = 0.4, outlier.colour = 'gray14', outlier.fill = 'gray14', outlier.size = 2.4) +
+  stat_summary(fun = 'mean', geom = 'point', shape = '*', size = 5.8, color = 'black', fill = 'black') +
+  #geom_text(aes(label = Val_atipico), na.rm = TRUE, hjust = -0.4, colour = 'gray54') +
+  scale_colour_manual(values = c('yellow', 'turquoise1')) +
+  scale_fill_manual(values = c('yellow', 'turquoise1')) +
+  theme_bw() +
+  labs(x = 'Sexo de la cría', y = 'Intervalo entre partos') +
+  theme(legend.position = 'none',
+        axis.text = element_text(size = 10, face = 'bold'),
+        axis.title = element_text(size = 12, face = 'bold'))
+
+boxplot_EpP <- Base_datos_3 %>%
+  dplyr::select(IEP, ÉpP) %>%
+  mutate(ÉpP = case_when(
+    ÉpP == 1 ~ 'Sequía',
+    ÉpP == 2 ~ 'Transición',
+    ÉpP == 3 ~ 'Lluvia'
+  ),
+  Val_atipico = ifelse(is_outlier(IEP), IEP, as.numeric(NA))) %>%
+  ggplot(aes(x = ÉpP, y = IEP, colour = ÉpP, fill = ÉpP)) +
+  #geom_jitter(colour = 'gray38', alpha = 0.4, size = 2.0, position = position_jitter(width = 0.1, height = 0.1)) +
+  geom_boxplot(alpha = 0.4, outlier.colour = 'gray14', outlier.fill = 'gray14', outlier.size = 2.4) +
+  stat_summary(fun = 'mean', geom = 'point', shape = '*', size = 5.8, color = 'black', fill = 'black') +
+  #geom_text(aes(label = Val_atipico), na.rm = TRUE, hjust = -0.4, colour = 'gray54') +
+  scale_colour_manual(values = c('violetred1', 'green', 'black')) +
+  scale_fill_manual(values = c('violetred1', 'green', 'black')) +
+  theme_bw() +
+  labs(x = 'Época de parto', y = 'Intervalo entre partos') +
+  theme(legend.position = 'none',
+        axis.text = element_text(size = 10, face = 'bold'),
+        axis.title = element_text(size = 12, face = 'bold'))
+
+(boxplot_OP) / (boxplot_EpP | boxplot_SC)
+```
+
+---
+
+<section style="text-align: center;"><h2><p class="text-info">Escalado de características</p></h2></section>
+
+<br>
 
 
 
