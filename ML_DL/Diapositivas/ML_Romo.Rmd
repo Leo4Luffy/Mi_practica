@@ -547,5 +547,58 @@ boxplot_EpP <- Base_datos_3 %>%
 
 <br>
 
+<section style="text-align: justify;"><p class="text-primary">Existen varios métodos para normalizar las características. La elección de dicho método depende de la distribución de los datos y la presencia de valores atípicos en los datos.</p></section>
 
+<div class = "row">
 
+<div class = "col-md-6">
+
+<div class="alert alert-dismissible alert-info">
+Distribución de de los datos
+</div>
+
+<section style="text-align: justify;"><p class="text-primary">La distribución de probabilidad, se refiere a todos los resultados posibles de una variable aleatoria (discreta o continua). Es decir, describe el comportamiento de dicha variable dentro de un intervalo de valores o de posibles resultados.<!-- Las distribuciones revelan información útil, pero la información es probabilística.--></p></section>
+
+<!-- La distribución de probabilidad permite asignar a cada evento la probabilidad de que este ocurra o tenga éxito. Con el estudio de las probabilidades, se ha permitido una manera de estandarizar los sucesos y procesos que ocurren al azar, esto se ha logrado estimando las frecuencias en las que se obtiene un resultado en específico. -->
+
+```{r Ejemplo de distribución normal de los datos, fig.align = 'center', eval = TRUE, echo = FALSE, message = FALSE, fig.showtext = TRUE, out.width = '220'}
+
+Normal <- function(n, Lower, Upper) { # Función para simular datos con distribución normal
+  set.seed (100)
+  x = rnorm(n, 0, 1)
+  data.frame(x)
+  }
+
+Normal(200) %>%
+  ggplot(aes(x = x)) +
+  geom_histogram(aes(y = ..density..), bins = 28, fill = 'yellow', colour = 'yellow', alpha = 0.4) +
+  geom_density(size = 2.2, colour = 'black') +
+  #annotate(geom = 'text', x = 1.5, y = 0.5, label = 'Distribución normal', family = 'gochi', size = 8.8, colour = 'black') +
+  theme_void() +
+  theme(axis.text = element_blank(),
+        axis.ticks = element_blank(),
+        axis.title = element_blank())
+```
+
+</div>
+
+<div class = "col-md-6">
+
+<p>&#8628;</p>
+
+<br>
+
+<section style="text-align: justify;"><p class="text-primary">Como el ejemplo anterior, la forma más fácil de entender una distribución es visualizarla.</p></section>
+
+<section style="text-align: justify;"><p class="text-primary">De igual forma, las propiedades de una distribución se pueden describir mediante estadística descriptiva como la media, la mediana, el sesgo y la curtosis.</p></section>
+
+```{r Imagen octocat 2, fig.align = 'center', out.width = "180", eval = TRUE, echo = FALSE, message = FALSE}
+
+knitr::include_graphics('Imagenes/octocat_5.png')
+```
+
+<!--Una distribución contiene información sobre probabilidades asociadas con los puntos. Por ejemplo, las distribuciones revelan qué valores son típicos, cuáles son raros y cuáles son aparentemente imposibles. Una distribución también revela la "mejor suposición" para predecir valores futuros, así como la certeza o incertidumbre de esa suposición.-->
+
+</div>
+
+</div>
