@@ -3,7 +3,7 @@ title: "Metodología de machine learning"
 subtitle: "Aplicación en datos del bovino criollo colombiano Romosinuano"
 author: "Jorge Leonardo López Martínez; Freddy Hernandez Barajas; Gustavo Alfonso Ossa Saraz"
 institute: ""
-date: ""
+date: "`r format(Sys.time(), '%d %B, %Y')`"
 output:
   xaringan::moon_reader:
     css: estilo.css
@@ -31,6 +31,7 @@ library(sf)
 library(ggsflabel)
 library(ggforce)
 library(patchwork)
+library(moments)
 library(showtext) # Link donde estan las fuentes Google (http://www.google.com/fonts)
 font_add_google('Gochi Hand', 'gochi')
 showtext.auto()
@@ -588,11 +589,9 @@ Normal(200) %>%
 
 <br>
 
-<section style="text-align: justify;"><p class="text-primary">Como el ejemplo anterior, la forma más fácil de entender una distribución es visualizarla.</p></section>
+<section style="text-align: justify;"><p class="text-primary">La forma más fácil de entender una distribución es visualizarla. Un histrograma como el de la imagen es un ejemplo de dicha visualización. De igual forma, las propiedades de una distribución se pueden describir mediante estadística descriptiva como la media, la mediana, el sesgo y la curtosis.</p></section>
 
-<section style="text-align: justify;"><p class="text-primary">De igual forma, las propiedades de una distribución se pueden describir mediante estadística descriptiva como la media, la mediana, el sesgo y la curtosis.</p></section>
-
-```{r Imagen octocat 2, fig.align = 'center', out.width = "180", eval = TRUE, echo = FALSE, message = FALSE}
+```{r Imagen octocat 2, fig.align = 'center', out.width = "150", eval = TRUE, echo = FALSE, message = FALSE}
 
 knitr::include_graphics('Imagenes/octocat_5.png')
 ```
@@ -602,3 +601,81 @@ knitr::include_graphics('Imagenes/octocat_5.png')
 </div>
 
 </div>
+
+---
+
+<section style="text-align: center;"><h2><p class="text-info">Escalado de características</p></h2></section>
+
+<div class = "row">
+
+<div class = "col-md-6">
+
+```{r Estadisticos para averiguar la distribución del intervalo entre partos, echo = FALSE, eval = FALSE, message = FALSE}
+
+Est_dist <- Base_datos_3 %>%
+  summarise(Promedio = mean(IEP), Mediana = median(IEP), Sesgo = skewness(IEP), Curtosis = kurtosis(IEP))
+```
+
+```{r Distribución de los datos de intervalo entre partos, echo = FALSE, eval = TRUE, message = FALSE, fig.align = 'center', out.width = '300'}
+
+Est_dist_2 <- Base_datos_3 %>%
+  ggplot(aes(x = IEP)) +
+  geom_histogram(aes(y = ..density..), bins = 28, fill = 'yellow', colour = 'yellow', alpha = 0.4) +
+  geom_density(size = 2.2, colour = 'black') +
+  #annotate(geom = 'text', x = 1.5, y = 0.5, label = 'Distribución normal', family = 'gochi', size = 8.8, colour = 'black') +
+  theme_bw() +
+  labs(x = 'Intervalo entre partos', y = 'Frecuencia') +
+  theme(legend.position = 'none',
+        axis.text = element_text(size = 18, face = 'bold'),
+        axis.title = element_text(size = 20, face = 'bold'))
+
+Est_dist_2
+```
+
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th scope="col">Estadístico</th>
+      <th scope="col">Valor</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr class="table-danger">
+      <th scope="row">Media</th>
+      <td>379.44</td>
+    </tr>
+    <tr class="table-warning">
+      <th scope="row">Mediana</th>
+      <td>368</td>
+    </tr>
+    <tr class="table-info">
+      <th scope="row">Sesgo</th>
+      <td>1.25</td>
+    </tr>
+    <tr class="table-dark">
+      <th scope="row">Curtosis</th>
+      <td>5.48</td>
+    </tr>
+  </tbody>
+</table>
+
+</div>
+
+<div class = "col-md-6">
+
+<section style="text-align: justify;"><p class="text-primary">Mediante el histograma se observó que los datos de intervalo entre partos en bovinos Romosinuano presentan una distribución no simétrica. En este caso asimétria positiva o asimétria hacia la derecha, puesto que la cola de la distribución apunta hacia la derecha.</p></section>
+
+<section style="text-align: justify;"><p class="text-primary">Con respecto a las estadísticas descriptivas, un sesgo distinto de 0 indica falta de simetría de la distribución, mientras que el valor de la curtosis cuantifica el peso de las colas en comparación con la distribución normal, para la cual la curtosis debería ser igual a 3.</p></section>
+
+<section style="text-align: justify;"><p class="text-primary">Por lo tanto, al observar el histograma con una asimetría positiva y una curtosis por encima de 3, se concluye que la distribución de los datos de intervalo entre partos en bovinos Romosinuano corresponde a una distribución sesgada a la derecha.</p></section>
+
+</div>
+
+</div>
+
+---
+
+<section style="text-align: center;"><h2><p class="text-info">Escalado de características</p></h2></section>
+
+<br>
+
