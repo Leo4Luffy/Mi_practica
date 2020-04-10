@@ -589,9 +589,28 @@ Normal(200) %>%
 
 <br>
 
-<section style="text-align: justify;"><p class="text-primary">La forma más fácil de entender una distribución es visualizarla. Un histrograma como el de la imagen es un ejemplo de dicha visualización. De igual forma, las propiedades de una distribución se pueden describir mediante estadística descriptiva como la media, la mediana, el sesgo y la curtosis.</p></section>
+<section style="text-align: justify;"><p class="text-primary">La forma más fácil de entender una distribución es visualizarla. Un histrograma como el de la imagen es un ejemplo de dicha visualización. De igual forma, las propiedades de una distribución se pueden describir mediante estadística descriptiva como:</p></section>
 
-```{r Imagen octocat 2, fig.align = 'center', out.width = "150", eval = TRUE, echo = FALSE, message = FALSE}
+<div class="form-check">
+  <div class="form-check disabled">
+    <input class="form-check-input" type="checkbox" value="" disabled="">
+    La media;
+  </div>
+  <div class="form-check disabled">
+    <input class="form-check-input" type="checkbox" value="" disabled="">
+    La mediana;
+  </div>
+  <div class="form-check disabled">
+    <input class="form-check-input" type="checkbox" value="" disabled="">
+    El sesgo;
+  </div>
+  <div class="form-check disabled">
+    <input class="form-check-input" type="checkbox" value="" disabled="">
+    La curtosis.
+  </div>
+</div>
+
+```{r Imagen octocat 2, fig.align = 'center', out.width = "150", eval = FALSE, echo = FALSE, message = FALSE}
 
 knitr::include_graphics('Imagenes/octocat_5.png')
 ```
@@ -678,4 +697,3 @@ Est_dist_2
 <section style="text-align: center;"><h2><p class="text-info">Escalado de características</p></h2></section>
 
 <br>
-
