@@ -1,0 +1,33 @@
+---
+title: "Trabajos de interés sobre genética"
+subtitle: ""
+author: "Jorge Leonardo López Martínez"
+institute: ""
+date: "`r format(Sys.time(), '%d %B, %Y')`"
+output:
+  xaringan::moon_reader:
+    css: estilo.css
+---
+
+<div class = "row">
+
+<div class = "col-md-4">
+
+
+
+</div>
+
+<div class = "col-md-4">
+
+
+
+</div>
+
+<div class = "col-md-4">
+
+
+
+</div>
+
+</div>
+
