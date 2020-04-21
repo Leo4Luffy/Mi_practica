@@ -8,11 +8,11 @@ output:
   xaringan::moon_reader:
     css: estilo.css
 ---
-
+<!--
 background-image: url(https://github.githubassets.com/images/modules/about/diversity/blacktocat.png)
 background-size: 86px
 background-position: 98% 0.4%
-
+-->
 ```{r Paquetes usados, echo = FALSE, eval = TRUE, message = FALSE, warning = FALSE}
 
 library(dplyr)

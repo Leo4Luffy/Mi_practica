@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
   <head>
-    <title>Trabajos de interés sobre genética</title>
+    <title>Curso sobre fundamentos básicos de programación en Python</title>
     <meta charset="utf-8" />
     <meta name="author" content="Jorge Leonardo López Martínez" />
     <link rel="stylesheet" href="estilo.css" type="text/css" />
@@ -10,38 +10,75 @@
     <textarea id="source">
 class: center, middle, inverse, title-slide
 
-# Trabajos de interés sobre genética
+# Curso sobre fundamentos básicos de programación en Python
 ### Jorge Leonardo López Martínez
-### 19 abril, 2020
+### 21 abril, 2020
 
 ---
 
+
+
+
+&lt;!-- 
+Los dos lenguajes de ciencia de datos más populares, R y Python, a menudo se tratan como rivales. Sin embargo, esto podría estar más lejos de la verdad. Cada lenguaje de programación tiene sus fortalezas, por ejemplo, para emplear la metodología de machine learning se puede usar Python para aprovechar el uso de "scikit learn" y "tensorflow", mientras que la limpieza de datos, la visualización, la aplicación y la presentación de informes se puede hacer mediante el uso del R y sus paquetes "tidyverse, "shiny" y "rmakdown".
+
+La conclusión es entonces que conocer tanto de R como de Python te hace SUPER PRODUCTIVO. Los científicos de datos que aprenden a usar las fortalezas de ambos idiomas son valiosos porque NO TIENEN LÍMITES.
+--&gt;
+
 &lt;!--
-background-image: url(https://github.githubassets.com/images/modules/about/diversity/blacktocat.png)
-background-size: 86px
-background-position: 98% 0.4%
+Con solo dos pasos se puede usar Python en R:
+
+Paso 1 - Inicie un documento rmarkdown y cargue los paquetes "tidyverse" (para visualización, limpieza de datos, etc) y "reticulate" (el enlace clave entre R y Python).
 --&gt;
 
 
-&lt;section style="text-align: center;"&gt;&lt;h4&gt;&lt;p class="text-info"&gt;Un siglo después de Fisher: tiempo para un nuevo paradigma en génetica cuantitativa&lt;/p&gt;&lt;/h4&gt;&lt;/section&gt;
 
-&lt;div class = "row"&gt;
+&lt;!--
+Paso 2 - A continuación debe asegurarse debe asegurarse de tener la configuración del entorno Python a usar. En este caso se usara Anaconda (Conda), una herramienta de Python desarrollada para científicos de datos. Para esto:
 
-&lt;div class = "col-md-6"&gt;
+1- Descargue Conda: https://docs.anaconda.com/anaconda/install/
 
-&lt;section style="text-align: justify;"&gt;&lt;p class="text-secondary"&gt;Hace casi un siglo, los avances teóricos de Ronald Fisher establecieron la teoría que formó el campo de la genética cuantitativa. Desde entonces, el campo ha sido extremadamente productivo a la vez que se ajusta a este paradigma central.&lt;/p&gt;&lt;/section&gt;
+2- Se crea un nuevo entorno de Python para el cual se debe ejecutar el siguiente código en la terminal: conda create -n py3.8 python=3.8 scikit-learn pandas numpy matplotlib. Este código
+  * Crea un nuevo entorno de Python llamado "py3.8";
+  * Instala la versión de Python 3.8;
+  * Instala las últimas versiones de scikit-learn, pandas, numpy, y matplotlib.
 
-&lt;img src="Resumen_genetica_files/figure-html/unnamed-chunk-1-1.png" width="300" style="display: block; margin: auto;" /&gt;
-
-&lt;/div&gt;
-
-&lt;div class = "col-md-6"&gt;
+NOTA: si al ejecutar en la terminal conda env list se ve el entorno "py3.8", ya esta lista la anterior instrucción. Esto mismo se puede hacer en rmarkdown usando la función conda_list():
+--&gt;
 
 
 
-&lt;/div&gt;
+&lt;!--
+Luego, asegúrese de que su documento rmarkdown active el entorno "py3.8" usando la función use_convaenv():
+--&gt;
 
-&lt;/div&gt;
+
+
+&lt;!--
+Y se verifica que el paquete "reticulate" esta usando el ambiente conda nuevo:
+
+NOTA: Si esta funcionando deberia ver algo similar a esto, según el post de https://www.business-science.io/learn-r/2020/04/20/setup-python-in-r-with-rmarkdown.html#:
+  python: /Users/mdancho/opt/anaconda3/envs/py3.8/bin/python
+Puede que no sea exacto, pero debería ver "py3.8" en la ruta del archivo... en mi caso SI SE VE.
+--&gt;
+
+
+
+&lt;!--
+Ahora se inicia con las PRUEBAS de Python. Todo el código en esta sección utiliza "python code chunks". Esto significa que debe usar {python} en lugar de {r} en los fragmentos de código:
+--&gt;
+
+
+
+
+
+&lt;!--
+NOTA: Con las anteriores pruebas se comprueba de que ejecutar Python en R (rmarkdown) SI DA :).
+--&gt;
+
+&lt;!--
+SE INICIA POR TANTO A CONTINUACIÓN A ESCRIBIR EL RESUMEN DEL CURSO DE PYTHON EN RMARKDOWN.
+--&gt;
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>

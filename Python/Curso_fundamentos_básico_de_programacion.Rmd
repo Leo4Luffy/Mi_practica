@@ -1,0 +1,124 @@
+---
+title: "Curso sobre fundamentos básicos de programación en Python"
+subtitle: ""
+author: "Jorge Leonardo López Martínez"
+institute: ""
+date: "`r format(Sys.time(), '%d %B, %Y')`"
+output:
+  xaringan::moon_reader:
+    css: estilo.css
+---
+
+```{r, include = FALSE}
+
+knitr::opts_chunk$set(
+  message = FALSE,
+  warning = FALSE
+)
+```
+
+<!-- 
+Los dos lenguajes de ciencia de datos más populares, R y Python, a menudo se tratan como rivales. Sin embargo, esto podría estar más lejos de la verdad. Cada lenguaje de programación tiene sus fortalezas, por ejemplo, para emplear la metodología de machine learning se puede usar Python para aprovechar el uso de "scikit learn" y "tensorflow", mientras que la limpieza de datos, la visualización, la aplicación y la presentación de informes se puede hacer mediante el uso del R y sus paquetes "tidyverse, "shiny" y "rmakdown".
+
+La conclusión es entonces que conocer tanto de R como de Python te hace SUPER PRODUCTIVO. Los científicos de datos que aprenden a usar las fortalezas de ambos idiomas son valiosos porque NO TIENEN LÍMITES.
+-->
+
+<!--
+Con solo dos pasos se puede usar Python en R:
+
+Paso 1 - Inicie un documento rmarkdown y cargue los paquetes "tidyverse" (para visualización, limpieza de datos, etc) y "reticulate" (el enlace clave entre R y Python).
+-->
+
+```{r Paquetes usados, echo = FALSE, eval = TRUE, message = FALSE, warning = FALSE}
+
+library(tidyverse)
+library(reticulate)
+```
+
+<!--
+Paso 2 - A continuación debe asegurarse debe asegurarse de tener la configuración del entorno Python a usar. En este caso se usara Anaconda (Conda), una herramienta de Python desarrollada para científicos de datos. Para esto:
+
+1- Descargue Conda: https://docs.anaconda.com/anaconda/install/
+
+2- Se crea un nuevo entorno de Python para el cual se debe ejecutar el siguiente código en la terminal: conda create -n py3.8 python=3.8 scikit-learn pandas numpy matplotlib. Este código
+  * Crea un nuevo entorno de Python llamado "py3.8";
+  * Instala la versión de Python 3.8;
+  * Instala las últimas versiones de scikit-learn, pandas, numpy, y matplotlib.
+
+NOTA: si al ejecutar en la terminal conda env list se ve el entorno "py3.8", ya esta lista la anterior instrucción. Esto mismo se puede hacer en rmarkdown usando la función conda_list():
+-->
+
+```{r, echo = FALSE, eval = FALSE}
+
+conda_list() # Para ejecutar esta función, se debio cargar el paquete "reticulate" previamente.
+```
+
+<!--
+Luego, asegúrese de que su documento rmarkdown active el entorno "py3.8" usando la función use_convaenv():
+-->
+
+```{r, echo = FALSE, eval = FALSE}
+
+use_condaenv('py3.8', required = TRUE)
+```
+
+<!--
+Y se verifica que el paquete "reticulate" esta usando el ambiente conda nuevo:
+
+NOTA: Si esta funcionando deberia ver algo similar a esto, según el post de https://www.business-science.io/learn-r/2020/04/20/setup-python-in-r-with-rmarkdown.html#:
+  python: /Users/mdancho/opt/anaconda3/envs/py3.8/bin/python
+Puede que no sea exacto, pero debería ver "py3.8" en la ruta del archivo... en mi caso SI SE VE.
+-->
+
+```{r, echo = FALSE, eval = FALSE}
+
+py_config()
+```
+
+<!--
+Ahora se inicia con las PRUEBAS de Python. Todo el código en esta sección utiliza "python code chunks". Esto significa que debe usar {python} en lugar de {r} en los fragmentos de código:
+-->
+
+```{python, echo = FALSE, eval = FALSE}
+
+# Prueba 1:
+
+1 + 1 # Si se agrega 1+1, debería dar 2... SI DA. En este caso, Python funciona  
+```
+
+```{python, echo = FALSE, eval = FALSE}
+
+# Prueba 2... para esto, se importaran tres paquetes de Python y se prueban:
+
+import numpy as np # Para cálculos matemáticos.
+np.arange(1, 10) # Esta función del paquete numpy sirve para crear una secuencia de números en una matriz... SI DA.
+
+import pandas as pd # Para edición de datos.
+df = pd.DataFrame(data = {"sequence":np.arange(1,20,.01)})
+df = df.assign(value=np.sin(df["sequence"]))
+df # Aquí se uso el paquete pandas para crear una base de datos llamada df usando la función pd.DataFrame... SI DA.
+
+import matplotlib as plt
+df.plot(x = 'sequence', y = 'value', title = 'Matplotlib') # Si al ejecutar el código de trazado de pandas y al aparecer la visualización, el paquete matplotlib está instalado... SI DA.
+
+from sklearn.ensemble import RandomForestClassifier # Módulo de Scikit Learn para ejecutar un bosque aleatorio de prueba.
+clf = RandomForestClassifier(random_state=0)
+X = [[ 1,  2,  3],
+     [11, 12, 13]]
+y = [0, 1]
+clf.fit(X, y)
+clf.predict(X)  # La función predict() es un método para hacer una predicción sobre el conjunto de datos de entrenamiento... SI DA.
+```
+
+<!--
+NOTA: Con las anteriores pruebas se comprueba de que ejecutar Python en R (rmarkdown) SI DA :).
+-->
+
+<!--
+SE INICIA POR TANTO A CONTINUACIÓN A ESCRIBIR EL RESUMEN DEL CURSO DE PYTHON EN RMARKDOWN.
+-->
+
+```{r}
+
+```
+
