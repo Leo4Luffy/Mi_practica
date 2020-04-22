@@ -22,13 +22,17 @@ font_add_google('Gochi Hand', 'gochi')
 showtext_auto()
 ```
 
-<section style="text-align: center;"><h4><p class="text-info">Un siglo después de Fisher: tiempo para un nuevo paradigma en génetica cuantitativa</p></h4></section>
+<section style="text-align: center;"><h4><p class="text-info">Un siglo después de Fisher: tiempo para un nuevo paradigma en génetica cuantitativa<font color="black"><sup>1</sup></font></p></h4></section>
 
 <div class = "row">
 
 <div class = "col-md-6">
 
 <section style="text-align: justify;"><p class="text-secondary">Hace casi un siglo, los avances teóricos de Ronald Fisher establecieron la teoría que formó el campo de la genética cuantitativa. Desde entonces, el campo fue extremadamente productivo a la vez que se ajustaba a este paradigma central.</p></section>
+
+<!--
+El campo de la genética se fundó cuandoo se presentó el primer mapeo genotipo-fenotipo en el tranajo pionero de Mendel sobre los guisantes. Paralelamente, Galton desarrollo ideas sobre la heredabilidad de los caracteres fenotipos a mediados de la decada de 1870. Después de que el trabajo de Mendel fue redescubierto, hubo un debate entre las escuelas de pensamiento biometrico y Mendeliano.
+-->
 
 ```{r, eval = TRUE, echo = FALSE, fig.align = 'center', message = FALSE, warning = FALSE, fig.showtext = TRUE, out.width = '300'}
 
@@ -92,7 +96,59 @@ data.frame(
 
 <section style="text-align: justify;"><p class="text-secondary">datos recopilados usando las nuevas tecnologías de genómica y de genética molecular generan dudas sobre si el paradigma de la genética cuantitativa actual es suficiente para enfrentar los desafíos para el estudio de la variación de caracteres complejos.</p></section>
 
+<!--
+Los modelos actuales se extienden hasta sus límites y requieren ajustes sustanciales para explicar y tratar las observaciones. En el trabajo argumentan que el campo de la genética cuantitativa ahora está en una crisis y en un punto donde se necesita un nuevo marco genético que pueda abarcar los resultados anteriores, así como las anomalias actuales. 
+-->
+
+<section style="text-align: justify;"><p class="text-secondary">La genética es un campo del futuro pero se necesita un cambio de paradigma para utilizar todo su potencial en la agricultura, la medicina y la biología evolutiva.</p></section>
+
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+
+<small>
+.footnote[
+[1] [A century after Fisher: time for a new paradigm in quantitative genetics](https://www.ncbi.nlm.nih.gov/pubmed/24161664).
+]
+</small>
+
 </div>
 
 </div>
+
+---
+
+<br>
+
+<div class = "row">
+
+<div class = "col-md-3">
+
+</div>
+
+<div class = "col-md-5">
+
+```{r Imagen octocat, fig.align = 'center', out.width = '240', eval = TRUE, echo = FALSE, message = FALSE}
+
+knitr::include_graphics('Imagenes/octocat.png')
+```
+
+<div class="alert alert-dismissible alert-warning">
+Mi correo electrónico: <font color="gray">jollopezma@unal.edu.co</font>
+<HR>
+Mi cuenta de GitHub: <font color="gray">https://github.com/Leo4Luffy</font>
+</div>
+
+</div>
+
+<div class = "col-md-4">
+
+</div>
+
+</div>
+
 
