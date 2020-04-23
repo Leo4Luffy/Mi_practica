@@ -120,7 +120,7 @@ NOTA: Con las anteriores pruebas se comprueba de que ejecutar Python en R (rmark
 SE INICIA POR TANTO A CONTINUACIÓN A ESCRIBIR EL RESUMEN DEL CURSO DE PYTHON EN RMARKDOWN.
 -->
 
-<section style="text-align: center;"><h3><p class="text-info">Mi primer programa en Python</p></h3></section>
+<section style="text-align: center;"><h3><p class="text-info">Fundamentos básicos en Python</p></h3></section>
 
 <br>
 
@@ -136,15 +136,18 @@ demo_code('
 print("¡Hola, Mundo!")
 ') %>%
   hlt_args(color = 'gray') %>%
-  hlt_funs(color = 'deeppink', underline = TRUE)
+  hlt_funs(color = 'deeppink', underline = TRUE) %>%
+  hlt_fixed('print') %>%
+  hlt_fixed('(', background = 'cyan') %>%
+  hlt_fixed(')', background = 'cyan')
 ```
 
 ```{python, echo = FALSE, eval = FALSE}
 
-print('¡Hola, Mundo!')
+print("¡Hola, Mundo!")
 ```
 
-<section style="text-align: justify;"><p class="text-secondary">La palabra <font color="black"><u>print</u></font> es el nombre de una función. Una función (en el contexto de programación) es una parte separada del código de computadora el cual es capaz de:</p></section>
+<section style="text-align: justify;"><p class="text-secondary">La palabra <font color="black"><u>print</u></font> es el nombre de una función. Una función (en el contexto de programación) es una parte separada del código de computadora el cual es capaz de:</p>
 
 <div class="form-check">
   <div class="form-check disabled">
@@ -157,13 +160,35 @@ print('¡Hola, Mundo!')
   </div>
 </div>
 
+</section>
+
 <section style="text-align: justify;"><p class="text-secondary">Dichas funciones pueden venir de Python mismo (esta integrada), pueden provenir de uno o varios de los módulos de Python llamados complementos o puede escribirlos uno mismo.</p></section>
+
+<!--
+El nombre de la función debe ser significativo (el nombre de la función print es evidente), imprime en la terminal.
+
+Si vas a utilizar alguna función ya existente, no podrás modificar su nombre, pero cuando comiences a escribir tus propias funciones, debes considerar cuidadosamente la elección de nombres.
+-->
 
 </div>
 
 <div class = "col-md-6">
 
-<section style="text-align: justify;"><p class="text-secondary">Un componente muy importante de una función es el argumento.</p></section>
+<section style="text-align: justify;"><p class="text-secondary">Un componente muy importante de una función son sus <font color="black"><u>argumentos</u></font>.</p></section>
+
+<section style="text-align: justify;"><p class="text-secondary">Las funciones de Python, son muy versátiles: dependiendo de las necesidades individuales, pueden aceptar cualquier número de argumentos, tantos como sea necesario para realizar sus tareas. Aunque algunas funciones de Python pueden también no necesitar ningún argumento.</p></section>
+
+<section style="text-align: justify;"><p class="text-secondary">A pesar del número de argumentos necesarios o proporcionados, las funciones de Python demandan fuertemente la presencia de un par de paréntesis: el de apertura y de cierre.</p></section>
+
+<section style="text-align: justify;"><p class="text-secondary">Si se desea entregar uno o más argumentos a una función, se debe colocar dentro de los paréntesis. Si se va a usar una función que no tiene argumentos, aún debe tener los paréntesis.</p></section>
+
+<!--
+Para distinguir las palabras comunes de los nombres de funciones, coloca un par de paréntesis vacíos después de sus nombres, incluso si la función correspondiente requiere uno o más argumentos. Esta es una medida estándar.
+
+El único argumento entregado a la función print() en este ejemplo es una cadena: "¡Hola, Mundo!". Como se puede ver, la cadena está delimitada por comillas, de hecho, las comillas forman la cadena, recortan una parte del código y le asignan un significado diferente. Podemos imaginar que las comillas significan algo así: el texto entre nosotros no es un código. No está diseñado para ser ejecutado, y se debe tomar tal como está. Casi cualquier cosa que ponga dentro de las comillas se tomará de manera literal, no como código, sino como datos.
+
+
+-->
 
 </div>
 
@@ -171,6 +196,138 @@ print('¡Hola, Mundo!')
 
 ---
 
-<section style="text-align: center;"><h3><p class="text-info">Mi primer programa en Python</p></h3></section>
+<section style="text-align: center;"><h3><p class="text-info">Fundamentos básicos en Python</p></h3></section>
 
 <br>
+
+<p class="text-warning">La función <u>print( )</u></p>
+
+<div class = "row">
+
+<div class = "col-md-6">
+
+<section style="text-align: justify;"><p class="text-secondary">El nombre de la función (<font color="black"><u>print</u></font> en este caso) junto con los paréntesis y los argumentos, forman la invocación de la función. Entonces ¿qué sucede cuando Python encuentra la invocación de una función?:</p>
+
+<div class="form-check">
+  <div class="form-check disabled">
+    <input class="form-check-input" type="checkbox" value="" disabled="">
+    Primero, Python comprueba si el nombre de la función especificada es <font color="black">legal</font>.<!-- (explora sus datos internos para encontrar una función existente del nombre; si esta búsqueda falla, Python cancela el código). -->
+  </div>
+  <div class="form-check disabled">
+    <input class="form-check-input" type="checkbox" value="" disabled="">
+    Segundo, Python comprueba si los requisitos de la función para el número de argumentos <font color="black">le permiten invocar</font> la función de esta manera. <!-- (por ejemplo, si una función específica exige exactamente dos argumentos, cualquier invocación que entregue solo un argumento se considerará errónea y abortará la ejecución del código). -->
+  </div>
+  <div class="form-check disabled">
+    <input class="form-check-input" type="checkbox" value="" disabled="">
+    Tercero, Python <font color="black">deja el código por un momento</font> y salta dentro de la función que se desea invocar; por lo tanto, también toma los argumentos y los pasa a la función.
+  </div>
+</div>
+
+</section>
+
+</div>
+
+<div class = "col-md-6">
+
+<section style="text-align: justify;">
+<div class="form-check">
+  <div class="form-check disabled">
+    <input class="form-check-input" type="checkbox" value="" disabled="">
+    Cuarto, la función <font color="black">ejecuta el código</font>, provoca el efecto deseado (si lo hubiera), evalúa el resultado deseado y termina la tarea.
+  </div>
+  <div class="form-check disabled">
+    <input class="form-check-input" type="checkbox" value="" disabled="">
+    Finalmente, Python <font color="black">regresa al código</font> (al lugar inmediatamente después de la invocación) y reanuda su ejecución.
+  </div>
+</div>
+</section>
+
+<section style="text-align: justify;"><p class="text-secondary">También se puede agregar una invocación vacía de la función <font color="black">print( ).</font> Esta genera una línea vacía.</p></section>
+
+```{python, echo = FALSE, eval = FALSE}
+
+print()
+```
+
+<section style="text-align: justify;"><p class="text-secondary">O bien, se puede insertar dentro del texto el carácter <font color="black">\n</font> así: <font color="black">print("¡Hola,\n Mundo!")</font>. <font color="black">\ </font>, <!-- llamado carácter de escape, significa que la serie de caracteres en la cadena se escapa (detiene) por un momento (un momento muy corto) para introducir una inclusión especial. En otras palabras, -->indica que el siguiente carácter después de la barra invertida tiene un significado diferente. La letra <font color="black">n</font> proviene de la palabra newline (nueva linea). Así, <font color="black">\n </font>(llamado carácter de nueva línea) incita a la consola a iniciar una nueva línea de salida.</p></section>
+
+```{python, echo = FALSE, eval = FALSE}
+
+print("¡Hola,\n Mundo!")
+```
+
+</div>
+
+</div>
+
+---
+
+<section style="text-align: center;"><h3><p class="text-info">Fundamentos básicos en Python</p></h3></section>
+
+<br>
+
+<p class="text-warning">Literales de Python</u></p>
+
+<div class = "row">
+
+<div class = "col-md-6">
+
+<section style="text-align: justify;"><p class="text-secondary">Un <font color="black"><u>literal</u></font> se refiere a datos cuyos valores están determinados por el literal mismo. Por ejemplo, los siguientes dígitos:
+
+<br>
+
+```{python, echo = FALSE, eval = TRUE}
+
+print("123")
+print(123)
+```
+
+<section style="text-align: justify;"><p class="text-secondary">El valor que representa es ciento veintitrés, y 123 es un literal. Se utilizan literales para codificar datos y ponerlos dentro del código.</p></section>
+
+<section style="text-align: justify;"><p class="text-secondary">El ejemplo anterior resultó de dos formas diferentes: <font color="black">print("123")</font> y <font color="black">print(123)</font>. A través de este ejemplo, se encuentran dos tipos diferentes de literales: una <font color="black">cadena</font> y un <font color="black">número entero</font>.</p></section>
+
+<section style="text-align: justify;"><p class="text-secondary">La función <font color="black">print( )</font> los muestra exactamente de la misma manera. Sin embargo, internamente, la memoria de la computadora los almacena de dos maneras completamente diferentes. <!--La cadena existe como eso, solo una cadena, una serie de letras.--></p></section>
+
+</div>
+
+<div class = "col-md-6">
+
+<section style="text-align: justify;"><p class="text-secondary">El número es convertido a una representación maquina (una serie de bits). La función <font color="black">print( )</font> es capaz de mostrar ambos en una forma legible para humanos.</p></section>
+
+</div>
+
+</div>
+
+---
+
+<br>
+<br>
+
+<div class = "row">
+
+<div class = "col-md-3">
+
+</div>
+
+<div class = "col-md-5">
+
+```{r Imagen octocat, fig.align = 'center', out.width = '240', eval = TRUE, echo = FALSE, message = FALSE}
+
+knitr::include_graphics('Imagenes/octocat.png')
+```
+
+<div class="alert alert-dismissible alert-warning">
+Mi correo electrónico: <font color="gray">jollopezma@unal.edu.co</font>
+<HR>
+Mi cuenta de GitHub: <font color="gray">https://github.com/Leo4Luffy</font>
+</div>
+
+</div>
+
+<div class = "col-md-4">
+
+</div>
+
+</div>
+
+

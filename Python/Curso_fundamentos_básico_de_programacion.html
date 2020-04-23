@@ -12,7 +12,7 @@ class: center, middle, inverse, title-slide
 
 # Curso sobre fundamentos básicos de programación en Python
 ### Jorge Leonardo López Martínez
-### 21 abril, 2020
+### 23 abril, 2020
 
 ---
 
@@ -80,7 +80,7 @@ NOTA: Con las anteriores pruebas se comprueba de que ejecutar Python en R (rmark
 SE INICIA POR TANTO A CONTINUACIÓN A ESCRIBIR EL RESUMEN DEL CURSO DE PYTHON EN RMARKDOWN.
 --&gt;
 
-&lt;section style="text-align: center;"&gt;&lt;h3&gt;&lt;p class="text-info"&gt;Mi primer programa en Python&lt;/p&gt;&lt;/h3&gt;&lt;/section&gt;
+&lt;section style="text-align: center;"&gt;&lt;h3&gt;&lt;p class="text-info"&gt;Fundamentos básicos en Python&lt;/p&gt;&lt;/h3&gt;&lt;/section&gt;
 
 &lt;br&gt;
 
@@ -90,7 +90,7 @@ SE INICIA POR TANTO A CONTINUACIÓN A ESCRIBIR EL RESUMEN DEL CURSO DE PYTHON EN
 
 &lt;section style="text-align: justify;"&gt;&lt;p class="text-secondary"&gt;Observe la línea de código a continuación:&lt;/p&gt;&lt;/section&gt;
 
-&lt;code class ='r hljs remark-code'&gt;&lt;span style='color:deeppink;underline:text-decoration'&gt;print&lt;/span&gt;("¡Hola, Mundo!")&lt;/code&gt; 
+&lt;code class ='r hljs remark-code'&gt;&lt;span style='color:deeppink;underline:text-decoration'&gt;&lt;span style='background-color:#ffff7f'&gt;print&lt;/span&gt;&lt;/span&gt;&lt;span style='background-color:cyan'&gt;(&lt;/span&gt;"¡Hola, Mundo!"&lt;span style='background-color:cyan'&gt;)&lt;/span&gt;&lt;/code&gt; 
 
 ```
 ## [1] "¡Hola, Mundo!"
@@ -100,7 +100,7 @@ SE INICIA POR TANTO A CONTINUACIÓN A ESCRIBIR EL RESUMEN DEL CURSO DE PYTHON EN
 
 
 
-&lt;section style="text-align: justify;"&gt;&lt;p class="text-secondary"&gt;La palabra &lt;font color="black"&gt;&lt;u&gt;print&lt;/u&gt;&lt;/font&gt; es el nombre de una función. Una función (en el contexto de programación) es una parte separada del código de computadora el cual es capaz de:&lt;/p&gt;&lt;/section&gt;
+&lt;section style="text-align: justify;"&gt;&lt;p class="text-secondary"&gt;La palabra &lt;font color="black"&gt;&lt;u&gt;print&lt;/u&gt;&lt;/font&gt; es el nombre de una función. Una función (en el contexto de programación) es una parte separada del código de computadora el cual es capaz de:&lt;/p&gt;
 
 &lt;div class="form-check"&gt;
   &lt;div class="form-check disabled"&gt;
@@ -113,13 +113,35 @@ SE INICIA POR TANTO A CONTINUACIÓN A ESCRIBIR EL RESUMEN DEL CURSO DE PYTHON EN
   &lt;/div&gt;
 &lt;/div&gt;
 
+&lt;/section&gt;
+
 &lt;section style="text-align: justify;"&gt;&lt;p class="text-secondary"&gt;Dichas funciones pueden venir de Python mismo (esta integrada), pueden provenir de uno o varios de los módulos de Python llamados complementos o puede escribirlos uno mismo.&lt;/p&gt;&lt;/section&gt;
+
+&lt;!--
+El nombre de la función debe ser significativo (el nombre de la función print es evidente), imprime en la terminal.
+
+Si vas a utilizar alguna función ya existente, no podrás modificar su nombre, pero cuando comiences a escribir tus propias funciones, debes considerar cuidadosamente la elección de nombres.
+--&gt;
 
 &lt;/div&gt;
 
 &lt;div class = "col-md-6"&gt;
 
-&lt;section style="text-align: justify;"&gt;&lt;p class="text-secondary"&gt;Un componente muy importante de una función es el argumento.&lt;/p&gt;&lt;/section&gt;
+&lt;section style="text-align: justify;"&gt;&lt;p class="text-secondary"&gt;Un componente muy importante de una función son sus &lt;font color="black"&gt;&lt;u&gt;argumentos&lt;/u&gt;&lt;/font&gt;.&lt;/p&gt;&lt;/section&gt;
+
+&lt;section style="text-align: justify;"&gt;&lt;p class="text-secondary"&gt;Las funciones de Python, son muy versátiles: dependiendo de las necesidades individuales, pueden aceptar cualquier número de argumentos, tantos como sea necesario para realizar sus tareas. Aunque algunas funciones de Python pueden también no necesitar ningún argumento.&lt;/p&gt;&lt;/section&gt;
+
+&lt;section style="text-align: justify;"&gt;&lt;p class="text-secondary"&gt;A pesar del número de argumentos necesarios o proporcionados, las funciones de Python demandan fuertemente la presencia de un par de paréntesis: el de apertura y de cierre.&lt;/p&gt;&lt;/section&gt;
+
+&lt;section style="text-align: justify;"&gt;&lt;p class="text-secondary"&gt;Si se desea entregar uno o más argumentos a una función, se debe colocar dentro de los paréntesis. Si se va a usar una función que no tiene argumentos, aún debe tener los paréntesis.&lt;/p&gt;&lt;/section&gt;
+
+&lt;!--
+Para distinguir las palabras comunes de los nombres de funciones, coloca un par de paréntesis vacíos después de sus nombres, incluso si la función correspondiente requiere uno o más argumentos. Esta es una medida estándar.
+
+El único argumento entregado a la función print() en este ejemplo es una cadena: "¡Hola, Mundo!". Como se puede ver, la cadena está delimitada por comillas, de hecho, las comillas forman la cadena, recortan una parte del código y le asignan un significado diferente. Podemos imaginar que las comillas significan algo así: el texto entre nosotros no es un código. No está diseñado para ser ejecutado, y se debe tomar tal como está. Casi cualquier cosa que ponga dentro de las comillas se tomará de manera literal, no como código, sino como datos.
+
+
+--&gt;
 
 &lt;/div&gt;
 
@@ -127,9 +149,138 @@ SE INICIA POR TANTO A CONTINUACIÓN A ESCRIBIR EL RESUMEN DEL CURSO DE PYTHON EN
 
 ---
 
-&lt;section style="text-align: center;"&gt;&lt;h3&gt;&lt;p class="text-info"&gt;Mi primer programa en Python&lt;/p&gt;&lt;/h3&gt;&lt;/section&gt;
+&lt;section style="text-align: center;"&gt;&lt;h3&gt;&lt;p class="text-info"&gt;Fundamentos básicos en Python&lt;/p&gt;&lt;/h3&gt;&lt;/section&gt;
 
 &lt;br&gt;
+
+&lt;p class="text-warning"&gt;La función &lt;u&gt;print( )&lt;/u&gt;&lt;/p&gt;
+
+&lt;div class = "row"&gt;
+
+&lt;div class = "col-md-6"&gt;
+
+&lt;section style="text-align: justify;"&gt;&lt;p class="text-secondary"&gt;El nombre de la función (&lt;font color="black"&gt;&lt;u&gt;print&lt;/u&gt;&lt;/font&gt; en este caso) junto con los paréntesis y los argumentos, forman la invocación de la función. Entonces ¿qué sucede cuando Python encuentra la invocación de una función?:&lt;/p&gt;
+
+&lt;div class="form-check"&gt;
+  &lt;div class="form-check disabled"&gt;
+    &lt;input class="form-check-input" type="checkbox" value="" disabled=""&gt;
+    Primero, Python comprueba si el nombre de la función especificada es &lt;font color="black"&gt;legal&lt;/font&gt;.&lt;!-- (explora sus datos internos para encontrar una función existente del nombre; si esta búsqueda falla, Python cancela el código). --&gt;
+  &lt;/div&gt;
+  &lt;div class="form-check disabled"&gt;
+    &lt;input class="form-check-input" type="checkbox" value="" disabled=""&gt;
+    Segundo, Python comprueba si los requisitos de la función para el número de argumentos &lt;font color="black"&gt;le permiten invocar&lt;/font&gt; la función de esta manera. &lt;!-- (por ejemplo, si una función específica exige exactamente dos argumentos, cualquier invocación que entregue solo un argumento se considerará errónea y abortará la ejecución del código). --&gt;
+  &lt;/div&gt;
+  &lt;div class="form-check disabled"&gt;
+    &lt;input class="form-check-input" type="checkbox" value="" disabled=""&gt;
+    Tercero, Python &lt;font color="black"&gt;deja el código por un momento&lt;/font&gt; y salta dentro de la función que se desea invocar; por lo tanto, también toma los argumentos y los pasa a la función.
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/section&gt;
+
+&lt;/div&gt;
+
+&lt;div class = "col-md-6"&gt;
+
+&lt;section style="text-align: justify;"&gt;
+&lt;div class="form-check"&gt;
+  &lt;div class="form-check disabled"&gt;
+    &lt;input class="form-check-input" type="checkbox" value="" disabled=""&gt;
+    Cuarto, la función &lt;font color="black"&gt;ejecuta el código&lt;/font&gt;, provoca el efecto deseado (si lo hubiera), evalúa el resultado deseado y termina la tarea.
+  &lt;/div&gt;
+  &lt;div class="form-check disabled"&gt;
+    &lt;input class="form-check-input" type="checkbox" value="" disabled=""&gt;
+    Finalmente, Python &lt;font color="black"&gt;regresa al código&lt;/font&gt; (al lugar inmediatamente después de la invocación) y reanuda su ejecución.
+  &lt;/div&gt;
+&lt;/div&gt;
+&lt;/section&gt;
+
+&lt;section style="text-align: justify;"&gt;&lt;p class="text-secondary"&gt;También se puede agregar una invocación vacía de la función &lt;font color="black"&gt;print( ).&lt;/font&gt; Esta genera una línea vacía.&lt;/p&gt;&lt;/section&gt;
+
+
+
+&lt;section style="text-align: justify;"&gt;&lt;p class="text-secondary"&gt;O bien, se puede insertar dentro del texto el carácter &lt;font color="black"&gt;\n&lt;/font&gt; así: &lt;font color="black"&gt;print("¡Hola,\n Mundo!")&lt;/font&gt;. &lt;font color="black"&gt;\ &lt;/font&gt;, &lt;!-- llamado carácter de escape, significa que la serie de caracteres en la cadena se escapa (detiene) por un momento (un momento muy corto) para introducir una inclusión especial. En otras palabras, --&gt;indica que el siguiente carácter después de la barra invertida tiene un significado diferente. La letra &lt;font color="black"&gt;n&lt;/font&gt; proviene de la palabra newline (nueva linea). Así, &lt;font color="black"&gt;\n &lt;/font&gt;(llamado carácter de nueva línea) incita a la consola a iniciar una nueva línea de salida.&lt;/p&gt;&lt;/section&gt;
+
+
+
+&lt;/div&gt;
+
+&lt;/div&gt;
+
+---
+
+&lt;section style="text-align: center;"&gt;&lt;h3&gt;&lt;p class="text-info"&gt;Fundamentos básicos en Python&lt;/p&gt;&lt;/h3&gt;&lt;/section&gt;
+
+&lt;br&gt;
+
+&lt;p class="text-warning"&gt;Literales de Python&lt;/u&gt;&lt;/p&gt;
+
+&lt;div class = "row"&gt;
+
+&lt;div class = "col-md-6"&gt;
+
+&lt;section style="text-align: justify;"&gt;&lt;p class="text-secondary"&gt;Un &lt;font color="black"&gt;&lt;u&gt;literal&lt;/u&gt;&lt;/font&gt; se refiere a datos cuyos valores están determinados por el literal mismo. Por ejemplo, los siguientes dígitos:
+
+&lt;br&gt;
+
+
+
+```
+## 123
+```
+
+
+
+```
+## 123
+```
+
+
+
+&lt;section style="text-align: justify;"&gt;&lt;p class="text-secondary"&gt;El valor que representa es ciento veintitrés, y 123 es un literal. Se utilizan literales para codificar datos y ponerlos dentro del código.&lt;/p&gt;&lt;/section&gt;
+
+&lt;section style="text-align: justify;"&gt;&lt;p class="text-secondary"&gt;El ejemplo anterior resultó de dos formas diferentes: &lt;font color="black"&gt;print("123")&lt;/font&gt; y &lt;font color="black"&gt;print(123)&lt;/font&gt;. A través de este ejemplo, se encuentran dos tipos diferentes de literales: una &lt;font color="black"&gt;cadena&lt;/font&gt; y un &lt;font color="black"&gt;número entero&lt;/font&gt;.&lt;/p&gt;&lt;/section&gt;
+
+&lt;section style="text-align: justify;"&gt;&lt;p class="text-secondary"&gt;La función &lt;font color="black"&gt;print( )&lt;/font&gt; los muestra exactamente de la misma manera. Sin embargo, internamente, la memoria de la computadora los almacena de dos maneras completamente diferentes. &lt;!--La cadena existe como eso, solo una cadena, una serie de letras.--&gt;&lt;/p&gt;&lt;/section&gt;
+
+&lt;/div&gt;
+
+&lt;div class = "col-md-6"&gt;
+
+&lt;section style="text-align: justify;"&gt;&lt;p class="text-secondary"&gt;El número es convertido a una representación maquina (una serie de bits). La función &lt;font color="black"&gt;print( )&lt;/font&gt; es capaz de mostrar ambos en una forma legible para humanos.&lt;/p&gt;&lt;/section&gt;
+
+&lt;/div&gt;
+
+&lt;/div&gt;
+
+---
+
+&lt;br&gt;
+&lt;br&gt;
+
+&lt;div class = "row"&gt;
+
+&lt;div class = "col-md-3"&gt;
+
+&lt;/div&gt;
+
+&lt;div class = "col-md-5"&gt;
+
+&lt;img src="Imagenes/octocat.png" width="240" style="display: block; margin: auto;" /&gt;
+
+&lt;div class="alert alert-dismissible alert-warning"&gt;
+Mi correo electrónico: &lt;font color="gray"&gt;jollopezma@unal.edu.co&lt;/font&gt;
+&lt;HR&gt;
+Mi cuenta de GitHub: &lt;font color="gray"&gt;https://github.com/Leo4Luffy&lt;/font&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;div class = "col-md-4"&gt;
+
+&lt;/div&gt;
+
+&lt;/div&gt;
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
