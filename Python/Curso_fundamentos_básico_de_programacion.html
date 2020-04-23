@@ -239,7 +239,7 @@ El único argumento entregado a la función print() en este ejemplo es una caden
 
 &lt;section style="text-align: justify;"&gt;&lt;p class="text-secondary"&gt;El valor que representa es ciento veintitrés, y 123 es un literal. Se utilizan literales para codificar datos y ponerlos dentro del código.&lt;/p&gt;&lt;/section&gt;
 
-&lt;section style="text-align: justify;"&gt;&lt;p class="text-secondary"&gt;El ejemplo anterior resultó de dos formas diferentes: &lt;font color="black"&gt;print("123")&lt;/font&gt; y &lt;font color="black"&gt;print(123)&lt;/font&gt;. A través de este ejemplo, se encuentran dos tipos diferentes de literales: una &lt;font color="black"&gt;cadena&lt;/font&gt; y un &lt;font color="black"&gt;número entero&lt;/font&gt;.&lt;/p&gt;&lt;/section&gt;
+&lt;section style="text-align: justify;"&gt;&lt;p class="text-secondary"&gt;El ejemplo anterior resultó de dos formas diferentes: &lt;font color="black"&gt;print("123")&lt;/font&gt; y &lt;font color="black"&gt;print(123)&lt;/font&gt;. A través de este ejemplo, se encuentran dos tipos diferentes de literales: una &lt;font color="red"&gt;&lt;u&gt;cadena&lt;/u&gt;&lt;/font&gt; y un &lt;font color="red"&gt;&lt;u&gt;número&lt;/u&gt;&lt;/font&gt; entero.&lt;/p&gt;&lt;/section&gt;
 
 &lt;section style="text-align: justify;"&gt;&lt;p class="text-secondary"&gt;La función &lt;font color="black"&gt;print( )&lt;/font&gt; los muestra exactamente de la misma manera. Sin embargo, internamente, la memoria de la computadora los almacena de dos maneras completamente diferentes. &lt;!--La cadena existe como eso, solo una cadena, una serie de letras.--&gt;&lt;/p&gt;&lt;/section&gt;
 
@@ -248,6 +248,109 @@ El único argumento entregado a la función print() en este ejemplo es una caden
 &lt;div class = "col-md-6"&gt;
 
 &lt;section style="text-align: justify;"&gt;&lt;p class="text-secondary"&gt;El número es convertido a una representación maquina (una serie de bits). La función &lt;font color="black"&gt;print( )&lt;/font&gt; es capaz de mostrar ambos en una forma legible para humanos.&lt;/p&gt;&lt;/section&gt;
+
+&lt;!--
+El sistema binario es el sistema que las computadoras utilizan para almacenar números, y pueden realizar cualquier tipo de operaciones con ellos.
+--&gt;
+
+&lt;section style="text-align: justify;"&gt;&lt;p class="text-secondary"&gt;Se puede afirmar que todos los números manejados por las computadoras modernas son de dos tipos:&lt;/p&gt;&lt;/section&gt;
+
+&lt;div class="form-check"&gt;
+  &lt;div class="form-check disabled"&gt;
+    &lt;input class="form-check-input" type="checkbox" value="" disabled=""&gt;
+    Enteros&lt;!--, es decir, aquellos que no tienen una parte fraccionaria--&gt;.
+  &lt;/div&gt;
+  &lt;div class="form-check disabled"&gt;
+    &lt;input class="form-check-input" type="checkbox" value="" disabled=""&gt;
+    Números punto-flotantes (o simplemente flotantes)&lt;!--, los cuales contienen (o son capaces de contener) una parte fraccionaria, o bien, tienen una parte decimal no vacía. --&gt;.
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;section style="text-align: justify;"&gt;&lt;p class="text-secondary"&gt;La distinción es muy importante, y la frontera entre estos dos tipos de números es muy estricta. Ambos tipos difieren significativamente en como son almacenados en una computadora y en el rango de valores que aceptan.&lt;/p&gt;&lt;/section&gt;
+
+&lt;/div&gt;
+
+&lt;/div&gt;
+
+---
+
+&lt;section style="text-align: center;"&gt;&lt;h3&gt;&lt;p class="text-info"&gt;Fundamentos básicos en Python&lt;/p&gt;&lt;/h3&gt;&lt;/section&gt;
+
+&lt;br&gt;
+
+&lt;p class="text-warning"&gt;Literales de Python&lt;/u&gt;&lt;/p&gt;
+
+&lt;div class = "row"&gt;
+
+&lt;div class = "col-md-6"&gt;
+
+&lt;section style="text-align: justify;"&gt;&lt;p class="text-secondary"&gt;Existen dos convenciones adicionales en Python que no son conocidas en el mundo de las matemáticas.&lt;/p&gt;&lt;/section&gt;
+
+&lt;section style="text-align: justify;"&gt;&lt;p class="text-secondary"&gt;El primero permite utilizar un número en su representación &lt;font color="black"&gt;octal&lt;/font&gt;: Si un numero entero esta precedido por un código &lt;font color="black"&gt;0O&lt;/font&gt; o &lt;font color="black"&gt;0o&lt;/font&gt; (cero-o), el numero será tratado como un valor octal.&lt;/p&gt;&lt;/section&gt;
+
+&lt;!-- La función print() realiza la conversión automáticamente. Intenta esto: --&gt;
+
+
+
+&lt;section style="text-align: justify;"&gt;&lt;p class="text-secondary"&gt;La segunda convención permite utilizar números en &lt;font color="black"&gt;hexadecimal&lt;/font&gt;. Dichos números deben ser precedidos por el prefijo &lt;font color="black"&gt;0x&lt;/font&gt; o &lt;font color="black"&gt;0X&lt;/font&gt; (cero-x).&lt;/p&gt;&lt;/section&gt;
+
+&lt;!-- Intenta esto: --&gt;
+
+
+
+&lt;section style="text-align: justify;"&gt;&lt;p class="text-secondary"&gt;Las &lt;font color="red"&gt;&lt;u&gt;cadenas&lt;/u&gt;&lt;/font&gt; (otro literal de Python) se emplean cuando se requiere procesar texto, no números. Las cadenas requieren comillas así como los flotantes necesitan punto decimal.&lt;/p&gt;&lt;/section&gt;
+
+&lt;/div&gt;
+
+&lt;div class = "col-md-6"&gt;
+
+&lt;section style="text-align: justify;"&gt;&lt;p class="text-secondary"&gt; Sin embargo, ¿cómo se puede codificar una comilla dentro de una cadena que ya está delimitada por comillas? Por ejemplo, si se desease mostrar el mensaje &lt;font color="black"&gt;Me gusta "Monty Python"&lt;/font&gt;. Existen dos posibles soluciones:&lt;/p&gt;
+
+&lt;div class="form-check"&gt;
+  &lt;div class="form-check disabled"&gt;
+    &lt;input class="form-check-input" type="checkbox" value="" disabled=""&gt;     La primera usando un carácter de escape:&lt;!-- el cual se utiliza empleando la diagonal invertida--&gt; print("Me gusta \"Monty Python\"").
+  &lt;/div&gt;
+  &lt;div class="form-check disabled"&gt;
+    &lt;input class="form-check-input" type="checkbox" value="" disabled=""&gt;
+    La segunda haciendo uso de un apótrofe en lugar de una comilla: print('Me gusta "Monty Python"').
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/section&gt;
+
+
+
+&lt;section style="text-align: justify;"&gt;&lt;p class="text-secondary"&gt;Un valor &lt;font color="red"&gt;&lt;u&gt;boleano&lt;/u&gt;&lt;/font&gt; es otro literal de Python. Este resulta, por ejemplo, si se le pregunta a Python si un número es más grande que otro.&lt;!-- El nombre proviene de George Boole (1815-1864), el autor de Las Leyes del Pensamiento, las cuales definen el Algebra Booleana como una parte del algebra que hace uso de dos valores: Verdadero y Falso, denotados como 1 y 0. --&gt; Estos dos valores booleanos tienen denotaciones estrictas en Python: &lt;font color="black"&gt;TRUE&lt;/font&gt; y &lt;font color="black"&gt;FALSE&lt;/font&gt;.&lt;/p&gt;&lt;/section&gt;
+
+&lt;!--
+Existe un literal especial más utilizado en Python: el literal None. Este literal es llamado un objeto de NonType (ningún tipo), y puede ser utilizado para representar la ausencia de un valor.
+--&gt;
+
+&lt;/div&gt;
+
+&lt;/div&gt;
+
+---
+
+&lt;section style="text-align: center;"&gt;&lt;h3&gt;&lt;p class="text-info"&gt;Fundamentos básicos en Python&lt;/p&gt;&lt;/h3&gt;&lt;/section&gt;
+
+&lt;br&gt;
+
+&lt;p class="text-warning"&gt;Operadores básicos&lt;/u&gt;&lt;/p&gt;
+
+&lt;div class = "row"&gt;
+
+&lt;div class = "col-md-6"&gt;
+
+&lt;section style="text-align: justify;"&gt;&lt;p class="text-secondary"&gt;Un &lt;font color="black"&gt;operador&lt;/font&gt; es un símbolo del lenguaje de programación, el cual es capaz de realizar operaciones con los valores. Por ejemplo, como en la aritmética, el signo de &lt;font color="red"&gt;+&lt;/font&gt; (mas) es un operador el cual es capaz de sumar dos numeros, dando el resultado de la suma.&lt;/p&gt;&lt;/section&gt;
+
+&lt;section style="text-align: justify;"&gt;&lt;p class="text-secondary"&gt;Cuando los datos y operadores se unen, forman juntos &lt;font color="black"&gt;expresiones&lt;/font&gt;. La expresión más sencilla es el literal.&lt;/p&gt;&lt;/section&gt;
+
+&lt;!-- Voy en la parte 2.1.3.1 Operadores, herramientas para la manipulación de datos --&gt;
+
+&lt;/div&gt;
+
+&lt;div class = "col-md-6"&gt;
 
 &lt;/div&gt;
 

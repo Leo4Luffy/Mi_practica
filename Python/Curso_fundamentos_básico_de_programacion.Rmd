@@ -284,7 +284,7 @@ print(123)
 
 <section style="text-align: justify;"><p class="text-secondary">El valor que representa es ciento veintitrés, y 123 es un literal. Se utilizan literales para codificar datos y ponerlos dentro del código.</p></section>
 
-<section style="text-align: justify;"><p class="text-secondary">El ejemplo anterior resultó de dos formas diferentes: <font color="black">print("123")</font> y <font color="black">print(123)</font>. A través de este ejemplo, se encuentran dos tipos diferentes de literales: una <font color="black">cadena</font> y un <font color="black">número entero</font>.</p></section>
+<section style="text-align: justify;"><p class="text-secondary">El ejemplo anterior resultó de dos formas diferentes: <font color="black">print("123")</font> y <font color="black">print(123)</font>. A través de este ejemplo, se encuentran dos tipos diferentes de literales: una <font color="red"><u>cadena</u></font> y un <font color="red"><u>número</u></font> entero.</p></section>
 
 <section style="text-align: justify;"><p class="text-secondary">La función <font color="black">print( )</font> los muestra exactamente de la misma manera. Sin embargo, internamente, la memoria de la computadora los almacena de dos maneras completamente diferentes. <!--La cadena existe como eso, solo una cadena, una serie de letras.--></p></section>
 
@@ -293,6 +293,119 @@ print(123)
 <div class = "col-md-6">
 
 <section style="text-align: justify;"><p class="text-secondary">El número es convertido a una representación maquina (una serie de bits). La función <font color="black">print( )</font> es capaz de mostrar ambos en una forma legible para humanos.</p></section>
+
+<!--
+El sistema binario es el sistema que las computadoras utilizan para almacenar números, y pueden realizar cualquier tipo de operaciones con ellos.
+-->
+
+<section style="text-align: justify;"><p class="text-secondary">Se puede afirmar que todos los números manejados por las computadoras modernas son de dos tipos:</p></section>
+
+<div class="form-check">
+  <div class="form-check disabled">
+    <input class="form-check-input" type="checkbox" value="" disabled="">
+    Enteros<!--, es decir, aquellos que no tienen una parte fraccionaria-->.
+  </div>
+  <div class="form-check disabled">
+    <input class="form-check-input" type="checkbox" value="" disabled="">
+    Números punto-flotantes (o simplemente flotantes)<!--, los cuales contienen (o son capaces de contener) una parte fraccionaria, o bien, tienen una parte decimal no vacía. -->.
+  </div>
+</div>
+
+<section style="text-align: justify;"><p class="text-secondary">La distinción es muy importante, y la frontera entre estos dos tipos de números es muy estricta. Ambos tipos difieren significativamente en como son almacenados en una computadora y en el rango de valores que aceptan.</p></section>
+
+</div>
+
+</div>
+
+---
+
+<section style="text-align: center;"><h3><p class="text-info">Fundamentos básicos en Python</p></h3></section>
+
+<br>
+
+<p class="text-warning">Literales de Python</u></p>
+
+<div class = "row">
+
+<div class = "col-md-6">
+
+<section style="text-align: justify;"><p class="text-secondary">Existen dos convenciones adicionales en Python que no son conocidas en el mundo de las matemáticas.</p></section>
+
+<section style="text-align: justify;"><p class="text-secondary">El primero permite utilizar un número en su representación <font color="black">octal</font>: Si un numero entero esta precedido por un código <font color="black">0O</font> o <font color="black">0o</font> (cero-o), el numero será tratado como un valor octal.</p></section>
+
+<!-- La función print() realiza la conversión automáticamente. Intenta esto: -->
+
+```{python, echo = FALSE, eval = FALSE}
+
+print(0o123) # Este en un número octal con un valor (decimal) igual a 83.
+```
+
+<section style="text-align: justify;"><p class="text-secondary">La segunda convención permite utilizar números en <font color="black">hexadecimal</font>. Dichos números deben ser precedidos por el prefijo <font color="black">0x</font> o <font color="black">0X</font> (cero-x).</p></section>
+
+<!-- Intenta esto: -->
+
+```{python, echo = FALSE, eval = FALSE}
+
+print(0x123) # 0x123 es un número hexadecimal con un valor (decimal) igual a 291.
+```
+
+<section style="text-align: justify;"><p class="text-secondary">Las <font color="red"><u>cadenas</u></font> (otro literal de Python) se emplean cuando se requiere procesar texto, no números. Las cadenas requieren comillas así como los flotantes necesitan punto decimal.</p></section>
+
+</div>
+
+<div class = "col-md-6">
+
+<section style="text-align: justify;"><p class="text-secondary"> Sin embargo, ¿cómo se puede codificar una comilla dentro de una cadena que ya está delimitada por comillas? Por ejemplo, si se desease mostrar el mensaje <font color="black">Me gusta "Monty Python"</font>. Existen dos posibles soluciones:</p>
+
+<div class="form-check">
+  <div class="form-check disabled">
+    <input class="form-check-input" type="checkbox" value="" disabled="">     La primera usando un carácter de escape:<!-- el cual se utiliza empleando la diagonal invertida--> print("Me gusta \"Monty Python\"").
+  </div>
+  <div class="form-check disabled">
+    <input class="form-check-input" type="checkbox" value="" disabled="">
+    La segunda haciendo uso de un apótrofe en lugar de una comilla: print('Me gusta "Monty Python"').
+  </div>
+</div>
+
+</section>
+
+```{python, echo = FALSE, eval = FALSE}
+
+print("Me gusta \"Monty Python\"")
+print('Me gusta "Monty Python"')
+```
+
+<section style="text-align: justify;"><p class="text-secondary">Un valor <font color="red"><u>boleano</u></font> es otro literal de Python. Este resulta, por ejemplo, si se le pregunta a Python si un número es más grande que otro.<!-- El nombre proviene de George Boole (1815-1864), el autor de Las Leyes del Pensamiento, las cuales definen el Algebra Booleana como una parte del algebra que hace uso de dos valores: Verdadero y Falso, denotados como 1 y 0. --> Estos dos valores booleanos tienen denotaciones estrictas en Python: <font color="black">TRUE</font> y <font color="black">FALSE</font>.</p></section>
+
+<!--
+Existe un literal especial más utilizado en Python: el literal None. Este literal es llamado un objeto de NonType (ningún tipo), y puede ser utilizado para representar la ausencia de un valor.
+-->
+
+</div>
+
+</div>
+
+---
+
+<section style="text-align: center;"><h3><p class="text-info">Fundamentos básicos en Python</p></h3></section>
+
+<br>
+
+<p class="text-warning">Operadores básicos</u></p>
+
+<div class = "row">
+
+<div class = "col-md-6">
+
+<section style="text-align: justify;"><p class="text-secondary">Un <font color="black">operador</font> es un símbolo del lenguaje de programación, el cual es capaz de realizar operaciones con los valores. Por ejemplo, como en la aritmética, el signo de <font color="red">+</font> (mas) es un operador el cual es capaz de sumar dos numeros, dando el resultado de la suma.</p></section>
+
+<section style="text-align: justify;"><p class="text-secondary">Cuando los datos y operadores se unen, forman juntos <font color="black">expresiones</font>. La expresión más sencilla es el literal.</p></section>
+
+<!-- Voy en la parte 2.1.3.1 Operadores, herramientas para la manipulación de datos -->
+
+</div>
+
+<div class = "col-md-6">
 
 </div>
 
