@@ -120,7 +120,7 @@ NOTA: Con las anteriores pruebas se comprueba de que ejecutar Python en R (rmark
 SE INICIA POR TANTO A CONTINUACIÓN A ESCRIBIR EL RESUMEN DEL CURSO DE PYTHON EN RMARKDOWN.
 -->
 
-<section style="text-align: center;"><h3><p class="text-info">Fundamentos básicos en Python</p></h3></section>
+<section style="text-align: center;"><h4><p class="text-info">Fundamentos básicos de programación en Python</p></h4></section>
 
 <br>
 
@@ -196,8 +196,7 @@ El único argumento entregado a la función print() en este ejemplo es una caden
 
 ---
 
-<section style="text-align: center;"><h3><p class="text-info">Fundamentos básicos en Python</p></h3></section>
-
+<section style="text-align: center;"><h4><p class="text-info">Fundamentos básicos de programación en Python</p></h4></section>
 <br>
 
 <p class="text-warning">La función <u>print( )</u></p>
@@ -262,11 +261,10 @@ print("¡Hola,\n Mundo!")
 
 ---
 
-<section style="text-align: center;"><h3><p class="text-info">Fundamentos básicos en Python</p></h3></section>
-
+<section style="text-align: center;"><h4><p class="text-info">Fundamentos básicos de programación en Python</p></h4></section>
 <br>
 
-<p class="text-warning">Literales de Python</u></p>
+<p class="text-warning">Literales de Python</p>
 
 <div class = "row">
 
@@ -319,11 +317,10 @@ El sistema binario es el sistema que las computadoras utilizan para almacenar n�
 
 ---
 
-<section style="text-align: center;"><h3><p class="text-info">Fundamentos básicos en Python</p></h3></section>
-
+<section style="text-align: center;"><h4><p class="text-info">Fundamentos básicos de programación en Python</p></h4></section>
 <br>
 
-<p class="text-warning">Literales de Python</u></p>
+<p class="text-warning">Literales de Python</p>
 
 <div class = "row">
 
@@ -378,6 +375,17 @@ print('Me gusta "Monty Python"')
 <section style="text-align: justify;"><p class="text-secondary">Un valor <font color="red"><u>boleano</u></font> es otro literal de Python. Este resulta, por ejemplo, si se le pregunta a Python si un número es más grande que otro.<!-- El nombre proviene de George Boole (1815-1864), el autor de Las Leyes del Pensamiento, las cuales definen el Algebra Booleana como una parte del algebra que hace uso de dos valores: Verdadero y Falso, denotados como 1 y 0. --> Estos dos valores booleanos tienen denotaciones estrictas en Python: <font color="black">TRUE</font> y <font color="black">FALSE</font>.</p></section>
 
 <!--
+Un programador escribe un programa, y el programa hace preguntas. Python ejecuta el programa, y provee las respuestas. El programa debe ser capaz de reaccionar acorde a las respuestas recibidas.
+
+Afortunadamente, las computadoras solo conocen dos tipos de respuestas:
+
+Si, esto es verdad.
+No, esto es falso.
+
+Nunca habrá una respuesta como: No lo sé o probablemente si, pero no estoy seguro. Python, es entonces, un reptil binario.
+-->
+
+<!--
 Existe un literal especial más utilizado en Python: el literal None. Este literal es llamado un objeto de NonType (ningún tipo), y puede ser utilizado para representar la ausencia de un valor.
 -->
 
@@ -387,11 +395,10 @@ Existe un literal especial más utilizado en Python: el literal None. Este liter
 
 ---
 
-<section style="text-align: center;"><h3><p class="text-info">Fundamentos básicos en Python</p></h3></section>
-
+<section style="text-align: center;"><h4><p class="text-info">Fundamentos básicos de programación en Python</p></h4></section>
 <br>
 
-<p class="text-warning">Operadores básicos</u></p>
+<p class="text-warning">Operadores básicos</p>
 
 <div class = "row">
 
@@ -401,7 +408,296 @@ Existe un literal especial más utilizado en Python: el literal None. Este liter
 
 <section style="text-align: justify;"><p class="text-secondary">Cuando los datos y operadores se unen, forman juntos <font color="black">expresiones</font>. La expresión más sencilla es el literal.</p></section>
 
-<!-- Voy en la parte 2.1.3.1 Operadores, herramientas para la manipulación de datos -->
+<section style="text-align: justify;"><p class="text-secondary">Un signo de <font color="red">**</font> (doble asterisco) es un operador de exponenciación (potencia). El argumento a la izquierda es la base, el de la derecha, el exponente.</p></section>
+
+<!--
+Es posible, con base en los resultados a continuación, formular las siguientes reglas con base en los resultados:
+
+- Cuando ambos ** argumentos son enteros, el resultado es entero también.
+- Cuando al menos un ** argumento es flotante, el resultado también es flotante.
+-->
+
+```{python, echo = FALSE, eval = FALSE}
+
+print(2 ** 3)
+print(2 ** 3.)
+print(2. ** 3)
+print(2. ** 3.)
+```
+
+<section style="text-align: justify;"><p class="text-secondary">Un símbolo de <font color="red">*</font> (asterisco) es un operador de multiplicación.</p></section>
+
+</div>
+
+<div class = "col-md-6">
+
+<section style="text-align: justify;"><p class="text-secondary">Un símbolo de <font color="red">/</font> (diagonal) es un operador de división. El valor después de la diagonal es el dividendo, el valor antes de la diagonal es el divisor.</p></section>
+
+<!--
+Al ejecutar el código a continuación, se puede ver que el resultado por el operador de división siempre es flotante, sin importar si a primera vista el resultado es flotante: 1 / 2, o si parece ser completamente entero: 2 / 1.
+-->
+
+```{python, echo = FALSE, eval = FALSE}
+
+print(6 / 3)
+print(6 / 3.)
+print(6. / 3)
+print(6. / 3.)
+```
+
+<!--
+Sin embargo, en ocasiones se podrá necesitar que el resultado de una división sea entero, no flotante. Afortunadamente como se vera a continuación, Python puede ayudar con esto.
+-->
+
+<section style="text-align: justify;"><p class="text-secondary">Un símbolo de <font color="red">//</font> (doble diagonal) de división entera. Difiere del operador estándar / en dos detalles:</p>
+
+<div class="form-check">
+  <div class="form-check disabled">
+    <input class="form-check-input" type="checkbox" value="" disabled="">     El resultado carece de la parte fraccionaria, está ausente (para los enteros), o siempre es igual a cero (para los flotantes); esto significa que los resultados siempre son redondeados.
+  </div>
+  <div class="form-check disabled">
+    <input class="form-check-input" type="checkbox" value="" disabled="">
+    Se ajusta a la regla entero vs flotante.
+  </div>
+</div>
+
+</section>
+
+<!--
+Con el código a continuación, se puede observar, una división de entero entre entero da un resultado entero. Todos los demás casos producen flotantes.
+-->
+
+```{python, echo = FALSE, eval = FALSE}
+
+print(6 // 3)
+print(1 // 2.)
+```
+
+</div>
+
+</div>
+
+---
+
+<section style="text-align: center;"><h4><p class="text-info">Fundamentos básicos de programación en Python</p></h4></section>
+<br>
+
+<p class="text-warning">Operadores básicos</p>
+
+<div class = "row">
+
+<div class = "col-md-6">
+
+<section style="text-align: justify;"><p class="text-secondary">El resultado de la operación que queda al usar el símbolo de <font color="red">%</font> (denominado residuo o módulo) es el residuo que queda de una división entera. En otras palabras, es el valor que sobra después de dividir un valor entre otro para producir un resultado entero.</p></section>
+
+<section style="text-align: justify;"><p class="text-secondary">El símbolo del operador de resta es obviamente <font color="red">-</font> (el signo de menos), sin embargo se debe notar que este operador tiene otra función: puede cambiar el signo de un número.</p></section>
+
+<section style="text-align: justify;"><p class="text-secondary">En la programación es raro tratar cada operador como si no tuviera relación con los otros. Por ejemplo, las multiplicaciones preceden a las sumas. El fenómeno que causa que algunos operadores actúen antes que otros es conocido como <font color="black">la jerarquía de prioridades</font>.</p></section>
+
+</div>
+
+<div class = "col-md-6">
+
+<section style="text-align: justify;"><p class="text-secondary">Python define la jerarquía de todos los operadores, y asume que los operadores de mayor jerarquía deben realizar sus operaciones antes que los de menor jerarquía.</p></section>
+
+<section style="text-align: justify;"><p class="text-secondary">El <font color="black">enlace</font> de un operador determina el orden en que se computan las operaciones de los operadores con la misma prioridad, los cuales se encuentran dentro de una misma expresión. Por ejemplo la expresión <font color="black">9 % 6 % 2</font>.</p></section>
+
+<section style="text-align: justify;"><p class="text-secondary">La mayoría de los operadores de Python tienen un enlazado hacia la izquierda, lo que significa que el calculo de la expresión es realizado de izquierda a derecha, así: de izquierda a derecha, primero <font color="black">9 % 6</font> da como resultado <font color="black">3</font>, y entonces <font color="black">3 % 2</font> da como resultado <font color="black">1</font>.</p></section>
+
+<!--
+Sin embargo puede haber una excepción interesante a la regla del enlace anterior. Al hacer el calculo pero ahora con exponentes, 2 ** 2 ** 3, el resultado da 256 (2 ** 3 = 8; 2 ** 8 = 256). El resultado muestra claramente que el operador de exponenciación utiliza enlazado hacia la derecha.
+-->
+
+</div>
+
+</div>
+
+---
+
+<section style="text-align: center;"><h4><p class="text-info">Fundamentos básicos de programación en Python</p></h4></section>
+<br>
+
+<p class="text-warning">Operadores básicos</p>
+
+<div class = "row">
+
+<div class = "col-md-6">
+
+<section style="text-align: justify;"><p class="text-secondary">Al hacer uso de <font color="black">paréntesis</font>, se puede cambiar el orden natural del cálculo de la operación. De acuerdo con las reglas aritméticas, las sub-expresiones dentro de los paréntesis siempre se calculan primero. También se pueden emplear tantos paréntesis como se necesiten, y seguido son utilizados para mejorar la legibilidad de una expresión, aun si no cambian el orden de las operaciones. Por ejemplo, <font color="black">((5 * ((25 % 13) + 100) / (2 * 13)) // 2)</font>.</p></section>
+
+</div>
+
+<div class = "col-md-6">
+
+</div>
+
+</div>
+
+---
+
+<section style="text-align: center;"><h4><p class="text-info">Fundamentos básicos de programación en Python</p></h4></section>
+<br>
+
+<p class="text-warning">Variables</p>
+
+<div class = "row">
+
+<div class = "col-md-6">
+
+<section style="text-align: justify;"><p class="text-secondary">Es normal preguntar como es que se pueden <font color="black">almacenar los resultados</font> de las operaciones, para poder emplearlos en otras operaciones, y así sucesivamente. Python ayuda con ello. Python ofrece "cajas" (contenedores) especiales para este propósito, estas cajas son llamadas <font color="black">variables</font>, y el nombre mismo sugiere que el contenido de estos contenedores puede variar en casi cualquier forma.</p></section>
+
+<section style="text-align: justify;"><p class="text-secondary">Los componentes o elementos de una variable en Python son:</p></section>
+
+<div class="form-check">
+  <div class="form-check disabled">
+    <input class="form-check-input" type="checkbox" value="" disabled="">     Un nombre.
+  </div>
+  <div class="form-check disabled">
+    <input class="form-check-input" type="checkbox" value="" disabled="">
+    Un valor (el contenido del contenedor).
+  </div>
+</div>
+
+</section>
+
+<section style="text-align: justify;"><p class="text-secondary">Si se desea nombrar una variable, se deben seguir las siguientes reglas:</p></section>
+
+</div>
+
+<div class = "col-md-6">
+
+<section style="text-align: justify;">
+
+<div class="form-check">
+  <div class="form-check disabled">
+    <input class="form-check-input" type="checkbox" value="" disabled="">     El nombre de la variable debe de estar compuesto por MAYUSCULAS, minúsculas, dígitos, y el carácter _ (guion bajo).
+  </div>
+  <div class="form-check disabled">
+    <input class="form-check-input" type="checkbox" value="" disabled="">
+    El nombre de la variable debe comenzar con una letra.
+  </div>
+  <div class="form-check disabled">
+    <input class="form-check-input" type="checkbox" value="" disabled="">
+    El carácter guion bajo es considerado una letra.
+  </div>
+  <div class="form-check disabled">
+    <input class="form-check-input" type="checkbox" value="" disabled="">
+    Las mayúsculas y minúsculas se tratan de forma distinta (un poco diferente que en el mundo real - Alicia y ALICIA son el mismo nombre, pero en Python son dos nombres de variable distintos, subsecuentemente, son dos variables diferentes).
+  </div>
+  <div class="form-check disabled">
+    <input class="form-check-input" type="checkbox" value="" disabled="">
+    El nombre de las variables no pueden ser igual a alguna de las palabras reservadas de Python.
+  </div>
+</div>
+
+</section>
+
+</div>
+
+</div>
+
+---
+
+<section style="text-align: center;"><h4><p class="text-info">Fundamentos básicos de programación en Python</p></h4></section>
+<br>
+
+<p class="text-warning">Variables</p>
+
+<div class = "row">
+
+<div class = "col-md-6">
+
+<section style="text-align: justify;"><p class="text-secondary">En Python existen las llamadas <font color="black">palabras clave</font> o (mejor dicho) <font color="black">palabras reservadas</font>. Son reservadas porque no se deben utilizar como nombres: ni para variables, ni para funciones, ni para cualquier otra cosa que se desee crear.</p></section>
+
+<section style="text-align: justify;"><p class="text-secondary">Por ejemplo, 'False', 'None', 'class', 'continue', 'elif', 'else', 'for', 'from', 'import', 'return', 'while', etc.</p></section>
+
+<!--
+El significado de la palabra reservada está predefinido, y no debe cambiar.
+-->
+
+<section style="text-align: justify;"><p class="text-secondary">Ahora, <font color="black">como son creadas las variables</font>, y <font color="black">como se ponen los valores dentro de ellas</font>. Una variable se crea cuando se le asigna un valor. Si se le asigna cualquier valor a una variable no existente, la variable será automáticamente creada. La creación (o su sintaxis) es muy simple: solo utiliza el nombre de la variable deseada, después el signo de igual (<font color="black">=</font>) y el valor que se desea colocar dentro de la variable.</p></section>
+
+```{python, echo = FALSE, eval = FALSE}
+
+var = 1
+print(var)
+```
+
+</div>
+
+<div class = "col-md-6">
+
+<section style="text-align: justify;"><p class="text-secondary">El signo de igual es de hecho un <font color="black">operador de asignación</font>. Aunque esto suene un poco extraño, el operador tiene una sintaxis simple y una interpretación clara y precisa.</p></section>
+
+<section style="text-align: justify;"><p class="text-secondary">Asigna el valor del argumento de la derecha al de la izquierda, aún cuando el argumento de la derecha sea una expresión arbitraria compleja que involucre literales, operadores y variables.</p></section>
+
+```{python, echo = FALSE, eval = FALSE}
+
+var = 1
+print(var)
+var = var + 1
+print(var)
+```
+
+<section style="text-align: justify;"><p class="text-secondary">También es posible utilizar <font color="black">operadores de asignación compuesta</font> (u <font color="black">operadores abreviados</font>) para modificar los valores asignados a las variables, por ejemplo, <font color="black">var += 1</font> (que sería lo mismo que decir <font color="black">var = var + 1</font>). Otros ejemplos son:</p>
+
+<div class="form-check">
+  <div class="form-check disabled">
+    <input class="form-check-input" type="checkbox" value="" disabled="">     i = i + 2 * j ⇒ i += 2 * j
+  </div>
+  <div class="form-check disabled">
+    <input class="form-check-input" type="checkbox" value="" disabled="">
+    j = j - (i + var + rem) ⇒ j -= (i + var + rem)
+  </div>
+</div>
+
+</section>
+
+</div>
+
+</div>
+
+---
+
+<section style="text-align: center;"><h4><p class="text-info">Fundamentos básicos de programación en Python</p></h4></section>
+<br>
+
+<p class="text-warning">Poner comentarios en el código</p>
+
+<div class = "row">
+
+<div class = "col-md-6">
+
+<section style="text-align: justify;"><p class="text-secondary">Quizá en algún momento será necesario poner algunas palabras en el código dirigidas no a Python, sino a las personas quienes estén leyendo el código con el fin de explicarles como es que funciona, o tal vez especificar el significado de las variables, también para documentar quien es el autor del programa y en que fecha fue escrito.</p></section>
+
+<section style="text-align: justify;"><p class="text-secondary">Un texto insertado en el programa el cual es, omitido en la ejecución, es denominado <font color="black">un comentario</font>.</p></section>
+
+<section style="text-align: justify;"><p class="text-secondary">En Python, un comentario es un texto que comienza con el símbolo <font color="black">#</font> y se extiende hasta el final de la línea. Este permite que Python no intente interpretarlo como parte del código.</p></section>
+
+</div>
+
+<div class = "col-md-6">
+
+<section style="text-align: justify;"><p class="text-secondary">Los desarrolladores buenos y responsables describen cada pieza importante de código, por ejemplo, el explicar el rol de una variable; aunque la mejor manera de comentar una variable es dándole un nombre que no sea ambiguo.</p></section>
+
+<section style="text-align: justify;"><p class="text-secondary">Los comentarios pueden ser útiles en otro aspecto, se pueden utilizar para <font color="black">marcar un fragmento de código que actualmente no se necesita</font>, cual sea la razón.</p></section>
+
+<section style="text-align: justify;"><p class="text-secondary">Los comentarios pueden ser muy útiles cuando tu estas leyendo tu propio código después de un tiempo (es común que los desarrolladores olviden lo que su propio código hace), y cuando otros están leyendo tu código (les puede ayudar a comprender que es lo que hacen tus programas y como es que lo hacen).</p></section>
+
+</div>
+
+</div>
+
+---
+
+<section style="text-align: center;"><h4><p class="text-info">Fundamentos básicos de programación en Python</p></h4></section>
+<br>
+
+<p class="text-warning">La función <u>input( )</u></p>
+
+<div class = "row">
+
+<div class = "col-md-6">
 
 </div>
 
@@ -442,5 +738,3 @@ Mi cuenta de GitHub: <font color="gray">https://github.com/Leo4Luffy</font>
 </div>
 
 </div>
-
-
