@@ -612,15 +612,114 @@ El significado de la palabra reservada está predefinido, y no debe cambiar.
 &lt;section style="text-align: center;"&gt;&lt;h4&gt;&lt;p class="text-info"&gt;Fundamentos básicos de programación en Python&lt;/p&gt;&lt;/h4&gt;&lt;/section&gt;
 &lt;br&gt;
 
+&lt;div class = "row"&gt;
+
+&lt;div class = "col-md-6"&gt;
+
 &lt;p class="text-warning"&gt;La función &lt;u&gt;input( )&lt;/u&gt;&lt;/p&gt;
+
+&lt;section style="text-align: justify;"&gt;&lt;p class="text-secondary"&gt;La función &lt;font color="black"&gt;input&lt;/font&gt; es capaz de leer datos que fueron introducidos por el usuario y pasar esos datos al programa en ejecución. El programa entonces puede manipular los datos, haciendo que el código sea verdaderamente interactivo.&lt;/p&gt;&lt;/section&gt;
+
+&lt;section style="text-align: justify;"&gt;&lt;p class="text-secondary"&gt;A diferencia de la función print (ya mencionada al inicio de este resumen) que no tiene un resultado utilizable, la importancia de esta nueva función es que &lt;font color="black"&gt;regresa un valor muy utilizable&lt;/font&gt;.&lt;/p&gt;&lt;/section&gt;
+
+&lt;!--
+La función input() viene con un parámetro inicial: un mensaje de tipo cadena para el usuario. Permite escribir un mensaje antes de la entrada del usuario, por ejemplo:
+
+nombre = input("Ingresa tu nombre: ")
+print("Hola, " + nombre + ". ¡Un gusto conocerte!")
+
+Cuando la función input() es llamada o invocada, el flujo del programa se detiene, el símbolo del cursor se mantiene parpadeando (le está indicando al usuario que tome acción ya que la consola está en modo de entrada) hasta que el usuario haya ingresado un dato y/o haya presionado la tecla Enter.
+
+Otra característica de la función input() es que puede ser utilizada para pedirle al usuario que termine o finalice el programa. Observa el siguiente código:
+
+nombre = input("Ingresa tu nombre: ")
+print("Hola, " + nombre + ". ¡Un gusto conocerte!")
+
+print("\nPresiona la tecla Enter para finalizar el programa.")
+input()
+print("FIN.")
+
+El resultado de la función input() es una cadena. Se pueden unir cadenas unas con otras a través del operador de concatenación (+). Observa el siguiente código:
+
+num1 = input("Ingresa el primer número: ") # Ingresa 12
+num2 = input("Ingresa el segundo número: ") # Ingresa 21
+
+print(num1 + num2) # el programa regresa 1221
+--&gt;
+
+&lt;p class="text-warning"&gt;Conversión de datos o casting&lt;/p&gt;
+
+&lt;section style="text-align: justify;"&gt;&lt;p class="text-secondary"&gt;Con Python se puede convertir un numero a una cadena. Esto con la función &lt;font color="black"&gt;&lt;u&gt;str( )&lt;/u&gt;&lt;/font&gt;. Python ofrece también dos simples funciones para especificar un tipo de dato: &lt;font color="black"&gt;&lt;u&gt;int( )&lt;/u&gt;&lt;/font&gt; y &lt;font color="black"&gt;&lt;u&gt;float( )&lt;/u&gt;&lt;/font&gt;. Sus nombres indican cual es su función:&lt;/p&gt;&lt;/section&gt;
+
+&lt;/div&gt;
+
+&lt;div class = "col-md-6"&gt;
+
+&lt;section style="text-align: justify;"&gt;
+
+&lt;div class="form-check"&gt;
+  &lt;div class="form-check disabled"&gt;
+    &lt;input class="form-check-input" type="checkbox" value="" disabled=""&gt;     La función int toma un argumento (por ejemplo, una cadena: int(string)) e intenta convertirlo a un valor entero; sin embargo esto puede llegar a fallar.
+  &lt;/div&gt;
+  &lt;div class="form-check disabled"&gt;
+    &lt;input class="form-check-input" type="checkbox" value="" disabled=""&gt;
+    La función float toma un argumento (por ejemplo, una cadena: float(string)) e intenta convertirlo a flotante (el resto es lo mismo).
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/section&gt;
+
+&lt;section style="text-align: justify;"&gt;&lt;p class="text-secondary"&gt;Estas dos funciones se pueden invocar directamente pasando el resultado de la función &lt;font color="black"&gt;input&lt;/font&gt; directamente. No hay necesidad de emplear variables como almacenamiento intermedio. Por ejemplo, &lt;font color="black"&gt;algo = float(input("Inserta un número: "))&lt;/font&gt;.&lt;/p&gt;&lt;/section&gt;
+
+&lt;section style="text-align: justify;"&gt;&lt;p class="text-secondary"&gt;El tener un equipo compuesto por &lt;font color="black"&gt;input()-int()-float()&lt;/font&gt; abre muchas nuevas posibilidades. Eventualmente se podrán escribir programas completos, los cuales acepten datos en forma de números, los cuales serán procesados y se mostrarán los resultados.&lt;/p&gt;&lt;/section&gt;
+
+&lt;!--
+Por supuesto, estos programas serán muy primitivos y no muy utilizables, debido a que no pueden tomar decisiones, y consecuentemente no son capaces de reaccionar acorde a cada situación.
+--&gt;
+
+&lt;/div&gt;
+
+&lt;/div&gt;
+
+---
+
+&lt;section style="text-align: center;"&gt;&lt;h4&gt;&lt;p class="text-info"&gt;Fundamentos básicos de programación en Python&lt;/p&gt;&lt;/h4&gt;&lt;/section&gt;
+&lt;br&gt;
 
 &lt;div class = "row"&gt;
 
 &lt;div class = "col-md-6"&gt;
 
+&lt;p class="text-warning"&gt;Concatenación&lt;/p&gt;
+
+&lt;section style="text-align: justify;"&gt;&lt;p class="text-secondary"&gt;El signo de &lt;font color="black"&gt;+&lt;/font&gt; (más), al ser aplicado a dos cadenas, se convierte en &lt;font color="black"&gt;un operador de concatenación&lt;/font&gt;: &lt;font color="black"&gt;string + string&lt;/font&gt;... Simplemente concatena (junta) dos cadenas en una. Además, puede ser utilizado más de una vez en una misma expresión. Si se desea que el signo &lt;font color="black"&gt;+&lt;/font&gt; sea un concatenador, no un sumador, solo se debe asegurar que ambos argumentos sean cadenas: &lt;font color="black"&gt;print("string" + "string").
+&lt;/font&gt;&lt;/p&gt;&lt;/section&gt;
+
+&lt;p class="text-warning"&gt;Replicación&lt;/p&gt;
+
+&lt;section style="text-align: justify;"&gt;&lt;p class="text-secondary"&gt;El signo de &lt;font color="black"&gt;*&lt;/font&gt; (asterisco), cuando es aplicado a una cadena y a un número (o a un número y cadena) se convierte en un &lt;font color="black"&gt;operador de replicación&lt;/font&gt; Por ejemplo:&lt;/p&gt;
+
+&lt;div class="form-check"&gt;
+  &lt;div class="form-check disabled"&gt;
+    &lt;input class="form-check-input" type="checkbox" value="" disabled=""&gt;     "James" * 3 da "JamesJamesJames".
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/section&gt;
+
 &lt;/div&gt;
 
 &lt;div class = "col-md-6"&gt;
+
+&lt;section style="text-align: justify;"&gt;
+&lt;div class="form-check"&gt;
+  &lt;div class="form-check disabled"&gt;
+    &lt;input class="form-check-input" type="checkbox" value="" disabled=""&gt;
+    5 * "2" (o "2" * 5) da como resultado "22222" (no 10).
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;p class="text-secondary"&gt;Un número menor o igual que cero produce una cadena vacía.&lt;/p&gt;&lt;/section&gt;
 
 &lt;/div&gt;
 
