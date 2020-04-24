@@ -34,6 +34,12 @@ showtext_auto()
 El campo de la genética se fundó cuando se presentó el primer mapeo genotipo-fenotipo en el tranajo pionero de Mendel sobre los guisantes. Paralelamente, Galton desarrollo ideas sobre la heredabilidad de los caracteres fenotipos a mediados de la decada de 1870. Después de que el trabajo de Mendel fue redescubierto, hubo un debate entre las escuelas de pensamiento biometrico y Mendeliano.
 
 A principios de la decada de 1900, el estadístico  britanico Ronald Fisher revolucionó el campo de la genética al presentar una teoría que unificaba ambas escuelas de pensamiento. Su trabajo proporciono un marco solido para el estudio de la variación fenotípica en las poblaciones que ha prevalecido hasta nuestros días.
+
+Fisher desarrolló la teoría de la genética cuantitativa bajo un supuesto simplista, y principalmente motivado por razones estadíticas, de que la varianza genética de una población se debia a un gran número de factores Mendelianos, cada uno de los cuales hizo una pequeña contribución aditiva a un fenotipo particular, el llamado "modelo infinitesimal". Aunque Fisher luego también incluyó variables explicativas adicionales a sus modelos, como la dominancia y la epistasis, estos fueron parámetros de ruido motivados principalmente por razones estadísticas que explican anomalias, en lugar de características biológicamente importantes.
+
+La revolución genomica: de datos pobres a datos ricos
+
+El marco estadístico desarrollado por Fisher estaba restringido por la falta de información molecular. No fue hasta la decada de 1970 que la genética molecular realmente se desarrolló en serio y, desde entonces, los avances tecnológicos han sido rápidos. Hoy en día es técnicamente y economicamente factible rastrear el proceso hereditario con una resolución de un solo nucleótido, algo que Fisher no pudo prever. Hasta cierto punto, este desarrolló ha inducido reacciones en el campo de la genética cuantitativa, como el desarrollo de métodos de mapeo QTL y la predicción genómica (Figura a continuación). Sin embargo, es necesario compaginar la genética cuantitativa y la genética molecular para volver a evaluar si su separación historica en campos separados dentro de la genética refleja su relevancia actual entre sí.
 -->
 
 ```{r, eval = TRUE, echo = FALSE, fig.align = 'center', message = FALSE, warning = FALSE, fig.showtext = TRUE, out.width = '300'}
@@ -163,5 +169,3 @@ Mi cuenta de GitHub: <font color="gray">https://github.com/Leo4Luffy</font>
 </div>
 
 </div>
-
-
