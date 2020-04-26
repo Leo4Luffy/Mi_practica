@@ -1,0 +1,33 @@
+---
+title: "Introducción a la estadística multivariada y su aplicación en la genética poblacional"
+subtitle: ""
+author: "Jorge Leonardo López Martínez"
+institute: ""
+date: "`r format(Sys.time(), '%d %B, %Y')`"
+output:
+  xaringan::moon_reader:
+    css: estilo.css
+---
+
+```{r Paquetes usados, echo = FALSE, eval = TRUE, message = FALSE, warning = FALSE}
+
+library(dplyr)
+library(ggplot2)
+library(showtext) # Link donde hay varias fuentes de ejemplo (https://github.com/yixuan/showtext)
+font_add_google('Gochi Hand', 'gochi')
+showtext_auto()
+```
+
+<section style="text-align: center;"><h3><p class="text-primary">Análisis de componentes principales</p></h3></section>
+
+<div class = "row">
+
+<div class = "col-md-6">
+
+</div>
+
+<div class = "col-md-6">
+
+</div>
+
+</div>
