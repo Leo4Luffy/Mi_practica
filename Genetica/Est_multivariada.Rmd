@@ -1,5 +1,5 @@
 ---
-title: "Introducción a la estadística multivariada y su aplicación en la genética poblacional"
+title: "Estadística multivariada aplicada a la genética - una introducción"
 subtitle: ""
 author: "Jorge Leonardo López Martínez"
 institute: ""
@@ -28,7 +28,8 @@ showtext_auto()
 
 <section style="text-align: justify;"><p class="text-secondary">Por lo general, los datos suelen informarse en una estructura de datos tabular con una fila para cada individuo y una columna para cada variable, dando la representación de una matriz.</p></section>
 
-```{r, echo = FALSE, eval = TRUE, message = FALSE, fig.align = 'center', out.width='260'}
+```{r, echo = FALSE, eval = TRUE, message = FALSE, fig.align = 'center', out.width = '260'}
+
 data.frame(
   x = c(3:8), y = c(3:8)
 ) %>%
@@ -80,11 +81,93 @@ data.frame(
 
 <div class = "col-md-6">
 
-<!-- Voy en la sección 7.2.1 Resúmenes y preparación de datos de baja dimensión. -->
+<!--
+<section style="text-align: justify;"><p class="text-secondary">El <font color="black"><u>análisis de componentes principales</u></font> es una técnica lineal, lo que significa que busca relaciones lineales entre variables, y que esas nuevas variables son funciones lineales de las originales.</p></section> 
+
+<section style="text-align: justify;"><p class="text-secondary">El <font color="black"><u>análisis de componentes principales</u></font> es principalmente un técnica exploratoria que produce mapas que muestran las relaciones entre variables y entre observaciones de una manera útil.</p></section>
+-->
 
 </div>
 
 <div class = "col-md-6">
+
+<section style="text-align: justify;"><p class="text-secondary">Se deben tomar muchas decisiones durante el procesamiento del análisis de componentes principales.</p></section>
+
+```{r, echo = FALSE, eval = TRUE, message = FALSE, fig.align = 'center', out.width = '440', fig.showtext = TRUE}
+
+Triangulo <- data.frame(
+  x = c(3.0, 4.0, 3.0), y = c(4.5, 3.5, 3.5)
+)
+
+Diamante <- data.frame(
+  x = c(3.5, 4.1, 3.5, 2.9), y = c(2.7, 2.1, 1.5, 2.1)
+)
+
+Diamante_2 <- data.frame(
+  x = c(2.7, 4.6, 3.7, 1.7), y = c(0.6, 0.6, -0.8, -0.8)
+)
+
+Diamante_3 <- data.frame(
+  x = c(2.7, 4.6, 3.7, 1.7), y = c(-2.0, -2.0, -3.8, -3.8)
+)
+
+Datos <- data.frame(
+  x = c(3.0, 3.6, 3.3, 3.4, 2.4, 2.6, 2.7, 2.9, 2.8, 3.3, 3.4, 3.5), y = c(-3.0, -2.8, -2.4, -3.4, -3.2, -2.8, -2.4, -2.5, -3.1, -3.2, -2.3, -2.6)
+)
+
+data.frame(
+  x = c(-2.5:9.5), y = c(-6:6)
+) %>%
+  ggplot(aes(x, y)) +
+  geom_blank() +
+  annotate(geom = 'rect', xmin = 2.6, xmax = 4.4, ymin = 5.5, ymax = 6.0, colour = 'black', fill = 'white', alpha = 0.4) +
+  annotate(geom = 'text', x = 3.5, y = 5.75, label = 'Datos', family = 'gochi', size = 6.4, colour = 'black') +
+  annotate(geom = 'rect', xmin = 1.8, xmax = 3.2, ymin = 4.7, ymax = 5.2, colour = 'black', fill = 'white', alpha = 0.4) +
+  annotate(geom = 'text', x = 2.5, y = 4.95, label = 'Media', family = 'gochi', size = 6.4, colour = 'black') +
+  annotate(geom = 'rect', xmin = 3.8, xmax = 5.2, ymin = 4.7, ymax = 5.2, colour = 'black', fill = 'white', alpha = 0.4) +
+  annotate(geom = 'text', x = 4.5, y = 4.95, label = 'Varianza', family = 'gochi', size = 6.4, colour = 'black') +
+  annotate(geom = 'segment', x = 3.0, xend = 2.5, y = 5.5, yend = 5.2, colour = 'black', size = 1.0) +
+  annotate(geom = 'segment', x = 4.0, xend = 4.5, y = 5.5, yend = 5.2, colour = 'black', size = 1.0) +
+  geom_curve(x = 3.5, xend = 3.5, y = 5.3, yend = 4.5, arrow = arrow(length = unit(0.1, 'inch')), size = 1.0, color = 'black', curvature = 0.0) +
+  geom_polygon(data = Triangulo, aes(x = x, y = y), fill = 'yellow', colour = 'yellow', alpha = 0.4) +
+  annotate(geom = 'text', x = 5.1, y = 4.0, label = 'Elección', family = 'gochi', size = 7.6, colour = 'black') +
+  geom_curve(x = 4.5, xend = 3.9, y = 4.0, yend = 4.0, arrow = arrow(length = unit(0.1, 'inch')), size = 1.0, color = 'black', curvature = 0.0) +
+geom_curve(x = 3.5, xend = 3.5, y = 3.3, yend = 2.8, arrow = arrow(length = unit(0.1, 'inch')), size = 1.0, color = 'black', curvature = 0.0) +
+  geom_polygon(data = Diamante, aes(x = x, y = y), fill = 'white', colour = 'black') +
+  annotate(geom = 'text', x = 3.5, y = 2.15, label = '¿K?', family = 'gochi', size = 7.4, colour = 'black') +
+  geom_curve(x = 3.5, xend = 3.5, y = 1.3, yend = 0.8, arrow = arrow(length = unit(0.1, 'inch')), size = 1.0, color = 'black', curvature = 0.0) +
+  annotate(geom = 'text', x = 5.2, y = 2.1, label = 'Elección', family = 'gochi', size = 7.6, colour = 'black') +
+  geom_curve(x = 4.6, xend = 4.2, y = 2.1, yend = 2.1, arrow = arrow(length = unit(0.1, 'inch')), size = 1.0, color = 'black', curvature = 0.0) +
+  geom_polygon(data = Diamante_2, aes(x = x, y = y), fill = 'white', colour = 'black', size = 1.4) +
+  geom_curve(x = 2.7, xend = 3.5, y = -0.6, yend = 0.4, arrow = arrow(length = unit(0.1, 'inch')), size = 1.0, color = 'black', curvature = 0.0) +
+  geom_curve(x = 2.4, xend = 3.9, y = -0.1, yend = -0.1, arrow = arrow(length = unit(0.1, 'inch')), size = 1.0, color = 'black', curvature = 0.0) +
+  geom_curve(x = 3.1, xend = 3.0, y = -0.1, yend = 0.4, arrow = arrow(length = unit(0.1, 'inch')), size = 0.8, color = 'red', curvature = 0.0) +
+  geom_curve(x = 3.1, xend = 3.3, y = -0.1, yend = -0.2, arrow = arrow(length = unit(0.1, 'inch')), size = 0.8, color = 'red', curvature = 0.0) +
+  geom_curve(x = 3.1, xend = 3.05, y = -0.1, yend = -0.6, arrow = arrow(length = unit(0.1, 'inch')), size = 0.8, color = 'red', curvature = 0.0) +
+  geom_curve(x = 3.1, xend = 2.7, y = -0.1, yend = -0.4, arrow = arrow(length = unit(0.1, 'inch')), size = 0.8, color = 'red', curvature = 0.0) +
+  annotate(geom = 'text', x = 5.0, y = 0.9, label = 'Variables', family = 'gochi', size = 7.6, colour = 'black') +
+  geom_curve(x = 3.5, xend = 3.5, y = -1.0, yend = -1.8, arrow = arrow(length = unit(0.1, 'inch')), size = 1.0, color = 'black', curvature = 0.0) +
+  geom_polygon(data = Diamante_3, aes(x = x, y = y), fill = 'white', colour = 'black', size = 1.4) +
+  geom_point(data = Datos, aes(x = x, y = y), colour = 'black', fill = 'black', alpha = 0.4, size = 3.8) +
+  annotate(geom = 'text', x = 5.0, y = -1.7, label = 'Observaciones', family = 'gochi', size = 8.0, colour = 'black') +
+  geom_curve(x = 2.7, xend = 3.5, y = -3.6, yend = -2.2, arrow = arrow(length = unit(0.1, 'inch')), size = 1.0, color = 'black', curvature = 0.0) +
+  geom_curve(x = 2.4, xend = 3.9, y = -2.9, yend = -2.9, arrow = arrow(length = unit(0.1, 'inch')), size = 1.0, color = 'black', curvature = 0.0) +
+  geom_curve(x = 3.5, xend = 3.5, y = -4.0, yend = -4.8, arrow = arrow(length = unit(0.1, 'inch')), size = 1.0, color = 'black', curvature = 0.0) +
+  annotate(geom = 'rect', xmin = 3.0, xmax = 4.0, ymin = -5.5, ymax = -5.0, colour = 'black', fill = 'white') +
+  annotate(geom = 'text', x = 3.5, y = -5.25, label = 'Fin', family = 'gochi', size = 6.4, colour = 'black') +
+  annotate(geom = 'segment', x = 2.8, xend = 1.4, y = -5.25, yend = -5.25, colour = 'black', size = 1.0) +
+  annotate(geom = 'segment', x = 1.4, xend = 1.4, y = -5.25, yend = 0.5, colour = 'black', size = 1.0) +
+  annotate(geom = 'text', x = 1.5, y = 1.8, label = 'Cambio', family = 'gochi', size = 7.6, colour = 'black') +
+  annotate(geom = 'text', x = 1.5, y = 1.2, label = 'de datos', family = 'gochi', size = 7.6, colour = 'black') +
+  annotate(geom = 'segment', x = 1.4, xend = 1.4, y = 2.1, yend = 5.75, colour = 'black', size = 1.0) +
+  geom_curve(x = 1.4, xend = 2.4, y = 5.75, yend = 5.75, arrow = arrow(length = unit(0.1, 'inch')), size = 1.0, color = 'black', curvature = 0.0) +
+  scale_y_continuous(limits = c(-5.8, 6.0)) +
+  scale_x_continuous(limits = c(1, 6.0)) +
+  theme_void() +
+  theme(axis.text = element_blank(),
+        axis.ticks = element_blank(),
+        axis.title = element_blank())
+```
 
 </div>
 
