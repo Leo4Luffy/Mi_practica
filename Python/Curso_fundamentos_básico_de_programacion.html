@@ -12,7 +12,7 @@ class: center, middle, inverse, title-slide
 
 # Curso sobre fundamentos básicos de programación en Python
 ### Jorge Leonardo López Martínez
-### 24 abril, 2020
+### 29 abril, 2020
 
 ---
 
@@ -724,6 +724,218 @@ Por supuesto, estos programas serán muy primitivos y no muy utilizables, debido
 &lt;/div&gt;
 
 &lt;/div&gt;
+
+---
+
+&lt;section style="text-align: center;"&gt;&lt;h4&gt;&lt;p class="text-info"&gt;Fundamentos básicos de programación en Python&lt;/p&gt;&lt;/h4&gt;&lt;/section&gt;
+&lt;br&gt;
+
+&lt;p class="text-warning"&gt;Preguntas y respuestas&lt;/p&gt;
+
+&lt;div class = "row"&gt;
+
+&lt;div class = "col-md-6"&gt;
+
+&lt;section style="text-align: justify;"&gt;&lt;p class="text-secondary"&gt;Un programador escribe un programa y &lt;font color="black"&gt;el programa hace preguntas&lt;/font&gt;. Una computadora ejecuta el programa y &lt;font color="black"&gt;proporciona las respuestas&lt;/font&gt;. El programa &lt;font color="black"&gt;debe ser capaz de reaccionar de acuerdo con las respuestas recibidas&lt;/font&gt;. Afortunadamente, las computadoras solo conocen dos tipos de respuestas:&lt;/p&gt;&lt;/section&gt;
+
+&lt;div class="form-check"&gt;
+  &lt;div class="form-check disabled"&gt;
+    &lt;input class="form-check-input" type="checkbox" value="" disabled=""&gt;     Si, es cierto.
+  &lt;/div&gt;
+  &lt;div class="form-check disabled"&gt;
+    &lt;input class="form-check-input" type="checkbox" value="" disabled=""&gt;
+    No, esto es falso.
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;section style="text-align: justify;"&gt;&lt;p class="text-secondary"&gt;Nunca obtendrás una respuesta como &lt;i&gt;Déjame pensar ..., no lo sé&lt;/i&gt;, o probablemente &lt;i&gt;sí, pero no lo sé con seguridad&lt;/i&gt;.&lt;/p&gt;&lt;/section&gt;
+
+&lt;section style="text-align: justify;"&gt;&lt;p class="text-secondary"&gt;Para hacer &lt;font color="black"&gt;preguntas&lt;/font&gt;, Python utiliza un conjunto de operadores muy especiales. Uno de ellos es el operador &lt;font color="black"&gt;==&lt;/font&gt; (igual a) el cual se  utiliza por ejemplo para hacer preguntas de comparación.&lt;/p&gt;&lt;/section&gt;
+
+&lt;/div&gt;
+
+&lt;div class = "col-md-6"&gt;
+
+&lt;section style="text-align: justify;"&gt;&lt;p class="text-secondary"&gt;Es importante no olvidar esta importante distinción:&lt;/p&gt;
+
+&lt;div class="form-check"&gt;
+  &lt;div class="form-check disabled"&gt;
+    &lt;input class="form-check-input" type="checkbox" value="" disabled=""&gt;     = es un operador de asignación, por ejemplo, a = b asigna a la varable a el valor de b.
+  &lt;/div&gt;
+  &lt;div class="form-check disabled"&gt;
+    &lt;input class="form-check-input" type="checkbox" value="" disabled=""&gt;
+    == es una pregunta ¿Son estos valores iguales?; a == b compara a y b. Si son iguales, el resultado de la comparación es &lt;font color="black"&gt;True&lt;/font&gt;. Si no son iguales, el resultado de la comparación es &lt;font color="black"&gt;False&lt;/font&gt;.
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/section&gt;
+
+&lt;section style="text-align: justify;"&gt;&lt;p class="text-secondary"&gt;&lt;font color="black"&gt;==&lt;/font&gt; es un &lt;font color="black"&gt;operador binario con enlazado a la izquierda&lt;/font&gt;. Necesita dos argumentos y &lt;font color="black"&gt;verifica si son iguales&lt;/font&gt;.&lt;/p&gt;&lt;/section&gt;
+
+&lt;section style="text-align: justify;"&gt;&lt;p class="text-secondary"&gt;El operador &lt;font color="black"&gt;!=&lt;/font&gt; (no es igual a) también compara los valores de dos operandos. La diferencia es: si son iguales, el resultado de la comparación es &lt;font color="black"&gt;False&lt;/font&gt;. Si no son iguales, el resultado de la comparación es &lt;font color="black"&gt;True&lt;/font&gt;.&lt;/p&gt;&lt;/section&gt;
+
+&lt;!-- Por ejemplo --&gt;
+
+
+
+&lt;/div&gt;
+
+&lt;/div&gt;
+
+---
+
+&lt;section style="text-align: center;"&gt;&lt;h4&gt;&lt;p class="text-info"&gt;Fundamentos básicos de programación en Python&lt;/p&gt;&lt;/h4&gt;&lt;/section&gt;
+&lt;br&gt;
+
+&lt;p class="text-warning"&gt;Condiciones y ejecución condicional&lt;/p&gt;
+
+&lt;div class = "row"&gt;
+
+&lt;div class = "col-md-6"&gt;
+
+&lt;section style="text-align: justify;"&gt;&lt;p class="text-secondary"&gt;Una vez se sabe como hacerle preguntas a Python, se debe tener un mecanismo que le permita hacer algo &lt;font color="black"&gt;si se cumple una condición, y no hacerlo si no se cumple&lt;/font&gt;.&lt;/p&gt;&lt;/section&gt;
+
+&lt;section style="text-align: justify;"&gt;&lt;p class="text-secondary"&gt;Para tomar tales decisiones, Python ofrece una instrucción especial. Debido a su naturaleza y su aplicación, se denomina &lt;font color="black"&gt;instrucción condicional&lt;/font&gt; (o &lt;font color="black"&gt;declaración condicional&lt;/font&gt;).&lt;/p&gt;&lt;/section&gt;
+
+&lt;section style="text-align: justify;"&gt;&lt;p class="text-secondary"&gt;La primera forma de una declaración condicional, que puede ver por ejemplo a continuación, está escrita de manera muy informal pero figurada:&lt;/p&gt;&lt;/section&gt;
+
+if cierto_o_no:&lt;p&gt;
+     &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;hacer_esto_si_cierto&lt;/p&gt;
+
+&lt;section style="text-align: justify;"&gt;&lt;p class="text-secondary"&gt;Esta declaración consta de los siguientes elementos necesarios en este orden:&lt;/p&gt;&lt;/section&gt;
+
+&lt;/div&gt;
+
+&lt;div class = "col-md-6"&gt;
+
+&lt;section style="text-align: justify;"&gt;
+
+&lt;div class="form-check"&gt;
+  &lt;div class="form-check disabled"&gt;
+    &lt;input class="form-check-input" type="checkbox" value="" disabled=""&gt;     La palabra clave if.
+  &lt;/div&gt;
+  &lt;div class="form-check disabled"&gt;
+    &lt;input class="form-check-input" type="checkbox" value="" disabled=""&gt;
+    Uno o más espacios en blanco.
+  &lt;/div&gt;
+  &lt;div class="form-check disabled"&gt;
+    &lt;input class="form-check-input" type="checkbox" value="" disabled=""&gt;
+    Una expresión (una pregunta o una respuesta) cuyo valor se interpretara únicamente en términos de True (cuando su valor no sea cero) y False (cuando sea igual a cero).
+  &lt;/div&gt;
+  &lt;div class="form-check disabled"&gt;
+    &lt;input class="form-check-input" type="checkbox" value="" disabled=""&gt;
+    Unos dos puntos seguido de una nueva línea.
+  &lt;/div&gt;
+  &lt;div class="form-check disabled"&gt;
+    &lt;input class="form-check-input" type="checkbox" value="" disabled=""&gt;
+    Una instrucción con sangría o un conjunto de instrucciones; la sangría se puede lograr de dos maneras: insertando un número particular de espacios (la recomendación es usar cuatro espacios de sangría), o usando el tabulador. Si hay mas de una instrucción en la parte con sangría, la sangría debe ser la misma en todas las líneas, ya que Python no permite mezclar espacios y tabuladores para la sangría.
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/section&gt;
+
+&lt;/div&gt;
+
+&lt;/div&gt;
+
+---
+
+&lt;section style="text-align: center;"&gt;&lt;h4&gt;&lt;p class="text-info"&gt;Fundamentos básicos de programación en Python&lt;/p&gt;&lt;/h4&gt;&lt;/section&gt;
+&lt;br&gt;
+
+&lt;p class="text-warning"&gt;Condiciones y ejecución condicional&lt;/p&gt;
+
+&lt;div class = "row"&gt;
+
+&lt;div class = "col-md-6"&gt;
+
+&lt;section style="text-align: justify;"&gt;&lt;p class="text-secondary"&gt;La anterior declaración funciona así:&lt;/p&gt;
+
+&lt;div class="form-check"&gt;
+  &lt;div class="form-check disabled"&gt;
+    &lt;input class="form-check-input" type="checkbox" value="" disabled=""&gt;     Si la expresión cierto_o_no representa la verdad, la declaración con sangría se ejecutará.
+  &lt;/div&gt;
+  &lt;div class="form-check disabled"&gt;
+    &lt;input class="form-check-input" type="checkbox" value="" disabled=""&gt;
+    Si la expresión cierto_o_no no es verdad, la declaración con sangría se omitirá, y la siguiente instrucción ejecutada será la siguiente al nivel de la sangría original.
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/section&gt;
+
+&lt;!--
+Hemos dicho que las declaraciones condicionales deben tener sangría. Esto crea una estructura muy legible, demostrando claramente todas las rutas de ejecución posibles en el código.
+
+Echa un vistazo al siguiente código:
+--&gt;
+
+
+
+&lt;!--
+Como puedes ver, tender la cama, tomar una ducha y dormir y soñar se ejecutan condicionalmente, cuando contadorOvejas alcanza el límite deseado. Alimentar a los perros, sin embargo, siempre se hace (es decir, la función alimentarPerros no tiene sangría y no pertenece al bloque if, lo que significa que siempre se ejecuta).
+--&gt;
+
+&lt;section style="text-align: justify;"&gt;&lt;p class="text-secondary"&gt;Otra variante de la declaración condicional que permite realizar una acción adicional cuando no se cumple una condición es &lt;font color="black"&gt;if-else&lt;/font&gt;:&lt;/p&gt;&lt;/section&gt;
+
+if condición_true_or_false:&lt;p&gt;
+    &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;ejecuta_si_condición_true&lt;/p&gt;
+ &amp;nbsp;&amp;nbsp;else:&lt;p&gt;
+    &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;ejecuta_si_condición_false&lt;/p&gt;
+
+&lt;/div&gt;
+
+&lt;div class = "col-md-6"&gt;
+
+&lt;section style="text-align: justify;"&gt;&lt;p class="text-secondary"&gt;Por lo tanto, hay una nueva palabra: &lt;font color="black"&gt;else&lt;/font&gt;. Esta es una &lt;font color="black"&gt;palabra reservada&lt;/font&gt;.&lt;/p&gt;&lt;/section&gt;
+
+&lt;section style="text-align: justify;"&gt;&lt;p class="text-secondary"&gt;La parte del código que comienza con &lt;font color="black"&gt;else&lt;/font&gt; dice que hacer si no se cumple la condición especificada por el &lt;font color="black"&gt;if&lt;/font&gt;.&lt;/p&gt;&lt;/section&gt;
+
+&lt;section style="text-align: justify;"&gt;&lt;p class="text-secondary"&gt;La ejecución de &lt;font color="black"&gt;if-else&lt;/font&gt; es la siguiente:&lt;/p&gt;
+
+&lt;div class="form-check"&gt;
+  &lt;div class="form-check disabled"&gt;
+    &lt;input class="form-check-input" type="checkbox" value="" disabled=""&gt;     Si la condición se evalúa como Verdadero (su valor no es igual a cero), la instrucción ejecuta_si_condición_true se ejecuta, y la declaración condicional llega a su fin.
+  &lt;/div&gt;
+  &lt;div class="form-check disabled"&gt;
+    &lt;input class="form-check-input" type="checkbox" value="" disabled=""&gt;
+    Si la condición se evalúa como Falso (es igual a cero), la instrucción ejecuta_si_condición_false se ejecuta, y la declaración condicional llega a su fin.
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/section&gt;
+
+&lt;/div&gt;
+
+&lt;/div&gt;
+
+---
+
+&lt;section style="text-align: center;"&gt;&lt;h4&gt;&lt;p class="text-info"&gt;Fundamentos básicos de programación en Python&lt;/p&gt;&lt;/h4&gt;&lt;/section&gt;
+&lt;br&gt;
+
+&lt;p class="text-warning"&gt;Condiciones y ejecución condicional&lt;/p&gt;
+
+&lt;div class = "row"&gt;
+
+&lt;div class = "col-md-6"&gt;
+
+&lt;/div&gt;
+
+&lt;div class = "col-md-6"&gt;
+
+&lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;!--
+Al utilizar la anterior forma de declaración condicional, podemos describir nuestros planes de la siguiente manera:
+--&gt;
+
+
+
+&lt;!--
+Si el clima es bueno, saldremos a caminar. De lo contrario, iremos al cine. No importa si el clima es bueno o malo, almorzaremos después (después de la caminata o después de ir al cine).
+--&gt;
 
 ---
 
