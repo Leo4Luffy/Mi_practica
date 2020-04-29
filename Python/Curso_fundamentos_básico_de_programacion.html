@@ -904,6 +904,16 @@ if condición_true_or_false:&lt;p&gt;
 
 &lt;/section&gt;
 
+&lt;!--
+Al utilizar la anterior forma de declaración condicional, podemos describir nuestros planes de la siguiente manera:
+--&gt;
+
+
+
+&lt;!--
+Si el clima es bueno, saldremos a caminar. De lo contrario, iremos al cine. No importa si el clima es bueno o malo, almorzaremos después (después de la caminata o después de ir al cine).
+--&gt;
+
 &lt;/div&gt;
 
 &lt;/div&gt;
@@ -919,6 +929,114 @@ if condición_true_or_false:&lt;p&gt;
 
 &lt;div class = "col-md-6"&gt;
 
+&lt;section style="text-align: justify;"&gt;&lt;p class="text-secondary"&gt;También se puede considerar el caso donde la instrucción colocada después del &lt;font color="black"&gt;if&lt;/font&gt; es otro &lt;font color="black"&gt;if&lt;/font&gt;. Este uso de la declaración &lt;font color="black"&gt;if&lt;/font&gt; se conoce como &lt;font color="black"&gt;anidamiento&lt;/font&gt;. Hay que recordar que cada &lt;font color="black"&gt;else&lt;/font&gt; se refiere al &lt;font color="black"&gt;if&lt;/font&gt; que se encuentra en el mismo nivel de sangría; se necesita saber esto para determinar cómo se relacionan los &lt;font color="black"&gt;ifs&lt;/font&gt; y los &lt;font color="black"&gt;elses&lt;/font&gt;.&lt;/p&gt;&lt;/section&gt;
+
+&lt;!--
+Haciendo uso de un ejemplo de plan dominguero. Si hay buen clima, saldremos a caminar. Si encontramos un buen restaurante, almorzaremos allí. De lo contrario, vamos a comer un sandwich. Si hay mal clima, iremos al cine. Si no hay boletos, iremos de compras al centro comercial más cercano.&lt;/p&gt;&lt;/section&gt;
+--&gt;
+
+
+
+&lt;section style="text-align: justify;"&gt;&lt;p class="text-secondary"&gt;Otro caso especial presenta otra nueva &lt;font color="black"&gt;palabra reservada&lt;/font&gt; de Python: &lt;font color="black"&gt;elif&lt;/font&gt;. Esta es una forma más corta de &lt;font color="black"&gt;else-if&lt;/font&gt;.&lt;/p&gt;&lt;/section&gt;
+
+&lt;section style="text-align: justify;"&gt;&lt;p class="text-secondary"&gt;&lt;font color="black"&gt;elif&lt;/font&gt; se usa para &lt;font color="black"&gt;verificar más de una condición&lt;/font&gt;, y para &lt;font color="black"&gt;detener&lt;/font&gt; cuando se encuentra la primera declaración verdadera.&lt;/p&gt;&lt;/section&gt;
+
+&lt;!--
+El siguiente ejemplo se parece a la anidación del ejemplo anterior, pero las similitudes son muy leves. Nuevamente, cambiaremos nuestros planes y los expresaremos de la siguiente manera: si hay buen clima, saldremos a caminar, de lo contrario, si obtenemos entradas, iremos al cine, de lo contrario, si hay mesas libres en el restaurante, vamos a almorzar; si todo falla, regresaremos a casa y jugaremos ajedrez.
+--&gt;
+
+
+
+&lt;section style="text-align: justify;"&gt;&lt;p class="text-secondary"&gt;La forma de ensamblar las declaraciones &lt;font color="black"&gt;if-elif-else&lt;/font&gt; a veces se denomina &lt;font color="black"&gt;cascada&lt;/font&gt;.&lt;/p&gt;&lt;/section&gt;
+
+&lt;/div&gt;
+
+&lt;div class = "col-md-6"&gt;
+
+&lt;section style="text-align: justify;"&gt;&lt;p class="text-secondary"&gt;Se debe tener en cuenta lo siguiente:&lt;/p&gt;
+
+&lt;div class="form-check"&gt;
+  &lt;div class="form-check disabled"&gt;
+    &lt;input class="form-check-input" type="checkbox" value="" disabled=""&gt;     No se debe usar else sin un if precedente.
+  &lt;/div&gt;
+  &lt;div class="form-check disabled"&gt;
+    &lt;input class="form-check-input" type="checkbox" value="" disabled=""&gt;
+    Else siempre es la última rama de la cascada, independientemente de si se ha usado elif o no.
+  &lt;/div&gt;
+  &lt;div class="form-check disabled"&gt;
+    &lt;input class="form-check-input" type="checkbox" value="" disabled=""&gt;
+    Else es una parte opcional de la cascada, y puede omitirse.
+  &lt;/div&gt;
+  &lt;div class="form-check disabled"&gt;
+    &lt;input class="form-check-input" type="checkbox" value="" disabled=""&gt;
+    Si hay una rama else en la cascada, solo se ejecuta una de todas las ramas.
+  &lt;/div&gt;
+  &lt;div class="form-check disabled"&gt;
+    &lt;input class="form-check-input" type="checkbox" value="" disabled=""&gt;
+    Si no hay una rama else, es posible que no se ejecute ninguna de las opciones disponibles.
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/section&gt;
+
+&lt;/div&gt;
+
+&lt;/div&gt;
+
+---
+
+&lt;section style="text-align: center;"&gt;&lt;h4&gt;&lt;p class="text-info"&gt;Fundamentos básicos de programación en Python&lt;/p&gt;&lt;/h4&gt;&lt;/section&gt;
+&lt;br&gt;
+
+&lt;p class="text-warning"&gt;Pseudocódigo e introducción a los ciclos o bucles&lt;/p&gt;
+
+&lt;div class = "row"&gt;
+
+&lt;div class = "col-md-6"&gt;
+
+&lt;section style="text-align: justify;"&gt;&lt;p class="text-secondary"&gt;Se pueden ignorar los requisitos de la sintaxis de Python e intentar analizar el problema sin pensar en la programación real. En otras palabras, se puede escribir el &lt;font color="black"&gt;algoritmo&lt;/font&gt;, e implementar luego cuando se este contento con él. En este caso, se puede utilizar un tipo de notación que no es un lenguaje de programación real (no se puede compilar ni ejecutar), pero está formalizado, es conciso y se puede leer. Se llama &lt;font color="black"&gt;pseudocódigo&lt;/font&gt;.&lt;/p&gt;&lt;/section&gt;
+
+&lt;section style="text-align: justify;"&gt;&lt;p class="text-secondary"&gt;Un ejemplo de pseudocódigo a continuación:&lt;/p&gt;&lt;/section&gt;
+
+&lt;p&gt;línea 01  numeroMayor = -999999999
+&lt;p&gt;línea 02  numero = int(input())&lt;/p&gt;
+&lt;p&gt;línea 03  if numero == -1:&lt;/p&gt;
+&lt;p&gt;línea 04  print(numeroMayor)&lt;/p&gt;
+&lt;p&gt;línea 05  exit()&lt;/p&gt;
+
+&lt;/div&gt;
+
+&lt;div class = "col-md-6"&gt;
+
+&lt;p&gt;línea 06  if numero &gt; numeroMayor:&lt;/p&gt;
+&lt;p&gt;línea 07  numeroMayor = numero&lt;/p&gt;
+&lt;p&gt;línea 08  vaya a la línea 02&lt;/p&gt;
+
+&lt;section style="text-align: justify;"&gt;&lt;p class="text-secondary"&gt;En primer lugar, se puede simplificar el programa si, al comienzo del código, se asigna la variable numeroMayor con un valor que será más pequeño que cualquiera de los números ingresados. Se usa -999999999 para ese propósito.&lt;/p&gt;&lt;/section&gt;
+
+&lt;section style="text-align: justify;"&gt;&lt;p class="text-secondary"&gt;En segundo lugar, se asume que el algoritmo no sabrá por adelantado cuántos números se entregarán al programa. Se espera que el usuario al ingresar todos los números que se desee, el algoritmo funcione bien con cien y con mil números. ¿Cómo se hace esto?&lt;/p&gt;&lt;/section&gt;
+
+&lt;/div&gt;
+
+&lt;/div&gt;
+
+---
+
+&lt;section style="text-align: center;"&gt;&lt;h4&gt;&lt;p class="text-info"&gt;Fundamentos básicos de programación en Python&lt;/p&gt;&lt;/h4&gt;&lt;/section&gt;
+&lt;br&gt;
+
+&lt;p class="text-warning"&gt;Pseudocódigo e introducción a los ciclos o bucles&lt;/p&gt;
+
+&lt;div class = "row"&gt;
+
+&lt;div class = "col-md-6"&gt;
+
+&lt;section style="text-align: justify;"&gt;&lt;p class="text-secondary"&gt;Se hace un trato con el usuario: cuando se ingresa el valor -1, será una señal de que no hay más datos y que el programa debe finalizar su trabajo. De lo contrario, si el valor ingresado no es igual a -1, el programa leerá otro número, y así sucesivamente.&lt;/p&gt;&lt;/section&gt;
+
+&lt;section style="text-align: justify;"&gt;&lt;p class="text-secondary"&gt;El truco se basa en la suposición de que cualquier parte del código se puede realizar más de una vez, precisamente, tantas veces como sea necesario.&lt;/p&gt;&lt;/section&gt;
+
+&lt;section style="text-align: justify;"&gt;&lt;p class="text-secondary"&gt;La ejecución de una determinada parte del código más de una vez se denomina &lt;font color="black"&gt;bucle&lt;/font&gt;. Por ejemplo, las líneas 02 a 08 del anterior pseudocódigo forman un bucle. Se pasara tantas veces como sea necesario para revisar todos los valores ingresados.&lt;/p&gt;&lt;/section&gt;
+&lt;!--Voy en la parte 3.1.2.1 Ciclos en Python | while--&gt;
 &lt;/div&gt;
 
 &lt;div class = "col-md-6"&gt;
@@ -926,16 +1044,6 @@ if condición_true_or_false:&lt;p&gt;
 &lt;/div&gt;
 
 &lt;/div&gt;
-
-&lt;!--
-Al utilizar la anterior forma de declaración condicional, podemos describir nuestros planes de la siguiente manera:
---&gt;
-
-
-
-&lt;!--
-Si el clima es bueno, saldremos a caminar. De lo contrario, iremos al cine. No importa si el clima es bueno o malo, almorzaremos después (después de la caminata o después de ir al cine).
---&gt;
 
 ---
 

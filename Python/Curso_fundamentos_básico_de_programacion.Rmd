@@ -999,29 +999,6 @@ if condición_true_or_false:<p>
 
 </section>
 
-</div>
-
-</div>
-
----
-
-<section style="text-align: center;"><h4><p class="text-info">Fundamentos básicos de programación en Python</p></h4></section>
-<br>
-
-<p class="text-warning">Condiciones y ejecución condicional</p>
-
-<div class = "row">
-
-<div class = "col-md-6">
-
-</div>
-
-<div class = "col-md-6">
-
-</div>
-
-</div>
-
 <!--
 Al utilizar la anterior forma de declaración condicional, podemos describir nuestros planes de la siguiente manera:
 -->
@@ -1038,6 +1015,159 @@ almorzar()
 <!--
 Si el clima es bueno, saldremos a caminar. De lo contrario, iremos al cine. No importa si el clima es bueno o malo, almorzaremos después (después de la caminata o después de ir al cine).
 -->
+
+</div>
+
+</div>
+
+---
+
+<section style="text-align: center;"><h4><p class="text-info">Fundamentos básicos de programación en Python</p></h4></section>
+<br>
+
+<p class="text-warning">Condiciones y ejecución condicional</p>
+
+<div class = "row">
+
+<div class = "col-md-6">
+
+<section style="text-align: justify;"><p class="text-secondary">También se puede considerar el caso donde la instrucción colocada después del <font color="black">if</font> es otro <font color="black">if</font>. Este uso de la declaración <font color="black">if</font> se conoce como <font color="black">anidamiento</font>. Hay que recordar que cada <font color="black">else</font> se refiere al <font color="black">if</font> que se encuentra en el mismo nivel de sangría; se necesita saber esto para determinar cómo se relacionan los <font color="black">ifs</font> y los <font color="black">elses</font>.</p></section>
+
+<!--
+Haciendo uso de un ejemplo de plan dominguero. Si hay buen clima, saldremos a caminar. Si encontramos un buen restaurante, almorzaremos allí. De lo contrario, vamos a comer un sandwich. Si hay mal clima, iremos al cine. Si no hay boletos, iremos de compras al centro comercial más cercano.</p></section>
+-->
+
+```{python, echo = FALSE, eval = FALSE}
+
+if climaEsBueno:
+    if encontramosBuenRestaurante:
+        almorzar()
+    else:
+        comerSandwich() 
+else:
+    if hayBoletosDisponibles:
+        irAlCine()
+    else:
+        irDeCompras() 
+```
+
+<section style="text-align: justify;"><p class="text-secondary">Otro caso especial presenta otra nueva <font color="black">palabra reservada</font> de Python: <font color="black">elif</font>. Esta es una forma más corta de <font color="black">else-if</font>.</p></section>
+
+<section style="text-align: justify;"><p class="text-secondary"><font color="black">elif</font> se usa para <font color="black">verificar más de una condición</font>, y para <font color="black">detener</font> cuando se encuentra la primera declaración verdadera.</p></section>
+
+<!--
+El siguiente ejemplo se parece a la anidación del ejemplo anterior, pero las similitudes son muy leves. Nuevamente, cambiaremos nuestros planes y los expresaremos de la siguiente manera: si hay buen clima, saldremos a caminar, de lo contrario, si obtenemos entradas, iremos al cine, de lo contrario, si hay mesas libres en el restaurante, vamos a almorzar; si todo falla, regresaremos a casa y jugaremos ajedrez.
+-->
+
+```{python, echo = FALSE, eval = FALSE}
+
+if climaBueno:
+    iraCaminar()
+elif hayBoletosDisponibles:
+    IralCine()
+elif mesasLibres:
+    almorzar()
+else:
+    jugarAjedrezEnCasa() 
+```
+
+<section style="text-align: justify;"><p class="text-secondary">La forma de ensamblar las declaraciones <font color="black">if-elif-else</font> a veces se denomina <font color="black">cascada</font>.</p></section>
+
+</div>
+
+<div class = "col-md-6">
+
+<section style="text-align: justify;"><p class="text-secondary">Se debe tener en cuenta lo siguiente:</p>
+
+<div class="form-check">
+  <div class="form-check disabled">
+    <input class="form-check-input" type="checkbox" value="" disabled="">     No se debe usar else sin un if precedente.
+  </div>
+  <div class="form-check disabled">
+    <input class="form-check-input" type="checkbox" value="" disabled="">
+    Else siempre es la última rama de la cascada, independientemente de si se ha usado elif o no.
+  </div>
+  <div class="form-check disabled">
+    <input class="form-check-input" type="checkbox" value="" disabled="">
+    Else es una parte opcional de la cascada, y puede omitirse.
+  </div>
+  <div class="form-check disabled">
+    <input class="form-check-input" type="checkbox" value="" disabled="">
+    Si hay una rama else en la cascada, solo se ejecuta una de todas las ramas.
+  </div>
+  <div class="form-check disabled">
+    <input class="form-check-input" type="checkbox" value="" disabled="">
+    Si no hay una rama else, es posible que no se ejecute ninguna de las opciones disponibles.
+  </div>
+</div>
+
+</section>
+
+</div>
+
+</div>
+
+---
+
+<section style="text-align: center;"><h4><p class="text-info">Fundamentos básicos de programación en Python</p></h4></section>
+<br>
+
+<p class="text-warning">Pseudocódigo e introducción a los ciclos o bucles</p>
+
+<div class = "row">
+
+<div class = "col-md-6">
+
+<section style="text-align: justify;"><p class="text-secondary">Se pueden ignorar los requisitos de la sintaxis de Python e intentar analizar el problema sin pensar en la programación real. En otras palabras, se puede escribir el <font color="black">algoritmo</font>, e implementar luego cuando se este contento con él. En este caso, se puede utilizar un tipo de notación que no es un lenguaje de programación real (no se puede compilar ni ejecutar), pero está formalizado, es conciso y se puede leer. Se llama <font color="black">pseudocódigo</font>.</p></section>
+
+<section style="text-align: justify;"><p class="text-secondary">Un ejemplo de pseudocódigo a continuación:</p></section>
+
+<p>línea 01  numeroMayor = -999999999
+<p>línea 02  numero = int(input())</p>
+<p>línea 03  if numero == -1:</p>
+<p>línea 04  print(numeroMayor)</p>
+<p>línea 05  exit()</p>
+
+</div>
+
+<div class = "col-md-6">
+
+<p>línea 06  if numero > numeroMayor:</p>
+<p>línea 07  numeroMayor = numero</p>
+<p>línea 08  vaya a la línea 02</p>
+
+<section style="text-align: justify;"><p class="text-secondary">En primer lugar, se puede simplificar el programa si, al comienzo del código, se asigna la variable numeroMayor con un valor que será más pequeño que cualquiera de los números ingresados. Se usa -999999999 para ese propósito.</p></section>
+
+<section style="text-align: justify;"><p class="text-secondary">En segundo lugar, se asume que el algoritmo no sabrá por adelantado cuántos números se entregarán al programa. Se espera que el usuario al ingresar todos los números que se desee, el algoritmo funcione bien con cien y con mil números. ¿Cómo se hace esto?</p></section>
+
+</div>
+
+</div>
+
+---
+
+<section style="text-align: center;"><h4><p class="text-info">Fundamentos básicos de programación en Python</p></h4></section>
+<br>
+
+<p class="text-warning">Pseudocódigo e introducción a los ciclos o bucles</p>
+
+<div class = "row">
+
+<div class = "col-md-6">
+
+<section style="text-align: justify;"><p class="text-secondary">Se hace un trato con el usuario: cuando se ingresa el valor -1, será una señal de que no hay más datos y que el programa debe finalizar su trabajo. De lo contrario, si el valor ingresado no es igual a -1, el programa leerá otro número, y así sucesivamente.</p></section>
+
+<section style="text-align: justify;"><p class="text-secondary">El truco se basa en la suposición de que cualquier parte del código se puede realizar más de una vez, precisamente, tantas veces como sea necesario.</p></section>
+
+<section style="text-align: justify;"><p class="text-secondary">La ejecución de una determinada parte del código más de una vez se denomina <font color="black">bucle</font>. Por ejemplo, las líneas 02 a 08 del anterior pseudocódigo forman un bucle. Se pasara tantas veces como sea necesario para revisar todos los valores ingresados.</p></section>
+<!--Voy en la parte 3.1.2.1 Ciclos en Python | while-->
+</div>
+
+<div class = "col-md-6">
+
+</div>
+
+</div>
 
 ---
 
