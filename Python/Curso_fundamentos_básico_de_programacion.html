@@ -12,7 +12,7 @@ class: center, middle, inverse, title-slide
 
 # Curso sobre fundamentos básicos de programación en Python
 ### Jorge Leonardo López Martínez
-### 29 abril, 2020
+### 30 abril, 2020
 
 ---
 
@@ -1035,8 +1035,147 @@ El siguiente ejemplo se parece a la anidación del ejemplo anterior, pero las si
 
 &lt;section style="text-align: justify;"&gt;&lt;p class="text-secondary"&gt;El truco se basa en la suposición de que cualquier parte del código se puede realizar más de una vez, precisamente, tantas veces como sea necesario.&lt;/p&gt;&lt;/section&gt;
 
-&lt;section style="text-align: justify;"&gt;&lt;p class="text-secondary"&gt;La ejecución de una determinada parte del código más de una vez se denomina &lt;font color="black"&gt;bucle&lt;/font&gt;. Por ejemplo, las líneas 02 a 08 del anterior pseudocódigo forman un bucle. Se pasara tantas veces como sea necesario para revisar todos los valores ingresados.&lt;/p&gt;&lt;/section&gt;
+&lt;section style="text-align: justify;"&gt;&lt;p class="text-secondary"&gt;La ejecución de una determinada parte del código más de una vez se denomina &lt;font color="black"&gt;ciclo&lt;/font&gt; o &lt;font color="black"&gt;bucle&lt;/font&gt;. Por ejemplo, las líneas 02 a 08 del anterior pseudocódigo forman un bucle. Se pasara tantas veces como sea necesario para revisar todos los valores ingresados.&lt;/p&gt;&lt;/section&gt;
 &lt;!--Voy en la parte 3.1.2.1 Ciclos en Python | while--&gt;
+&lt;/div&gt;
+
+&lt;div class = "col-md-6"&gt;
+
+&lt;section style="text-align: justify;"&gt;&lt;p class="text-secondary"&gt;En general, en Python, un ciclo se puede representar de la siguiente manera:&lt;/p&gt;&lt;/section&gt;
+
+while expresión_condicional:&lt;p&gt;
+     &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;instrucción&lt;/p&gt;
+
+&lt;section style="text-align: justify;"&gt;&lt;p class="text-secondary"&gt;La diferencia sintáctica con la instrucción &lt;font color="black"&gt;if&lt;/font&gt; es solo una: se usa la palabra &lt;font color="black"&gt;while&lt;/font&gt; en lugar de la palabra &lt;font color="black"&gt;if&lt;/font&gt;.&lt;/p&gt;&lt;/section&gt;
+
+&lt;section style="text-align: justify;"&gt;&lt;p class="text-secondary"&gt;La diferencia semántica es más importante: cuando se cumple la condición, &lt;font color="black"&gt;if&lt;/font&gt; realiza sus declaraciones &lt;font color="black"&gt;sólo una vez&lt;/font&gt;; &lt;font color="black"&gt;while repite la ejecución siempre que la condición se evalúe como True&lt;/font&gt;.&lt;/p&gt;&lt;/section&gt;
+
+&lt;/div&gt;
+
+&lt;/div&gt;
+
+---
+
+&lt;section style="text-align: center;"&gt;&lt;h4&gt;&lt;p class="text-info"&gt;Fundamentos básicos de programación en Python&lt;/p&gt;&lt;/h4&gt;&lt;/section&gt;
+&lt;br&gt;
+
+&lt;p class="text-warning"&gt;Pseudocódigo e introducción a los ciclos o bucles&lt;/p&gt;
+
+&lt;div class = "row"&gt;
+
+&lt;div class = "col-md-6"&gt;
+
+&lt;section style="text-align: justify;"&gt;&lt;p class="text-secondary"&gt;Es importante recordar que:&lt;/p&gt;
+
+&lt;div class="form-check"&gt;
+  &lt;div class="form-check disabled"&gt;
+    &lt;input class="form-check-input" type="checkbox" value="" disabled=""&gt;     Si se desea ejecutar más de una declaración dentro de un while, se debe (como con if) poner sangría a todas las instrucciones de la misma manera.
+  &lt;/div&gt;
+  &lt;div class="form-check disabled"&gt;
+    &lt;input class="form-check-input" type="checkbox" value="" disabled=""&gt;
+    Una instrucción o conjunto de instrucciones ejecutadas dentro del while se llama el cuerpo del ciclo.
+  &lt;/div&gt;
+  &lt;div class="form-check disabled"&gt;
+    &lt;input class="form-check-input" type="checkbox" value="" disabled=""&gt;
+    Si la condición es False (igual a cero) tan pronto como se compruebe por primera vez, el cuerpo no se ejecuta ni una sola vez.
+  &lt;/div&gt;
+  &lt;div class="form-check disabled"&gt;
+    &lt;input class="form-check-input" type="checkbox" value="" disabled=""&gt;
+    El cuerpo debe poder cambiar el valor de la condición, porque si la condición es True al principio, el cuerpo podría funcionar continuamente hasta el infinito.
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/section&gt;
+
+&lt;/div&gt;
+
+&lt;div class = "col-md-6"&gt;
+
+&lt;section style="text-align: justify;"&gt;&lt;p class="text-secondary"&gt;Un &lt;font color="black"&gt;ciclo infinito&lt;/font&gt;, también denominado &lt;font color="black"&gt;ciclo sin fin&lt;/font&gt;, es una secuencia de instrucciones en un programa que se repite indefinidamente. Este es un ejemplo:&lt;/p&gt;&lt;/section&gt;
+
+while True:&lt;p&gt;
+     &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;print("Estoy atrapado dentro de un ciclo")&lt;/p&gt;
+
+&lt;section style="text-align: justify;"&gt;&lt;p class="text-secondary"&gt;Otro tipo de ciclo disponible en Python proviene de la observación de que a veces es más importante &lt;font color="black"&gt;contar los "giros o vueltas" del ciclo&lt;/font&gt; que verificar las condiciones. Por ejemplo, se usa el ciclo &lt;font color="black"&gt;while&lt;/font&gt; para que el cuerpo de un ciclo se ejecute cien veces:&lt;/p&gt;&lt;/section&gt;
+
+&lt;p&gt;i = 0&lt;/p&gt;
+&lt;p&gt;while i &lt; 100:&lt;/p&gt;&lt;p&gt;
+    &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;i += 1&lt;/p&gt;
+
+&lt;/div&gt;
+
+&lt;/div&gt;
+
+---
+
+&lt;section style="text-align: center;"&gt;&lt;h4&gt;&lt;p class="text-info"&gt;Fundamentos básicos de programación en Python&lt;/p&gt;&lt;/h4&gt;&lt;/section&gt;
+&lt;br&gt;
+
+&lt;p class="text-warning"&gt;Pseudocódigo e introducción a los ciclos o bucles&lt;/p&gt;
+
+&lt;div class = "row"&gt;
+
+&lt;div class = "col-md-6"&gt;
+
+&lt;section style="text-align: justify;"&gt;&lt;p class="text-secondary"&gt;El ciclo &lt;font color="black"&gt;for&lt;/font&gt; se encarga de realizar el tipo de tareas anterior.&lt;/p&gt;&lt;/section&gt;
+
+&lt;section style="text-align: justify;"&gt;&lt;p class="text-secondary"&gt;Sin embargo, el ciclo &lt;font color="black"&gt;for&lt;/font&gt; está diseñado para realizar tareas más complicadas: &lt;font color="black"&gt;puede "explorar" grandes colecciones de datos elemento por elemento&lt;/font&gt;. Por ejemplo, el siguiente fragmento:&lt;/p&gt;&lt;/section&gt;
+
+for i in range (100):&lt;p&gt;
+     &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;pass&lt;/p&gt;
+
+&lt;section style="text-align: justify;"&gt;&lt;p class="text-secondary"&gt;Hay algunos elementos nuevos en el anterior:&lt;/p&gt;
+
+&lt;div class="form-check"&gt;
+  &lt;div class="form-check disabled"&gt;
+    &lt;input class="form-check-input" type="checkbox" value="" disabled=""&gt;     La palabra reservada for abre el ciclo for. No hay condición después de eso; no se tiene que pensar en las condiciones, ya que se verifican internamente, sin ninguna intervención.
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/section&gt;
+
+&lt;/div&gt;
+
+&lt;div class = "col-md-6"&gt;
+
+&lt;section style="text-align: justify;"&gt;
+
+&lt;div class="form-check"&gt;
+  &lt;div class="form-check disabled"&gt;
+    &lt;input class="form-check-input" type="checkbox" value="" disabled=""&gt;
+    Cualquier variable después de la palabra reservada for es la variable de control del ciclo; cuenta los giros del ciclo y lo hace automáticamente.
+  &lt;/div&gt;
+  &lt;div class="form-check disabled"&gt;
+    &lt;input class="form-check-input" type="checkbox" value="" disabled=""&gt;
+    La palabra reservada in introduce un elemento de sintaxis que describe el rango de valores posibles que se asignan a la variable de control.
+  &lt;/div&gt;
+  &lt;div class="form-check disabled"&gt;
+    &lt;input class="form-check-input" type="checkbox" value="" disabled=""&gt;
+    La función range( ) es responsable de generar todos los valores deseados de la variable de control&lt;!--; en el ejemplo, la función creará (incluso podemos decir que alimentará el ciclo con) valores subsiguientes del siguiente conjunto: 0, 1, 2 .. 97, 98, 99. En este caso, la función range( ) comienza su trabajo desde 0 y lo finaliza un paso (un número entero) antes del valor de su argumento--&gt;.
+  &lt;/div&gt;
+  &lt;div class="form-check disabled"&gt;
+    &lt;input class="form-check-input" type="checkbox" value="" disabled=""&gt;
+    La palabra clave pass dentro del cuerpo del ciclo, no hace nada en absoluto; es una instrucción vacía: se coloca aquí porque la sintaxis del ciclo for exige al menos una instrucción dentro del cuerpo (por cierto, if, elif, else y while expresan lo mismo).
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/section&gt;
+
+&lt;/div&gt;
+
+&lt;/div&gt;
+
+---
+
+&lt;section style="text-align: center;"&gt;&lt;h4&gt;&lt;p class="text-info"&gt;Fundamentos básicos de programación en Python&lt;/p&gt;&lt;/h4&gt;&lt;/section&gt;
+&lt;br&gt;
+
+&lt;p class="text-warning"&gt;Pseudocódigo e introducción a los ciclos o bucles&lt;/p&gt;
+&lt;!--Voy en 3.1.2.7 Control de ciclos en Python | break y continue--&gt;
+&lt;div class = "row"&gt;
+
+&lt;div class = "col-md-6"&gt;
+
 &lt;/div&gt;
 
 &lt;div class = "col-md-6"&gt;
