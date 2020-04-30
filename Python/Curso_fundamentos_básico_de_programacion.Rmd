@@ -1174,6 +1174,8 @@ while expresión_condicional:<p>
 
 <section style="text-align: justify;"><p class="text-secondary">La diferencia semántica es más importante: cuando se cumple la condición, <font color="black">if</font> realiza sus declaraciones <font color="black">sólo una vez</font>; <font color="black">while repite la ejecución siempre que la condición se evalúe como True</font>.</p></section>
 
+<section style="text-align: justify;"><p class="text-secondary">El ciclo <font color="black">while</font> ejecuta una sentencia o un conjunto de declaraciones siempre que una condición booleana especificada sea verdadera.</p></section>
+
 </div>
 
 </div>
@@ -1295,18 +1297,144 @@ for i in range (100):<p>
 <br>
 
 <p class="text-warning">Pseudocódigo e introducción a los ciclos o bucles</p>
-<!--Voy en 3.1.2.7 Control de ciclos en Python | break y continue-->
+
 <div class = "row">
 
 <div class = "col-md-6">
 
+<section style="text-align: justify;"><p class="text-secondary">Sin embargo se pueden presentar dos situaciones:</p>
+
+<div class="form-check">
+  <div class="form-check disabled">
+    <input class="form-check-input" type="checkbox" value="" disabled="">
+    Puede que no sea necesario continuar el ciclo en su totalidad; se debe abstener de seguir ejecutando el cuerpo del ciclo e ir más allá.
+  </div>
+  <div class="form-check disabled">
+    <input class="form-check-input" type="checkbox" value="" disabled="">
+    Puede que se necesite comenzar el siguiente giro del ciclo sin completar la ejecución del turno actual.
+  </div>
+</div>
+
+</section>
+
+<section style="text-align: justify;"><p class="text-secondary">Para esto, Python proporciona dos instrucciones especiales para la implementación de estas dos tareas. Estas dos instrucciones son:</p>
+
+<div class="form-check">
+  <div class="form-check disabled">
+    <input class="form-check-input" type="checkbox" value="" disabled="">
+    Break: Sale del ciclo inmediatamente, e incondicionalmente termina la operación del ciclo; el programa comienza a ejecutar la instrucción más cercana después del cuerpo del ciclo.
+  </div>
+</div>
+
+</section>
+
 </div>
 
 <div class = "col-md-6">
 
+<section style="text-align: justify;">
+
+<div class="form-check">
+  <div class="form-check disabled">
+    <input class="form-check-input" type="checkbox" value="" disabled="">
+    Continue: Se comporta como si el programa hubiera llegado repentinamente al final del cuerpo; el siguiente turno se inicia y la expresión de condición se prueba de inmediato.
+  </div>
+</div>
+
+<!--
+A continuación, dos ejemplos simples para ilustrar como funcionan las dos instrucciones.
+-->
+
+```{python, echo = FALSE, eval = FALSE}
+
+print("La instrucción de ruptura:")
+for i in range(1,6):
+    if i == 3:
+        break
+    print("Dentro del ciclo.", i)
+print("Fuera del ciclo.")
+
+# continua - ejemplo
+
+print("\nLa instrucción continue:")
+for i in range(1,6):
+    if i == 3:
+        continue
+    print("Dentro del ciclo.", i)
+print("Fuera del ciclo.")
+```
+
+
+</section>
+
+<section style="text-align: justify;"><p class="text-secondary">Ambas palabras son <font color="black">palabras reservadas</font>.</p></section>
+
 </div>
 
 </div>
+
+---
+
+<section style="text-align: center;"><h4><p class="text-info">Fundamentos básicos de programación en Python</p></h4></section>
+<br>
+
+<p class="text-warning">Operaciones lógicas</p>
+
+<div class = "row">
+
+<div class = "col-md-6">
+
+<section style="text-align: justify;"><p class="text-secondary">Python debe tener operadores para construir <font color="black">conjunciones</font> (para el cumplimiento simultaneo de dos condiciones) y <font color="black">disyunciones</font> (al menos una de las condiciones se debe cumplir). Sin ellos, el poder expresivo del lenguaje se debilitaría sustancialmente. A estos se les llama <font color="black">operadores lógicos</font>.</p></section>
+
+<section style="text-align: justify;"><p class="text-secondary">Un operador de conjunción lógica en Python es la palabra <font color="black">and</font> (<font color="black">y</font>). Este es un operador binario <font color="black">con una prioridad inferior a la expresada por los operadores de comparación</font>. Este permite codificar condiciones complejas sin el uso de paréntesis como este:</p></section>
+
+<section style="text-align: center;">contador > 0 and valor == 100</section>
+
+<section style="text-align: justify;"><p class="text-secondary">Un operador de disyunción es la palabra <font color="black">or</font> (<font color="black">o</font>). Este es un operador binario con una prioridad más baja que <font color="black">and</font>.</p></section>
+
+</div>
+
+<div class = "col-md-6">
+
+<section style="text-align: justify;"><p class="text-secondary">Además, hay otro operador que se puede aplicar para condiciones de construcción. Es un <font color="black">operador unario que realiza una negación lógica</font>. Su funcionamiento es simple: convierte la verdad en falso y lo falso en verdad. Este operador se escribe como la palabra <font color="black">not</font>, y su <font color="black">prioridad es muy alta</font>.</p></section>
+
+<section style="text-align: justify;"><p class="text-secondary">Existen cuatro operadores (<font color="black">denominados operadores bitwise</font>) que cubren todas las operaciones que se mencionaron anteriormente en el contexto lógico, además de un operador adicional: <font color="black">xor</font> denotado como <font color="black">^</font>. Estos son:</p></section>
+
+<div class="form-check">
+  <div class="form-check disabled">
+    <input class="form-check-input" type="checkbox" value="" disabled="">
+    &  (ampersand) - conjunción a nivel de bits.
+  </div>
+  <div class="form-check disabled">
+    <input class="form-check-input" type="checkbox" value="" disabled="">
+    |  (barra vertical) - disyunción a nivel de bits.
+  </div>
+  <div class="form-check disabled">
+    <input class="form-check-input" type="checkbox" value="" disabled="">
+    ~  (tilde) - negación a nivel de bits.
+  </div>
+  <div class="form-check disabled">
+    <input class="form-check-input" type="checkbox" value="" disabled="">
+    ^  (signo de intercalación) - exclusivo a nivel de bits o.
+  </div>
+</div>
+
+<!--
+La diferencia en el funcionamiento de los operadores lógicos y de bits es importante: los operadores lógicos no penetran en el nivel de bits de su argumento. Solo les interesa el valor entero final.
+
+Los operadores bitwise son más estrictos: tratan con cada bit por separado. Si asumimos que la variable entera ocupa 64 bits (lo que es común en los sistemas informáticos modernos), puede imaginar la operación a nivel de bits como una evaluación de 64 veces del operador lógico para cada par de bits de los argumentos. Su analogía es obviamente imperfecta, ya que en el mundo real todas estas 64 operaciones se realizan al mismo tiempo (simultáneamente).
+-->
+
+</div>
+
+</div>
+
+<!--buscar en la pagina del icetex y en la cancilleria, scolar4devs.com-->
+
+<!--
+Voy en la sección 3.1.4.1 Listas - colecciones de datos
+
+-->
 
 ---
 
