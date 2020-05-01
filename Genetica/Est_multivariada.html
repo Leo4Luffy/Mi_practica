@@ -12,34 +12,46 @@ class: center, middle, inverse, title-slide
 
 # Estadística multivariada aplicada a la genética - una introducción
 ### Jorge Leonardo López Martínez
-### 28 abril, 2020
+### 01 mayo, 2020
 
 ---
 
 
 
 
-&lt;section style="text-align: center;"&gt;&lt;h3&gt;&lt;p class="text-warning"&gt;Análisis de componentes principales&lt;/p&gt;&lt;/h3&gt;&lt;/section&gt;
+&lt;section style="text-align: center;"&gt;&lt;h4&gt;&lt;p class="text-warning"&gt;Análisis de datos genéticos: una revisión&lt;/p&gt;&lt;/h4&gt;&lt;/section&gt;
 
 &lt;div class = "row"&gt;
 
 &lt;div class = "col-md-6"&gt;
 
-&lt;section style="text-align: justify;"&gt;&lt;p class="text-secondary"&gt;Muchos conjuntos de datos consisten en varias variables medidas en el mismo conjunto de individuos. Por ejemplo, se pueden tener características biométricas como altura, peso, edad y datos genéticos para, por ejemplo, mil individuos.&lt;/p&gt;&lt;/section&gt;
+&lt;section style="text-align: justify;"&gt;&lt;p class="text-primary"&gt;Los métodos estadísticos son un componente escencial para los genetistas de poblaciones. Los desarrollos en las teorías estadísticas y el aumento en el poder de computo proporcionan numerosas herramientas en el análisis de marcadores genéticos, lo que permite a los genetistas plantear preguntas nuevas y desafiantes. Los análisis multivariados como el como el &lt;font color="black"&gt;&lt;u&gt;análisis de componentes principales&lt;/u&gt;&lt;/font&gt; son herramientas eficientes en la extracción de información  de marcadores genéticos debido a su capacidad para resumir información genética multivariante en unas pocas variables sinteticas.&lt;/p&gt;&lt;/section&gt;
 
-&lt;section style="text-align: justify;"&gt;&lt;p class="text-secondary"&gt;Por lo general, los datos suelen informarse en una estructura de datos tabular con una fila para cada individuo y una columna para cada variable, dando la representación de una matriz.&lt;/p&gt;&lt;/section&gt;
+&lt;img src="Est_multivariada_files/figure-html/unnamed-chunk-1-1.png" width="200" style="display: block; margin: auto;" /&gt;
 
-&lt;img src="Est_multivariada_files/figure-html/unnamed-chunk-1-1.png" width="260" style="display: block; margin: auto;" /&gt;
 
 &lt;/div&gt;
 
 &lt;div class = "col-md-6"&gt;
 
-&lt;section style="text-align: justify;"&gt;&lt;p class="text-secondary"&gt;La razón de ser del análisis multivariado es la investigación de asociaciones entre las diferentes variables medidas. &lt;!--Si las columnas de la matriz fueran todas independientes entre sí (no relacionadas), simplemente se estudiaria cada columna por separado y se harían estadísticas estándar "univariadas" una por una; no sería beneficioso estudiarlos como una matriz.--&gt;&lt;/p&gt;&lt;/section&gt;
+&lt;section style="text-align: justify;"&gt;&lt;p class="text-primary"&gt;El análisis multivariado tiene numerosas ventajas sobre otros enfoques clásicos utilizados en la genetica de poblaciones:&lt;/p&gt;
 
-&lt;section style="text-align: justify;"&gt;&lt;p class="text-secondary"&gt;Por ejemplo, al estudiar la expresión de 25 mil genes (columnas) en muchas muestras de células derivadas del indiviuo (filas), muchos de estos genes pueden actúar juntos, ya sea que esten correlacionados de forma positiva o negativa. Se perdería mucha información importante si solo se estudiara cada gen por separado. Las conexiones importantes entre genes son detectables solo si se consideran los datos como un todo&lt;!--: cada fila representa las muchas mediciones realizadas en la misma unidad de observación--&gt;.&lt;/p&gt;&lt;/section&gt;
+&lt;div class="form-check"&gt;
+  &lt;div class="form-check disabled"&gt;
+    &lt;input class="form-check-input" type="checkbox" value="" disabled=""&gt;
+    Los métodos multivariados son exploratorios, es decir, no requieren fuertes suposiciones acerca de un modelo genético, como el equilibrio de Hardy-Weinberg o la ausencia de desequilibrio de ligamiento.
+  &lt;/div&gt;
+  &lt;div class="form-check disabled"&gt;
+    &lt;input class="form-check-input" type="checkbox" value="" disabled=""&gt;
+    Aunque los enfoques de agrupamiento suponen que los genotipos estan estructurados en poblaciones discretas, el análisis multivariado tiene como objetivo resumir la variabilidad genética, y por lo tanto, puede revelar cualquier tipo de estructuración genética.
+  &lt;/div&gt;
+  &lt;div class="form-check disabled"&gt;
+    &lt;input class="form-check-input" type="checkbox" value="" disabled=""&gt;
+    Los métodos multivariados no requieren un uso intensivo de la computadora y puede aplicarse a grandes conjuntos de datos (como cientos de miles de marcadores).
+  &lt;/div&gt;
+&lt;/div&gt;
 
-&lt;section style="text-align: justify;"&gt;&lt;p class="text-secondary"&gt;Sin embargo, tener 25 mil dimensiones de variación para considerar a la vez es desalentador. No obstante, se puede reducir los datos a un número menor de dimensiones más importantes sin perder demasiada información mediante un &lt;font color="black"&gt;&lt;u&gt;análisis de componentes principales&lt;/u&gt;&lt;/font&gt;.&lt;/p&gt;&lt;/section&gt;
+&lt;/section&gt;
 
 &lt;/div&gt;
 
@@ -47,7 +59,38 @@ class: center, middle, inverse, title-slide
 
 ---
 
-&lt;section style="text-align: center;"&gt;&lt;h3&gt;&lt;p class="text-warning"&gt;Análisis de componentes principales&lt;/p&gt;&lt;/h3&gt;&lt;/section&gt;
+&lt;section style="text-align: center;"&gt;&lt;h4&gt;&lt;p class="text-warning"&gt;Análisis de datos genéticos: una revisión&lt;/p&gt;&lt;/h4&gt;&lt;/section&gt;
+
+&lt;div class = "row"&gt;
+
+&lt;div class = "col-md-6"&gt;
+
+&lt;section style="text-align: justify;"&gt;
+
+&lt;div class="form-check"&gt;
+  &lt;div class="form-check disabled"&gt;
+    &lt;input class="form-check-input" type="checkbox" value="" disabled=""&gt;
+    El análisis multivariado puede abordar preguntas complejas como &lt;u&gt;la identificación de adaptaciones&lt;/u&gt; y asociar la variabilidad genética con datos ambientales.
+  &lt;/div&gt;
+  &lt;div class="form-check disabled"&gt;
+    &lt;input class="form-check-input" type="checkbox" value="" disabled=""&gt;
+    Los métodos multivariados se han desarrollado y utilizado ampliamente durante más de un siglo en diversos campos.
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;p class="text-primary"&gt;Hoy en día, el análisis multivariado representa un área de la estadística completa, rica y diversificada que ofrece una amplia variedad de métodos, cada uno con sus propias propiedades.&lt;/p&gt;&lt;/section&gt;
+
+&lt;/div&gt;
+
+&lt;div class = "col-md-6"&gt;
+
+&lt;/div&gt;
+
+&lt;/div&gt;
+
+---
+
+&lt;section style="text-align: center;"&gt;&lt;h4&gt;&lt;p class="text-warning"&gt;Análisis de datos genéticos: una revisión&lt;/p&gt;&lt;/h4&gt;&lt;/section&gt;
 
 &lt;div class = "row"&gt;
 
@@ -70,6 +113,33 @@ class: center, middle, inverse, title-slide
 &lt;/div&gt;
 
 &lt;/div&gt;
+
+---
+&lt;!--
+&lt;div class = "row"&gt;
+
+&lt;div class = "col-md-6"&gt;
+
+&lt;section style="text-align: justify;"&gt;&lt;p class="text-secondary"&gt;Muchos conjuntos de datos consisten en varias variables medidas en el mismo conjunto de individuos. Por ejemplo, se pueden tener características biométricas como altura, peso, edad y datos genéticos para, por ejemplo, mil individuos.&lt;/p&gt;&lt;/section&gt;
+
+&lt;section style="text-align: justify;"&gt;&lt;p class="text-secondary"&gt;Por lo general, los datos suelen informarse en una estructura de datos tabular con una fila para cada individuo y una columna para cada variable, dando la representación de una matriz.&lt;/p&gt;&lt;/section&gt;
+
+&lt;img src="Est_multivariada_files/figure-html/unnamed-chunk-3-1.png" width="260" style="display: block; margin: auto;" /&gt;
+
+&lt;/div&gt;
+
+&lt;div class = "col-md-6"&gt;
+
+&lt;section style="text-align: justify;"&gt;&lt;p class="text-secondary"&gt;La razón de ser del análisis multivariado es la investigación de asociaciones entre las diferentes variables medidas.&lt;/p&gt;&lt;/section&gt;
+
+&lt;section style="text-align: justify;"&gt;&lt;p class="text-secondary"&gt;Por ejemplo, al estudiar la expresión de 25 mil genes (columnas) en muchas muestras de células derivadas del indiviuo (filas), muchos de estos genes pueden actúar juntos, ya sea que esten correlacionados de forma positiva o negativa. Se perdería mucha información importante si solo se estudiara cada gen por separado. Las conexiones importantes entre genes son detectables solo si se consideran los datos como un todo.&lt;/p&gt;&lt;/section&gt;
+
+&lt;section style="text-align: justify;"&gt;&lt;p class="text-secondary"&gt;Sin embargo, tener 25 mil dimensiones de variación para considerar a la vez es desalentador. No obstante, se puede reducir los datos a un número menor de dimensiones más importantes sin perder demasiada información mediante un &lt;font color="black"&gt;&lt;u&gt;análisis de componentes principales&lt;/u&gt;&lt;/font&gt;.&lt;/p&gt;&lt;/section&gt;
+
+&lt;/div&gt;
+
+&lt;/div&gt;
+--&gt;
 
 ---
 
