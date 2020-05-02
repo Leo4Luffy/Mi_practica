@@ -141,12 +141,6 @@ ggplot() +
 
 <div class = "col-md-6">
 
-<!--
-<section style="text-align: justify;"><p class="text-secondary">El <font color="black"><u>análisis de componentes principales</u></font> es una técnica lineal, lo que significa que busca relaciones lineales entre variables, y que esas nuevas variables son funciones lineales de las originales.</p></section> 
-
-<section style="text-align: justify;"><p class="text-secondary">El <font color="black"><u>análisis de componentes principales</u></font> es principalmente un técnica exploratoria que produce mapas que muestran las relaciones entre variables y entre observaciones de una manera útil.</p></section>
--->
-
 </div>
 
 <div class = "col-md-6">
@@ -287,6 +281,12 @@ data.frame(
 </div>
 
 </div>
+-->
+
+<!--
+<section style="text-align: justify;"><p class="text-secondary">El <font color="black"><u>análisis de componentes principales</u></font> es una técnica lineal, lo que significa que busca relaciones lineales entre variables, y que esas nuevas variables son funciones lineales de las originales.</p></section> 
+
+<section style="text-align: justify;"><p class="text-secondary">El <font color="black"><u>análisis de componentes principales</u></font> es principalmente un técnica exploratoria que produce mapas que muestran las relaciones entre variables y entre observaciones de una manera útil.</p></section>
 -->
 
 ---

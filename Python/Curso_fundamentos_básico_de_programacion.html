@@ -12,7 +12,7 @@ class: center, middle, inverse, title-slide
 
 # Curso sobre fundamentos básicos de programación en Python
 ### Jorge Leonardo López Martínez
-### 30 abril, 2020
+### 02 mayo, 2020
 
 ---
 
@@ -1288,12 +1288,283 @@ Los operadores bitwise son más estrictos: tratan con cada bit por separado. Si 
 
 &lt;/div&gt;
 
-&lt;!--buscar en la pagina del icetex y en la cancilleria, scolar4devs.com--&gt;
+
+---
+
+&lt;section style="text-align: center;"&gt;&lt;h4&gt;&lt;p class="text-info"&gt;Fundamentos básicos de programación en Python&lt;/p&gt;&lt;/h4&gt;&lt;/section&gt;
+&lt;br&gt;
+
+&lt;p class="text-warning"&gt;Listas - colecciones de datos&lt;/p&gt;
+
+&lt;div class = "row"&gt;
+
+&lt;div class = "col-md-6"&gt;
+
+&lt;section style="text-align: justify;"&gt;&lt;p class="text-secondary"&gt;Hasta ahora dentro de los temas aprendidos se ha visto como declarar variables que pueden almacenar exactamente un valor dado a la vez. Tales variables a veces se denominan &lt;font color="black"&gt;escalares&lt;/font&gt; por analogía con las matemáticas. Sin embargo, podría ser conveniente declarar una variable que pueda &lt;fonr color="black"&gt;almacenar más de un valor&lt;/font&gt;. Todavía sería una y la misma variable, pero muy amplia y espaciosa.&lt;/p&gt;&lt;/section&gt;
+
+&lt;section style="text-align: justify;"&gt;&lt;p class="text-secondary"&gt;¿Suena atractivo? Quizás, pero ¿cómo se manejaría un contenedor así lleno de valores diferentes? ¿Cómo se elegiría solo el que se necesita?&lt;/p&gt;&lt;/section&gt;
+
+&lt;section style="text-align: justify;"&gt;&lt;p class="text-secondary"&gt;Para esto por ejemplo, se puede crear una variable llamada &lt;i&gt;numeros&lt;/i&gt; a el cual se le asigna no solo un número, sino que se llena con una &lt;font color="black"&gt;lista&lt;/font&gt; que consta de cinco valores:&lt;/font&gt;&lt;/section&gt;
+
+&lt;/div&gt;
+
+&lt;div class = "col-md-6"&gt;
+
+&lt;section style="text-align: center;"&gt;
+numeros = [10, 5, 7, 2, 1]
+&lt;/section&gt;
+
+&lt;section style="text-align: justify;"&gt;&lt;p class="text-secondary"&gt;Así, &lt;i&gt;numeros&lt;/i&gt; es una lista que consta de cinco valores, todos ellos números. También se puede decir que esta declaración crea una lista de longitud igual a cinco (ya que contiene cinco elementos).&lt;/p&gt;&lt;/section&gt;
+
+&lt;section style="text-align: justify;"&gt;&lt;p class="text-secondary"&gt;&lt;font color="black"&gt;Los elementos dentro de una lista pueden tener diferentes tipos&lt;/font&gt;: algunos pueden ser enteros, otros pueden ser flotantes, etc. La lista &lt;font color="black"&gt;es una colección de elementos, pero cada elemento es un escalar&lt;/font&gt;.&lt;/p&gt;&lt;/section&gt;
+
+&lt;section style="text-align: justify;"&gt;&lt;p class="text-secondary"&gt;Python tiene una convención que indica que los elementos de una lista están &lt;font color="black"&gt;siempre numerados desde 0&lt;/font&gt;. Esto significa que el elemento almacenado al inicio de la lista tendrá el número 0. Como hay cinco elementos en la anterior lista, al último de ellos se le asigna el número 4.&lt;/p&gt;&lt;/section&gt;
+
+&lt;/div&gt;
+
+&lt;/div&gt;
+
+---
+
+&lt;section style="text-align: center;"&gt;&lt;h4&gt;&lt;p class="text-info"&gt;Fundamentos básicos de programación en Python&lt;/p&gt;&lt;/h4&gt;&lt;/section&gt;
+&lt;br&gt;
+
+&lt;p class="text-warning"&gt;Listas - colecciones de datos&lt;/p&gt;
+
+&lt;div class = "row"&gt;
+
+&lt;div class = "col-md-6"&gt;
+
+&lt;section style="text-align: justify;"&gt;&lt;p class="text-secondary"&gt;Se puede cambiar el valor de un elemeto elegido en la lista así:&lt;/p&gt;&lt;/section&gt;
+
+&lt;section style="text-align: left;"&gt;
+&lt;p&gt;numeros = [10, 5, 7, 2, 1]&lt;/p&gt;
+&lt;p&gt;numeros[0] = 111 # Se asigna un nuevo valor de 111 al primer elemento en la lista.&lt;/p&gt;
+&lt;/section&gt;
+
+&lt;section style="text-align: justify;"&gt;&lt;p class="text-secondary"&gt;El valor dentro de los corchetes que selecciona un elemento de la lista se llama un &lt;font color="black"&gt;índice&lt;/font&gt;, mientras que la operación de seleccionar un elemento de la lista se conoce como &lt;font color="black"&gt;indexación&lt;/font&gt;. Por ejemplo:&lt;/p&gt;&lt;/section&gt;
+
+&lt;section style="text-align: left;"&gt;
+&lt;p&gt;numeros[1] = numeros[4] # Se copia el valor del quinto elemento al segundo elemento de la lista.&lt;/p&gt;
+&lt;/section&gt;
+
+&lt;section style="text-align: justify;"&gt;&lt;p class="text-secondary"&gt;Es importante anotar que &lt;font color="black"&gt;cualquier expresión también puede ser un índice&lt;/font&gt;. Esto abre muchas posibilidades.&lt;/p&gt;&lt;/section&gt;
+
+&lt;/div&gt;
+
+&lt;div class = "col-md-6"&gt;
+
+&lt;section style="text-align: justify;"&gt;&lt;p class="text-secondary"&gt;La &lt;font color="black"&gt;longitud de una lista&lt;/font&gt; puede variar durante la ejecución. Se pueden agregar nuevos elementos a la lista, mientras que otros pueden eliminarse de ella. Esto significa que la lista es una &lt;font color="black"&gt;entidad muy dinámica&lt;/font&gt;.&lt;/p&gt;&lt;/section&gt;
+
+&lt;section style="text-align: justify;"&gt;&lt;p class="text-secondary"&gt;Si se desea verificar la longitud actual de la lista, se puede usar una función llamada &lt;font color="black"&gt;len( )&lt;/font&gt; (su nombre proviene de length - longitud). Esta función toma el nombre de la lista como un argumento y devuelve el número de elementos almacenados actualmente dentro de la lista (en otras palabras, la longitud de la lista). Así:&lt;/p&gt;&lt;/section&gt;
+
+&lt;section style="text-align: left;"&gt;
+&lt;p&gt;print(len(numeros)) # imprimiendo la longitud de la lista&lt;/p&gt;
+&lt;/section&gt;
+
+&lt;/div&gt;
+
+&lt;/div&gt;
+
+---
+
+&lt;section style="text-align: center;"&gt;&lt;h4&gt;&lt;p class="text-info"&gt;Fundamentos básicos de programación en Python&lt;/p&gt;&lt;/h4&gt;&lt;/section&gt;
+&lt;br&gt;
+
+&lt;p class="text-warning"&gt;Listas - colecciones de datos&lt;/p&gt;
+
+&lt;div class = "row"&gt;
+
+&lt;div class = "col-md-6"&gt;
+
+&lt;section style="text-align: justify;"&gt;&lt;p class="text-secondary"&gt;Cualquier elemento de la lista puede ser eliminado en cualquier momento mediante una instrucción llamada &lt;font color="black"&gt;del&lt;/font&gt; (de delete - eliminar). Esta es una instrucción, no una función.&lt;/p&gt;&lt;/section&gt;
+
+&lt;section style="text-align: justify;"&gt;&lt;p class="text-secondary"&gt;Para esto se debe apuntar al elemento que se quiere eliminar, esta desaparecerá de la lista y la longitud de la lista se reducirá en uno:&lt;/p&gt;&lt;/section&gt;
+
+&lt;section style="text-align: left;"&gt;
+&lt;p&gt;numeros = [10, 5, 7, 2, 1]&lt;/p&gt;
+&lt;p&gt;del numeros[1]&lt;/p&gt;
+&lt;p&gt;print(len(numeros)) # Ahora son 4 los elementos de la lista.&lt;/p&gt;
+&lt;/section&gt;
+
+&lt;section style="text-align: justify;"&gt;&lt;p class="text-secondary"&gt;En Python, los &lt;font color="black"&gt;índices negativos&lt;/font&gt; son válidos y pueden ser muy útiles. Un elemento con un índice igual a -1 es el &lt;font color="black"&gt;último en la lista&lt;/font&gt;:&lt;/p&gt;&lt;/section&gt;
+
+&lt;/div&gt;
+
+&lt;div class = "col-md-6"&gt;
+
+&lt;section style="text-align: left;"&gt;
+&lt;p&gt;numeros = [10, 5, 7, 2, 1]&lt;/p&gt;
+&lt;p&gt;print(numeros[-1]) # El código del ejemplo muestra a 1 que es el último número de la lista.&lt;/p&gt;
+&lt;/section&gt;
+
+&lt;section style="text-align: justify;"&gt;&lt;p class="text-secondary"&gt;Del mismo modo, el elemento con un índice igual a -2 es el &lt;font color ="black"&gt;anterior al último en la lista&lt;/font&gt;. Así hasta -4 &lt;font color ="black"&gt;(print(numeros[-4]))&lt;/font&gt; que sería el último elemento accesible en la lista de ejemplo.&lt;/p&gt;&lt;/section&gt;
+
+&lt;section style="text-align: justify;"&gt;&lt;p class="text-secondary"&gt;Así, la &lt;font color="black"&gt;lista&lt;/font&gt; es un &lt;font color="black"&gt;tipo de dato&lt;/font&gt; en Python que se utiliza para &lt;font color="black"&gt;almacenar múltiples objetos&lt;/font&gt;. Es una &lt;font color="black"&gt;colección ordenada y mutable&lt;/font&gt; de elementos separados por comas entre corchetes.&lt;/p&gt;&lt;/section&gt;
+
+&lt;/div&gt;
+
+&lt;/div&gt;
+
+---
+
+&lt;section style="text-align: center;"&gt;&lt;h4&gt;&lt;p class="text-info"&gt;Fundamentos básicos de programación en Python&lt;/p&gt;&lt;/h4&gt;&lt;/section&gt;
+&lt;br&gt;
+
+&lt;p class="text-warning"&gt;Funciones vs Métodos&lt;/p&gt;
+
+&lt;div class = "row"&gt;
+
+&lt;div class = "col-md-6"&gt;
+
+&lt;section style="text-align: justify;"&gt;&lt;p class="text-secondary"&gt;Un &lt;font color="black"&gt;método&lt;/font&gt; es un tipo específico de función: se comporta como una función y se parece a una función, pero difiere en la forma en que actúa y en su estilo de invocación.&lt;/p&gt;&lt;/section&gt;
+
+&lt;section style="text-align: justify;"&gt;&lt;p class="text-secondary"&gt;Una &lt;font color="black"&gt;función&lt;/font&gt; no pertenece a ningún dato: obtiene datos, puede crear nuevos datos y (generalmente) produce un resultado. Un método hace todas estas cosas, pero también puede cambiar el estado de una entidad seleccionada.&lt;/p&gt;&lt;/section&gt;
+
+&lt;section style="text-align: justify;"&gt;&lt;p class="text-secondary"&gt;Un método es propiedad de los datos para los que trabaja, mientras que una función es propiedad de todo el código. Esto también significa que invocar un método requiere alguna especificación de los datos a partir de los cuales se invoca el método.&lt;/p&gt;&lt;/section&gt;
+
+&lt;/div&gt;
+
+&lt;div class = "col-md-6"&gt;
+
+&lt;section style="text-align: justify;"&gt;&lt;p class="text-secondary"&gt;En general, una invocación de función típica puede tener este aspecto:&lt;/p&gt;&lt;/section&gt;
+
+&lt;section style="text-align: center;"&gt;
+resultado =  funcion(argumento)
+&lt;/section&gt;
+
+&lt;section style="text-align: justify;"&gt;&lt;p class="text-secondary"&gt;La función toma un argumento, hace algo y devuelve un resultado.&lt;/p&gt;&lt;/section&gt;
+
+&lt;section style="text-align: justify;"&gt;&lt;p class="text-secondary"&gt;La invocación de un método se ve así:&lt;/p&gt;&lt;/section&gt;
+
+&lt;section style="text-align: center;"&gt;
+resultado =  data.method(argumento)
+&lt;/section&gt;
+
+&lt;section style="text-align: justify;"&gt;&lt;p class="text-secondary"&gt;El nombre del método está precedido por el nombre de los datos que posee el método. A continuación, se agrega un punto, seguido del nombre del método y un par de paréntesis que encierran los argumentos.&lt;/p&gt;&lt;/section&gt;
+
+&lt;section style="text-align: justify;"&gt;&lt;p class="text-secondary"&gt;El método se comporta como una función, pero puede hacer algo más: puede &lt;font color="black"&gt;cambiar el estado interno de los datos&lt;/font&gt; a partir de los cuales se ha invocado.&lt;/p&gt;&lt;/section&gt;
+
+&lt;/div&gt;
+
+&lt;/div&gt;
+
+---
+
+&lt;section style="text-align: center;"&gt;&lt;h4&gt;&lt;p class="text-info"&gt;Fundamentos básicos de programación en Python&lt;/p&gt;&lt;/h4&gt;&lt;/section&gt;
+&lt;br&gt;
+
+&lt;p class="text-warning"&gt;Listas y métodos&lt;/p&gt;
+
+&lt;div class = "row"&gt;
+
+&lt;div class = "col-md-6"&gt;
+
+&lt;section style="text-align: justify;"&gt;&lt;p class="text-secondary"&gt;Se pueden agregar nuevos elementos a una lista existente con métodos propios de las listas, no por funciones.&lt;/p&gt;&lt;/section&gt;
+
+&lt;section style="text-align: justify;"&gt;&lt;p class="text-secondary"&gt;En este sentido, un nuevo elemento puede ser añadido al final de la lista existente. Dicha operación se realiza mediante un método llamado &lt;font color="black"&gt;append( )&lt;/font&gt;, el cual toma el valor de su argumento y lo coloca al final de la lista que posee el método:&lt;/p&gt;&lt;/section&gt;
+
+&lt;section style="text-align: center;"&gt;
+&lt;p&gt;lista.append(valor)&lt;/p&gt;
+&lt;/section&gt;
+
+&lt;section style="text-align: justify;"&gt;&lt;p class="text-secondary"&gt;El método &lt;font color="black"&gt;insert( )&lt;/font&gt; es un poco más inteligente: puede agregar un nuevo elemento en cualquier lugar de la lista, no solo al final:&lt;/p&gt;&lt;/section&gt;
+
+&lt;section style="text-align: center;"&gt;
+&lt;p&gt;lista.insert(ubicación,valor)&lt;/p&gt;
+&lt;/section&gt;
+
+&lt;section style="text-align: justify;"&gt;&lt;p class="text-secondary"&gt;El anterior toma dos argumentos:&lt;/p&gt;&lt;/section&gt;
+
+&lt;/div&gt;
+
+&lt;div class = "col-md-6"&gt;
+
+&lt;section style="text-align: justify;"&gt;
+
+&lt;div class="form-check"&gt;
+  &lt;div class="form-check disabled"&gt;
+    &lt;input class="form-check-input" type="checkbox" value="" disabled=""&gt;
+    El primero muestra la ubicación requerida del elemento a insertar. Todos los elementos existentes que ocupan ubicaciones a la derecha del nuevo elemento (incluido el que está en la posición indicada) se desplazan a la derecha, para hacer espacio para el nuevo elemento.
+  &lt;/div&gt;
+  &lt;div class="form-check disabled"&gt;
+    &lt;input class="form-check-input" type="checkbox" value="" disabled=""&gt;
+    El segundo es el elemento a insertar.
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;p class="text-secondary"&gt;Otro ejemplo de método es si se deseara ordenar una lista. Todas las listas tienen un método denominado &lt;font color ="black"&gt;sort( )&lt;/font&gt;, que las ordena lo más rápido posible. Por ejemplo: &lt;font color="black"&gt;miLista.sort( )&lt;/font&gt;. Con el método &lt;font color="black"&gt;reverse( )&lt;/font&gt;, se puede invertir la lista.&lt;/p&gt;
+
+&lt;p class="text-secondary"&gt;Se puede iniciar la vida de una lista &lt;font color="black"&gt;creándola vacía&lt;/font&gt; (esto se hace con un par de corchetes vacíos) y luego agregar nuevos elementos según sea necesario: &lt;font color="black"&gt;miLista = [ ]&lt;/font&gt;.&lt;/p&gt;
+
+&lt;/section&gt;
 
 &lt;!--
-Voy en la sección 3.1.4.1 Listas - colecciones de datos
+Las listas pueden ser iteradas mediante el uso del bucle for. El bucle for tiene una variante muy especial que puede procesar las listas de manera muy efectiva. Echemos un vistazo a eso.
 
+Supongamos que desea calcular la suma de todos los valores almacenados en la lista miLista.
+
+Necesitas una variable cuya suma se almacenará y se le asignará inicialmente un valor de 0 - su nombre es suma. Luego agrega todos los elementos de la lista usando el bucle for. Echa un vistazo al fragmento en el editor.
 --&gt;
+
+
+
+&lt;/div&gt;
+
+&lt;/div&gt;
+
+---
+
+&lt;section style="text-align: center;"&gt;&lt;h4&gt;&lt;p class="text-info"&gt;Fundamentos básicos de programación en Python&lt;/p&gt;&lt;/h4&gt;&lt;/section&gt;
+&lt;br&gt;
+
+&lt;p class="text-warning"&gt;Operaciones en listas&lt;/p&gt;
+
+&lt;div class = "row"&gt;
+
+&lt;div class = "col-md-6"&gt;
+
+&lt;section style="text-align: justify;"&gt;&lt;p class="text-secondary"&gt;Python ofrece dos operadores muy poderosos, capaces de revisar la lista para verificar si un valor específico está almacenado dentro de la lista o no. Estos operadores son:&lt;/p&gt;&lt;/section&gt;
+
+&lt;section style="text-align: center;"&gt;
+&lt;p&gt;elemento in miLista&lt;/p&gt;
+&lt;p&gt;elemento not in miLista&lt;/p&gt;
+&lt;/section&gt;
+
+&lt;section style="text-align: justify;"&gt;&lt;p class="text-secondary"&gt;El primero de ellos (&lt;font color="black"&gt;in&lt;/font&gt;) verifica si un elemento dado(su argumento izquierdo) está actualmente almacenado en algún lugar dentro de la lista(el argumento derecho).&lt;/p&gt;&lt;/section&gt;
+
+&lt;section style="text-align: justify;"&gt;&lt;p class="text-secondary"&gt;El operador devuelve True en este caso. El segundo (&lt;font color="black"&gt;not in&lt;/font&gt;) comprueba si un elemento dado (su argumento izquierdo) está ausente en una lista. El operador devuelve True en este caso.&lt;/p&gt;&lt;/section&gt;
+
+&lt;/div&gt;
+
+&lt;div class = "col-md-6"&gt;
+
+&lt;section style="text-align: justify;"&gt;&lt;p class="text-secondary"&gt;También se puede usar listas anidadas en Python para crear matrices (es decir, listas bidimensionales). En este caso, para encontrar cualquier elemento de una lista bidimensional, se requieren de dos índices: el primero selecciona la fila y el segundo la columna.&lt;/p&gt;&lt;/section&gt;
+
+&lt;section style="text-align: justify;"&gt;&lt;p class="text-secondary"&gt;Sin embargo, Python no limita la profundidad de la inclusión lista en lista. También se puede anidar tantas listas en las listas como desee y, por lo tanto, crear listas n-dimensionales. Este es el caso de un arreglo tridimensional.&lt;/p&gt;&lt;/section&gt;
+
+&lt;/div&gt;
+
+---
+
+&lt;section style="text-align: center;"&gt;&lt;h4&gt;&lt;p class="text-info"&gt;Fundamentos básicos de programación en Python&lt;/p&gt;&lt;/h4&gt;&lt;/section&gt;
+&lt;br&gt;
+
+&lt;p class="text-warning"&gt;&lt;/p&gt;
+
+&lt;div class = "row"&gt;
+
+&lt;div class = "col-md-6"&gt;
+
+&lt;/div&gt;
+
+&lt;div class = "col-md-6"&gt;
+
+&lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;!--buscar en la pagina del icetex y en la cancilleria, scolar4devs.com--&gt;
 
 ---
 
