@@ -25,6 +25,7 @@ Alguito de información sobre el paquete xaringan (https://bookdown.org/yihui/rm
 ```{r Paquetes a usar, echo = FALSE, eval = TRUE, message = FALSE}
 
 library(dplyr)
+library(tidyr)
 library(ggplot2)
 library(raster)
 library(sf)
@@ -32,6 +33,7 @@ library(ggsflabel)
 library(ggforce)
 library(patchwork)
 library(moments)
+library(kableExtra)
 library(showtext) # Link donde estan las fuentes Google (http://www.google.com/fonts)
 font_add_google('Gochi Hand', 'gochi')
 showtext.auto()
@@ -174,6 +176,18 @@ knitr::include_graphics('Imagenes/octocat.png')
   Extracción de los datos
 </div>
 
+</div>
+
+<div class = "col-md-6">
+
+</div>
+
+</div>
+
+<div class = "row">
+
+<div class = "col-md-6">
+
 <section style="text-align: justify;"><p class="text-primary">La <font color="black"><u>extracción de los datos</u></font> tiene un papel importante en mejorar el tiempo de aprendizaje y aumentar el tamaño de los datos. El objetivo de este proceso de extracción es adquirir la matriz de datos de entrada apropiada como muestra de aprendizaje.</p></section>
 
 <section style="text-align: justify;"><p class="text-primary">La extracción de información en el conjunto de datos de este estudio se realizó mediante la selección de aquellas variables (predictoras) que tuvieran relación con la variable respuesta intervalo entre partos.</p></section>
@@ -181,10 +195,6 @@ knitr::include_graphics('Imagenes/octocat.png')
 </div>
 
 <div class = "col-md-6">
-
-<p>&#8628;</p>
-
-<br>
 
 <section style="text-align: justify;"><p class="text-primary">Esto debido a que el propósito de la metodología a emplear consiste en estimar el valor de dicha variable respuesta en base a las variables predictoras, como se puede observar en la expresión $\small y = f(x) + b$.</p></section>
 
@@ -225,7 +235,17 @@ Base_datos_2 <- Base_datos %>%
   Extracción de los datos
 </div>
 
-<section style="text-align: justify;"><p class="text-primary"></p>
+</div>
+
+<div class = "col-md-6">
+
+</div>
+
+</div>
+
+<div class = "row">
+
+<div class = "col-md-6">
 
 <table class="table table-hover">
   <thead>
@@ -252,15 +272,9 @@ Base_datos_2 <- Base_datos %>%
   </tbody>
 </table>
 
-</section>
-
 </div>
 
 <div class = "col-md-6">
-
-<p>&#8628;</p>
-
-<br>
 
 <table class="table table-hover">
   <thead>
@@ -299,9 +313,21 @@ knitr::include_graphics('Imagenes/octocat_2.png')
 
 <div class = "col-md-6">
 
-<div class="alert alert-dismissible alert-danger">
+<div class="alert alert-dismissible alert-warning">
   Limpieza de los datos
 </div>
+
+</div>
+
+<div class = "col-md-6">
+
+</div>
+
+</div>
+
+<div class = "row">
+
+<div class = "col-md-6">
 
 <!-- <section style="text-align: justify;"><p class="text-primary">La limpieza de los datos tiene el propósito de corregir los datos faltantes en los conjuntos de datos que provienen de varias fuentes, por ejemplo, error de datos de entrada, error de programación, error en la transferencia de datos, etc.</p></section> -->
 
@@ -313,11 +339,7 @@ knitr::include_graphics('Imagenes/octocat_2.png')
 
 <div class = "col-md-6">
 
-<p>&#8628;</p>
-
-<br>
-
-<section style="text-align: justify;"><p class="text-primary">Luego los datos sin procesar se transforman en características. Así por ejemplo usando el método de codificación activa<!-- (Una codificación activa es un proceso que transforma características categóricas o discretas en una matriz numérica.)-->, el mes de parto se conviertió en una característica denominada época de parto (sequía, transición y lluvia). La misma se convierte luego en valores numericos (1, 2 y 3, respectivamente) para que la regresión de machine learning puede comprenderlo mejor.</p></section>
+<section style="text-align: justify;"><p class="text-primary">Luego los datos sin procesar se transforman en características. Así por ejemplo usando el método de codificación activa<!-- (Una codificación activa es un proceso que transforma características categóricas o discretas en una matriz numérica.)-->, el mes de parto se convirtió en una característica denominada época de parto (sequía, transición y lluvia). La misma se convierte luego en valores numericos (1, 2 y 3, respectivamente) para que la regresión de machine learning puede comprenderlo mejor.</p></section>
 
 <section style="text-align: justify;"><p class="text-primary">El resultado completo del pre-procesamiento de los datos se puede ver en la tabla a continuación: →</p></section>
 
@@ -383,6 +405,12 @@ DT::datatable(
 
 ---
 
+<!--
+LOS DATOS SE DEBEN DIVIDIR ANTES DEL ESCALADO EN TRAIN Y TEST... se va a ver los pasos mencionado por https://towardsdatascience.com/preprocessing-with-sklearn-a-complete-and-comprehensive-guide-670cb98fcfb9
+-->
+
+---
+
 <section style="text-align: center;"><h2><p class="text-info">Escalado de características</p></h2></section>
 
 <br>
@@ -393,23 +421,31 @@ DT::datatable(
 
 <div class = "col-md-6">
 
-<div class="alert alert-dismissible alert-success">
-Valores atípicos
+<div class="alert alert-dismissible alert-warning">
+  Valores atípicos
 </div>
-
-<section style="text-align: justify;"><p class="text-primary">Un valor atípico es una observación cuyo valor de la variable respuesta es condicionalmente inusual dado el valor de la variable predictora.</p></section>
-
-<section style="text-align: justify;"><p class="text-primary">Estos son problemáticos porque pueden cambiar drásticamente las estimaciones y predicciones de ajuste, y porque su presencia puede ser una señal de que el modelo no logra capturar características importantes de los datos.</p></section>
-
-<section style="text-align: justify;"><p class="text-primary">El boxplot es un método <!--típicamente representado por cuartiles e intercuartiles--> que ayuda a definir el límite superior e inferior más allá de los cuales cualquier dato que se encuentre será considerado como atípico. <!--El propósito mismo de este diagrama es identificar valores atípicos y descartarlos de la serie de datos antes de hacer cualquier observación adicional para que la conclusión del estudio proporcione resultados más precisos no influenciados por ningún extremo o valores anormales.--></p></section>
 
 </div>
 
 <div class = "col-md-6">
 
-<p>&#8628;</p>
+</div>
 
-<br>
+</div>
+
+<div class = "row">
+
+<div class = "col-md-6">
+
+<section style="text-align: justify;"><p class="text-primary">Un valor atípico es una observación cuyo valor de la variable respuesta es condicionalmente inusual dado el valor de la variable predictora.</p></section>
+
+<section style="text-align: justify;"><p class="text-primary">Estos son problemáticos porque pueden degradar el rendimiento predictivo de muchos algoritmos de machine learning, y porque su presencia puede ser una señal de que el modelo no logra capturar características importantes de los datos.</p></section>
+
+<section style="text-align: justify;"><p class="text-primary">El <font color="black"><u>boxplot</u></font> es un método <!--típicamente representado por cuartiles e intercuartiles--> que ayuda a definir el límite superior e inferior más allá de los cuales cualquier dato que se encuentre es considerado como atípico. <!--El propósito mismo de este diagrama es identificar valores atípicos y descartarlos de la serie de datos antes de hacer cualquier observación adicional para que la conclusión del estudio proporcione resultados más precisos no influenciados por ningún extremo o valores anormales.--></p></section>
+
+</div>
+
+<div class = "col-md-6">
 
 <section style="text-align: justify;"><p class="text-primary">Según los estándares básicos seguidos por los estadísticos, una definición conveniente de un valor atípico es un punto que cae más de 1.5 veces el rango intercuartil (IQR) por encima del tercer cuartil (Q3) o por debajo del primer cuartil (Q1):</p></section>
 
@@ -466,6 +502,10 @@ data.frame(
 
 knitr::include_graphics('Imagenes/boxplot.png')
 ```
+
+<!--
+Se observó que el número de valores atípicos en el conjunto de datos es bastante alto.
+-->
 
 </div>
 
@@ -554,9 +594,21 @@ boxplot_EpP <- Base_datos_3 %>%
 
 <div class = "col-md-6">
 
-<div class="alert alert-dismissible alert-info">
-Distribución de de los datos
+<div class="alert alert-dismissible alert-warning">
+  Distribución de de los datos
 </div>
+
+</div>
+
+<div class = "col-md-6">
+
+</div>
+
+</div>
+
+<div class = "row">
+
+<div class = "col-md-6">
 
 <section style="text-align: justify;"><p class="text-primary">La distribución de probabilidad, se refiere a todos los resultados posibles de una variable aleatoria (discreta o continua). Es decir, describe el comportamiento de dicha variable dentro de un intervalo de valores o de posibles resultados.<!-- Las distribuciones revelan información útil, pero la información es probabilística.--></p></section>
 
@@ -585,11 +637,7 @@ Normal(200) %>%
 
 <div class = "col-md-6">
 
-<p>&#8628;</p>
-
-<br>
-
-<section style="text-align: justify;"><p class="text-primary">La forma más fácil de entender una distribución es visualizarla. Un histrograma como el de la imagen es un ejemplo de dicha visualización. De igual forma, las propiedades de una distribución se pueden describir mediante estadística descriptiva como:</p></section>
+<section style="text-align: justify;"><p class="text-primary">La forma más fácil de entender una distribución es visualizarla. Un <font color="black"><u>histograma</u></font> como el de la imagen es un ejemplo de dicha visualización. De igual forma, las propiedades de una distribución se pueden describir mediante la <font color="black"><u>estadística descriptiva</u></font> como:</p></section>
 
 <div class="form-check">
   <div class="form-check disabled">
@@ -629,12 +677,6 @@ knitr::include_graphics('Imagenes/octocat_5.png')
 
 <div class = "col-md-6">
 
-```{r Estadisticos para averiguar la distribución del intervalo entre partos, echo = FALSE, eval = FALSE, message = FALSE}
-
-Est_dist <- Base_datos_3 %>%
-  summarise(Promedio = mean(IEP), Mediana = median(IEP), Sesgo = skewness(IEP), Curtosis = kurtosis(IEP))
-```
-
 ```{r Distribución de los datos de intervalo entre partos, echo = FALSE, eval = TRUE, message = FALSE, fig.align = 'center', out.width = '300'}
 
 Est_dist_2 <- Base_datos_3 %>%
@@ -650,7 +692,7 @@ Est_dist_2 <- Base_datos_3 %>%
 
 Est_dist_2
 ```
-
+<!--
 <table class="table table-hover">
   <thead>
     <tr>
@@ -677,6 +719,17 @@ Est_dist_2
     </tr>
   </tbody>
 </table>
+-->
+
+```{r Estadisticos para averiguar la distribución del intervalo entre partos, echo = FALSE, eval = TRUE, message = FALSE}
+
+Est_dist <- Base_datos_3 %>%
+  summarise(Promedio = round(mean(IEP), digits = 2), Mediana = round(median(IEP), digits = 2), Sesgo = round(skewness(IEP), digits = 2), Curtosis = round(kurtosis(IEP), digits = 2)) %>%
+  gather(key = 'Estadístico', value = 'Valor')
+  
+kable(Est_dist, col.names = c('Estadístico', 'Valor')) %>%
+  kable_styling(full_width = FALSE)
+```
 
 </div>
 
@@ -686,7 +739,7 @@ Est_dist_2
 
 <section style="text-align: justify;"><p class="text-primary">Con respecto a las estadísticas descriptivas, un sesgo distinto de 0 indica falta de simetría de la distribución, mientras que el valor de la curtosis cuantifica el peso de las colas en comparación con la distribución normal, para la cual la curtosis debería ser igual a 3.</p></section>
 
-<section style="text-align: justify;"><p class="text-primary">Por lo tanto, al observar el histograma con una asimetría positiva y una curtosis por encima de 3, se concluye que la distribución de los datos de intervalo entre partos en bovinos Romosinuano corresponde a una distribución sesgada a la derecha.</p></section>
+<section style="text-align: justify;"><p class="text-primary">Por lo tanto, al observar el histograma con una asimetría positiva, una curtosis por encima de 3 y un sesgo distinto de 0, se concluye que la distribución de los datos de intervalo entre partos en bovinos Romosinuano corresponde a una distribución sesgada a la derecha.</p></section>
 
 </div>
 
@@ -695,6 +748,24 @@ Est_dist_2
 ---
 
 <section style="text-align: center;"><h2><p class="text-info">Escalado de características</p></h2></section>
+
+<br>
+
+<section style="text-align: justify;"><p class="text-primary">Se observó mediante todo el proceso de visualización anterior que el número de valores atípicos en el conjunto de datos de intervalo entre partos era bastante alto. Además de los valores atípicos, también se observó que la distribución de los datos no seguian una distribución normal. Por lo tanto, se concluyó que el método de escalado de características apropiado a usar era una <font color="black"><u>escala robusta</u></font>. Este método funciona eliminando la mediana y utilizando el rango intercuartil (IQR):</p></section>
+
+$$\small Escalado \;\; robusto = \frac{x - mediana(x)}{IQR}$$
+
+<section style="text-align: justify;"><p class="text-primary">Este método es robusto para los valores atípicos.</p></section>
+
+```{python}
+
+
+```
+
+
+---
+
+<section style="text-align: center;"><h2><p class="text-info">Balanceo de características</p></h2></section>
 
 <br>
 
