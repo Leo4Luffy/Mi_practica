@@ -27,6 +27,7 @@ Alguito de información sobre el paquete xaringan (https://bookdown.org/yihui/rm
 library(dplyr)
 library(tidyr)
 library(ggplot2)
+library(tidymodels)
 library(raster)
 library(sf)
 library(ggsflabel)
@@ -99,7 +100,7 @@ ggplot(data = mapa_Col_sf) +
 
 <div class = "col-md-6">
 
-<section style="text-align: justify;"><p class="text-primary">La base de datos comprende el registro informativo de la característica intervalo entre partos en bovino criollo colombiano Romosinuano.</p></section>
+<section style="text-align: justify;"><p class="text-primary">La base de datos comprende el registro informativo del carácter intervalo entre partos en bovino criollo colombiano Romosinuano.</p></section>
 
 <section style="text-align: justify;"><p class="text-primary">Dicha base de datos se caracteriza por presentar una <font color="black"><u>estructura de clúster de tipo longitudinal</u></font>, cuyo ejemplo se puede observar en la siguiente imagen:</p></section>
 
@@ -198,7 +199,7 @@ knitr::include_graphics('Imagenes/octocat.png')
 
 <section style="text-align: justify;"><p class="text-primary">Esto debido a que el propósito de la metodología a emplear consiste en estimar el valor de dicha variable respuesta en base a las variables predictoras, como se puede observar en la expresión $\small y = f(x) + b$.</p></section>
 
-<section style="text-align: justify;"><p class="text-primary">Las variables de estudio usadas en la modelación se presentan en la tabla a continuación: →</p></section>
+<section style="text-align: justify;"><p class="text-primary">Las variables de estudio usadas en la modelación se presentan en la tabla a continuación:</p></section>
 
 </div>
 
@@ -339,9 +340,9 @@ knitr::include_graphics('Imagenes/octocat_2.png')
 
 <div class = "col-md-6">
 
-<section style="text-align: justify;"><p class="text-primary">Luego los datos sin procesar se transforman en características. Así por ejemplo usando el método de codificación activa<!-- (Una codificación activa es un proceso que transforma características categóricas o discretas en una matriz numérica.)-->, el mes de parto se convirtió en una característica denominada época de parto (sequía, transición y lluvia). La misma se convierte luego en valores numericos (1, 2 y 3, respectivamente) para que la regresión de machine learning puede comprenderlo mejor.</p></section>
+<section style="text-align: justify;"><p class="text-primary">Luego los datos se transforman usando el método de codificación activa<!-- (Una codificación activa es un proceso que transforma características categóricas o discretas en una matriz numérica.)--> (conversión a variables dummy): el mes de parto se convirtió en una variable denominada época de parto (sequía, transición y lluvia). La misma se convierte luego en una variable numerica (1, 2 y 3, respectivamente) para que la regresión de machine learning pueda comprenderla mejor.<!-- Es necesario convertir las características categóricas en una representación numérica. --></p></section>
 
-<section style="text-align: justify;"><p class="text-primary">El resultado completo del pre-procesamiento de los datos se puede ver en la tabla a continuación: →</p></section>
+<section style="text-align: justify;"><p class="text-primary">El resultado completo del pre-procesamiento de los datos se puede ver en la tabla a continuación:</p></section>
 
 </div>
 
@@ -408,6 +409,64 @@ DT::datatable(
 <!--
 LOS DATOS SE DEBEN DIVIDIR ANTES DEL ESCALADO EN TRAIN Y TEST... se va a ver los pasos mencionado por https://towardsdatascience.com/preprocessing-with-sklearn-a-complete-and-comprehensive-guide-670cb98fcfb9
 -->
+<section style="text-align: center;"><h2><p class="text-info">División de los datos en train y test</p></h2></section>
+
+<br>
+
+<div class = "row">
+
+<div class = "col-md-6">
+
+<section style="text-align: justify;"><p class="text-primary">En estadística y machine learning generalmente se suele dividir los datos en dos subconjuntos: datos de <font color="black"><u>entrenamiento</u></font> y datos de <font color="black"><u>prueba</u></font> (y a veces en tres: entrenamiento, <font color="black"><u>validación</u></font> y prueba):</p></section>
+
+```{r Divisón en train y test, fig.align = 'center', eval = TRUE, echo = FALSE, message = FALSE, fig.showtext = TRUE, out.width = '320'}
+
+data.frame(
+  x = c(1:4), y =c(1:4)
+) %>%
+  ggplot(aes(x, y)) +
+  geom_blank() +
+  annotate(geom = 'rect', xmin = 1.4, xmax = 3.6, ymin = 3.5, ymax = 4.0, colour = 'yellow', fill = 'yellow', alpha = 0.4, size = 1.2) +
+  annotate(geom = 'text', x = 2.5, y = 3.75, label = 'Datos originales', family = 'gochi', size = 9.2, colour = 'black') +
+  annotate(geom = 'rect', xmin = 1.4, xmax = 2.77, ymin = 2.9, ymax = 3.4, colour = 'yellow', fill = 'yellow', alpha = 0.4, size = 1.2) +
+  annotate(geom = 'rect', xmin = 2.8, xmax = 3.6, ymin = 2.9, ymax = 3.4, colour = 'red', fill = 'red', alpha = 0.4, size = 1.2) +
+  annotate(geom = 'text', x = 2.1, y = 3.15, label = 'Entrenamiento', family = 'gochi', size = 8.0, colour = 'black') +
+  annotate(geom = 'text', x = 3.2, y = 3.15, label = 'Prueba', family = 'gochi', size = 9.2, colour = 'black') +
+  annotate(geom = 'segment', x = 1.4, xend = 2.8, y = 2.78, yend = 2.78, colour = 'black', size = 2.0) +
+  annotate(geom = 'text', x = 2.1, y = 2.6, label = 'Validación cruzada', family = 'gochi', size = 8.8, colour = 'black') +
+  annotate(geom = 'segment', x = 2.1, xend = 2.1, y = 2.78, yend = 2.68, colour = 'black', size = 2.0) +
+  annotate(geom = 'rect', xmin = 1.4, xmax = 1.6, ymin = 1.9, ymax = 2.4, colour = 'yellow', fill = 'yellow', alpha = 0.4, size = 1.2) +
+  annotate(geom = 'rect', xmin = 1.6, xmax = 1.8, ymin = 1.9, ymax = 2.4, colour = 'yellow', fill = 'yellow', alpha = 0.4, size = 1.2) +
+  annotate(geom = 'rect', xmin = 1.8, xmax = 2.0, ymin = 1.9, ymax = 2.4, colour = 'yellow', fill = 'yellow', alpha = 0.4, size = 1.2) +
+  annotate(geom = 'rect', xmin = 2.0, xmax = 2.2, ymin = 1.9, ymax = 2.4, colour = 'yellow', fill = 'yellow', alpha = 0.4, size = 1.2) +
+  annotate(geom = 'rect', xmin = 2.2, xmax = 2.4, ymin = 1.9, ymax = 2.4, colour = 'yellow', fill = 'yellow', alpha = 0.4, size = 1.2) +
+  annotate(geom = 'rect', xmin = 2.4, xmax = 2.6, ymin = 1.9, ymax = 2.4, colour = 'yellow', fill = 'yellow', alpha = 0.4, size = 1.2) +
+  annotate(geom = 'rect', xmin = 2.6, xmax = 2.8, ymin = 1.9, ymax = 2.4, colour = 'yellow', fill = 'yellow', alpha = 0.4, size = 1.2) +
+  geom_curve(x = 2.84, xend = 3.2, y = 2.15, yend = 2.8, arrow = arrow(length = unit(0.1, 'inch')), size = 2.0, color = 'black', curvature = +0.4) +
+  annotate(geom = 'text', x = 2.4, y = 1.68, label = 'Si los datos lo permiten:', family = 'gochi', size = 8.8, colour = 'black') +
+  annotate(geom = 'rect', xmin = 1.4, xmax = 2.25, ymin = 1.0, ymax = 1.5, colour = 'yellow', fill = 'yellow', alpha = 0.4, size = 1.2) +
+  annotate(geom = 'rect', xmin = 2.28, xmax = 2.78, ymin = 1.0, ymax = 1.5, colour = 'cyan', fill = 'cyan', alpha = 0.4, size = 1.2) +
+  annotate(geom = 'rect', xmin = 2.8, xmax = 3.6, ymin = 1.0, ymax = 1.5, colour = 'red', fill = 'red', alpha = 0.4, size = 1.2) +
+  annotate(geom = 'text', x = 1.8, y = 1.35, label = 'Entrena-', family = 'gochi', size = 8.2, colour = 'black') +
+  annotate(geom = 'text', x = 1.8, y = 1.15, label = 'miento', family = 'gochi', size = 8.2, colour = 'black') +
+  annotate(geom = 'text', x = 2.52, y = 1.35, label = 'Valida-', family = 'gochi', size = 8.0, colour = 'black') +
+  annotate(geom = 'text', x = 2.52, y = 1.15, label = 'ción', family = 'gochi', size = 8.0, colour = 'black') +
+  annotate(geom = 'text', x = 3.2, y = 1.25, label = 'Prueba', family = 'gochi', size = 9.2, colour = 'black') +
+  theme_void() +
+  theme(axis.text = element_blank(),
+        axis.ticks = element_blank(),
+        axis.title = element_blank())
+```
+
+</div>
+
+<div class = "col-md-6">
+
+<section style="text-align: justify;"><p class="text-primary">La divisón de los datos en dichos subconjuntos de datos se recomienda realizarse antes de los pasos que se describiran a continuación.</p></section>
+
+</div>
+
+</div>
 
 ---
 
