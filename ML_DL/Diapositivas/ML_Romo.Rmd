@@ -24,10 +24,12 @@ Alguito de información sobre el paquete xaringan (https://bookdown.org/yihui/rm
 
 ```{r Paquetes a usar, echo = FALSE, eval = TRUE, message = FALSE}
 
+library(demoR)
 library(dplyr)
 library(tidyr)
 library(ggplot2)
-library(tidymodels)
+library(rsample)
+library(tidymodels) # Para obtener gran parte de los resultados se va a hacer uso del paquete "tidymodels". Este paquete consiste en una colección de paquetes para modelado y machine learning utilizando los principios del "tidyverse".
 library(raster)
 library(sf)
 library(ggsflabel)
@@ -39,7 +41,6 @@ library(showtext) # Link donde estan las fuentes Google (http://www.google.com/f
 font_add_google('Gochi Hand', 'gochi')
 showtext.auto()
 ```
-
 
 <section style="text-align: center;"><h2><p class="text-info">Objetivo y población de estudio</p></h2></section>
 
@@ -340,7 +341,7 @@ knitr::include_graphics('Imagenes/octocat_2.png')
 
 <div class = "col-md-6">
 
-<section style="text-align: justify;"><p class="text-primary">Luego los datos se transforman usando el método de codificación activa<!-- (Una codificación activa es un proceso que transforma características categóricas o discretas en una matriz numérica.)--> (conversión a variables dummy): el mes de parto se convirtió en una variable denominada época de parto (sequía, transición y lluvia). La misma se convierte luego en una variable numerica (1, 2 y 3, respectivamente) para que la regresión de machine learning pueda comprenderla mejor.<!-- Es necesario convertir las características categóricas en una representación numérica. --></p></section>
+<section style="text-align: justify;"><p class="text-primary">Luego los datos se transforman usando el método de codificación activa<!-- (Una codificación activa es un proceso que transforma características categóricas o discretas en una matriz numérica.)--> (conversión a variables dummy o variables indicadoras). Por ejemplo, el mes de parto se convirtió en una variable denominada época de parto (sequía, transición y lluvia). <!--La misma se convierte luego en una variable numerica (1, 2 y 3, respectivamente) para que la regresión de machine learning pueda comprenderla mejor. Es necesario convertir las características categóricas en una representación numérica. --></p></section>
 
 <section style="text-align: justify;"><p class="text-primary">El resultado completo del pre-procesamiento de los datos se puede ver en la tabla a continuación:</p></section>
 
@@ -362,19 +363,20 @@ Base_datos_3 <- Base_datos_2 %>%
       Edad_parto != 20746
   ) %>%
   mutate(
+    N_parto = as.factor(N_parto), 
     Mes_parto = as.integer(Mes_parto),
     Epoca_parto = case_when( # Fueron formadas tres clases definidas como meses de época de lluvia (meses de julio a septiembre), de transición (meses de abril a junio y de octubre a diciembre) y de sequía (meses de enero a marzo).
-      Mes_parto %in% c(1:3) ~ '1',
-      Mes_parto %in% c(4:6) ~ '2',
-      Mes_parto %in% c(7:9) ~ '3',
-      Mes_parto %in% c(10:12) ~ '2'
+      Mes_parto %in% c(1:3) ~ 'Sequía',
+      Mes_parto %in% c(4:6) ~ 'Transición',
+      Mes_parto %in% c(7:9) ~ 'Lluvia',
+      Mes_parto %in% c(10:12) ~ 'Transición'
       ),
     Sexo_hija = case_when(
-      Sexo_hija == 'H' ~ '2',
-      Sexo_hija == 'M' ~ '1'
+      Sexo_hija == 'H' ~ 'Hembra',
+      Sexo_hija == 'M' ~ 'Macho'
       )
     ) %>%
-  mutate_if(is.character, as.integer) %>% # Aquí, se cambia las variables tipo caracter a entero (numérico).
+  mutate_if(is.character, as.factor) %>% # Aquí, se cambia las variables tipo caracter a factor.
   dplyr::select(Hija, IEP, N_parto, Sexo_hija, Edad_parto, Epoca_parto, Ano_parto, D_abierto) %>%
   rename('Individuo' = Hija, 'IEP' = IEP, 'OP' = N_parto, 'SC' = Sexo_hija, 'EdP' = Edad_parto, 'ÉpP' = Epoca_parto, 'AP' = Ano_parto, 'DA' = D_abierto)
 
@@ -392,6 +394,8 @@ edad_parto <- Base_datos_2 %>%
 
 <section style="text-align: center;"><h2><p class="text-info">Los datos</p></h2></section>
 
+<br>
+
 ```{r eval = require('DT'), tidy = FALSE, echo = FALSE, eval = TRUE, message = FALSE}
 
 DT::datatable(
@@ -399,16 +403,13 @@ DT::datatable(
   fillContainer = FALSE, options = list(pageLength = 5),
   caption = htmltools::tags$caption(
     style = 'caption-side: bottom; text-align: left;',
-    htmltools::em('IEP = Intervalo entre partos, OP = Orden de parto, SC = Sexo de la cría (macho: 1, hembra:2), EdP = Edad al parto, ÉpP = Época de parto (sequía: 1, transición: 2, lluvia: 3), AP = Año de parto, DA = Días abiertos.')
+    htmltools::em('IEP = Intervalo entre partos, OP = Orden de parto, SC = Sexo de la cría, EdP = Edad al parto, ÉpP = Época de parto, AP = Año de parto, DA = Días abiertos.')
     )
   )
 ```
 
 ---
 
-<!--
-LOS DATOS SE DEBEN DIVIDIR ANTES DEL ESCALADO EN TRAIN Y TEST... se va a ver los pasos mencionado por https://towardsdatascience.com/preprocessing-with-sklearn-a-complete-and-comprehensive-guide-670cb98fcfb9
--->
 <section style="text-align: center;"><h2><p class="text-info">División de los datos en train y test</p></h2></section>
 
 <br>
@@ -417,9 +418,9 @@ LOS DATOS SE DEBEN DIVIDIR ANTES DEL ESCALADO EN TRAIN Y TEST... se va a ver los
 
 <div class = "col-md-6">
 
-<section style="text-align: justify;"><p class="text-primary">En estadística y machine learning generalmente se suele dividir los datos en dos subconjuntos: datos de <font color="black"><u>entrenamiento</u></font> y datos de <font color="black"><u>prueba</u></font> (y a veces en tres: entrenamiento, <font color="black"><u>validación</u></font> y prueba):</p></section>
+<section style="text-align: justify;"><p class="text-primary">En estadística se suele dividir los datos en dos subconjuntos: datos de <font color="black"><u>entrenamiento</u></font> y datos de <font color="black"><u>prueba</u></font> (y a veces en tres: entrenamiento, <font color="black"><u>validación</u></font> y prueba):</p></section>
 
-```{r Divisón en train y test, fig.align = 'center', eval = TRUE, echo = FALSE, message = FALSE, fig.showtext = TRUE, out.width = '320'}
+```{r Divisón en train y test, fig.align = 'center', eval = TRUE, echo = FALSE, message = FALSE, fig.showtext = TRUE, out.width = '280'}
 
 data.frame(
   x = c(1:4), y =c(1:4)
@@ -458,11 +459,72 @@ data.frame(
         axis.title = element_blank())
 ```
 
+<section style="text-align: justify;"><p class="text-primary">El modelo de regresión se ajusta con los datos de entrenamiento, se hacen predicciones basados en estos datos, y los datos de prueba se usan para medir el rendimiento del modelo.</p></section>
+
 </div>
 
 <div class = "col-md-6">
 
-<section style="text-align: justify;"><p class="text-primary">La divisón de los datos en dichos subconjuntos de datos se recomienda realizarse antes de los pasos que se describiran a continuación.</p></section>
+<!--
+Hay información del proceso de dividir los datos en train y test en:
+- Split into train/test en http://www.rebeccabarter.com/blog/2020-03-25_machine_learning/.
+
+En esta pagina comparten paso a paso el uso de varios paquetes del paquete tidymodels para ajustar un modelo de regresión logistica (entonces creo que se podria hacer lo mismo para modelos mixtos):
+- https://www.tidymodels.org/start/recipes/
+
+En esta pagina comparten paso a paso una forma de medir, basado en estadísticas de remuestreo, qué tan bien el modelo ajustado mediante los pasos anteriores predice nuevos datos:
+- https://www.tidymodels.org/start/resampling/... también dan un ejemplo de arboles de decisión y bosques aleatorios.
+-->
+
+<!--
+La función initial_split() toma los datos originales y guarda en un objeto la información sobre cómo hacer la división de los datos. Este es el enfoque más común de dividir los datos: una cuarta parte de los datos se reservan para el conjunto de prueba... así mediante muestreo aleatorio se selecciona al azar el 25% de los datos en datos de prueba (25%) y el resto (75%) para el conjunto de entrenamiento.
+
+La salida impresa de division_datos, dice cuantas observaciones se tienen en el conjunto de entrenamiento, en el conjunto de pruebas, y cuando suman en total.
+-->
+
+```{r Division de los datos en train y test 1, echo = FALSE, eval = TRUE, message = FALSE}
+
+demo_code('
+division_datos <- initial_split(data = Base_datos_3, prop = 3/4)
+') %>%
+  hlt_args(color = 'gray') %>%
+  hlt_funs(color = 'deeppink', underline = TRUE)
+```
+
+<!--
+NOTA: Dado que el muestreo aleatorio anterior usa números aleatorios, es importante establecer la semilla (mediante la función set.seed()) del número aleatorio. Esto garantiza que los números aleatorios se puedan reproducir más adelante (si es necesario).¿¿¿¿Preguntar después al profe Freddy si es necesario establecer una semilla en el trabajo????
+-->
+
+<!--
+Los datos de entrenamiento se usan para ajustar el modelo, estimar parámetros, comparar modelos, etc.
+-->
+
+```{r Division de los datos en train y test 2, echo = FALSE, eval = TRUE, message = FALSE}
+
+demo_code('
+datos_entrenamiento <- training(division_datos)
+') %>%
+  hlt_args(color = 'gray') %>%
+  hlt_funs(color = 'deeppink', underline = TRUE)
+```
+
+<!--
+Los datos de prueba se usan como una fuente imparcial para medir el rendimiento del modelo final. Estos se mantienen en reserva hasta el final del proyecto, momento en el que solo debe haber uno o dos modelos bajo consideración seria.
+-->
+
+```{r División de los datos en train y test 3, echo = FALSE, eval = TRUE, message = FALSE}
+
+demo_code('
+datos_prueba <- testing(division_datos)
+') %>%
+  hlt_args(color = 'gray') %>%
+  hlt_funs(color = 'deeppink', underline = TRUE)
+```
+
+<section style="text-align: justify;"><p class="text-primary">Muchas veces además de dividir el conjunto de datos en entrenamiento y prueba, se suele elegir aleatoriamente X% (por ejemplo un 80%) del conjunto de datos de entrenamiento para que sea el conjunto de entrenamiento real y el % restante (100-X) para que sea el conjunto de validación. El modelo se entrena iterativamente y se valida en estos conjuntos diferentes. Esto se conoce comúnmente como <font color="black"><u>validación cruzada</u></font>. <!--Básicamente, usa el conjunto de entrenamiento para generar múltiples divisiones de los conjuntos de entrenamiento y validación. La validación cruzada evita el ajuste excesivo y se está volviendo cada vez más popular, siendo la validación cruzada K-fold el método más popular de validación cruzada.--></p></section>
+
+<!--Voy en REMUESTREO AL RESCATE en https://www.tidymodels.org/start/resampling/ y en "En algún momento vamos a querer hacer..." en http://www.rebeccabarter.com/blog/2020-03-25_machine_learning/.
+-->
 
 </div>
 
@@ -815,12 +877,6 @@ kable(Est_dist, col.names = c('Estadístico', 'Valor')) %>%
 $$\small Escalado \;\; robusto = \frac{x - mediana(x)}{IQR}$$
 
 <section style="text-align: justify;"><p class="text-primary">Este método es robusto para los valores atípicos.</p></section>
-
-```{python}
-
-
-```
-
 
 ---
 
