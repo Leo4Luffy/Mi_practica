@@ -28,7 +28,7 @@ library(demoR)
 library(dplyr)
 library(tidyr)
 library(ggplot2)
-library(rsample)
+library(rsample) # Este paquete se uso porque contiene funciones de interés como por ejemplo, funciones para dividir el conjnto de datos en datos de entrenamiento y de prueba.
 library(tidymodels) # Para obtener gran parte de los resultados se va a hacer uso del paquete "tidymodels". Este paquete consiste en una colección de paquetes para modelado y machine learning utilizando los principios del "tidyverse".
 library(raster)
 library(sf)
@@ -434,7 +434,7 @@ data.frame(
   annotate(geom = 'text', x = 2.1, y = 3.15, label = 'Entrenamiento', family = 'gochi', size = 8.0, colour = 'black') +
   annotate(geom = 'text', x = 3.2, y = 3.15, label = 'Prueba', family = 'gochi', size = 9.2, colour = 'black') +
   annotate(geom = 'segment', x = 1.4, xend = 2.8, y = 2.78, yend = 2.78, colour = 'black', size = 2.0) +
-  annotate(geom = 'text', x = 2.1, y = 2.6, label = 'Validación cruzada', family = 'gochi', size = 8.8, colour = 'black') +
+  annotate(geom = 'text', x = 2.1, y = 2.6, label = 'Método de remuestreo', family = 'gochi', size = 8.8, colour = 'black') +
   annotate(geom = 'segment', x = 2.1, xend = 2.1, y = 2.78, yend = 2.68, colour = 'black', size = 2.0) +
   annotate(geom = 'rect', xmin = 1.4, xmax = 1.6, ymin = 1.9, ymax = 2.4, colour = 'yellow', fill = 'yellow', alpha = 0.4, size = 1.2) +
   annotate(geom = 'rect', xmin = 1.6, xmax = 1.8, ymin = 1.9, ymax = 2.4, colour = 'yellow', fill = 'yellow', alpha = 0.4, size = 1.2) +
@@ -444,7 +444,7 @@ data.frame(
   annotate(geom = 'rect', xmin = 2.4, xmax = 2.6, ymin = 1.9, ymax = 2.4, colour = 'yellow', fill = 'yellow', alpha = 0.4, size = 1.2) +
   annotate(geom = 'rect', xmin = 2.6, xmax = 2.8, ymin = 1.9, ymax = 2.4, colour = 'yellow', fill = 'yellow', alpha = 0.4, size = 1.2) +
   geom_curve(x = 2.84, xend = 3.2, y = 2.15, yend = 2.8, arrow = arrow(length = unit(0.1, 'inch')), size = 2.0, color = 'black', curvature = +0.4) +
-  annotate(geom = 'text', x = 2.4, y = 1.68, label = 'Si los datos lo permiten:', family = 'gochi', size = 8.8, colour = 'black') +
+  annotate(geom = 'text', x = 2.14, y = 1.68, label = 'Si los datos lo permiten:', family = 'gochi', size = 8.8, colour = 'black') +
   annotate(geom = 'rect', xmin = 1.4, xmax = 2.25, ymin = 1.0, ymax = 1.5, colour = 'yellow', fill = 'yellow', alpha = 0.4, size = 1.2) +
   annotate(geom = 'rect', xmin = 2.28, xmax = 2.78, ymin = 1.0, ymax = 1.5, colour = 'cyan', fill = 'cyan', alpha = 0.4, size = 1.2) +
   annotate(geom = 'rect', xmin = 2.8, xmax = 3.6, ymin = 1.0, ymax = 1.5, colour = 'red', fill = 'red', alpha = 0.4, size = 1.2) +
@@ -459,7 +459,7 @@ data.frame(
         axis.title = element_blank())
 ```
 
-<section style="text-align: justify;"><p class="text-primary">El modelo de regresión se ajusta con los datos de entrenamiento, se hacen predicciones basados en estos datos, y los datos de prueba se usan para medir el rendimiento del modelo.</p></section>
+<section style="text-align: justify;"><p class="text-primary">El modelo de regresión se ajusta y se hacen predicciones con los datos de entrenamiento, y los datos de prueba se usan para medir el rendimiento del modelo. En este estudio:</p></section>
 
 </div>
 
@@ -468,27 +468,29 @@ data.frame(
 <!--
 Hay información del proceso de dividir los datos en train y test en:
 - Split into train/test en http://www.rebeccabarter.com/blog/2020-03-25_machine_learning/.
-
-En esta pagina comparten paso a paso el uso de varios paquetes del paquete tidymodels para ajustar un modelo de regresión logistica (entonces creo que se podria hacer lo mismo para modelos mixtos):
-- https://www.tidymodels.org/start/recipes/
-
-En esta pagina comparten paso a paso una forma de medir, basado en estadísticas de remuestreo, qué tan bien el modelo ajustado mediante los pasos anteriores predice nuevos datos:
-- https://www.tidymodels.org/start/resampling/... también dan un ejemplo de arboles de decisión y bosques aleatorios.
 -->
 
 <!--
 La función initial_split() toma los datos originales y guarda en un objeto la información sobre cómo hacer la división de los datos. Este es el enfoque más común de dividir los datos: una cuarta parte de los datos se reservan para el conjunto de prueba... así mediante muestreo aleatorio se selecciona al azar el 25% de los datos en datos de prueba (25%) y el resto (75%) para el conjunto de entrenamiento.
-
-La salida impresa de division_datos, dice cuantas observaciones se tienen en el conjunto de entrenamiento, en el conjunto de pruebas, y cuando suman en total.
 -->
 
 ```{r Division de los datos en train y test 1, echo = FALSE, eval = TRUE, message = FALSE}
 
+set.seed(1234)
 demo_code('
 division_datos <- initial_split(data = Base_datos_3, prop = 3/4)
 ') %>%
   hlt_args(color = 'gray') %>%
   hlt_funs(color = 'deeppink', underline = TRUE)
+```
+
+<!--
+La salida impresa de division_datos a continuación, dice cuantas observaciones se tienen en el conjunto de entrenamiento, en el conjunto de pruebas, y cuando suman en total.
+-->
+
+```{r, echo = FALSE, eval = FALSE, message = FALSE}
+
+division_datos
 ```
 
 <!--
@@ -521,10 +523,7 @@ datos_prueba <- testing(division_datos)
   hlt_funs(color = 'deeppink', underline = TRUE)
 ```
 
-<section style="text-align: justify;"><p class="text-primary">Muchas veces además de dividir el conjunto de datos en entrenamiento y prueba, se suele elegir aleatoriamente X% (por ejemplo un 80%) del conjunto de datos de entrenamiento para que sea el conjunto de entrenamiento real y el % restante (100-X) para que sea el conjunto de validación. El modelo se entrena iterativamente y se valida en estos conjuntos diferentes. Esto se conoce comúnmente como <font color="black"><u>validación cruzada</u></font>. <!--Básicamente, usa el conjunto de entrenamiento para generar múltiples divisiones de los conjuntos de entrenamiento y validación. La validación cruzada evita el ajuste excesivo y se está volviendo cada vez más popular, siendo la validación cruzada K-fold el método más popular de validación cruzada.--></p></section>
-
-<!--Voy en REMUESTREO AL RESCATE en https://www.tidymodels.org/start/resampling/ y en "En algún momento vamos a querer hacer..." en http://www.rebeccabarter.com/blog/2020-03-25_machine_learning/.
--->
+<section style="text-align: justify;"><p class="text-primary">Muchas veces además de dividir el conjunto de datos en entrenamiento y prueba, se suele elegir aleatoriamente X% (por ejemplo un 80%) del conjunto de datos de entrenamiento para que sea el conjunto de entrenamiento real y el % restante (100-X) para que sea el conjunto de validación. El modelo se entrena iterativamente y se valida en estos conjuntos diferentes. Esto se conoce comúnmente como <font color="black"><u>métodos de remuestreo</u></font>. <!--Básicamente, usa el conjunto de entrenamiento para generar múltiples divisiones de los conjuntos de entrenamiento y validación. La validación cruzada evita el ajuste excesivo y se está volviendo cada vez más popular, siendo la validación cruzada K-fold el método más popular de validación cruzada.--></p></section>
 
 </div>
 
@@ -532,11 +531,121 @@ datos_prueba <- testing(division_datos)
 
 ---
 
-<section style="text-align: center;"><h2><p class="text-info">Escalado de características</p></h2></section>
+<section style="text-align: center;"><h2><p class="text-info">División de los datos en train y test</p></h2></section>
 
 <br>
 
-<section style="text-align: justify;"><p class="text-primary">Existen varios métodos para normalizar las características. La elección de dicho método depende de la distribución de los datos y la presencia de valores atípicos en los datos.</p></section>
+<div class = "row">
+
+<div class = "col-md-6">
+
+<section style="text-align: justify;"><p class="text-primary">Los métodos de remuestreo, como la <font color="black"><u>validación cruzada</u></font> y el <font color="black"><u>bootstrap</u></font>, son sistemas de simulación empírica. Crean una serie de conjuntos de datos similares a la división de entrenamiento y prueba discutida con anterioridad: se usa un subconjunto de datos para crear el modelo y se utiliza un subconjunto diferente para medir el rendimiento. El remuestreo siempre se usa con el conjunto de entrenamiento:</p></section>
+
+```{r Divisón en train y test 2, fig.align = 'center', eval = TRUE, echo = FALSE, message = FALSE, fig.showtext = TRUE, out.width = '280'}
+
+data.frame(
+  x = c(0.25:4.25), y = c(0.0:4.0)
+) %>%
+  ggplot(aes(x, y)) +
+  geom_blank() +
+  theme_void() +
+  annotate(geom = 'rect', xmin = 1.4, xmax = 3.6, ymin = 3.5, ymax = 4.0, colour = 'black', fill = 'white', alpha = 0.4, size = 1.2) +
+  annotate(geom = 'text', x = 2.5, y = 3.75, label = 'Datos originales', family = 'gochi', size = 7.8, colour = 'black') +
+  annotate(geom = 'rect', xmin = 1.4, xmax = 2.77, ymin = 2.5, ymax = 3.0, colour = 'yellow', fill = 'yellow', alpha = 0.4, size = 1.2) +
+  annotate(geom = 'rect', xmin = 2.8, xmax = 3.6, ymin = 2.5, ymax = 3.0, colour = 'red', fill = 'red', alpha = 0.4, size = 1.2) +
+  #annotate(geom = 'text', x = 2.1, y = 2.75, label = 'Entrenamiento', family = 'gochi', size = 6.6, colour = 'black') +
+  #annotate(geom = 'text', x = 3.2, y = 2.75, label = 'Prueba', family = 'gochi', size = 7.8, colour = 'black') +
+  geom_curve(x = 2.45, xend = 2.1, y = 3.4, yend = 3.1, arrow = arrow(length = unit(0.1, 'inch')), size = 1.4, color = 'black', curvature = 0.0) +
+  geom_curve(x = 2.55, xend = 3.2, y = 3.4, yend = 3.1, arrow = arrow(length = unit(0.1, 'inch')), size = 1.4, color = 'black', curvature = 0.0) +
+  geom_curve(x = 2.0, xend = 1.4, y = 2.4, yend = 2.0, arrow = arrow(length = unit(0.1, 'inch')), size = 1.4, color = 'black', curvature = 0.0) +
+  geom_curve(x = 2.1, xend = 2.1, y = 2.4, yend = 2.0, arrow = arrow(length = unit(0.1, 'inch')), size = 1.4, color = 'black', curvature = 0.0) +
+  geom_curve(x = 2.2, xend = 2.8, y = 2.4, yend = 2.0, arrow = arrow(length = unit(0.1, 'inch')), size = 1.4, color = 'black', curvature = 0.0) +
+  annotate(geom = 'text', x = 0.8, y = 1.9, label = 'Remuestreo 1', family = 'gochi', size = 6.6, colour = 'black') +
+  annotate(geom = 'text', x = 2.1, y = 1.9, label = 'Remuestreo 2', family = 'gochi', size = 6.6, colour = 'black') +
+  annotate(geom = 'text', x = 3.4, y = 1.9, label = 'Remuestreo B', family = 'gochi', size = 6.6, colour = 'black') +
+  geom_curve(x = 0.8, xend = 0.8, y = 1.7, yend = 1.4, arrow = arrow(length = unit(0.1, 'inch')), size = 1.4, color = 'black', curvature = 0.0) +
+  geom_curve(x = 2.1, xend = 2.1, y = 1.7, yend = 1.4, arrow = arrow(length = unit(0.1, 'inch')), size = 1.4, color = 'black', curvature = 0.0) +
+  geom_curve(x = 3.4, xend = 3.4, y = 1.7, yend = 1.4, arrow = arrow(length = unit(0.1, 'inch')), size = 1.4, color = 'black', curvature = 0.0) +
+  annotate(geom = 'rect', xmin = 0.25, xmax = 1.0, ymin = 0.8, ymax = 1.3, colour = 'yellow', fill = 'yellow', alpha = 0.4, size = 1.2) +
+  annotate(geom = 'rect', xmin = 1.03, xmax = 1.3, ymin = 0.8, ymax = 1.3, colour = 'cyan', fill = 'cyan', alpha = 0.4, size = 1.2) +
+  annotate(geom = 'rect', xmin = 1.5, xmax = 2.25, ymin = 0.8, ymax = 1.3, colour = 'yellow', fill = 'yellow', alpha = 0.4, size = 1.2) +
+  annotate(geom = 'rect', xmin = 2.28, xmax = 2.5, ymin = 0.8, ymax = 1.3, colour = 'cyan', fill = 'cyan', alpha = 0.4, size = 1.2) +
+  annotate(geom = 'rect', xmin = 2.7, xmax = 3.45, ymin = 0.8, ymax = 1.3, colour = 'yellow', fill = 'yellow', alpha = 0.4, size = 1.2) +
+  annotate(geom = 'rect', xmin = 3.48, xmax = 3.74, ymin = 0.8, ymax = 1.3, colour = 'cyan', fill = 'cyan', alpha = 0.4, size = 1.2) +
+  annotate(geom = 'rect', xmin = 0.25, xmax = 0.5, ymin = 3.25, ymax = 3.5, colour = 'yellow', fill = 'yellow', alpha = 0.4, size = 1.2) +
+  annotate(geom = 'text', x = 0.95, y = 3.4, label = 'Entrena-', family = 'gochi', size = 5.8, colour = 'black') +
+  annotate(geom = 'text', x = 0.95, y = 3.2, label = 'miento', family = 'gochi', size = 5.8, colour = 'black') +
+  annotate(geom = 'rect', xmin = 0.25, xmax = 0.5, ymin = 2.75, ymax = 3.0, colour = 'red', fill = 'red', alpha = 0.4, size = 1.2) +
+  annotate(geom = 'text', x = 0.90, y = 2.8, label = 'Prueba', family = 'gochi', size = 5.8, colour = 'black') +
+  annotate(geom = 'rect', xmin = 0.25, xmax = 0.5, ymin = 2.25, ymax = 2.5, colour = 'cyan', fill = 'cyan', alpha = 0.4, size = 1.2) +
+  annotate(geom = 'text', x = 0.88, y = 2.4, label = 'Valida-', family = 'gochi', size = 5.8, colour = 'black') +
+  annotate(geom = 'text', x = 0.84, y = 2.2, label = 'ción', family = 'gochi', size = 5.8, colour = 'black') +
+  theme(axis.text = element_blank(),
+        axis.ticks = element_blank(),
+        axis.title = element_blank())
+```
+
+</div>
+
+<div class = "col-md-6">
+
+<section style="text-align: justify;"><p class="text-primary">En el primer nivel del diagrama anterior, se emplea la función <font color="black">rsample::initial_split( )</font>, que divide los datos originales en conjuntos de entrenamiento y de prueba (como se hizo anteriormente). Luego, se eligen los datos de entrenamiento para volver a muestrear y se mantiene los datos del subconjunto de prueba.</p></section>
+
+<section style="text-align: justify;"><p class="text-primary">Para generar estos nuevos datos en el estudio:</p></section>
+
+<!--
+Para generar estos resultados, el primer paso es crear un objeto de remuestreo usando el paquete "rsample". Hay varios métodos de remuestreo implementados en rsample. La validación cruzada se puede crear usando la función vfold_cv():
+-->
+
+```{r División de los datos en train y test 4, echo = FALSE, eval = TRUE, message = FALSE}
+
+demo_code('
+datos_vc <- vfold_cv(datos_entrenamiento, v = 10)
+') %>%
+  hlt_args(color = 'gray') %>%
+  hlt_funs(color = 'deeppink', underline = TRUE)
+```
+
+<!--
+Se usó validación cruzada 10 veces (v = 10). Este método asigna de forma aleatoria las 5546 observaciones (que hacen parte del conjunto de entrenamiento) a 10 grupos de aproximadamente el mismo tamaño, llamados "pliegues" ("fold" en ingles). Para la primera iteración de remuestreo, el primer pliegue de aproximadamente 555 observaciones (el 10% de las 5546 observaciones) se usa con el fin de medir el rendimiento del modelo (esto es similar a un conjunto de prueba, y para evitar confusiones con este último se denomina como evaluación o validación).
+
+El otro 90% de los datos (aproximadamente 4491 observaciones) se utilizan para ajustar el modelo. Nuevamente, esto suena similar a un conjunto de entrenamiento, por lo que en tidymodels se suele llamar a estos datos el conjunto de análisis. Este modelo, entrenado en el conjunto de análisis, se aplica al conjunto de evaluación para generar predicciones, y las estadísticas de rendimiento se calculan en función de esas predicciones.
+
+En este estudio, el CV 10 veces se mueve iterativamente a través de los pliegues y deja un 10% diferente cada vez para la evaluación del modelo. Al final de este proceso, hay 10 conjuntos de estadísticas de rendimiento que se crearon en 10 conjuntos de datos que no se utilizaron en el proceso de modelado. Esto significa 10 precisiones y 10 áreas bajo la curva ROC (una de las metricas usadas para evaluar el rendimiento). Si bien se crearon 10 modelos, estos no se usan más; no se mantienena los modelos mismos entrenados en estos pliegues porque su único propósito es calcular las métricas de rendimiento.
+
+Las estimaciones finales de muestreo para el modelo son los promedios de las de estadísticas de rendimiento de las réplicas.
+-->
+
+```{r, echo = FALSE, eval = FALSE, message = FALSE}
+
+datos_vc
+```
+
+<!--
+Al visualizar lo anterior se observa que la columna de la lista denominada "splits" contiene la información sobre las filas que pertenecen a los conjuntos de análisis (o entrenamiento) y validación (o evaluación). Hay funciones que se pueden usar para extraer los datos remuestreados individuales llamados analysis() y assessment().
+-->
+
+<section style="text-align: justify;"><p class="text-primary">Su proposito consiste en estimar el rendimiento final del modelo a partir de estadísticas de rendimiento (como la precisión y el ROC) al igual que hace con los datos de prueba.<!-- El remuestreo permite simular qué tan bien se desempeñará el modelo con los nuevos datos, y el conjunto de prueba actúa como la verificación final e imparcial del rendimiento del modelo. --></p></section>
+
+</div>
+
+</div>
+
+<!--
+En esta pagina comparten paso a paso el uso de varios paquetes del paquete tidymodels para ajustar un modelo de regresión logistica (entonces creo que se podria hacer lo mismo para modelos mixtos):
+- https://www.tidymodels.org/start/recipes/
+
+En esta pagina comparten paso a paso una forma de medir, basado en estadísticas de remuestreo, qué tan bien el modelo ajustado mediante los pasos anteriores predice nuevos datos:
+- https://www.tidymodels.org/start/resampling/... también dan un ejemplo de arboles de decisión y bosques aleatorios.
+-->
+
+---
+
+<section style="text-align: center;"><h2><p class="text-info">Escalado de las variables</p></h2></section>
+
+<br>
+
+<section style="text-align: justify;"><p class="text-primary">Existen varios métodos para normalizar las variables. La elección de dicho método depende de la distribución de los datos y la presencia de valores atípicos en los datos.</p></section>
 
 <div class = "row">
 
@@ -560,7 +669,7 @@ datos_prueba <- testing(division_datos)
 
 <section style="text-align: justify;"><p class="text-primary">Un valor atípico es una observación cuyo valor de la variable respuesta es condicionalmente inusual dado el valor de la variable predictora.</p></section>
 
-<section style="text-align: justify;"><p class="text-primary">Estos son problemáticos porque pueden degradar el rendimiento predictivo de muchos algoritmos de machine learning, y porque su presencia puede ser una señal de que el modelo no logra capturar características importantes de los datos.</p></section>
+<section style="text-align: justify;"><p class="text-primary">Estos son problemáticos porque pueden afectar el rendimiento predictivo de los algoritmos de machine learning, y porque su presencia puede ser una señal de que el modelo no logra capturar características importantes de los datos.</p></section>
 
 <section style="text-align: justify;"><p class="text-primary">El <font color="black"><u>boxplot</u></font> es un método <!--típicamente representado por cuartiles e intercuartiles--> que ayuda a definir el límite superior e inferior más allá de los cuales cualquier dato que se encuentre es considerado como atípico. <!--El propósito mismo de este diagrama es identificar valores atípicos y descartarlos de la serie de datos antes de hacer cualquier observación adicional para que la conclusión del estudio proporcione resultados más precisos no influenciados por ningún extremo o valores anormales.--></p></section>
 
@@ -634,7 +743,7 @@ Se observó que el número de valores atípicos en el conjunto de datos es basta
 
 ---
 
-<section style="text-align: center;"><h2><p class="text-info">Escalado de características</p></h2></section>
+<section style="text-align: center;"><h2><p class="text-info">Escalado de las variables</p></h2></section>
 
 ```{r Diagrama de caja y bigotes para identificar valores atípicos, echo = FALSE, eval = TRUE, message = FALSE, fig.align = 'center', out.width = '570'}
 
@@ -661,11 +770,7 @@ boxplot_OP <- Base_datos_3 %>%
 
 boxplot_SC <- Base_datos_3 %>%
   dplyr::select(IEP, SC) %>%
-  mutate(SC = case_when(
-    SC == 1 ~ 'Macho',
-    SC == 2 ~ 'Hembra'
-  ),
-  Val_atipico = ifelse(is_outlier(IEP), IEP, as.numeric(NA))) %>%
+  mutate(Val_atipico = ifelse(is_outlier(IEP), IEP, as.numeric(NA))) %>%
   ggplot(aes(x = SC, y = IEP, colour = SC, fill = SC)) +
   #geom_jitter(colour = 'gray38', alpha = 0.4, size = 2.0, position = position_jitter(width = 0.1, height = 0.1)) +
   geom_boxplot(alpha = 0.4, outlier.colour = 'gray14', outlier.fill = 'gray14', outlier.size = 2.4) +
@@ -681,12 +786,7 @@ boxplot_SC <- Base_datos_3 %>%
 
 boxplot_EpP <- Base_datos_3 %>%
   dplyr::select(IEP, ÉpP) %>%
-  mutate(ÉpP = case_when(
-    ÉpP == 1 ~ 'Sequía',
-    ÉpP == 2 ~ 'Transición',
-    ÉpP == 3 ~ 'Lluvia'
-  ),
-  Val_atipico = ifelse(is_outlier(IEP), IEP, as.numeric(NA))) %>%
+  mutate(Val_atipico = ifelse(is_outlier(IEP), IEP, as.numeric(NA))) %>%
   ggplot(aes(x = ÉpP, y = IEP, colour = ÉpP, fill = ÉpP)) +
   #geom_jitter(colour = 'gray38', alpha = 0.4, size = 2.0, position = position_jitter(width = 0.1, height = 0.1)) +
   geom_boxplot(alpha = 0.4, outlier.colour = 'gray14', outlier.fill = 'gray14', outlier.size = 2.4) +
@@ -705,11 +805,11 @@ boxplot_EpP <- Base_datos_3 %>%
 
 ---
 
-<section style="text-align: center;"><h2><p class="text-info">Escalado de características</p></h2></section>
+<section style="text-align: center;"><h2><p class="text-info">Escalado de las variables</p></h2></section>
 
 <br>
 
-<section style="text-align: justify;"><p class="text-primary">Existen varios métodos para normalizar las características. La elección de dicho método depende de la distribución de los datos y la presencia de valores atípicos en los datos.</p></section>
+<section style="text-align: justify;"><p class="text-primary">Existen varios métodos para normalizar las variables. La elección de dicho método depende de la distribución de los datos y la presencia de valores atípicos en los datos.</p></section>
 
 <div class = "row">
 
@@ -792,7 +892,7 @@ knitr::include_graphics('Imagenes/octocat_5.png')
 
 ---
 
-<section style="text-align: center;"><h2><p class="text-info">Escalado de características</p></h2></section>
+<section style="text-align: center;"><h2><p class="text-info">Escalado de las variables</p></h2></section>
 
 <div class = "row">
 
@@ -856,11 +956,11 @@ kable(Est_dist, col.names = c('Estadístico', 'Valor')) %>%
 
 <div class = "col-md-6">
 
-<section style="text-align: justify;"><p class="text-primary">Mediante el histograma se observó que los datos de intervalo entre partos en bovinos Romosinuano presentan una distribución no simétrica. En este caso asimétria positiva o asimétria hacia la derecha, puesto que la cola de la distribución apunta hacia la derecha.</p></section>
+<section style="text-align: justify;"><p class="text-primary">Mediante el histograma se observó que los datos de intervalo entre partos en bovinos Romosinuano presentan una distribución no simétrica. En este caso asimétria positiva o asimétria hacia la derecha, puesto que la cola de la distribución apuntaba hacia la derecha.</p></section>
 
 <section style="text-align: justify;"><p class="text-primary">Con respecto a las estadísticas descriptivas, un sesgo distinto de 0 indica falta de simetría de la distribución, mientras que el valor de la curtosis cuantifica el peso de las colas en comparación con la distribución normal, para la cual la curtosis debería ser igual a 3.</p></section>
 
-<section style="text-align: justify;"><p class="text-primary">Por lo tanto, al observar el histograma con una asimetría positiva, una curtosis por encima de 3 y un sesgo distinto de 0, se concluye que la distribución de los datos de intervalo entre partos en bovinos Romosinuano corresponde a una distribución sesgada a la derecha.</p></section>
+<section style="text-align: justify;"><p class="text-primary">Por lo tanto, al observar el histograma con una asimetría positiva, una curtosis por encima de 3 y un sesgo distinto de 0, se concluyó que la distribución de los datos de intervalo entre partos en bovinos Romosinuano corresponde a una distribución sesgada a la derecha.</p></section>
 
 </div>
 
@@ -868,7 +968,7 @@ kable(Est_dist, col.names = c('Estadístico', 'Valor')) %>%
 
 ---
 
-<section style="text-align: center;"><h2><p class="text-info">Escalado de características</p></h2></section>
+<section style="text-align: center;"><h2><p class="text-info">Escalado de las variables</p></h2></section>
 
 <br>
 
