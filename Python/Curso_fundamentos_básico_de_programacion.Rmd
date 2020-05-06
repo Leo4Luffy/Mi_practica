@@ -1702,15 +1702,103 @@ print(suma)
 
 <p class="text-warning"></p>
 
+<p class="text-warning">Funciones</p>
+
 <div class = "row">
 
 <div class = "col-md-6">
 
+<section style="text-align: justify;"><p class="text-secondary">Muy a menudo ocurre que un cierto fragmento de código se repite muchas veces en un programa. Se repite de manera literal o, con algunas modificaciones menores, empleando algunas otras variables dentro del programa. También ocurre que un programador ha comenzado a copiar y pegar ciertas partes del código en más de una ocasión en el mismo programa.</p></section>
+
+<section style="text-align: justify;"><p class="text-secondary">Puede ser muy frustrante percatarse de repente que existe un error en el código copiado. El programador tendrá que escarbar bastante para encontrar todos los lugares en el código donde hay que corregir el error. Además, existe un gran riesgo de que las correcciones produzcan errores adicionales.</p></section>
+
 </div>
 
 <div class = "col-md-6">
 
+<section style="text-align: justify;"><p class="text-secondary">En vista a todo lo anterior, es una buena idea <font color="black">comenzar a escribir funciones propias</font>: si un fragmento de código comienza a aparecer en más de una ocasión, se puede considerar la posibilidad de aislarlo en la forma de una función invocando la función desde el lugar en el que originalmente se encontraba.</p></section>
+
+<section style="text-align: justify;"><p class="text-secondary">Puede suceder también que el algoritmo que se desea implementar sea tan complejo que el código comience a crecer de manera incontrolada y, de repente, ya no se puede navegar por él tan fácilmente. Se puede intentar solucionar este problema comentando el código, pero esto puede empeorar la situación: demasiados comentarios hacen que el código sea más difícil de leer y entender.</p></section>
+
 </div>
+
+</div>
+
+---
+
+<section style="text-align: center;"><h4><p class="text-info">Fundamentos básicos de programación en Python</p></h4></section>
+<br>
+
+<p class="text-warning"></p>
+
+<p class="text-warning">Funciones</p>
+
+<div class = "row">
+
+<div class = "col-md-6">
+
+<section style="text-align: justify;"><p class="text-secondary">Un buen desarrollador <font color="black">divide el código</font> (o mejor dicho, el problema) en piezas aisladas, y <font color="black">codifica cada una de ellas en la forma de una función</font>.</p></section>
+
+<section style="text-align: justify;"><p class="text-secondary">Esto simplifica considerablemente el trabajo del programa, debido a que cada pieza se codifica por separado y consecuentemente se prueba por separado. A este proceso se le llama comúnmente como <font color="black">descomposición</font>.</p></section>
+
+<section style="text-align: justify;"><p class="text-secondary">Esta descomposición permite obtener un conjunto de funciones cortas, fáciles de comprender y probar.</p></section>
+
+<section style="text-align: justify;"><p class="text-secondary">Es muy común también que un programa sea tan largo y complejo que no puede ser asignado a un solo desarrollador, y en su lugar un <font color="black">equipo de desarrolladores</font> trabajarán en el.</p></section>
+
+</div>
+
+<div class = "col-md-6">
+
+<section style="text-align: justify;"><p class="text-secondary">El problema, debe ser dividido entre varios desarrolladores de una manera en que se pueda asegurar su eficiencia y cooperación. Este tipo de descomposición tiene diferentes propósitos, no solo se trata de <font color="black">compartir el trabajo</font>, sino también de <font color="black">compartir la responsabilidad</font> entre varios desarrolladores.</p></section>
+
+<section style="text-align: justify;"><p class="text-secondary">Cada uno debe escribir un conjunto <!--bien definido y claro--> de funciones, las cuales al ser <font color="black">combinadas dentro de un módulo</font> dará como resultado el producto final.</p></section>
+
+<section style="text-align: justify"><p class="text-secondary">Así, si se va a dividir el trabajo entre varios programadores, <font color="black">se debe descomponer el problema para permitir que el producto sea implementado como un conjunto de funciones escritas por separado empacadas juntas en diferentes módulos</font>.</p></section>
+
+</div>
+
+---
+
+<section style="text-align: center;"><h4><p class="text-info">Fundamentos básicos de programación en Python</p></h4></section>
+<br>
+
+<p class="text-warning"></p>
+
+<p class="text-warning">Funciones</p>
+
+<div class = "row">
+
+<div class = "col-md-6">
+
+<section style="text-align: justify;"><p class="text-secondary">En general, las funciones provienen de al menos tres lugares:</p>
+
+<div class="form-check">
+  <div class="form-check disabled">
+    <input class="form-check-input" type="checkbox" value="" disabled="">
+    De Python mismo: varias funciones (como print()) son una parte integral de Python, y siempre están disponibles sin algún esfuerzo adicional del programador; se les llama a estas funciones funciones integradas.
+  </div>
+  <div class="form-check disabled">
+    <input class="form-check-input" type="checkbox" value="" disabled="">
+    De los módulos preinstalados de Python: muchas de las funciones, las cuales comúnmente son menos utilizadas que las integradas, están disponibles en módulos instalados juntamente con Python; para poder utilizar estas funciones el programador debe realizar algunos pasos adicionales.
+  </div>
+</div>
+
+</section>
+
+</div>
+
+<div class = "col-md-6">
+
+<section style="text-align: justify;">
+
+<div class="form-check">
+  <div class="form-check disabled">
+    <input class="form-check-input" type="checkbox" value="" disabled="">
+    Directamente del código: el programador puede escribir sus propias funciones, colocarlas dentro del código, y usarlas libremente.
+  </div>
+</div>
+<!--Voy en 4.1.1.4 Escribir Funciones-->
+</section>
 
 </div>
 

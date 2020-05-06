@@ -12,7 +12,7 @@ class: center, middle, inverse, title-slide
 
 # Curso sobre fundamentos básicos de programación en Python
 ### Jorge Leonardo López Martínez
-### 02 mayo, 2020
+### 06 mayo, 2020
 
 ---
 
@@ -1552,15 +1552,103 @@ Necesitas una variable cuya suma se almacenará y se le asignará inicialmente u
 
 &lt;p class="text-warning"&gt;&lt;/p&gt;
 
+&lt;p class="text-warning"&gt;Funciones&lt;/p&gt;
+
 &lt;div class = "row"&gt;
 
 &lt;div class = "col-md-6"&gt;
 
+&lt;section style="text-align: justify;"&gt;&lt;p class="text-secondary"&gt;Muy a menudo ocurre que un cierto fragmento de código se repite muchas veces en un programa. Se repite de manera literal o, con algunas modificaciones menores, empleando algunas otras variables dentro del programa. También ocurre que un programador ha comenzado a copiar y pegar ciertas partes del código en más de una ocasión en el mismo programa.&lt;/p&gt;&lt;/section&gt;
+
+&lt;section style="text-align: justify;"&gt;&lt;p class="text-secondary"&gt;Puede ser muy frustrante percatarse de repente que existe un error en el código copiado. El programador tendrá que escarbar bastante para encontrar todos los lugares en el código donde hay que corregir el error. Además, existe un gran riesgo de que las correcciones produzcan errores adicionales.&lt;/p&gt;&lt;/section&gt;
+
 &lt;/div&gt;
 
 &lt;div class = "col-md-6"&gt;
 
+&lt;section style="text-align: justify;"&gt;&lt;p class="text-secondary"&gt;En vista a todo lo anterior, es una buena idea &lt;font color="black"&gt;comenzar a escribir funciones propias&lt;/font&gt;: si un fragmento de código comienza a aparecer en más de una ocasión, se puede considerar la posibilidad de aislarlo en la forma de una función invocando la función desde el lugar en el que originalmente se encontraba.&lt;/p&gt;&lt;/section&gt;
+
+&lt;section style="text-align: justify;"&gt;&lt;p class="text-secondary"&gt;Puede suceder también que el algoritmo que se desea implementar sea tan complejo que el código comience a crecer de manera incontrolada y, de repente, ya no se puede navegar por él tan fácilmente. Se puede intentar solucionar este problema comentando el código, pero esto puede empeorar la situación: demasiados comentarios hacen que el código sea más difícil de leer y entender.&lt;/p&gt;&lt;/section&gt;
+
 &lt;/div&gt;
+
+&lt;/div&gt;
+
+---
+
+&lt;section style="text-align: center;"&gt;&lt;h4&gt;&lt;p class="text-info"&gt;Fundamentos básicos de programación en Python&lt;/p&gt;&lt;/h4&gt;&lt;/section&gt;
+&lt;br&gt;
+
+&lt;p class="text-warning"&gt;&lt;/p&gt;
+
+&lt;p class="text-warning"&gt;Funciones&lt;/p&gt;
+
+&lt;div class = "row"&gt;
+
+&lt;div class = "col-md-6"&gt;
+
+&lt;section style="text-align: justify;"&gt;&lt;p class="text-secondary"&gt;Un buen desarrollador &lt;font color="black"&gt;divide el código&lt;/font&gt; (o mejor dicho, el problema) en piezas aisladas, y &lt;font color="black"&gt;codifica cada una de ellas en la forma de una función&lt;/font&gt;.&lt;/p&gt;&lt;/section&gt;
+
+&lt;section style="text-align: justify;"&gt;&lt;p class="text-secondary"&gt;Esto simplifica considerablemente el trabajo del programa, debido a que cada pieza se codifica por separado y consecuentemente se prueba por separado. A este proceso se le llama comúnmente como &lt;font color="black"&gt;descomposición&lt;/font&gt;.&lt;/p&gt;&lt;/section&gt;
+
+&lt;section style="text-align: justify;"&gt;&lt;p class="text-secondary"&gt;Esta descomposición permite obtener un conjunto de funciones cortas, fáciles de comprender y probar.&lt;/p&gt;&lt;/section&gt;
+
+&lt;section style="text-align: justify;"&gt;&lt;p class="text-secondary"&gt;Es muy común también que un programa sea tan largo y complejo que no puede ser asignado a un solo desarrollador, y en su lugar un &lt;font color="black"&gt;equipo de desarrolladores&lt;/font&gt; trabajarán en el.&lt;/p&gt;&lt;/section&gt;
+
+&lt;/div&gt;
+
+&lt;div class = "col-md-6"&gt;
+
+&lt;section style="text-align: justify;"&gt;&lt;p class="text-secondary"&gt;El problema, debe ser dividido entre varios desarrolladores de una manera en que se pueda asegurar su eficiencia y cooperación. Este tipo de descomposición tiene diferentes propósitos, no solo se trata de &lt;font color="black"&gt;compartir el trabajo&lt;/font&gt;, sino también de &lt;font color="black"&gt;compartir la responsabilidad&lt;/font&gt; entre varios desarrolladores.&lt;/p&gt;&lt;/section&gt;
+
+&lt;section style="text-align: justify;"&gt;&lt;p class="text-secondary"&gt;Cada uno debe escribir un conjunto &lt;!--bien definido y claro--&gt; de funciones, las cuales al ser &lt;font color="black"&gt;combinadas dentro de un módulo&lt;/font&gt; dará como resultado el producto final.&lt;/p&gt;&lt;/section&gt;
+
+&lt;section style="text-align: justify"&gt;&lt;p class="text-secondary"&gt;Así, si se va a dividir el trabajo entre varios programadores, &lt;font color="black"&gt;se debe descomponer el problema para permitir que el producto sea implementado como un conjunto de funciones escritas por separado empacadas juntas en diferentes módulos&lt;/font&gt;.&lt;/p&gt;&lt;/section&gt;
+
+&lt;/div&gt;
+
+---
+
+&lt;section style="text-align: center;"&gt;&lt;h4&gt;&lt;p class="text-info"&gt;Fundamentos básicos de programación en Python&lt;/p&gt;&lt;/h4&gt;&lt;/section&gt;
+&lt;br&gt;
+
+&lt;p class="text-warning"&gt;&lt;/p&gt;
+
+&lt;p class="text-warning"&gt;Funciones&lt;/p&gt;
+
+&lt;div class = "row"&gt;
+
+&lt;div class = "col-md-6"&gt;
+
+&lt;section style="text-align: justify;"&gt;&lt;p class="text-secondary"&gt;En general, las funciones provienen de al menos tres lugares:&lt;/p&gt;
+
+&lt;div class="form-check"&gt;
+  &lt;div class="form-check disabled"&gt;
+    &lt;input class="form-check-input" type="checkbox" value="" disabled=""&gt;
+    De Python mismo: varias funciones (como print()) son una parte integral de Python, y siempre están disponibles sin algún esfuerzo adicional del programador; se les llama a estas funciones funciones integradas.
+  &lt;/div&gt;
+  &lt;div class="form-check disabled"&gt;
+    &lt;input class="form-check-input" type="checkbox" value="" disabled=""&gt;
+    De los módulos preinstalados de Python: muchas de las funciones, las cuales comúnmente son menos utilizadas que las integradas, están disponibles en módulos instalados juntamente con Python; para poder utilizar estas funciones el programador debe realizar algunos pasos adicionales.
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/section&gt;
+
+&lt;/div&gt;
+
+&lt;div class = "col-md-6"&gt;
+
+&lt;section style="text-align: justify;"&gt;
+
+&lt;div class="form-check"&gt;
+  &lt;div class="form-check disabled"&gt;
+    &lt;input class="form-check-input" type="checkbox" value="" disabled=""&gt;
+    Directamente del código: el programador puede escribir sus propias funciones, colocarlas dentro del código, y usarlas libremente.
+  &lt;/div&gt;
+&lt;/div&gt;
+&lt;!--Voy en 4.1.1.4 Escribir Funciones--&gt;
+&lt;/section&gt;
 
 &lt;/div&gt;
 
