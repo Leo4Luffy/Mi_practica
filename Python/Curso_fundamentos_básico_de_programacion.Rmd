@@ -1775,11 +1775,89 @@ print(suma)
 <div class="form-check">
   <div class="form-check disabled">
     <input class="form-check-input" type="checkbox" value="" disabled="">
-    De Python mismo: varias funciones (como print()) son una parte integral de Python, y siempre están disponibles sin algún esfuerzo adicional del programador; se les llama a estas funciones funciones integradas.
+    De Python mismo: <!--varias funciones (como print( ))--> son una parte integral de Python, y siempre están disponibles sin algún esfuerzo adicional del programador; se les llama <!--a estas funciones--> funciones integradas.
   </div>
   <div class="form-check disabled">
     <input class="form-check-input" type="checkbox" value="" disabled="">
-    De los módulos preinstalados de Python: muchas de las funciones, las cuales comúnmente son menos utilizadas que las integradas, están disponibles en módulos instalados juntamente con Python; para poder utilizar estas funciones el programador debe realizar algunos pasos adicionales.
+    De módulos preinstalados de Python: muchas de las funciones<!--, las cuales comúnmente son menos utilizadas que las integradas,--> están disponibles en módulos instalados juntamente con Python; para poder utilizarlas el programador debe realizar algunos pasos adicionales.
+  </div>
+  <div class="form-check disabled">
+    <input class="form-check-input" type="checkbox" value="" disabled="">
+    Directamente del código: el programador puede escribir sus propias funciones, colocarlas dentro del código, y usarlas libremente.
+  </div>
+</div>
+
+<p class="text-secondary">Para crear una función se necesita <font color="black">definirla</font>.</p>
+
+</section>
+
+</div>
+
+<div class = "col-md-6">
+
+<section style="text-align: justify;"><p class="text-secondary">Así es como se ve la definición más simple de una función:</p></section>
+
+<section style="text-align: left;">
+<p>def nombreFuncion( ):</p>
+    <p>&nbsp;&nbsp;&nbsp;&nbsp;cuerpoFuncion</p>
+</section>
+
+<section style="text-align: justify;">
+
+<div class="form-check">
+  <div class="form-check disabled">
+    <input class="form-check-input" type="checkbox" value="" disabled="">
+    Siempre comienza con la palabra reservada def (que significa definir).
+  </div>
+  <div class="form-check disabled">
+    <input class="form-check-input" type="checkbox" value="" disabled="">
+    Después de def va el nombre de la función<!--(las reglas para darle nombre a las funciones son las mismas que para las variables)-->.
+  </div>
+  <div class="form-check disabled">
+    <input class="form-check-input" type="checkbox" value="" disabled="">
+    Después del nombre de la función, hay un espacio para un par de paréntesis.
+  </div>
+  <div class="form-check disabled">
+    <input class="form-check-input" type="checkbox" value="" disabled="">
+    La línea debe de terminar con dos puntos.
+  </div>
+  <div class="form-check disabled">
+    <input class="form-check-input" type="checkbox" value="" disabled="">
+    La línea inmediatamente después de def marca el comienzo del cuerpo de la función, donde una instrucción anidada será ejecutada cada vez que la función sea invocada<!--; nota: la función termina donde el anidamiento termina, se debe ser cauteloso-->.
+  </div>
+</div>
+
+</section>
+
+</div>
+
+</div>
+
+---
+
+<section style="text-align: center;"><h4><p class="text-info">Fundamentos básicos de programación en Python</p></h4></section>
+<br>
+
+<p class="text-warning"></p>
+
+<p class="text-warning">Funciones</p>
+
+<div class = "row">
+
+<div class = "col-md-6">
+
+<section style="text-align: justify;"><p class="text-secondary">Cuando se <font color="black">invoca</font> una función, Python recuerda el lugar donde esto ocurre y salta hacia dentro de la función invocada. El cuerpo de la función es entonces <font color="black">ejecutado</font>. Al llegar al final de la función, Python <font color="black">regresa</font> al lugar inmediato después de donde ocurrió la invocación.</p></section>
+
+<section style="text-align: justify;"><p class="text-secondary">Existen dos consideraciones muy importantes:</p>
+
+<div class="form-check">
+  <div class="form-check disabled">
+    <input class="form-check-input" type="checkbox" value="" disabled="">
+    No se debe invocar una función antes de que se haya definido: Python lee el código de arriba hacia abajo. No va a adelantarse en el código para determinar si la función invocada esta definida mas adelante.
+  </div>
+  <div class="form-check disabled">
+    <input class="form-check-input" type="checkbox" value="" disabled="">
+    Una función y una variable no pueden compartir el mismo nombre.
   </div>
 </div>
 
@@ -1789,22 +1867,137 @@ print(suma)
 
 <div class = "col-md-6">
 
-<section style="text-align: justify;">
+<section style="text-align: justify;"><p class="text-secondary">Una <font color="black">función</font> es un bloque de código que realiza una tarea especifica cuando la función es invocada. Son útiles para hacer que el código sea reutilizable, que este mejor organizado y más legible. Las funciones <font color="black">contienen parámetros y pueden regresar valores</font>.</p></section>
 
-<div class="form-check">
-  <div class="form-check disabled">
-    <input class="form-check-input" type="checkbox" value="" disabled="">
-    Directamente del código: el programador puede escribir sus propias funciones, colocarlas dentro del código, y usarlas libremente.
-  </div>
-</div>
-<!--Voy en 4.1.1.4 Escribir Funciones-->
+<section style="text-align: justify;"><p class="text-secondary">El potencial completo de una función se revela cuando puede ser equipada con una interface que es capaz de aceptar datos provenientes de la invocación. Dichos datos pueden modificar el comportamiento de la función, haciéndola mas flexible y adaptable a condiciones cambiantes.</p></section>
+
+<section style="text-align: justify;"><p class="text-secondary">Así es como se ve una función con parametros:</p></section>
+
+<section style="text-align: left;">
+<p>def nombreFuncion(parametro):</p>
+    <p>&nbsp;&nbsp;&nbsp;&nbsp;cuerpoFuncion</p>
 </section>
 
 </div>
 
-<!--buscar en la pagina del icetex y en la cancilleria, scolar4devs.com-->
+</div>
 
 ---
+
+<section style="text-align: center;"><h4><p class="text-info">Fundamentos básicos de programación en Python</p></h4></section>
+<br>
+
+<p class="text-warning"></p>
+
+<p class="text-warning">Funciones</p>
+
+<div class = "row">
+
+<div class = "col-md-6">
+
+<section style="text-align: justify;"><p class="text-secondary">Un parámetro es una variable, pero existen dos factores que hacen a un parámetro diferente:</p>
+
+<div class="form-check">
+  <div class="form-check disabled">
+    <input class="form-check-input" type="checkbox" value="" disabled="">
+    Los parámetros solo existen dentro de las funciones en donde han sido definidos, y el único lugar donde un parámetro puede ser definido es entre los paréntesis después del nombre de la función, donde se encuentra la palabra reservada def.
+  </div>
+  <div class="form-check disabled">
+    <input class="form-check-input" type="checkbox" value="" disabled="">
+    La asignación de un valor a un parámetro de una función se hace en el momento en que la función se manda llamar o se invoca, especificando el argumento correspondiente.
+  </div>
+</div>
+
+</section>
+
+<section style="text-align: justify;"><p class="text-secondary">Una función puede tener <font color="black">tantos parámetros como se desee</font>, pero entre más parámetros, es más difícil memorizar su rol y propósito.</p></section>
+
+</div>
+
+<div class = "col-md-6">
+
+<section style="text-align: justify;"><p class="text-secondary">La técnica que asigna cada argumento al parámetro correspondiente, es llamada <font color="black">paso de parámetros posicionales</font>, los argumentos pasados de esta manera son llamados <font color="black">argumentos posicionales</font>.</p></section>
+
+<section style="text-align: justify;"><p class="text-secondary">Sin embargo, Python ofrece otra manera de pasar argumentos, donde <font color="black">el significado del argumento esta definido por su nombre</font>, no por su posición, a esto se le denomina <font color="black">paso de argumentos con palabras clave</font>. El concepto es claro: los valores pasados a los parámetros son precedidos por el nombre del parámetro al que se le va a pasar el valor, seguido por el signo de <font color="black">=</font>.<!--La posición no es relevante aquí, cada argumento conoce su destino con base en el nombre utilizado.Por supuesto que no se debe de utilizar el nombre de un parámetro que no existe.--> <font color="black">Es posible combinar ambos tipos si se desea</font>, solo hay una regla inquebrantable: se deben colocar primero los argumentos posicionales y después los de palabras clave.</p></section>
+
+</div>
+
+---
+
+<section style="text-align: center;"><h4><p class="text-info">Fundamentos básicos de programación en Python</p></h4></section>
+<br>
+
+<p class="text-warning"></p>
+
+<p class="text-warning">Funciones</p>
+
+<div class = "row">
+
+<div class = "col-md-6">
+
+<section style="text-align: justify;"><p class="text-secondary">En ocasiones ocurre que algunos valores de ciertos argumentos son mas utilizados que otros. Dichos argumentos tienen <font color="black">valores predefinidos</font> los cuales pueden ser considerados cuando los argumentos correspondientes han sido omitidos. Solo se tiene que colocar el nombre del parámetro seguido del signo de <font color="black">=</font> y el valor por default.</p></section>
+
+<section style="text-align: justify;"><p class="text-secondary">Las funciones, al igual que las funciones matemáticas, pueden tener resultados. Para lograr que las <font color="black">funciones devuelvan un valor</font> (pero no solo para ese propósito) se utiliza la instrucción <font color="black">return</font> (regresar o retornar).</p></section>
+
+<section style="text-align: justify;"><p class="text-secondary">La instrucción <font color="black">return</font> tiene dos variantes diferentes:</p></section>
+
+</div>
+
+<div class = "col-md-6">
+
+<section style="text-align: justify;"><p class="text-secondary"><font color="black">1. return sin una expresión</font>. Cuando se emplea, provoca la terminación inmediata de la ejecución de la función, y un retorno instantáneo <!--(de ahí el nombre)--> al punto de invocación. Si una función no está destinada a producir un resultado, emplear la instrucción <font color="black">return</font> no es obligatorio<!--, se ejecutará implícitamente al final de la función-->.</p></section>
+
+<section style="text-align: justify;"><p class="text-secondary"><font color="black">2. return con una expresión</font>. La segunda variante de return está extendida con una expresión:</p></section>
+
+<section style="text-align: left;">
+funcion( ):<p>
+     <p>&nbsp;&nbsp;&nbsp;&nbsp;return expresión</p>
+</section>
+
+<section style="text-align: justify;"><p class="text-secondary">Hay dos consecuencias de usarla:</p>
+
+<div class="form-check">
+  <div class="form-check disabled">
+    <input class="form-check-input" type="checkbox" value="" disabled="">
+    Provoca la terminación inmediata de la ejecución de la función <!--(nada nuevo en comparación con la primer variante)-->.
+  </div>
+  <div class="form-check disabled">
+    <input class="form-check-input" type="checkbox" value="" disabled="">
+    La función evaluará el valor de la expresión y lo devolverá <!--(de ahí el nombre una vez mas) como el resultado de la función-->.
+  </div>
+</div>
+
+</section>
+
+</div>
+
+</div>
+
+---
+
+<section style="text-align: center;"><h4><p class="text-info">Fundamentos básicos de programación en Python</p></h4></section>
+<br>
+
+<p class="text-warning"></p>
+
+<p class="text-warning">Funciones</p>
+
+<div class = "row">
+
+<div class = "col-md-6">
+
+<section style="text-align: justify;"><p class="text-secondary">La palabra <font color="black">None</font> como el resultado de una función, puede ser el síntoma de un error sutil dentro de la función.</p></section>
+<!--Voy en 4.1.3.4 Regresando el resultado de una función-->
+</div>
+
+<div class = "col-md-6">
+
+</div>
+
+</div>
+
+---
+<!--buscar en la pagina del icetex y en la cancilleria, scolar4devs.com-->
 
 <br>
 <br>
