@@ -1987,7 +1987,237 @@ funcion( ):<p>
 <div class = "col-md-6">
 
 <section style="text-align: justify;"><p class="text-secondary">La palabra <font color="black">None</font> como el resultado de una función, puede ser el síntoma de un error sutil dentro de la función.</p></section>
-<!--Voy en 4.1.3.4 Regresando el resultado de una función-->
+
+<section style="text-align: justify;"><p class="text-secondary"><font color="black">Se puede enviar una lista a una función como argumento</font>, así como cualquier entidad reconocible por Python, aunque se debe asegurar de que la función sea capaz de hacer uso de él. Entonces por ejempli, si se pasa una lista a una función, la función tiene que manejarla como una lista.</p></section>
+
+<section style="text-align: justify;"><p class="text-secondary">También <font color="black">una lista puede ser el resultado de una fución</font>, así como cualquier entidad reconocible por Python.</p></section>
+
+<!--
+Ejemplo de funciones simples:
+-->
+
+<!--
+1. Función que permite calcular el índice de masa corporal (IMC):
+-->
+
+```{python, echo = FALSE, eval = FALSE, message = FALSE}
+
+def imc(peso, altura): # La función tiene dos parámetros debido a que la formula del IMC ocupa dos valores: peso (en kg) y altura (en metros). Su nombre es imc.
+    return peso / altura ** 2
+
+print(imc(52.5, 1.65))
+```
+
+<!--
+2. Función que permite calcular el índice de masa corporal (IMC) y convertir unidades del sistema inglés al sistema métrico:
+-->
+
+```{python, echo = FALSE, eval = FALSE, message = FALSE}
+
+def imc(peso, altura):
+    if altura < 1.0 or altura > 2.5 or \
+    peso < 20 or peso > 200:
+        return None # El código aqui se asegura que los datos que sean ingresados sean correctos, de lo contrario la salida será "None"... el símbolo de diagonal invertida (\) es empleado aquí para que si se termina una línea Python entienda que la línea continua al siguiente (esto puede ser útil cuando se tienen largas líneas de código y se desea que sean mas legibles).
+    
+    return peso / altura ** 2
+
+print(imc(352.5, 1.65)) # Prueba.
+
+# NOTA: Sin embargo, la anterior función no es útil para personas que utilicen libras, pies y pulgadas. Para esto se escriben dos funciones nuevas y sencillas para convertir unidades de sistema inglés al sistema métrico:
+
+def lbakg(lb): # Función que convierte libras a kilogramos ya que 1 lb = 0.45359237 kg.
+    return lb * 0.45359237
+
+print(lbakg(1)) # Prueba.
+
+def piepulgam(pie, pulgada): # Función que convierte pies y pulgadas a metros ya que 1 pie = 0.3048 m, y 1 pulgada = 2.54 cm = 0.0254 m.
+    return pie * 0.3048 + pulgada * 0.0254
+
+print(piepulgam(1, 1))
+
+def piepulgam(pie, pulgada = 0.0): # Función como la anterior, solo que utiliza solo pies más no pulgadas para calcular los metros... el parámetro pulgada tiene como valor predeterminado el 0.0.
+    return pie * 0.3048 + pulgada * 0.0254
+
+print(piepulgam(6)) # Prueba
+
+# Finalmente, el código es capaz de responder a la pregunta: ¿Cual es el IMC de una persona que tiene 5'7" (pies) de altura y un peso de 176 lbs?:
+
+def piespulgam(pies, pulgadas = 0.0):
+    return pies * 0.3048 + pulgadas * 0.0254
+
+def lbsakg(lb):
+    return lb * 0.45359237
+
+def imc(peso, altura):
+    if altura < 1.0 or altura > 2.5 or \
+    peso < 20 or peso > 200:
+        return None
+    
+    return peso / altura ** 2
+
+print(imc(peso = lbsakg(176), altura = piespulgam(5, 7))) # Prueba
+```
+
+<!--
+3. Función que verifica si tres lados de ciertas longitudes pueden formar un triángulo.:
+-->
+
+```{python, echo = FALSE, eval = FALSE, message = FALSE}
+
+def esUnTriangulo(a, b, c): # La función (de nombre "esUnTriangulo") tiene tres parámetros, uno para cada lado.
+    if a + b <= c: # En la escuela se aprendio que la suma arbitraria de dos lados tiene que ser mayor que la longitud del tercer lado... así, se regresará True si todos los lados pueden formar un triángulo, y False de lo contrario. 
+        return False
+    if b + c <= a:
+        return False
+    if c + a <= b:
+        return False
+    return True
+
+print(esUnTriangulo (1, 1, 1)) # Prueba
+print(esUnTriangulo (1, 1, 3))
+
+# NOTA: un versión más compacta de la anterior función:
+def esUnTriangulo(a, b, c):
+    if a + b <= c or b + c <= a or \
+    c + a <= b:
+        return False
+    return True
+
+print(esUnTriangulo(1, 1, 1)) # Prueba
+print(esUnTriangulo(1, 1, 3))
+
+# NOTA: aún más compacta:
+def esUnTriangulo (a, b, c):
+    return a + b > c and b + c > a and c + a > b
+
+print(esUnTriangulo (1, 1, 1))
+print(esUnTriangulo (1, 1, 3))
+```
+
+<!--
+4. Función que verifica si tres lados de ciertas longitudes pueden formar un triángulo, y si el triángulo en un triángulo rectángulo:
+-->
+
+```{python, echo = FALSE, eval = FALSE, message = FALSE}
+
+def esUnTriangulo(a, b, c):
+    return a + b > c and b + c > a and c + a > b
+
+def esUnTrianguloRectangulo(a, b, c): # En este segundo paso se verifica qi un triángulo es un triángulo rectángulo por medio le teorema de Pitágoras (c² = a² + b²). Para saber cual de los tres lados es la hipotenusa, hay que recordar que la hipotenusa es el lado más largo, y los otros dos lados serían lo catetos.
+    if not esUnTriangulo  (a, b, c):
+        return False
+    if c > a and c > b:
+        return c ** 2 == a ** 2 + b ** 2
+    if a > b and a > c:
+        return a ** 2 == b ** 2 + c ** 2
+
+print(esUnTrianguloRectangulo(5, 3, 4)) # Prueba
+print(esUnTrianguloRectangulo(1, 3, 4))
+```
+
+<!--
+5. Función para calcular factoriales:
+-->
+
+```{python, echo = FALSE, eval = FALSE, message = FALSE}
+
+def factorialFun(n):
+    if n < 0:
+        return None
+    if n < 2:
+        return 1
+    
+    producto = 1
+    for i in range(2, n + 1): # El bucle for se usa para encontrar el producto.
+        producto *= i
+    return producto
+
+for n in range(1, 6): # Prueba
+    print(n, factorialFun(n))
+```
+
+<!--
+6. Función para la serie Fibonacci:
+-->
+
+```{python, echo = FALSE, eval = FALSE, message = FALSE}
+
+def fib(n):
+    if n < 1:
+         return None
+    if n < 3:
+        return 1
+
+    elem1 = elem2 = 1
+    sum = 0
+    for i in range(3, n + 1):
+        sum = elem1 + elem2
+        elem1, elem2 = elem2, sum
+    return sum
+
+for n in range(1, 10): # probando
+    print(n, "->", fib(n))
+```
+
+</div>
+
+<div class = "col-md-6">
+
+<section style="text-align: justify;"><p class="text-secondary">Una función puede invocar otras funciones o incluso a sí misma. Cuando una función se invoca a si misma, se le conoce como <font color="black">recursividad</font>, y la función que se invoca a si misma y contiene una condición de terminación (la cual le dice a la función que ya no siga invocándose a si misma) es llamada una función <font color="black">recursiva</font>.</p></section>
+
+<section style="text-align: justify;"><p class="text-secondary">Se pueden emplear funciones recursivas en Python para <font color="black">crear funciones limpias, elegantes, y dividir el código en trozos más pequeños</font>. Sin embargo, se debe tener mucho cuidado ya que es muy fácil cometer un error y crear una función la cual nunca termine. También se debe considerar que las funciones recursivas consumen mucha memoria, y por lo tanto pueden ser en ocasiones ineficientes.</p></section>
+
+<!--Al emplear la recursividad, se deben de tomar en cuenta tanto sus ventajas como desventajas.-->
+
+<!--
+7. Función de serie Fibonacci como ejemplo del concepto de recursividad  (la serie de Fibonacci es un claro ejemplo de recursividad, el cual es una técnica donde una función se invoca a si misma.)
+-->
+
+```{python, echo = FALSE, eval = FALSE, message = FALSE}
+
+def fib(n): # Este código es más claro que el anterior, pero implica un riesgo puesto que si no se considera una condición que detenga las invocacione recursivas, el programa puede entrar en un bucle infinito. Se debe ser cuidadoso.
+    if n < 1:
+        return None
+    if n < 3:
+        return 1
+    return fib(n - 1) + fib(n - 2)
+```
+
+<!--
+8. La función dEl factorial también es un ejemplo de recursividad:
+-->
+
+```{python, echo = FALSE, eval = FALSE, message = FALSE}
+
+def factorialFun(n):
+    if n < 0:
+        return None
+    if n < 2:
+        return 1
+    return n * factorialFun(n - 1)
+
+print(factorial(4)) # Prueba
+```
+
+</div>
+
+</div>
+
+---
+
+<section style="text-align: center;"><h4><p class="text-info">Fundamentos básicos de programación en Python</p></h4></section>
+<br>
+
+<p class="text-warning"></p>
+
+<p class="text-warning">Tipos de secuencia y mutabilidad</p>
+
+<div class = "row">
+
+<div class = "col-md-6">
+
+<section style="text-align: justify;"><p class="text-secondary">.</p></section>
+
 </div>
 
 <div class = "col-md-6">
