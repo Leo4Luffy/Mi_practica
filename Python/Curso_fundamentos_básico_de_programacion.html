@@ -1921,13 +1921,354 @@ Ejemplo de funciones simples:
 
 &lt;div class = "col-md-6"&gt;
 
-&lt;section style="text-align: justify;"&gt;&lt;p class="text-secondary"&gt;.&lt;/p&gt;&lt;/section&gt;
+&lt;section style="text-align: justify;"&gt;&lt;p class="text-secondary"&gt;Un &lt;font color="black"&gt;tipo de secuencia&lt;/font&gt; es un tipo de dato en Python el cual &lt;font color="black"&gt;es capaz de almacenar mas de un valor&lt;/font&gt; (o ninguno si la secuencia esta vacía), los cuales pueden ser secuencialmente (de ahí el nombre) examinados, elemento por elemento.Una &lt;font color="black"&gt;secuencia&lt;/font&gt; es un tipo de dato que puede ser escaneado por el bucle &lt;font color="black"&gt;for&lt;/font&gt;. La &lt;font color="black"&gt;lista&lt;/font&gt; es un clásico ejemplo de una secuencia de Python.&lt;/p&gt;&lt;/section&gt;
+
+&lt;section style="text-align: justify;"&gt;&lt;p class="text-secondary"&gt;La &lt;font color="black"&gt;mutabilidad&lt;/font&gt;, es una propiedad de cualquier tipo de dato en Python que describe su disponibilidad para poder cambiar libremente durante la ejecución de un programa. Existen dos tipos de datos en Python: &lt;font color="black"&gt;mutables&lt;/font&gt; e &lt;font color="black"&gt;inmutables&lt;/font&gt;.&lt;/p&gt;&lt;/section&gt;
+
+&lt;section style="text-align: justify;"&gt;&lt;p class="text-secondary"&gt;Los datos mutables pueden ser actualizados libremente en cualquier momento, a esta operación se le denomina "&lt;font color="black"&gt;in situ&lt;/font&gt;".&lt;/p&gt;&lt;/section&gt;
 
 &lt;/div&gt;
 
 &lt;div class = "col-md-6"&gt;
 
+&lt;section style="text-align: justify;"&gt;&lt;p class="text-secondary"&gt;Los datos inmutables no pueden ser modificados de esta manera. Un ejemplo de ello son las &lt;font color="black"&gt;tuplas&lt;/font&gt;. Una tupla es una secuencia inmutable: se puede comportar como una lista pero no puede ser modificada &lt;font color="black"&gt;in situ&lt;/font&gt; (en el momento).&lt;/p&gt;&lt;/section&gt;
+
+&lt;section style="text-align: justify;"&gt;&lt;p class="text-secondary"&gt;Lo primero que distingue una lista de una tupla es la sintaxis empleada para crearlas. Las tuplas utilizan &lt;font color="black"&gt;paréntesis&lt;/font&gt;, mientras que las listas usan corchetes, aunque también es posible crear una tupla tan solo separando los valores por &lt;font color="black"&gt;comas&lt;/font&gt;:&lt;/p&gt;&lt;/section&gt;
+
+&lt;section style="text-align: left;"&gt;
+&lt;p&gt;tupla1 = (1, 2, 4, 8)&lt;/p&gt;
+&lt;p&gt;tupla2 = 1.0, 0.5, 0.25, 0.125&lt;/p&gt;
+&lt;/section&gt;
+
+&lt;section style="text-align: justify;"&gt;&lt;p class="text-secondary"&gt;Cada elemento de una tupla puede ser de &lt;font color="black"&gt;distinto tipo&lt;/font&gt; (punto flotante, entero, cadena, etc.).&lt;/p&gt;&lt;/section&gt;
+
+&lt;!--
+Si se desea crear una tupla de un solo elemento, se debe de considerar el hecho de que, debido a la sintaxis (una tupla debe de poder distinguirse de un valor entero ordinario), se debe de colocar una coma al final:
+--&gt;
+
+
+
 &lt;/div&gt;
+
+&lt;/div&gt;
+
+---
+
+&lt;section style="text-align: center;"&gt;&lt;h4&gt;&lt;p class="text-info"&gt;Fundamentos básicos de programación en Python&lt;/p&gt;&lt;/h4&gt;&lt;/section&gt;
+&lt;br&gt;
+
+&lt;p class="text-warning"&gt;&lt;/p&gt;
+
+&lt;p class="text-warning"&gt;Tipos de secuencia y mutabilidad&lt;/p&gt;
+
+&lt;div class = "row"&gt;
+
+&lt;div class = "col-md-6"&gt;
+
+&lt;section style="text-align: justify;"&gt;&lt;p class="text-secondary"&gt;Si se desea leer los elementos de una tupla, se puede hacer de la misma manera que se hace con las listas:&lt;/p&gt;&lt;/section&gt;
+
+&lt;section style="text-align: left;"&gt;
+&lt;p&gt;miTupla = (1, 10, 100, 1000)&lt;/pp&gt;
+
+&lt;p&gt;print(miTupla[0])&lt;/p&gt;
+&lt;p&gt;print(miTupla[-1])&lt;/p&gt;
+&lt;p&gt;print(miTupla[1:])&lt;/p&gt;
+&lt;p&gt;print(miTupla[:-2])&lt;/p&gt;
+&lt;/section&gt;
+
+&lt;section style="text-align: justify;"&gt;&lt;p class="text-secondary"&gt;Las similitudes pueden ser engañosas: no se puede modificar el contenido de la tupla ¡No es una lista! Todas estas instrucciones (con excepción de primera) causarán un error de ejecución:&lt;/font&gt;
+
+&lt;/div&gt;
+
+&lt;div class = "col-md-6"&gt;
+
+&lt;p&gt;miTupla.append(10000)&lt;/p&gt;
+&lt;p&gt;del miTupla[0]&lt;/p&gt;
+&lt;p&gt;miTupla[1] = -10&lt;/p&gt;
+
+&lt;section style="text-align: justify;"&gt;&lt;p class="text-secondary"&gt;¿Qué más pueden hacer las tuplas?:&lt;/p&gt;
+
+&lt;div class="form-check"&gt;
+  &lt;div class="form-check disabled"&gt;
+    &lt;input class="form-check-input" type="checkbox" value="" disabled=""&gt;
+    La función len( ) acepta tuplas, y regresa el numero de elementos contenidos dentro.
+  &lt;/div&gt;
+  &lt;div class="form-check disabled"&gt;
+    &lt;input class="form-check-input" type="checkbox" value="" disabled=""&gt;
+    El operador + puede unir tuplas.
+  &lt;/div&gt;
+  &lt;div class="form-check disabled"&gt;
+    &lt;input class="form-check-input" type="checkbox" value="" disabled=""&gt;
+    El operador * puede multiplicar las tuplas, así como las listas.
+  &lt;/div&gt;
+  &lt;div class="form-check disabled"&gt;
+    &lt;input class="form-check-input" type="checkbox" value="" disabled=""&gt;
+    Los operadores in y not in funcionan de la misma manera que en las listas.
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;!--
+También se puede crear una tupla utilizando la función integrada de Python tuple(). Esto es particularmente útil cuando se desea convertir un iterable (por ejemplo, una lista, rango, cadena, etcétera) en una tupla:
+--&gt;
+
+
+
+&lt;!--
+De la misma manera, cuando se desea convertir un iterable en una liste, se puede emplear la función integrada de Python denominada list():
+--&gt;
+
+
+
+&lt;/section&gt;
+
+&lt;section style="text-align: justify;"&gt;&lt;p class="text-secondary"&gt;El &lt;font color="black"&gt;diccionario&lt;/font&gt; es otro tipo de estructura de datos de Python. &lt;font color="black"&gt;No es una secuencia&lt;/font&gt; (pero puede adaptarse fácilmente a un procesamiento secuencial) y además &lt;font color= "black"&gt;es mutable&lt;/font&gt;.
+
+&lt;/div&gt;
+
+&lt;/div&gt;
+
+---
+
+&lt;section style="text-align: center;"&gt;&lt;h4&gt;&lt;p class="text-info"&gt;Fundamentos básicos de programación en Python&lt;/p&gt;&lt;/h4&gt;&lt;/section&gt;
+&lt;br&gt;
+
+&lt;p class="text-warning"&gt;&lt;/p&gt;
+
+&lt;p class="text-warning"&gt;Tipos de secuencia y mutabilidad&lt;/p&gt;
+
+&lt;div class = "row"&gt;
+
+&lt;div class = "col-md-6"&gt;
+
+&lt;section style="text-align: justify;"&gt;&lt;p class="text-secondary"&gt;Un diccionario en Python funciona de la misma manera que un diccionario bilingüe. Por ejemplo, se tiene la palabra en español "gato" y se necesita su equivalente en francés. Lo que se haría es buscar en el diccionario para encontrar la palabra "gato". Eventualmente la encontrarás, y sabrás que la palabra equivalente en francés es "chat".&lt;/p&gt;&lt;/section&gt;
+
+&lt;section style="text-align: justify;"&gt;&lt;p class="text-secondary"&gt;En el mundo de Python, la palabra que se esta buscando se denomina &lt;font color="black"&gt;clave&lt;/font&gt; (key). La palabra que se obtiene del diccionario es denominada &lt;font color="black"&gt;valor&lt;/font&gt; (value). Esto significa que un diccionario es un conjunto de pares de &lt;font color="black"&gt;claves y valores&lt;/font&gt;:&lt;/p&gt;
+
+&lt;div class="form-check"&gt;
+  &lt;div class="form-check disabled"&gt;
+    &lt;input class="form-check-input" type="checkbox" value="" disabled=""&gt;
+    Cada clave debe de ser única. No es posible tener una clave duplicada.
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/section&gt;
+
+&lt;/div&gt;
+
+&lt;div class = "col-md-6"&gt;
+
+&lt;section style="text-align: justify;"&gt;
+
+&lt;div class="form-check"&gt;
+  &lt;div class="form-check disabled"&gt;
+    &lt;input class="form-check-input" type="checkbox" value="" disabled=""&gt;
+    Una clave puede ser un tipo de dato de cualquier tipo: puede ser un número (entero o flotante), o incluso una cadena.
+  &lt;/div&gt;
+  &lt;div class="form-check disabled"&gt;
+    &lt;input class="form-check-input" type="checkbox" value="" disabled=""&gt;
+    Un diccionario no es una lista. Una lista contiene un conjunto de valores numerados, mientras que un diccionario almacena pares de valores.
+  &lt;/div&gt;
+  &lt;div class="form-check disabled"&gt;
+    &lt;input class="form-check-input" type="checkbox" value="" disabled=""&gt;
+    La función len( ) aplica también para los diccionarios, regresa la cantidad de pares (clave-valor) en el diccionario.
+  &lt;/div&gt;
+  &lt;div class="form-check disabled"&gt;
+    &lt;input class="form-check-input" type="checkbox" value="" disabled=""&gt;
+    Un diccionario es una herramienta de un solo sentido. Si fuese un diccionario español-francés, podríamos buscar en español para encontrar su contraparte en francés mas no viceversa.
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/section&gt;
+
+&lt;/div&gt;
+
+&lt;/div&gt;
+
+---
+
+&lt;section style="text-align: center;"&gt;&lt;h4&gt;&lt;p class="text-info"&gt;Fundamentos básicos de programación en Python&lt;/p&gt;&lt;/h4&gt;&lt;/section&gt;
+&lt;br&gt;
+
+&lt;p class="text-warning"&gt;&lt;/p&gt;
+
+&lt;p class="text-warning"&gt;Tipos de secuencia y mutabilidad&lt;/p&gt;
+
+&lt;div class = "row"&gt;
+
+&lt;div class = "col-md-6"&gt;
+
+&lt;section style="text-align: justify;"&gt;&lt;p class="text-secondary"&gt;Si se desea asignar algunos pares iniciales a un diccionario, se puede utilizar la siguiente sintaxis:&lt;/p&gt;&lt;/section&gt;
+
+&lt;p&gt;dict = {"gato" : "chat", "perro" : "chien", "caballo" : "cheval"}&lt;/p&gt;
+&lt;p&gt;numerosTelefono = {'jefe' : 5551234567, 'Suzy' : 22657854310}&lt;/p&gt;
+&lt;p&gt;diccionarioVacio = {}&lt;/p&gt;
+
+&lt;p&gt;print(dict)&lt;/p&gt;
+&lt;p&gt;print(numerosTelefono)&lt;/p&gt;
+&lt;p&gt;print(diccionarioVacio)&lt;/p&gt;
+
+&lt;section style="text-align: justify;"&gt;&lt;p class="text-secondary"&gt;En el primer ejemplo, el diccionario emplea claves y valores, y ambas son cadenas.&lt;/p&gt;&lt;/section&gt;
+
+&lt;/div&gt;
+
+&lt;div class = "col-md-6"&gt;
+
+&lt;section style="text-align: justify;"&gt;&lt;p class="text-secondary"&gt;En el segundo ejemplo, las claves con cadenas pero los valores son enteros. El orden inverso (claves → números, valores → cadenas) también es posible, así como la combinación número a número.&lt;/p&gt;&lt;/section&gt;
+
+&lt;section style="text-align: justify;"&gt;&lt;p class="text-secondary"&gt;La lista de todos los pares es &lt;font color="black"&gt;encerrada con llaves&lt;/font&gt;, mientras que los pares son &lt;font color="black"&gt;separados por comas&lt;/font&gt;, y las claves y valores por &lt;font color="black"&gt;dos puntos&lt;/font&gt;.&lt;/p&gt;&lt;/section&gt;
+
+&lt;section style="text-align: justify;"&gt;&lt;p class="text-secondary"&gt;El primer diccionario es muy simple, es un diccionario Español-Francés. El segundo es un directorio telefónico muy pequeño. Los diccionarios vacíos son construidos por un &lt;font color="black"&gt;par vacío de llaves&lt;/font&gt;. El diccionario entero se puede imprimir con una invocación a la función &lt;font color="black"&gt;print( )&lt;/font&gt;.&lt;/p&gt;&lt;/section&gt;
+
+&lt;!--
+Puede que el orden de los pares impresos sea diferente a la asignación inicial, ¿Qué significa esto? Primeramente, recordemos que los diccionarios no son listas: no guardan el orden de sus datos, el orden no tiene significado (a diferencia de los diccionarios reales). El orden en que un diccionario almacena sus datos esta fuera de nuestro control. Esto es normal. Aunque en Python 3.6x los diccionarios se han convertido en colecciones ordenadas de manera predeterminada. Tu resultado puede variar dependiendo en la versión de Python que se este utilizando.
+--&gt;
+
+&lt;/div&gt;
+
+&lt;/div&gt;
+
+---
+
+&lt;section style="text-align: center;"&gt;&lt;h4&gt;&lt;p class="text-info"&gt;Fundamentos básicos de programación en Python&lt;/p&gt;&lt;/h4&gt;&lt;/section&gt;
+&lt;br&gt;
+
+&lt;p class="text-warning"&gt;&lt;/p&gt;
+
+&lt;p class="text-warning"&gt;Tipos de secuencia y mutabilidad&lt;/p&gt;
+
+&lt;div class = "row"&gt;
+
+&lt;div class = "col-md-6"&gt;
+
+&lt;section style="text-align: justify;"&gt;&lt;p class="text-secondary"&gt;Si se desea obtener cualquiera de los valores, se debe proporcionar una clave válida:&lt;/p&gt;&lt;/section&gt;
+
+&lt;section style="text-align: left;"&gt;
+&lt;p&gt;dict = {"gato" : "chat", "perro" : "chien", "caballo" : "cheval"}&lt;/p&gt;
+&lt;p&gt;numerosTelefono = {'jefe' : 5551234567, 'Suzy' : 22657854310}&lt;/p&gt;
+
+&lt;p&gt;print(dict['gato'])&lt;/p&gt;
+&lt;p&gt;print(numerosTelefono['Suzy'])&lt;/p&gt;
+&lt;/section&gt;
+
+&lt;section style="text-align: justify;"&gt;&lt;p class="text-secondary"&gt;Obtener el valor de un diccionario es semejante a la indexación, gracias a los corchetes alrededor del valor de la clave.&lt;/p&gt;
+
+&lt;div class="form-check"&gt;
+  &lt;div class="form-check disabled"&gt;
+    &lt;input class="form-check-input" type="checkbox" value="" disabled=""&gt;
+    Si una clave es una cadena, se tiene que especificar como una cadena.
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/section&gt;
+
+&lt;/div&gt;
+
+&lt;div class = "col-md-6"&gt;
+
+&lt;section style="text-align: justify;"&gt;
+
+&lt;div class="form-check"&gt;
+  &lt;div class="form-check disabled"&gt;
+    &lt;input class="form-check-input" type="checkbox" value="" disabled=""&gt;
+    Las claves son sensibles a las mayúsculas y minúsculas: 'Suzy' sería diferente a 'suzy'.
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/section&gt;
+
+&lt;section style="text-align: justify;"&gt;&lt;p class="text-secondary"&gt;Los diccionarios pueden ser &lt;font color="black"&gt;examinados&lt;/font&gt; usando un método denominado &lt;font color="black"&gt;keys( )&lt;/font&gt;,  el cual es parte de todo diccionario. El método &lt;font color="black"&gt;retorna o regresa una lista de todas las claves dentro del diccionario&lt;/font&gt;. Al tener una lista de claves se puede acceder a todo el diccionario de una manera fácil y útil. Por ejemplo:&lt;/p&gt;&lt;/section&gt;
+
+&lt;section style="text-align: left;"&gt;
+&lt;p&gt;for key in dict.keys():&lt;/p&gt;
+    &lt;p&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;print(key, "-&gt;", dict[key])&lt;/p&gt;
+&lt;/section&gt;
+
+&lt;section style="text-align: justify;"&gt;&lt;p class="text-secondary"&gt;Si se desea que la salida quede &lt;font color="black"&gt;ordenada&lt;/font&gt;, se puede emplear la función &lt;font color="black"&gt;sorted( )&lt;/font&gt;:&lt;/p&gt;&lt;/section&gt;
+
+&lt;section style="text-align: left;"&gt;
+&lt;p&gt;for key in sorted(dict.keys()):&lt;/p&gt;
+&lt;/section&gt;
+
+&lt;!--
+Otra manera de hacerlo es utilizar el método items(). Este método regresa una lista de tuplas donde cada tupla es un par de cada clave con su valor. Así es como funciona:
+--&gt;
+
+
+
+&lt;!--
+También existe un método denominado values(), funciona de manera muy similar al de keys(), pero regresa una lista de valores. Este es un ejemplo sencillo:
+--&gt;
+
+
+
+&lt;/div&gt;
+
+&lt;/div&gt;
+
+---
+
+&lt;section style="text-align: center;"&gt;&lt;h4&gt;&lt;p class="text-info"&gt;Fundamentos básicos de programación en Python&lt;/p&gt;&lt;/h4&gt;&lt;/section&gt;
+&lt;br&gt;
+
+&lt;p class="text-warning"&gt;&lt;/p&gt;
+
+&lt;p class="text-warning"&gt;Tipos de secuencia y mutabilidad&lt;/p&gt;
+
+&lt;div class = "row"&gt;
+
+&lt;div class = "col-md-6"&gt;
+
+&lt;section style="text-align: justify;"&gt;&lt;p class="text-secondary"&gt;El asignar un nuevo valor a una clave existente es sencillo, debido a que los diccionarios son completamente &lt;font color="black"&gt;mutables&lt;/font&gt;, no existen obstáculos para modificarlos. Por ejemplo, se va a reemplazar el valor "chat" por "minou":&lt;/p&gt;&lt;/section&gt;
+
+&lt;section style="text-align: left;"&gt;
+&lt;p&gt;dict = {"gato" : "chat", "perro" : "chien", "caballo" : "cheval"}&lt;/p&gt;
+
+&lt;p&gt;dict['gato'] = 'minou'&lt;/p&gt;
+&lt;p&gt;print(dict)&lt;/p&gt;
+&lt;/section&gt;
+
+&lt;section style="text-align: justify;"&gt;&lt;p class="text-secondary"&gt;El agregar una nueva clave con su valor a un diccionario es tan simple como cambiar un valor. Solo se tiene que asignar un valor a una nueva clave que no haya existido antes. Por ejemplo:&lt;/p&gt;&lt;/section&gt;
+
+&lt;/div&gt;
+
+&lt;div class = "col-md-6"&gt;
+
+&lt;section style="text-align: left;"&gt;
+&lt;p&gt;dict['cisne'] = 'cygne'&lt;/p&gt;
+&lt;p&gt;print(dict)&lt;/p&gt;
+&lt;/section&gt;
+
+&lt;section style="text-align: justify;"&gt;&lt;p class="text-secondary"&gt;También es posible insertar un elemento al diccionario utilizando el método &lt;font color="black"&gt;update( )&lt;/font&gt;:&lt;/p&gt;&lt;/section&gt;
+
+&lt;section style="text-align: left;"&gt;
+&lt;p&gt;dict.update({"pato" : "canard"})&lt;/p&gt;
+&lt;p&gt;print(dict)&lt;/p&gt;
+&lt;/section&gt;
+
+&lt;section style="text-align: justify;"&gt;&lt;p class="text-secondary"&gt;Con la instrucción &lt;font color="black"&gt;del( )&lt;/font&gt; se puede eliminar una clave de un diccionario (al eliminar la clave también se removerá el valor asociado. Los valores no pueden existir sin sus claves). Por ejemplo:&lt;/p&gt;&lt;/section&gt;
+
+&lt;section style="text-align: left;"&gt;
+&lt;p&gt;del dict['perro']&lt;/p&gt;
+&lt;p&gt;print(dict)&lt;/p&gt;
+&lt;/section&gt;
+
+&lt;!--
+Para eliminar el ultimo elemento de la lista, se puede emplear el método popitem():
+--&gt;
+
+
+
+&lt;!--
+Para comprobar si una clave existe en un diccionario, se puede emplear la palabra reservada in:
+--&gt;
+
+
+
+&lt;!--
+Para copiar un diccionario, se puede emplear el método copy():
+--&gt;
+
+
 
 &lt;/div&gt;
 
