@@ -380,6 +380,8 @@ Base_datos_3 <- Base_datos_2 %>%
   dplyr::select(Hija, IEP, N_parto, Sexo_hija, Edad_parto, Epoca_parto, Ano_parto, D_abierto) %>%
   rename('Individuo' = Hija, 'IEP' = IEP, 'OP' = N_parto, 'SC' = Sexo_hija, 'EdP' = Edad_parto, 'ÉpP' = Epoca_parto, 'AP' = Ano_parto, 'DA' = D_abierto)
 
+#glimpse(Base_datos_3) # Esta función es similar a la función str().
+
 edad_parto <- Base_datos_2 %>%
   mutate(N_parto = as.factor(N_parto)) %>%
   filter(
@@ -420,7 +422,7 @@ DT::datatable(
 
 <section style="text-align: justify;"><p class="text-primary">En estadística se suele dividir los datos en dos subconjuntos: datos de <font color="black"><u>entrenamiento</u></font> y datos de <font color="black"><u>prueba</u></font> (y a veces en tres: entrenamiento, <font color="black"><u>validación</u></font> y prueba):</p></section>
 
-```{r Divisón en train y test, fig.align = 'center', eval = TRUE, echo = FALSE, message = FALSE, fig.showtext = TRUE, out.width = '280'}
+```{r Divisón de los datos en train y test 1, fig.align = 'center', eval = TRUE, echo = FALSE, message = FALSE, fig.showtext = TRUE, out.width = '280'}
 
 data.frame(
   x = c(1:4), y =c(1:4)
@@ -471,10 +473,10 @@ Hay información del proceso de dividir los datos en train y test en:
 -->
 
 <!--
-La función initial_split() toma los datos originales y guarda en un objeto la información sobre cómo hacer la división de los datos. Este es el enfoque más común de dividir los datos: una cuarta parte de los datos se reservan para el conjunto de prueba... así mediante muestreo aleatorio se selecciona al azar el 25% de los datos en datos de prueba (25%) y el resto (75%) para el conjunto de entrenamiento.
+La función initial_split() toma los datos originales y guarda en un objeto la información sobre cómo hacer la división de los datos. Este es el enfoque más común de dividir los datos: una cuarta parte de los datos se reservan para el conjunto de prueba... así mediante muestreo aleatorio se selecciona al azar el 25% de los datos en datos de prueba y el resto (75%) para el conjunto de entrenamiento.
 -->
 
-```{r Division de los datos en train y test 1, echo = FALSE, eval = TRUE, message = FALSE}
+```{r Division de los datos en train y test 2, echo = FALSE, eval = TRUE, message = FALSE}
 
 set.seed(1234)
 demo_code('
@@ -501,7 +503,7 @@ NOTA: Dado que el muestreo aleatorio anterior usa números aleatorios, es import
 Los datos de entrenamiento se usan para ajustar el modelo, estimar parámetros, comparar modelos, etc.
 -->
 
-```{r Division de los datos en train y test 2, echo = FALSE, eval = TRUE, message = FALSE}
+```{r Division de los datos en train y test 3, echo = FALSE, eval = TRUE, message = FALSE}
 
 demo_code('
 datos_entrenamiento <- training(division_datos)
@@ -514,7 +516,7 @@ datos_entrenamiento <- training(division_datos)
 Los datos de prueba se usan como una fuente imparcial para medir el rendimiento del modelo final. Estos se mantienen en reserva hasta el final del proyecto, momento en el que solo debe haber uno o dos modelos bajo consideración seria.
 -->
 
-```{r División de los datos en train y test 3, echo = FALSE, eval = TRUE, message = FALSE}
+```{r División de los datos en train y test 4, echo = FALSE, eval = TRUE, message = FALSE}
 
 demo_code('
 datos_prueba <- testing(division_datos)
@@ -523,7 +525,7 @@ datos_prueba <- testing(division_datos)
   hlt_funs(color = 'deeppink', underline = TRUE)
 ```
 
-<section style="text-align: justify;"><p class="text-primary">Muchas veces además de dividir el conjunto de datos en entrenamiento y prueba, se suele elegir aleatoriamente X% (por ejemplo un 80%) del conjunto de datos de entrenamiento para que sea el conjunto de entrenamiento real y el % restante (100-X) para que sea el conjunto de validación. El modelo se entrena iterativamente y se valida en estos conjuntos diferentes. Esto se conoce comúnmente como <font color="black"><u>métodos de remuestreo</u></font>. <!--Básicamente, usa el conjunto de entrenamiento para generar múltiples divisiones de los conjuntos de entrenamiento y validación. La validación cruzada evita el ajuste excesivo y se está volviendo cada vez más popular, siendo la validación cruzada K-fold el método más popular de validación cruzada.--></p></section>
+<section style="text-align: justify;"><p class="text-primary">Muchas veces además de dividir el conjunto de datos en entrenamiento y prueba, se suele elegir aleatoriamente X% (por ejemplo un 80%) del conjunto de datos de entrenamiento para que sea el conjunto de entrenamiento real y el % restante (100-X) para que sea el conjunto de validación. El modelo se entrena iterativamente y se valida en estos conjuntos diferentes. Esto se conoce comúnmente como <font color="black"><u>método de remuestreo</u></font>. <!--Básicamente, usa el conjunto de entrenamiento para generar múltiples divisiones de los conjuntos de entrenamiento y validación. La validación cruzada evita el ajuste excesivo y se está volviendo cada vez más popular, siendo la validación cruzada K-fold el método más popular de validación cruzada.--></p></section>
 
 </div>
 
@@ -541,7 +543,7 @@ datos_prueba <- testing(division_datos)
 
 <section style="text-align: justify;"><p class="text-primary">Los métodos de remuestreo, como la <font color="black"><u>validación cruzada</u></font> y el <font color="black"><u>bootstrap</u></font>, son sistemas de simulación empírica. Crean una serie de conjuntos de datos similares a la división de entrenamiento y prueba discutida con anterioridad: se usa un subconjunto de datos para crear el modelo y se utiliza un subconjunto diferente para medir el rendimiento. El remuestreo siempre se usa con el conjunto de entrenamiento:</p></section>
 
-```{r Divisón en train y test 2, fig.align = 'center', eval = TRUE, echo = FALSE, message = FALSE, fig.showtext = TRUE, out.width = '280'}
+```{r Divisón de los datos en train y test 5, fig.align = 'center', eval = TRUE, echo = FALSE, message = FALSE, fig.showtext = TRUE, out.width = '300'}
 
 data.frame(
   x = c(0.25:4.25), y = c(0.0:4.0)
@@ -594,26 +596,26 @@ data.frame(
 <section style="text-align: justify;"><p class="text-primary">Para generar estos nuevos datos en el estudio:</p></section>
 
 <!--
-Para generar estos resultados, el primer paso es crear un objeto de remuestreo usando el paquete "rsample". Hay varios métodos de remuestreo implementados en rsample. La validación cruzada se puede crear usando la función vfold_cv():
+Para generar estos resultados, el primer paso es crear un objeto de remuestreo usando el paquete "rsample". Hay varios métodos de remuestreo implementados en rsample. Se uso la función validation_split():
 -->
 
-```{r División de los datos en train y test 4, echo = FALSE, eval = TRUE, message = FALSE}
+```{r División de los datos en train y test 6, echo = FALSE, eval = TRUE, message = FALSE}
 
 demo_code('
-datos_vc <- vfold_cv(datos_entrenamiento, v = 10)
+datos_val <- validation_split(datos_entrenamiento, prop = 0.80)
 ') %>%
   hlt_args(color = 'gray') %>%
   hlt_funs(color = 'deeppink', underline = TRUE)
 ```
 
 <!--
-Se usó validación cruzada 10 veces (v = 10). Este método asigna de forma aleatoria las 5546 observaciones (que hacen parte del conjunto de entrenamiento) a 10 grupos de aproximadamente el mismo tamaño, llamados "pliegues" ("fold" en ingles). Para la primera iteración de remuestreo, el primer pliegue de aproximadamente 555 observaciones (el 10% de las 5546 observaciones) se usa con el fin de medir el rendimiento del modelo (esto es similar a un conjunto de prueba, y para evitar confusiones con este último se denomina como evaluación o validación).
+Se usó la función validation_split() para asignar el 20% de los datos del conjunto de entrenamiento a un nuevo conjunto llamado de validación, y el 80% restante a un nuevo conjunto de entrenamiento. En tidymodels, un conjunto de validación se trata como una única iteración de remuestreo. Esto significa que nuestras métricas de rendimiento del modelo se calcularán en un solo conjunto de aproximadamente 1109 (5546*0.20) intervalos entre partos.
 
-El otro 90% de los datos (aproximadamente 4491 observaciones) se utilizan para ajustar el modelo. Nuevamente, esto suena similar a un conjunto de entrenamiento, por lo que en tidymodels se suele llamar a estos datos el conjunto de análisis. Este modelo, entrenado en el conjunto de análisis, se aplica al conjunto de evaluación para generar predicciones, y las estadísticas de rendimiento se calculan en función de esas predicciones.
+Otra forma sería usar mútiples iteraciones de remuestreo (que se haria por medio de la función vfold_cv() por ejemplo con k = 10 para crear 10 muestras diferentes del conjunto de entrenamiento el cual se divide en entrenamiento y prueba, y producir 10 métricas de rendimiento diferentes (vfold_cv(datos_entrenamiento, k = 10))).
 
-En este estudio, el CV 10 veces se mueve iterativamente a través de los pliegues y deja un 10% diferente cada vez para la evaluación del modelo. Al final de este proceso, hay 10 conjuntos de estadísticas de rendimiento que se crearon en 10 conjuntos de datos que no se utilizaron en el proceso de modelado. Esto significa 10 precisiones y 10 áreas bajo la curva ROC (una de las metricas usadas para evaluar el rendimiento). Si bien se crearon 10 modelos, estos no se usan más; no se mantienena los modelos mismos entrenados en estos pliegues porque su único propósito es calcular las métricas de rendimiento.
+Este último método asignaria de forma aleatoria las 5546 observaciones (que hacen parte del conjunto de entrenamiento) a 10 muestras diferentes de aproximadamente el mismo tamaño, llamados "pliegues" ("fold" en ingles), produciendo 10 métrica de rendimiento diferentes. Para la primera iteración de remuestreo, el primer pliegue de aproximadamente 555 observaciones (el 10% de las 5546 observaciones) se usa con el fin de medir el rendimiento del modelo (esto es similar a un conjunto de prueba, y para evitar confusiones con este último se denomina como evaluación o validación). El otro 90% de los datos (aproximadamente 4491 observaciones) se utilizan para ajustar el modelo. Nuevamente, esto suena similar a un conjunto de entrenamiento, por lo que en tidymodels se suele llamar a estos datos el conjunto de análisis. Este modelo, entrenado en el conjunto de análisis, se aplica al conjunto de evaluación para generar predicciones, y las estadísticas de rendimiento se calculan en función de esas predicciones.
 
-Las estimaciones finales de muestreo para el modelo son los promedios de las de estadísticas de rendimiento de las réplicas.
+En este estudio, el CV 10 veces se mueve iterativamente a través de los pliegues y deja un 10% diferente cada vez para la evaluación del modelo. Al final de este proceso, hay 10 conjuntos de estadísticas de rendimiento que se crearon en 10 conjuntos de datos que no se utilizaron en el proceso de modelado. Esto significa 10 precisiones y 10 áreas bajo la curva ROC (una de las metricas usadas para evaluar el rendimiento). Si bien se crearon 10 modelos, estos no se usan más; no se mantienena los modelos mismos entrenados en estos pliegues porque su único propósito es calcular las métricas de rendimiento. Las estimaciones finales de muestreo para el modelo serían los promedios de las de estadísticas de rendimiento de las réplicas.
 -->
 
 ```{r, echo = FALSE, eval = FALSE, message = FALSE}
@@ -625,19 +627,11 @@ datos_vc
 Al visualizar lo anterior se observa que la columna de la lista denominada "splits" contiene la información sobre las filas que pertenecen a los conjuntos de análisis (o entrenamiento) y validación (o evaluación). Hay funciones que se pueden usar para extraer los datos remuestreados individuales llamados analysis() y assessment().
 -->
 
-<section style="text-align: justify;"><p class="text-primary">Su proposito consiste en estimar el rendimiento final del modelo a partir de estadísticas de rendimiento (como la precisión y el ROC) al igual que hace con los datos de prueba.<!-- El remuestreo permite simular qué tan bien se desempeñará el modelo con los nuevos datos, y el conjunto de prueba actúa como la verificación final e imparcial del rendimiento del modelo. --></p></section>
+<section style="text-align: justify;"><p class="text-primary"><!-- La validación cruzada es un paso esencial en el proceso de entrenamiento de modelos basados en datos. -->Su proposito consiste en estimar el rendimiento final del modelo a partir de estadísticas de rendimiento (como la precisión y el ROC) al igual que hace con los datos de prueba<!-- y reducir el sobreajuste al particionar conjuntos de datos en k-fold. El remuestreo permite simular qué tan bien se desempeñará el modelo con los nuevos datos, y el conjunto de prueba actúa como la verificación final e imparcial del rendimiento del modelo -->.</p></section>
 
 </div>
 
 </div>
-
-<!--
-En esta pagina comparten paso a paso el uso de varios paquetes del paquete tidymodels para ajustar un modelo de regresión logistica (entonces creo que se podria hacer lo mismo para modelos mixtos):
-- https://www.tidymodels.org/start/recipes/
-
-En esta pagina comparten paso a paso una forma de medir, basado en estadísticas de remuestreo, qué tan bien el modelo ajustado mediante los pasos anteriores predice nuevos datos:
-- https://www.tidymodels.org/start/resampling/... también dan un ejemplo de arboles de decisión y bosques aleatorios.
--->
 
 ---
 
@@ -984,6 +978,18 @@ $$\small Escalado \;\; robusto = \frac{x - mediana(x)}{IQR}$$
 
 <br>
 
+<!--
+Ver en https://www.tidymodels.org/start/case-study/ la parte donde hablan de desequilibrio en la base de datos empleado. Ellos mencionan métodos para combatir este problema mediante el uso del paquete "recipes" (recetas) por medio de upsample o downsample, u otros paquetes más especializados como "themis" (https://tidymodels.github.io/themis/). 
+-->
 
+---
 
+<!--
+En estas paginas comparten paso a paso el uso de varios paquetes del paquete tidymodels para ajustar un modelo de regresión logistica (entonces creo que se podria hacer lo mismo para modelos mixtos):
+- https://www.tidymodels.org/start/recipes/
+- https://www.tidymodels.org/start/case-study/... se especificaria que es un modelo de regresión logistica usando la función logistic_reg() y "glmnet" dentro de la función set_engine()... aquí también hablan de la función step_rm() para elinar aquellas variables que no se usaran en el modelo, step_dummy() para convertir caracteres o factores en variables dummy y step_normalize() que centra y escala variables numéricas... también la forma de crear el modelo, la receta y agrupar ambos en un workflow()... también comparan el modelo de regresión logística con uno basado en arboles de decisión (bosque aleatorio).
+
+En esta pagina comparten paso a paso una forma de medir, basado en estadísticas de remuestreo, qué tan bien el modelo ajustado mediante los pasos anteriores predice nuevos datos:
+- https://www.tidymodels.org/start/resampling/... también dan un ejemplo de arboles de decisión y bosques aleatorios.
+-->
 
