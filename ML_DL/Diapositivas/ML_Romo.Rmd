@@ -27,9 +27,10 @@ Alguito de información sobre el paquete xaringan (https://bookdown.org/yihui/rm
 library(demoR)
 library(dplyr)
 library(tidyr)
+library(stringr)
 library(ggplot2)
 library(rsample) # Este paquete se uso porque contiene funciones de interés como por ejemplo, funciones para dividir el conjnto de datos en datos de entrenamiento y de prueba.
-library(tidymodels) # Para obtener gran parte de los resultados se va a hacer uso del paquete "tidymodels". Este paquete consiste en una colección de paquetes para modelado y machine learning utilizando los principios del "tidyverse".
+library(tidymodels) # Este paquete consiste en una colección de paquetes para modelado y machine learning utilizando los principios del "tidyverse". Aquí https://www.tidymodels.org/find/ se encuentran todas las funciones disponibles en este paquete. Aquí https://www.tidymodels.org/help/ se pueden preparar preguntas para ayuda de tidymodels. 
 library(raster)
 library(sf)
 library(ggsflabel)
@@ -352,8 +353,12 @@ knitr::include_graphics('Imagenes/octocat_2.png')
 ```{r Limpieza del conjunto de datos, echo = FALSE, eval = TRUE, message = FALSE, warning = FALSE}
 
 Base_datos_3 <- Base_datos_2 %>%
+  mutate(
+    Sexo_hija = str_to_sentence(Sexo_hija), # Habian dos bovinos identificados como 'h' y 'm'... estos se cambiaron a 'H' y 'M'.
+         Sexo_hija = str_trim(Sexo_hija) # Habia un bovino identificado como ' M'... este se cambio a 'M'.
+    ) %>%
   filter(
-    Sexo_hija %in% c('H', 'M') & # Habian bovinos identificado como " M", "h", "He:Rp", "m" y " "... estos no se consideraron.
+    Sexo_hija %in% c('H', 'M') & # Habia un bovino identificado como "He:Rp"... este no se considero.
       IEP != 'is.na' & # No se consideraron valores faltantes para la variable respuesta intervalo entre partos.
       IEP >= 300 & IEP <= 1278 & # Se limitaron los días entre partos de 300 a 1278 días ya que valores fuera de este rango pueden no ser normales.
       D_abierto >= 21 & D_abierto <= 250 & # Los días abiertos fueron restringidos de 21 a 250 días, ya que valores fuera de éste rango pueden ser fisiológicamente anormales o estar registrados erróneamente.
@@ -635,11 +640,11 @@ Al visualizar lo anterior se observa que la columna de la lista denominada "spli
 
 ---
 
-<section style="text-align: center;"><h2><p class="text-info">Escalado de las variables</p></h2></section>
+<section style="text-align: center;"><h2><p class="text-info">Transformación de las variables</p></h2></section>
 
 <br>
 
-<section style="text-align: justify;"><p class="text-primary">Existen varios métodos para normalizar las variables. La elección de dicho método depende de la distribución de los datos y la presencia de valores atípicos en los datos.</p></section>
+<section style="text-align: justify;"><p class="text-primary">Existen varios métodos para <font color="black"><u>normalizar</u></font> las variables. La elección de dicho método depende de la distribución de los datos y la presencia de valores atípicos en los datos.</p></section>
 
 <div class = "row">
 
@@ -737,7 +742,7 @@ Se observó que el número de valores atípicos en el conjunto de datos es basta
 
 ---
 
-<section style="text-align: center;"><h2><p class="text-info">Escalado de las variables</p></h2></section>
+<section style="text-align: center;"><h2><p class="text-info">Transformación de las variables</p></h2></section>
 
 ```{r Diagrama de caja y bigotes para identificar valores atípicos, echo = FALSE, eval = TRUE, message = FALSE, fig.align = 'center', out.width = '570'}
 
@@ -745,10 +750,9 @@ is_outlier <- function(x) {
   return(x < quantile(x, 0.25) - 1.5 * IQR(x) | x > quantile(x, 0.75) + 1.5 * IQR(x))
   } # Los valores atípicos son aquellas observaciones que se encuentran 1.5 veces IQR, donde IQR (el rango intercuartil) es la diferencia entre lo cuartiles 75 y 25... esta función permite identificar dentro del conjunto de datos aquellos valores atípicos
 
-boxplot_OP <- Base_datos_3 %>%
+boxplot_OP_DE <- datos_entrenamiento %>%
   dplyr::select(IEP, OP) %>%
-  mutate(OP = as.factor(OP),
-  Val_atipico = ifelse(is_outlier(IEP), IEP, as.numeric(NA))) %>%
+  #mutate(Val_atipico = ifelse(is_outlier(IEP), IEP, as.numeric(NA))) %>%
   ggplot(aes(x = OP, y = IEP, colour = OP, fill = OP)) +
   #geom_jitter(colour = 'gray38', alpha = 0.4, size = 2.0, position = position_jitter(width = 0.1, height = 0.1)) +
   geom_boxplot(alpha = 0.4, outlier.colour = 'gray14', outlier.fill = 'gray14', outlier.size = 2.4) +
@@ -757,10 +761,28 @@ boxplot_OP <- Base_datos_3 %>%
   scale_colour_manual(values = c('yellow', 'turquoise1', 'violetred1', 'chartreuse', 'magenta', 'springgreen', 'green', 'black', 'yellow', 'turquoise1', 'violetred1', 'chartreuse', 'magenta', 'springgreen', 'green', 'black')) +
   scale_fill_manual(values = c('yellow', 'turquoise1', 'violetred1', 'chartreuse', 'magenta', 'springgreen', 'green', 'black', 'yellow', 'turquoise1', 'violetred1', 'chartreuse', 'magenta', 'springgreen', 'green', 'black')) +
   theme_bw() +
-  labs(x = 'Orden de parto', y = 'Intervalo entre partos') +
+  labs(x = 'Orden de parto', y = 'Intervalo entre partos', title = 'Datos de entrenamiento') +
   theme(legend.position = 'none',
         axis.text = element_text(size = 10, face = 'bold'),
-        axis.title = element_text(size = 12, face = 'bold'))
+        axis.title = element_text(size = 12, face = 'bold'),
+        plot.title = element_text(size = 12, face = 'bold'))
+
+boxplot_OP_DP <- datos_prueba %>%
+  dplyr::select(IEP, OP) %>%
+  #mutate(Val_atipico = ifelse(is_outlier(IEP), IEP, as.numeric(NA))) %>%
+  ggplot(aes(x = OP, y = IEP, colour = OP, fill = OP)) +
+  #geom_jitter(colour = 'gray38', alpha = 0.4, size = 2.0, position = position_jitter(width = 0.1, height = 0.1)) +
+  geom_boxplot(alpha = 0.4, outlier.colour = 'gray14', outlier.fill = 'gray14', outlier.size = 2.4) +
+  stat_summary(fun = 'mean', geom = 'point', shape = '*', size = 5.8, color = 'black', fill = 'black') +
+  #geom_text(aes(label = Val_atipico), na.rm = TRUE, hjust = -0.4, colour = 'gray54') +
+  scale_colour_manual(values = c('yellow', 'turquoise1', 'violetred1', 'chartreuse', 'magenta', 'springgreen', 'green', 'black', 'yellow', 'turquoise1', 'violetred1', 'chartreuse', 'magenta', 'springgreen', 'green', 'black')) +
+  scale_fill_manual(values = c('yellow', 'turquoise1', 'violetred1', 'chartreuse', 'magenta', 'springgreen', 'green', 'black', 'yellow', 'turquoise1', 'violetred1', 'chartreuse', 'magenta', 'springgreen', 'green', 'black')) +
+  theme_bw() +
+  labs(x = 'Orden de parto', y = 'Intervalo entre partos', title = 'Datos de prueba') +
+  theme(legend.position = 'none',
+        axis.text = element_text(size = 10, face = 'bold'),
+        axis.title = element_text(size = 12, face = 'bold'),
+        plot.title = element_text(size = 12, face = 'bold'))
 
 boxplot_SC <- Base_datos_3 %>%
   dplyr::select(IEP, SC) %>%
@@ -794,16 +816,16 @@ boxplot_EpP <- Base_datos_3 %>%
         axis.text = element_text(size = 10, face = 'bold'),
         axis.title = element_text(size = 12, face = 'bold'))
 
-(boxplot_OP) / (boxplot_EpP | boxplot_SC)
+(boxplot_OP_DE) / (boxplot_OP_DP)
 ```
 
 ---
 
-<section style="text-align: center;"><h2><p class="text-info">Escalado de las variables</p></h2></section>
+<section style="text-align: center;"><h2><p class="text-info">Transformación de las variables</p></h2></section>
 
 <br>
 
-<section style="text-align: justify;"><p class="text-primary">Existen varios métodos para normalizar las variables. La elección de dicho método depende de la distribución de los datos y la presencia de valores atípicos en los datos.</p></section>
+<section style="text-align: justify;"><p class="text-primary">Existen varios métodos para <font color="black"><u>normalizar</u></font> las variables. La elección de dicho método depende de la distribución de los datos y la presencia de valores atípicos en los datos.</p></section>
 
 <div class = "row">
 
@@ -842,7 +864,7 @@ Normal(200) %>%
   geom_histogram(aes(y = ..density..), bins = 28, fill = 'yellow', colour = 'yellow', alpha = 0.4) +
   geom_density(size = 2.2, colour = 'black') +
   #annotate(geom = 'text', x = 1.5, y = 0.5, label = 'Distribución normal', family = 'gochi', size = 8.8, colour = 'black') +
-  theme_void() +
+  theme_bw() +
   theme(axis.text = element_blank(),
         axis.ticks = element_blank(),
         axis.title = element_blank())
@@ -852,7 +874,9 @@ Normal(200) %>%
 
 <div class = "col-md-6">
 
-<section style="text-align: justify;"><p class="text-primary">La forma más fácil de entender una distribución es visualizarla. Un <font color="black"><u>histograma</u></font> como el de la imagen es un ejemplo de dicha visualización. De igual forma, las propiedades de una distribución se pueden describir mediante la <font color="black"><u>estadística descriptiva</u></font> como:</p></section>
+<section style="text-align: justify;"><p class="text-primary">La forma más fácil de entender una distribución es visualizarla. Un <font color="black"><u>histograma</u></font> como el de la imagen es un ejemplo de dicha visualización.</p></section>
+
+<section style="text-align: justify;"><p class="text-primary">De igual forma, las propiedades de una distribución se pueden describir mediante la <font color="black"><u>estadística descriptiva</u></font> como:</p></section>
 
 <div class="form-check">
   <div class="form-check disabled">
@@ -886,103 +910,272 @@ knitr::include_graphics('Imagenes/octocat_5.png')
 
 ---
 
-<section style="text-align: center;"><h2><p class="text-info">Escalado de las variables</p></h2></section>
+<section style="text-align: center;"><h2><p class="text-info">Transformación de las variables</p></h2></section>
 
 <div class = "row">
 
 <div class = "col-md-6">
 
-```{r Distribución de los datos de intervalo entre partos, echo = FALSE, eval = TRUE, message = FALSE, fig.align = 'center', out.width = '300'}
+```{r Distribución de los datos de intervalo entre partos 1, echo = FALSE, eval = TRUE, message = FALSE, fig.align = 'center', out.width = '300'}
 
-Est_dist_2 <- Base_datos_3 %>%
+Est_dist_2_DE <- datos_entrenamiento %>%
   ggplot(aes(x = IEP)) +
   geom_histogram(aes(y = ..density..), bins = 28, fill = 'yellow', colour = 'yellow', alpha = 0.4) +
   geom_density(size = 2.2, colour = 'black') +
   #annotate(geom = 'text', x = 1.5, y = 0.5, label = 'Distribución normal', family = 'gochi', size = 8.8, colour = 'black') +
   theme_bw() +
-  labs(x = 'Intervalo entre partos', y = 'Frecuencia') +
+  labs(x = 'Intervalo entre partos', y = 'Frecuencia', title = 'Datos de entrenamiento') +
   theme(legend.position = 'none',
-        axis.text = element_text(size = 18, face = 'bold'),
-        axis.title = element_text(size = 20, face = 'bold'))
+        axis.text = element_text(size = 20, face = 'bold'),
+        axis.title = element_text(size = 22, face = 'bold'),
+        plot.title = element_text(size = 22, face = 'bold'))
 
-Est_dist_2
+Est_dist_2_DE
 ```
-<!--
+
+```{r Estadisticos de los datos de entrenamiento y de prueba, echo = FALSE, eval = FALSE, message = FALSE}
+
+Est_dist_DE <- datos_entrenamiento %>%
+  summarise(Media = round(mean(IEP), digits = 2), Mediana = median(IEP), Sesgo = round(skewness(IEP), digits = 2), Curtosis = round(kurtosis(IEP), digits = 2))
+
+Est_dist_DP <- datos_prueba %>%
+  summarise(Media = round(mean(IEP), digits = 2), Mediana = median(IEP), Sesgo = round(skewness(IEP), digits = 2), Curtosis = round(kurtosis(IEP), digits = 2))
+```
+
 <table class="table table-hover">
   <thead>
     <tr>
       <th scope="col">Estadístico</th>
-      <th scope="col">Valor</th>
+      <th scope="col">Entrenamiento</th>
+      <th scope="col">Prueba</th>
     </tr>
   </thead>
   <tbody>
     <tr class="table-danger">
       <th scope="row">Media</th>
-      <td>379.44</td>
+      <td>379.53</td>
+      <td>379.15</td>
     </tr>
-    <tr class="table-warning">
+    <tr class="table-success">
       <th scope="row">Mediana</th>
       <td>368</td>
+      <td>368</td>
     </tr>
-    <tr class="table-info">
+    <tr class="table-warning">
       <th scope="row">Sesgo</th>
-      <td>1.25</td>
+      <td>1.28</td>
+      <td>1.16</td>
     </tr>
-    <tr class="table-dark">
+    <tr class="table-secondary">
       <th scope="row">Curtosis</th>
-      <td>5.48</td>
+      <td>5.74</td>
+      <td>4.61</td>
     </tr>
   </tbody>
 </table>
--->
-
-```{r Estadisticos para averiguar la distribución del intervalo entre partos, echo = FALSE, eval = TRUE, message = FALSE}
-
-Est_dist <- Base_datos_3 %>%
-  summarise(Promedio = round(mean(IEP), digits = 2), Mediana = round(median(IEP), digits = 2), Sesgo = round(skewness(IEP), digits = 2), Curtosis = round(kurtosis(IEP), digits = 2)) %>%
-  gather(key = 'Estadístico', value = 'Valor')
-  
-kable(Est_dist, col.names = c('Estadístico', 'Valor')) %>%
-  kable_styling(full_width = FALSE)
-```
 
 </div>
 
 <div class = "col-md-6">
 
-<section style="text-align: justify;"><p class="text-primary">Mediante el histograma se observó que los datos de intervalo entre partos en bovinos Romosinuano presentan una distribución no simétrica. En este caso asimétria positiva o asimétria hacia la derecha, puesto que la cola de la distribución apuntaba hacia la derecha.</p></section>
+```{r Distribución de los datos de intervalo entre partos 2, echo = FALSE, eval = TRUE, message = FALSE, fig.align = 'center', out.width = '300'}
 
-<section style="text-align: justify;"><p class="text-primary">Con respecto a las estadísticas descriptivas, un sesgo distinto de 0 indica falta de simetría de la distribución, mientras que el valor de la curtosis cuantifica el peso de las colas en comparación con la distribución normal, para la cual la curtosis debería ser igual a 3.</p></section>
+Est_dist_2_DP <- datos_prueba %>%
+  ggplot(aes(x = IEP)) +
+  geom_histogram(aes(y = ..density..), bins = 28, fill = 'yellow', colour = 'yellow', alpha = 0.4) +
+  geom_density(size = 2.2, colour = 'black') +
+  #annotate(geom = 'text', x = 1.5, y = 0.5, label = 'Distribución normal', family = 'gochi', size = 8.8, colour = 'black') +
+  theme_bw() +
+  labs(x = 'Intervalo entre partos', y = 'Frecuencia', title = 'Datos de prueba') +
+  theme(legend.position = 'none',
+        axis.text = element_text(size = 20, face = 'bold'),
+        axis.title = element_text(size = 22, face = 'bold'),
+        plot.title = element_text(size = 22, face = 'bold'))
 
-<section style="text-align: justify;"><p class="text-primary">Por lo tanto, al observar el histograma con una asimetría positiva, una curtosis por encima de 3 y un sesgo distinto de 0, se concluyó que la distribución de los datos de intervalo entre partos en bovinos Romosinuano corresponde a una distribución sesgada a la derecha.</p></section>
+Est_dist_2_DP
+```
 
+<section style="text-align: justify;"><p class="text-primary">Con el histograma se observó que los datos presentaban asimétria hacia la derecha, puesto que la cola de la distribución apuntaba a la derecha. Respecto a las estadísticas descriptivas, el sesgo distinto de 0 indicó falta de simetría de la distribución, mientras que el valor de la curtosis, que cuantifica el peso de las colas en comparación con la distribución normal cuyo valor debería ser igual a 3, indicó falta de normalidad.</p></section>
+
+<!--
+Por lo tanto, al observar el histograma con una asimetría positiva, una curtosis por encima de 3 y un sesgo distinto de 0, se concluyó que la distribución de los datos de intervalo entre partos en bovinos Romosinuano corresponde a una distribución sesgada a la derecha.
+
+Se observó mediante el proceso de visualización anterior (diagrama de caja y bigotes) que el número de valores atípicos en el conjunto de datos de intervalo entre partos era alto. También se observó (mediante un histograma) que la distribución de los datos no seguian una distribución normal. Por lo tanto, se concluyó que el método de escalado de variables apropiado a usar era una escala robusta. Este método funciona restando a los datos la mediana y los escala de acuerdo con el rango intercuartil (IQR). Este método es robusto a los valores atípicos. Sin embargo, dado que esta metodología no la encontre dentro de los procesos del tidymodels en el momento que busque y se me dificulto realizar por medio del paquete scikit-learn de Python este mismo procedimiento, lo que hare será una transformación por box-cox y luego usare una escala común como el ejemplo presentado en este articulo: https://www.tidymodels.org/learn/models/parsnip-nnet/.
+-->
 </div>
 
 </div>
 
 ---
 
-<section style="text-align: center;"><h2><p class="text-info">Escalado de las variables</p></h2></section>
+<section style="text-align: center;"><h2><p class="text-info">Balanceo de las variables</p></h2></section>
 
 <br>
 
-<section style="text-align: justify;"><p class="text-primary">Se observó mediante todo el proceso de visualización anterior que el número de valores atípicos en el conjunto de datos de intervalo entre partos era bastante alto. Además de los valores atípicos, también se observó que la distribución de los datos no seguian una distribución normal. Por lo tanto, se concluyó que el método de escalado de características apropiado a usar era una <font color="black"><u>escala robusta</u></font>. Este método funciona eliminando la mediana y utilizando el rango intercuartil (IQR):</p></section>
+<section style="text-align: justify;"><p class="text-primary">Las <font color="black"><u>variables desbalanceadas</u></font> consisten de una proporción desproporcionada de observaciones en cada nivel de una variable predictora. Se considera un problema ya que la mayoría de los algoritmos de machine learning funcionan mejor cuando el número de observaciones es similar. Esto se debe a que dichos algoritmos están diseñados para maximizar la precisión y reducir el error.</p></section>
 
-$$\small Escalado \;\; robusto = \frac{x - mediana(x)}{IQR}$$
 
-<section style="text-align: justify;"><p class="text-primary">Este método es robusto para los valores atípicos.</p></section>
 
----
+<div class = "row">
 
-<section style="text-align: center;"><h2><p class="text-info">Balanceo de características</p></h2></section>
+<div class = "col-md-6">
 
-<br>
+<div class="alert alert-dismissible alert-warning">
+  Tipo de balanceo over-sampling
+</div>
+
+</div>
+
+<div class = "col-md-6">
+
+<div class="alert alert-dismissible alert-danger">
+  Tipo de balanceo under-sampling
+</div>
+
+</div>
+
+</div>
+
+<div class = "row">
+
+<div class = "col-md-6">
+
+<section style="text-align: justify;"><p class="text-primary">Se aumenta el número de obervaciones de los niveles con el menor valor hasta llegar al valor del nivel con el mayor número de observaciones:</p></section>
+
+```{r Oversampling, fig.align = 'center', eval = TRUE, echo = FALSE, message = FALSE, fig.showtext = TRUE, out.width = '200'}
+
+data.frame(
+  x = c(1.0:3.5), y = c(1.0:3.5)
+) %>%
+  ggplot(aes(x, y)) +
+  geom_blank() +
+  theme_bw() +
+  annotate(geom = 'rect', xmin = 1.0, xmax = 1.5, ymin = 1.0, ymax = 2.5, colour = 'cyan', fill = 'cyan', alpha = 0.4, size = 1.2) +
+  annotate(geom = 'rect', xmin = 2.0, xmax = 2.5, ymin = 1.0, ymax = 1.5, colour = 'yellow', fill = 'yellow', alpha = 0.4, size = 1.2) +
+  annotate(geom = 'rect', xmin = 3.0, xmax = 3.5, ymin = 1.0, ymax = 3.5, colour = 'black', fill = 'black', alpha = 0.4, size = 1.2) +
+  geom_curve(x = 1.25, xend = 1.25, y = 2.6, yend = 3.5, arrow = arrow(length = unit(0.1, 'inch')), size = 2.0, color = 'black', curvature = 0.0) +
+  geom_curve(x = 2.25, xend = 2.25, y = 1.6, yend = 3.5, arrow = arrow(length = unit(0.1, 'inch')), size = 2.0, color = 'black', curvature = 0.0) +
+  theme(axis.text = element_blank(),
+        axis.ticks = element_blank(),
+        axis.title = element_blank())
+```
+
+
+</div>
+
+<div class = "col-md-6">
+
+<section style="text-align: justify;"><p class="text-primary">Se disminuye el número de obervaciones de los niveles con mayor valor hasta llegar al valor del nivel con el menor número de observaciones:</p></section>
+
+```{r Undersampling, fig.align = 'center', eval = TRUE, echo = FALSE, message = FALSE, fig.showtext = TRUE, out.width = '200'}
+
+data.frame(
+  x = c(1.0:3.5), y = c(1.0:3.5)
+) %>%
+  ggplot(aes(x, y)) +
+  geom_blank() +
+  theme_bw() +
+  annotate(geom = 'rect', xmin = 1.0, xmax = 1.5, ymin = 1.0, ymax = 2.5, colour = 'cyan', fill = 'cyan', alpha = 0.4, size = 1.2) +
+  annotate(geom = 'rect', xmin = 2.0, xmax = 2.5, ymin = 1.0, ymax = 1.5, colour = 'yellow', fill = 'yellow', alpha = 0.4, size = 1.2) +
+  annotate(geom = 'rect', xmin = 3.0, xmax = 3.5, ymin = 1.0, ymax = 3.5, colour = 'black', fill = 'black', alpha = 0.4, size = 1.2) +
+  geom_curve(x = 1.25, xend = 1.25, y = 2.4, yend = 1.5, arrow = arrow(length = unit(0.1, 'inch')), size = 2.0, color = 'black', curvature = 0.0) +
+  geom_curve(x = 3.25, xend = 3.25, y = 3.4, yend = 1.5, arrow = arrow(length = unit(0.1, 'inch')), size = 2.0, color = 'black', curvature = 0.0) +
+  theme(axis.text = element_blank(),
+        axis.ticks = element_blank(),
+        axis.title = element_blank())
+```
+
+</div>
+
+</div>
 
 <!--
 Ver en https://www.tidymodels.org/start/case-study/ la parte donde hablan de desequilibrio en la base de datos empleado. Ellos mencionan métodos para combatir este problema mediante el uso del paquete "recipes" (recetas) por medio de upsample o downsample, u otros paquetes más especializados como "themis" (https://tidymodels.github.io/themis/). 
+
+También en https://canal.uned.es/video/5dd24cff5578f275763a9092 en el minuto 9:16 muestran diferentes técnicas de balanceo
 -->
 
 ---
+
+<section style="text-align: center;"><h2><p class="text-info">Balanceo de las variables</p></h2></section>
+
+```{r Balanceo de variables predictoras, echo = FALSE, eval = TRUE, message = FALSE, fig.align = 'center', out.width = '570'}
+
+balanceo_OP_DE <- datos_entrenamiento %>%
+  dplyr::select(IEP, OP) %>%
+  group_by(OP) %>%
+  summarise(Total = length(OP)) %>%
+  ggplot(aes(x = OP, y = Total)) +
+  geom_segment(aes(x = OP, xend = OP, y = 0, yend = Total), color = 'gray44', size = 1.4, alpha = 0.4) +
+  geom_point(color = 'cyan2', size = 3.4, alpha = 0.4) +
+  geom_text(aes(label = Total), na.rm = TRUE, hjust = -0.2, colour = 'black') +
+  theme_bw() +
+  labs(x = 'Orden de parto', y = 'Número de\n observaciones', title = '') +
+  theme(legend.position = 'none',
+        axis.text = element_text(size = 8, face = 'bold'),
+        axis.title = element_text(size = 10, face = 'bold'),
+        plot.title = element_text(size = 10, face = 'bold'))
+
+balanceo_ÉpP_DE <- datos_entrenamiento %>%
+  dplyr::select(IEP, ÉpP) %>%
+  group_by(ÉpP) %>%
+  summarise(Total = length(ÉpP)) %>%
+  ggplot(aes(x = ÉpP, y = Total)) +
+  geom_segment(aes(x = ÉpP, xend = ÉpP, y = 0, yend = Total), color = 'gray44', size = 1.4, alpha = 0.4) +
+  geom_point(color = 'cyan2', size = 3.4, alpha = 0.4) +
+  geom_text(aes(label = Total), na.rm = TRUE, hjust = -0.2, colour = 'black') +
+  theme_bw() +
+  labs(x = 'Edad al primer parto', y = 'Número de\n observaciones', title = '') +
+  theme(legend.position = 'none',
+        axis.text = element_text(size = 8, face = 'bold'),
+        axis.title = element_text(size = 10, face = 'bold'),
+        plot.title = element_text(size = 10, face = 'bold'))
+
+balanceo_SC_DE <- datos_entrenamiento %>%
+  dplyr::select(IEP, SC) %>%
+  group_by(SC) %>%
+  summarise(Total = length(SC)) %>%
+  ggplot(aes(x = SC, y = Total)) +
+  geom_segment(aes(x = SC, xend = SC, y = 0, yend = Total), color = 'gray44', size = 1.4, alpha = 0.4) +
+  geom_point(color = 'cyan2', size = 3.4, alpha = 0.4) +
+  geom_text(aes(label = Total), na.rm = TRUE, hjust = -0.2, colour = 'black') +
+  theme_bw() +
+  labs(x = 'Sexo de la cría', y = 'Número de\n observaciones', title = '') +
+  theme(legend.position = 'none',
+        axis.text = element_text(size = 8, face = 'bold'),
+        axis.title = element_text(size = 10, face = 'bold'),
+        plot.title = element_text(size = 10, face = 'bold'))
+
+balanceo_AP_DE <- datos_entrenamiento %>%
+  dplyr::select(IEP, AP) %>%
+  group_by(AP) %>%
+  summarise(Total = length(AP)) %>%
+  ggplot(aes(x = AP, y = Total)) +
+  geom_segment(aes(x = AP, xend = AP, y = 0, yend = Total), color = 'gray44', size = 1.4, alpha = 0.4) +
+  geom_point(color = 'cyan2', size = 3.4, alpha = 0.4) +
+  geom_text(aes(label = Total), na.rm = TRUE, hjust = -0.2, colour = 'black') +
+  theme_bw() +
+  labs(x = 'Año de parto', y = 'Número de observaciones', title = 'Datos de entrenamiento') +
+  theme(legend.position = 'none',
+        axis.text.y = element_text(size = 5, face = 'bold'),
+        axis.text.x = element_text(size = 10, face = 'bold'),
+        axis.title = element_text(size = 12, face = 'bold'),
+        plot.title = element_text(size = 12, face = 'bold')) +
+  coord_flip()
+
+(balanceo_AP_DE) | (balanceo_OP_DE / balanceo_ÉpP_DE / balanceo_SC_DE)
+```
+
+---
+
+<section style="text-align: center;"><h2><p class="text-info">Ajustando inicialmente un modelo básico de regresión</p></h2></section>
+
+<br>
+
+```{r, fig.align = 'center', out.width = '570', eval = TRUE, echo = FALSE, message = FALSE}
+
+knitr::include_graphics('Imagenes/paquete_recipes.png')
+```
 
 <!--
 En estas paginas comparten paso a paso el uso de varios paquetes del paquete tidymodels para ajustar un modelo de regresión logistica (entonces creo que se podria hacer lo mismo para modelos mixtos):
@@ -992,4 +1185,3 @@ En estas paginas comparten paso a paso el uso de varios paquetes del paquete tid
 En esta pagina comparten paso a paso una forma de medir, basado en estadísticas de remuestreo, qué tan bien el modelo ajustado mediante los pasos anteriores predice nuevos datos:
 - https://www.tidymodels.org/start/resampling/... también dan un ejemplo de arboles de decisión y bosques aleatorios.
 -->
-
