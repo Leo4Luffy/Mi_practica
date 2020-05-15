@@ -2570,7 +2570,7 @@ El emplear la función dir() dentro de un código puede no parecer muy útil; po
 
 &lt;section style="text-align: justify;"&gt;&lt;p class="text-secondary"&gt;Se trabajará localmente en la máquina para crear un &lt;font color="black"&gt;primer módulo&lt;/font&gt;. Se necesitan de dos archivos para realizar este experimento:&lt;/p&gt;&lt;/section&gt;
 
-&lt;img src="Curso_fundamentos_básico_de_programacion_files/figure-html/Mi primer módulo-1.png" width="220" style="display: block; margin: auto;" /&gt;
+&lt;img src="Curso_fundamentos_básico_de_programacion_files/figure-html/Mi primer módulo 1-1.png" width="220" style="display: block; margin: auto;" /&gt;
 
 &lt;section style="text-align: justify;"&gt;&lt;p class="text-secondary"&gt;Uno de ellos será el módulo en sí: el archivo por nombre &lt;font color="black"&gt;module.py&lt;/font&gt;. Este está vacio, sin embargo se llenara con el código real. El segundo archivo es &lt;font color="black"&gt;main.py&lt;/font&gt;, cuyo contenido es breve hasta ahora. Ambos archivos deben estar ubicados en la misma carpeta.&lt;/p&gt;&lt;/section&gt;
 
@@ -2605,9 +2605,195 @@ El emplear la función dir() dentro de un código puede no parecer muy útil; po
 
 &lt;div class = "col-md-6"&gt;
 
+&lt;section style="text-align: justify;"&gt;&lt;p class="text-secondary"&gt;Ahora se ha puesto algo en el archivo del módulo&lt;!--(claramente no hay diferencia alguna entre el modulo y un script ordinario)--&gt;:&lt;/p&gt;&lt;/section&gt;
+
+&lt;img src="Curso_fundamentos_básico_de_programacion_files/figure-html/Mi primer módulo 2-1.png" width="220" style="display: block; margin: auto;" /&gt;
+
+&lt;section style="text-align: justify;"&gt;&lt;p class="text-secondary"&gt;Al ejecutar de nuevo el archivo &lt;font color="black"&gt;main.py&lt;/font&gt; se observa algo como &lt;font color="black"&gt;I like to be a module.&lt;/font&gt; ¿Qué significa esto? Cuando un módulo es importado, su contenido es &lt;font color="black"&gt;ejecutado implícitamente por Python&lt;/font&gt;. Le da al módulo la oportunidad de inicializar algunos de sus aspectos internos (por ejemplo, puede asignar a algunas variables valores útiles).&lt;/p&gt;&lt;/section&gt;
+
 &lt;/div&gt;
 
 &lt;/div&gt;
+
+---
+
+&lt;section style="text-align: center;"&gt;&lt;h4&gt;&lt;p class="text-info"&gt;Fundamentos básicos de programación en Python&lt;/p&gt;&lt;/h4&gt;&lt;/section&gt;
+&lt;br&gt;
+
+&lt;p class="text-warning"&gt;Modulos y paquetes&lt;/p&gt;
+
+&lt;div class = "row"&gt;
+
+&lt;div class = "col-md-6"&gt;
+
+&lt;section style="text-align: justify;"&gt;&lt;p class="text-secondary"&gt;Imagina el siguiente contexto:&lt;/p&gt;
+
+&lt;div class="form-check"&gt;
+  &lt;div class="form-check disabled"&gt;
+    &lt;input class="form-check-input" type="checkbox" value="" disabled=""&gt;
+    Existe un módulo llamado mod1.
+  &lt;/div&gt;
+  &lt;div class="form-check disabled"&gt;
+    &lt;input class="form-check-input" type="checkbox" value="" disabled=""&gt;
+    Existe un módulo llamado mod2 el cual contiene la instrucción import mod1.
+  &lt;/div&gt;
+  &lt;div class="form-check disabled"&gt;
+    &lt;input class="form-check-input" type="checkbox" value="" disabled=""&gt;
+    Hay un archivo principal que contiene las instrucciones import mod1 y import mod2.
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/section&gt;
+
+&lt;section style="text-align: justify;"&gt;&lt;p class="text-secondary"&gt;A primera vista, se puede pensar que mod1 será importado dos veces. Afortunadamente, solo se produce la primera importación. Python recuerda los módulos importados y omite silenciosamente todas las importaciones posteriores.&lt;/p&gt;&lt;/section&gt;
+
+&lt;section style="text-align: justify;"&gt;&lt;p class="text-secondary"&gt;Python puede hacer mucho más. También crea una variable llamada &lt;font color="black"&gt;__name__&lt;/font&gt;. Además, cada archivo fuente usa su propia versión separada de la variable, no se comparte entre módulos. Modifica el módulo un poco para mostrar cómo usarlo:&lt;/p&gt;&lt;/section&gt;
+
+&lt;/div&gt;
+
+&lt;div class = "col-md-6"&gt;
+
+&lt;img src="Curso_fundamentos_básico_de_programacion_files/figure-html/Mi primer módulo 3-1.png" width="220" style="display: block; margin: auto;" /&gt;
+
+&lt;section style="text-align: justify;"&gt;&lt;p class="text-secondary"&gt;Al ejecutar el archivo &lt;font color="black"&gt;module.py&lt;/font&gt; se deberían ver las siguientes líneas:&lt;/p&gt;&lt;/section&gt;
+
+&lt;section style="text-align: left;"&gt;
+&lt;p&gt;I like to be a module.&lt;/p&gt;
+&lt;p&gt;__main__&lt;/p&gt;
+&lt;/section&gt;
+
+&lt;section style="text-align: justify;"&gt;&lt;p class="text-secondary"&gt;Ahora al ejecutar el archivo &lt;font color="black"&gt;main.py&lt;/font&gt; se debería ver:&lt;/p&gt;&lt;/section&gt;
+
+&lt;section style="text-align: left;"&gt;
+&lt;p&gt;I like to be a module.&lt;/p&gt;
+&lt;p&gt;module&lt;/p&gt;
+&lt;/section&gt;
+
+&lt;/div&gt;
+
+&lt;/div&gt;
+
+---
+
+&lt;section style="text-align: center;"&gt;&lt;h4&gt;&lt;p class="text-info"&gt;Fundamentos básicos de programación en Python&lt;/p&gt;&lt;/h4&gt;&lt;/section&gt;
+&lt;br&gt;
+
+&lt;p class="text-warning"&gt;Modulos y paquetes&lt;/p&gt;
+
+&lt;div class = "row"&gt;
+
+&lt;div class = "col-md-6"&gt;
+
+&lt;section style="text-align: justify;"&gt;&lt;p class="text-secondary"&gt;De lo anterior se puede decir que:&lt;/p&gt;
+
+&lt;div class="form-check"&gt;
+  &lt;div class="form-check disabled"&gt;
+    &lt;input class="form-check-input" type="checkbox" value="" disabled=""&gt;
+    Cuando se ejecuta un archivo directamente, su variable __name__ se establece a __main__.
+  &lt;/div&gt;
+  &lt;div class="form-check disabled"&gt;
+    &lt;input class="form-check-input" type="checkbox" value="" disabled=""&gt;
+    Cuando un archivo se importa como un módulo, su variable __name__ se establece al nombre del archivo (excluyendo a .py).
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/section&gt;
+
+&lt;section style="text-align: justify;"&gt;&lt;p class="text-secondary"&gt;Haciendo uso de la variable &lt;font color="black"&gt;__main__&lt;/font&gt; se puede detectar el contexto en el que se activó el código:&lt;/p&gt;&lt;/section&gt;
+
+&lt;img src="Curso_fundamentos_básico_de_programacion_files/figure-html/Mi primer módulo 4-1.png" width="210" style="display: block; margin: auto;" /&gt;
+
+&lt;/div&gt;
+
+&lt;div class = "col-md-6"&gt;
+
+&lt;section style="text-align: justify;"&gt;&lt;p class="text-secondary"&gt;Sin embargo, hay una forma más inteligente de utilizar la variable. Si se escribe un módulo lleno de varias funciones complejas, se puede usar para colocar una serie de pruebas para verificar si las funciones trabajan correctamente.&lt;/p&gt;&lt;/section&gt;
+
+&lt;section style="text-align: justify;"&gt;&lt;p class="text-secondary"&gt;Cada vez que se modifique alguna de estas funciones, simplemente se puede ejecutar el módulo para asegurar de que sus enmiendas no estropeen el código. Estas pruebas se omitirán cuando el código se importe como un módulo.&lt;/p&gt;&lt;/section&gt;
+
+&lt;section style="text-align: justify;"&gt;&lt;p class="text-secondary"&gt;Si se desea saber cuántas veces se han invocado las funciones, se necesita un &lt;font color="black"&gt;contador&lt;/font&gt; inicializado en cero cuando se importa el módulo. El introducir tal variable es absolutamente correcto, pero puede causar importantes efectos secundarios.&lt;/p&gt;&lt;/section&gt;
+
+&lt;/div&gt;
+
+&lt;/div&gt;
+
+---
+
+&lt;section style="text-align: center;"&gt;&lt;h4&gt;&lt;p class="text-info"&gt;Fundamentos básicos de programación en Python&lt;/p&gt;&lt;/h4&gt;&lt;/section&gt;
+&lt;br&gt;
+
+&lt;p class="text-warning"&gt;Modulos y paquetes&lt;/p&gt;
+
+&lt;div class = "row"&gt;
+
+&lt;div class = "col-md-6"&gt;
+
+&lt;section style="text-align: justify;"&gt;&lt;p class="text-secondary"&gt;Ahora pongamos dos funciones en el módulo: evaluarán la suma y el producto de los números recopilados en una lista. Además, se agregan algunos adornos allí y eliminan los restos superfluos.&lt;/p&gt;&lt;/section&gt;
+
+&lt;img src="Imagenes/Mi_primer_modulo.png" width="280" style="display: block; margin: auto;" /&gt;
+
+&lt;section style="text-align: justify;"&gt;&lt;p class="text-secondary"&gt;Algunos elementos necesitan explicación:&lt;/p&gt;&lt;/section&gt;
+
+&lt;/p&gt;
+
+&lt;/div&gt;
+
+&lt;div class = "col-md-6"&gt;
+
+&lt;section style="text-align: justify;"&gt;
+
+&lt;div class="form-check"&gt;
+  &lt;div class="form-check disabled"&gt;
+    &lt;input class="form-check-input" type="checkbox" value="" disabled=""&gt;
+    La línea que comienza con #! desde el punto de vista de Python, es solo un comentario debido a que comienza con #. Para sistemas operativos Unix y similares, dicha línea indica al sistema operativo cómo ejecutar el contenido del archivo (en otras palabras, qué programa debe lanzarse para interpretar el texto).
+  &lt;/div&gt;
+  &lt;div class="form-check disabled"&gt;
+    &lt;input class="form-check-input" type="checkbox" value="" disabled=""&gt;
+    Una cadena (quizás una multilínea) colocada antes de las instrucciones de cualquier módulo (incluidas las importaciones) se denomina doc-string, y debe explicar brevemente el propósito y el contenido del módulo.
+  &lt;/div&gt;
+  &lt;div class="form-check disabled"&gt;
+    &lt;input class="form-check-input" type="checkbox" value="" disabled=""&gt;
+    Se informa al usuario que la variable contador no deben modificarla bajo ninguna circunstancia, al anteponer _ (un guión bajo) o __ (dos guiones bajos).
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/section&gt;
+
+&lt;/div&gt;
+
+&lt;/div&gt;
+
+---
+
+&lt;section style="text-align: center;"&gt;&lt;h4&gt;&lt;p class="text-info"&gt;Fundamentos básicos de programación en Python&lt;/p&gt;&lt;/h4&gt;&lt;/section&gt;
+&lt;br&gt;
+
+&lt;p class="text-warning"&gt;Modulos y paquetes&lt;/p&gt;
+
+&lt;div class = "row"&gt;
+
+&lt;div class = "col-md-6"&gt;
+
+&lt;section style="text-align: justify;"&gt;
+
+&lt;div class="form-check"&gt;
+  &lt;div class="form-check disabled"&gt;
+    &lt;input class="form-check-input" type="checkbox" value="" disabled=""&gt;
+    Las funciones definidas dentro del módulo (suml( ) y prodl( )) están disponibles para ser importadas.
+  &lt;/div&gt;
+  &lt;div class="form-check disabled"&gt;
+    &lt;input class="form-check-input" type="checkbox" value="" disabled=""&gt;
+    Se ha utilizado la variable __name__ para detectar cuándo se ejecuta el archivo de forma independiente.
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/section&gt;
+
+&lt;section style="text-align: justify;"&gt;&lt;p class="text-secondary"&gt;Ahora es posible usar el nuevo módulo:&lt;/p&gt;&lt;/section&gt;
+
+&lt;section style="text-align: left;"&gt;
+&lt;p&gt;from module import suml, prodl&lt;/p&gt;
+&lt;/section&gt;
 
 ---
 &lt;!--buscar en la pagina del icetex y en la cancilleria, scolar4devs.com--&gt;
