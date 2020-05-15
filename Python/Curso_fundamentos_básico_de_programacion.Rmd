@@ -2891,6 +2891,105 @@ El emplear la función dir() dentro de un código puede no parecer muy útil; po
 </div>
 
 ---
+
+<section style="text-align: center;"><h4><p class="text-info">Fundamentos básicos de programación en Python</p></h4></section>
+<br>
+
+<p class="text-warning">Modulos</p>
+
+<div class = "row">
+
+<div class = "col-md-6">
+
+<section style="text-align: justify;"><p class="text-secondary">Los módulos de Python conforman su propio universo, en el que Python es solo una galaxia, y explorar las profundidades de estos módulos puede llevar mucho más tiempo que familiarizarse con Python "puro". Además, la comunidad de Python en todo el mundo crea y mantiene cientos de módulos adicionales utilizados en aplicaciones muy específicas como la genética, la psicología o incluso la astrología. Estos módulos no son distribuidos junto con Python, lo que hace que el universo de Python sea más amplio, casi infinito.</p></section>
+
+<section style="text-align: justify;"><p class="text-secondary">Escribir módulos no difiere mucho de escribir scripts comunes. Se vio que un <font color="black">módulo es un contenedor lleno de funciones</font>. También se mencionó que al crear muchos módulos, tarde que temprano se querrán agrupar.</p></section>
+
+</div>
+
+<div class = "col-md-6">
+
+<section style="text-align: justify;"><p class="text-secondary">Entonces, ¿existe un contenedor más general que un módulo? Sí lo hay, es un <font color="black">paquete</font>: en el mundo de los módulos, un paquete juega un papel similar al de una carpeta o directorio en el mundo de los archivos.</p></section>
+
+</div>
+
+</div>
+
+---
+
+<section style="text-align: center;"><h4><p class="text-info">Fundamentos básicos de programación en Python</p></h4></section>
+<br>
+
+<p class="text-warning">Modulos y paquetes</p>
+
+<div class = "row">
+
+<div class = "col-md-6">
+
+<section style="text-align: justify;"><p class="text-secondary">Se trabajará localmente en la máquina para crear un <font color="black">primer módulo</font>. Se necesitan de dos archivos para realizar este experimento:</p></section>
+
+```{r Mi primer módulo, echo = FALSE, eval = TRUE, message = FALSE, fig.align = 'center', out.width = '220'}
+
+library(dplyr)
+library(ggplot2)
+
+data.frame(
+  x = c(1:3), y = c(1:3)
+) %>%
+  ggplot(aes(x, y)) +
+  geom_blank() +
+  annotate(geom = 'rect', xmin = 1.0, xmax = 1.8, ymin = 1.4, ymax = 2.0, colour = 'black', fill = 'white', alpha = 0.4) +
+  annotate(geom = 'rect', xmin = 1.0, xmax = 1.8, ymin = 1.8, ymax = 2.0, colour = 'black', fill = 'black', alpha = 0.2) +
+  annotate(geom = 'rect', xmin = 2.2, xmax = 3.0, ymin = 1.4, ymax = 2.0, colour = 'black', fill = 'white', alpha = 0.4) +
+  annotate(geom = 'rect', xmin = 2.2, xmax = 3.0, ymin = 1.8, ymax = 2.0, colour = 'black', fill = 'black', alpha = 0.2) +
+  annotate(geom = 'text', x = 1.4, y = 1.9, label = 'module.py', size = 10.0, colour = 'black') +
+  annotate(geom = 'text', x = 2.6, y = 1.9, label = 'main.py', size = 10.0, colour = 'black') +
+  annotate(geom = 'text', x = 2.6, y = 1.75, label = 'import module', size = 9.0, colour = 'black') +
+  scale_y_continuous(limits = c(1.4, 2)) +
+  theme_void() +
+  theme(axis.text = element_blank(),
+        axis.ticks = element_blank(),
+        axis.title = element_blank())
+```
+
+<section style="text-align: justify;"><p class="text-secondary">Uno de ellos será el módulo en sí: el archivo por nombre <font color="black">module.py</font>. Este está vacio, sin embargo se llenara con el código real. El segundo archivo es <font color="black">main.py</font>, cuyo contenido es breve hasta ahora. Ambos archivos deben estar ubicados en la misma carpeta.</p></section>
+
+</div>
+
+<div class = "col-md-6">
+
+<section style="text-align: justify;"><p class="text-secondary">Inicia el IDLE y ejecuta el archivo <font color="black">main.py</font>. Al hacer esto, no se debería ver nada. Esto significa que Python ha importado con éxito el contenido del archivo <font color="black">module.py</font>. No importa que el módulo esté vacío por ahora.</p></section> 
+
+<section style="text-align: justify;"><p class="text-secondary">Hecha un vistazo a la carpeta en la que se encuentran ambos archivos. Ha aparecido una nueva subcarpeta: <font color="black">__pycache__</font>. Adentro de ella hay un archivo llamado module.cpython-xy.pyc donde x y y son dígitos derivados de la versión de Python (por ejemplo, serán 3 y 4 si utilizas Python 3.4). El nombre del archivo es el mismo que el de tu módulo. La parte posterior al primer punto dice qué implementación de Python ha creado el archivo (CPython) y su número de versión. La ultima parte (pyc) viene de las palabras Python y compilado.</p></section>
+
+</div>
+
+</div>
+
+---
+
+<section style="text-align: center;"><h4><p class="text-info">Fundamentos básicos de programación en Python</p></h4></section>
+<br>
+
+<p class="text-warning">Modulos y paquetes</p>
+
+<div class = "row">
+
+<div class = "col-md-6">
+
+<section style="text-align: justify;"><p class="text-secondary">Al mirar dentro del archivo module.cpython-xy.pyc, el contenido es completamente ilegible para los humanos. Tiene que ser así, ya que el archivo está destinado solo para uso de Python.</p></section>
+
+<section style="text-align: justify;"><p class="text-secondary">Cuando Python importa un módulo por primera vez, traduce el contenido a una forma <font color="black">"semi" compilada</font>. El archivo no contiene código en lenguaje máquina: es <font color="black">código semi-compilado</font> interno de Python, listo para ser ejecutado por el intérprete de Python. Como tal archivo no requiere tantas comprobaciones como las de un archivo fuente, la ejecución comienza más rápido y también se ejecuta más rápido. Gracias a eso, cada importación posterior será más rápida que interpretar el código fuente desde cero.</p></section>
+
+</div>
+
+<div class = "col-md-6">
+
+</div>
+
+</div>
+
+---
 <!--buscar en la pagina del icetex y en la cancilleria, scolar4devs.com-->
 
 <br>

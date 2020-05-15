@@ -12,7 +12,7 @@ class: center, middle, inverse, title-slide
 
 # Curso sobre fundamentos básicos de programación en Python
 ### Jorge Leonardo López Martínez
-### 14 mayo, 2020
+### 15 mayo, 2020
 
 ---
 
@@ -2527,6 +2527,83 @@ Para copiar un diccionario, se puede emplear el método copy():
 &lt;!--
 El emplear la función dir() dentro de un código puede no parecer muy útil; por lo general, se desea conocer el contenido de un módulo en particular antes de escribir y ejecutar el código.
 --&gt;
+
+&lt;/div&gt;
+
+&lt;/div&gt;
+
+---
+
+&lt;section style="text-align: center;"&gt;&lt;h4&gt;&lt;p class="text-info"&gt;Fundamentos básicos de programación en Python&lt;/p&gt;&lt;/h4&gt;&lt;/section&gt;
+&lt;br&gt;
+
+&lt;p class="text-warning"&gt;Modulos&lt;/p&gt;
+
+&lt;div class = "row"&gt;
+
+&lt;div class = "col-md-6"&gt;
+
+&lt;section style="text-align: justify;"&gt;&lt;p class="text-secondary"&gt;Los módulos de Python conforman su propio universo, en el que Python es solo una galaxia, y explorar las profundidades de estos módulos puede llevar mucho más tiempo que familiarizarse con Python "puro". Además, la comunidad de Python en todo el mundo crea y mantiene cientos de módulos adicionales utilizados en aplicaciones muy específicas como la genética, la psicología o incluso la astrología. Estos módulos no son distribuidos junto con Python, lo que hace que el universo de Python sea más amplio, casi infinito.&lt;/p&gt;&lt;/section&gt;
+
+&lt;section style="text-align: justify;"&gt;&lt;p class="text-secondary"&gt;Escribir módulos no difiere mucho de escribir scripts comunes. Se vio que un &lt;font color="black"&gt;módulo es un contenedor lleno de funciones&lt;/font&gt;. También se mencionó que al crear muchos módulos, tarde que temprano se querrán agrupar.&lt;/p&gt;&lt;/section&gt;
+
+&lt;/div&gt;
+
+&lt;div class = "col-md-6"&gt;
+
+&lt;section style="text-align: justify;"&gt;&lt;p class="text-secondary"&gt;Entonces, ¿existe un contenedor más general que un módulo? Sí lo hay, es un &lt;font color="black"&gt;paquete&lt;/font&gt;: en el mundo de los módulos, un paquete juega un papel similar al de una carpeta o directorio en el mundo de los archivos.&lt;/p&gt;&lt;/section&gt;
+
+&lt;/div&gt;
+
+&lt;/div&gt;
+
+---
+
+&lt;section style="text-align: center;"&gt;&lt;h4&gt;&lt;p class="text-info"&gt;Fundamentos básicos de programación en Python&lt;/p&gt;&lt;/h4&gt;&lt;/section&gt;
+&lt;br&gt;
+
+&lt;p class="text-warning"&gt;Modulos y paquetes&lt;/p&gt;
+
+&lt;div class = "row"&gt;
+
+&lt;div class = "col-md-6"&gt;
+
+&lt;section style="text-align: justify;"&gt;&lt;p class="text-secondary"&gt;Se trabajará localmente en la máquina para crear un &lt;font color="black"&gt;primer módulo&lt;/font&gt;. Se necesitan de dos archivos para realizar este experimento:&lt;/p&gt;&lt;/section&gt;
+
+&lt;img src="Curso_fundamentos_básico_de_programacion_files/figure-html/Mi primer módulo-1.png" width="220" style="display: block; margin: auto;" /&gt;
+
+&lt;section style="text-align: justify;"&gt;&lt;p class="text-secondary"&gt;Uno de ellos será el módulo en sí: el archivo por nombre &lt;font color="black"&gt;module.py&lt;/font&gt;. Este está vacio, sin embargo se llenara con el código real. El segundo archivo es &lt;font color="black"&gt;main.py&lt;/font&gt;, cuyo contenido es breve hasta ahora. Ambos archivos deben estar ubicados en la misma carpeta.&lt;/p&gt;&lt;/section&gt;
+
+&lt;/div&gt;
+
+&lt;div class = "col-md-6"&gt;
+
+&lt;section style="text-align: justify;"&gt;&lt;p class="text-secondary"&gt;Inicia el IDLE y ejecuta el archivo &lt;font color="black"&gt;main.py&lt;/font&gt;. Al hacer esto, no se debería ver nada. Esto significa que Python ha importado con éxito el contenido del archivo &lt;font color="black"&gt;module.py&lt;/font&gt;. No importa que el módulo esté vacío por ahora.&lt;/p&gt;&lt;/section&gt; 
+
+&lt;section style="text-align: justify;"&gt;&lt;p class="text-secondary"&gt;Hecha un vistazo a la carpeta en la que se encuentran ambos archivos. Ha aparecido una nueva subcarpeta: &lt;font color="black"&gt;__pycache__&lt;/font&gt;. Adentro de ella hay un archivo llamado module.cpython-xy.pyc donde x y y son dígitos derivados de la versión de Python (por ejemplo, serán 3 y 4 si utilizas Python 3.4). El nombre del archivo es el mismo que el de tu módulo. La parte posterior al primer punto dice qué implementación de Python ha creado el archivo (CPython) y su número de versión. La ultima parte (pyc) viene de las palabras Python y compilado.&lt;/p&gt;&lt;/section&gt;
+
+&lt;/div&gt;
+
+&lt;/div&gt;
+
+---
+
+&lt;section style="text-align: center;"&gt;&lt;h4&gt;&lt;p class="text-info"&gt;Fundamentos básicos de programación en Python&lt;/p&gt;&lt;/h4&gt;&lt;/section&gt;
+&lt;br&gt;
+
+&lt;p class="text-warning"&gt;Modulos y paquetes&lt;/p&gt;
+
+&lt;div class = "row"&gt;
+
+&lt;div class = "col-md-6"&gt;
+
+&lt;section style="text-align: justify;"&gt;&lt;p class="text-secondary"&gt;Al mirar dentro del archivo module.cpython-xy.pyc, el contenido es completamente ilegible para los humanos. Tiene que ser así, ya que el archivo está destinado solo para uso de Python.&lt;/p&gt;&lt;/section&gt;
+
+&lt;section style="text-align: justify;"&gt;&lt;p class="text-secondary"&gt;Cuando Python importa un módulo por primera vez, traduce el contenido a una forma &lt;font color="black"&gt;"semi" compilada&lt;/font&gt;. El archivo no contiene código en lenguaje máquina: es &lt;font color="black"&gt;código semi-compilado&lt;/font&gt; interno de Python, listo para ser ejecutado por el intérprete de Python. Como tal archivo no requiere tantas comprobaciones como las de un archivo fuente, la ejecución comienza más rápido y también se ejecuta más rápido. Gracias a eso, cada importación posterior será más rápida que interpretar el código fuente desde cero.&lt;/p&gt;&lt;/section&gt;
+
+&lt;/div&gt;
+
+&lt;div class = "col-md-6"&gt;
 
 &lt;/div&gt;
 
