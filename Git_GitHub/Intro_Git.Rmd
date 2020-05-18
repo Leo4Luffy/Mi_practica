@@ -1,0 +1,57 @@
+---
+title: "Introducción a Git - curso en datacamp"
+subtitle: ""
+author: "Jorge Leonardo López Martínez"
+date: "`r format(Sys.time(), '%d %B, %Y')`"
+output: 
+  html_document:
+    toc: true
+    toc_depth: 4
+    toc_float:
+        collapsed: true
+        smooth_scroll: true
+    number_sections: true
+    css: estilo.css
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+<br>
+
+# ¿Qué es el control de versiones?
+
+<section style="text-align: justify;">
+
+<p class="text-primary">Un sistema de <font color = "black"><u>control de versiones</u></font> es una herramienta que gestiona los cambios realizados en los archivos y directorios de un proyecto. Existen muchos sistemas de control de versiones, entre ellos el <font color = "black"><u>Git</u></font> el cual es utilizada por muchas de las herramientas de ciencia de datos. Sus puntos fuertes son:
+
++ Nada de lo que se guarda en Git se pierde, por lo que siempre puede volver para ver qué resultados se generaron con qué versiones de sus programas.
+
++ Git te notifica automáticamente cuando tu trabajo entra en conflicto con el de otra persona, por lo que es más difícil (pero no imposible) sobrescribir accidentalmente el trabajo.
+
++ Git puede sincronizar el trabajo realizado por diferentes personas en diferentes máquinas, por lo que se escala a medida que su equipo lo hace.
+
+El control de versiones no es solo para el software: libros, documentos, conjuntos de parámetros y <font color = "black"><u>todo lo que cambia con el tiempo o necesita ser compartido</u></font> puede y debe almacenarse y compartirse usando Git.
+
+</section>
+
+<br>
+
+# ¿Dónde almacena la información Git?
+
+<section style="text-align: justify;">
+
+Cada uno de sus proyectos en Git tiene dos partes: los archivos y directorios que crea y edita directamente, y la información adicional que Git registra sobre el historial del proyecto. La combinación de estas dos cosas se llama <font color = "black"><u>repositorio</u></font>.
+
+Git almacena toda su información adicional en un directorio llamado <font color = "black">.git</font> ubicado en el directorio raíz del repositorio. Suponga que su directorio de inicio /home/repl contiene un repositorio llamado dental, que tiene un subdirectorio llamado data. ¿Dónde se almacena la información sobre el historial de los archivos? En /home/repl/dental/.git
+
+</section>
+
+<br>
+
+# ¿Cómo puedo verificar el estado de un repositorio?
+
+<section style="text-align: justify;">
+
+</section>
