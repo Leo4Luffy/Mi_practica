@@ -54,4 +54,161 @@ Git almacena toda su información adicional en un directorio llamado <font color
 
 <section style="text-align: justify;">
 
+Cuando use Git, con frecuencia querrá verificar el estado de su repositorio. Para hacer esto, ejecute el comando <font color = "black">git status</font>, que muestra una lista de los archivos que se han modificado desde la última vez que se guardaron los cambios.
+
+</section>
+
+<br>
+
+# ¿Cómo puedo saber lo que he cambiado?
+
+<section style="text-align: justify;">
+
+Git tiene un área de preparación (<font color = "black">staging area</font>) en la que almacena archivos con cambios que desea guardar que aún no se han guardado. Poner archivos en el área de preparación es como poner cosas en una caja, mientras que confirmar (<font color = "black">committing</font>) esos cambios es como poner esa caja en el correo: puede agregar más cosas a la caja o sacarlas con la frecuencia que desee, pero una vez que lo coloca en el correo, no puede hacer más cambios.
+
+```{r Imagen staging-area, fig.align = 'center', out.width = "420", eval = TRUE, echo = FALSE, message = FALSE}
+
+knitr::include_graphics('Imagenes/staging_area.png')
+```
+
+<font color = "black">git status</font> muestra qué archivos están en esta área de preparación y qué archivos tienen cambios que aún no se han puesto allí. Para comparar el archivo tal como está actualmente con lo que guardó por última vez, puede usar <font color = "black">git diff filename</font>. <font color = "black">git diff</font> sin ningún nombre de archivo le mostrará todos los cambios en su repositorio, mientras que <font color = "black">git diff directory</font> le mostrará los cambios a los archivos en algún directorio.
+
+</section>
+
+<br>
+
+# ¿Qué hay en un diff?
+
+<section style="text-align: justify;">
+
+Un <font color = "black">diff</font> es una visualización formateada de las diferencias entre dos conjuntos de archivos. Git muestra diferencias como esta:
+
+```{r Imagen lo que se ve en diff, fig.align = 'center', out.width = "420", eval = TRUE, echo = FALSE, message = FALSE}
+
+knitr::include_graphics('Imagenes/example_diff.png')
+```
+
+Esto muestra:
+
+- El comando utilizado para producir la salida (en este caso, <font color = "black">diff --git</font>). <font color = "black">a</font> y <font color = "black">b</font> son marcadores de posición que significan "la primera versión" y "la segunda versión".
+
+- Una línea de índice (<font color = "black">index</font>) que muestra claves en la base de datos interna de cambios de Git. Se explorará esto más adelante.
+
+- <font color = "black">--- a/report.txt</font> y <font color = "black">+++ b/report.txt</font> , donde las líneas que se eliminan tienen el prefijo <font color = "black">-</font> y las líneas que se agregan tienen el prefijo <font color = "black">+</font>.
+
+- Una línea que comienza con <font color = "black">@@</font>, que indica dónde se realizan los cambios. Los pares de números son <font color = "black">start line</font> y <font color = "black">number of lines</font> (en esa sección del archivo donde ocurrieron los cambios). Esta salida de diferencia indica cambios que comienzan en la línea 1, con 5 líneas donde hubo una vez 4.
+
+- Una lista línea por línea de los cambios donde <font color = "black">-</font> muestran eliminaciones y <font color = "black">+</font> adiciones (también Git muestra eliminaciones en rojo y adiciones en verde). Las líneas que no han cambiado a veces se muestran antes y después de las que sí lo han hecho para dar contexto; cuando aparecen, no tienen ninguno <font color = "black">+</font> ni <font color = "black">-</font> frente a ellos.
+
+Las herramientas de programación de escritorio como <font color = "black">RStudio</font> pueden convertir diferencias como esta en una visualización de cambios más legible de lado a lado.
+
+</section>
+
+<br>
+
+# ¿Cuál es el primer paso para guardar los cambios?
+
+<section style="text-align: justify;">
+
+Se confirma los cambios en un repositorio de Git en dos pasos:
+
+1. Agregue uno o más archivos al área de preparación (staging area).
+2. Confirme (commit) todo en el área de preparación.
+
+Para agregar un archivo al área de preparación, use <font color = "black">git add filename</font>.
+
+</section>
+
+<br>
+
+# ¿Cómo puedo saber qué se va a confirmar (committed)?
+
+<section style="text-align: justify;">
+
+Para comparar el estado de sus archivos con los del área de preparación (staging area), puede usar <font color = "black">git diff -r HEAD</font>. La instrucción <font color = "black">-r</font> significa "comparar con una revisión particular", y <font color = "black">HEAD</font> es un acceso directo que significa "la confirmación (committ) más reciente".
+
+Puede restringir los resultados a un solo archivo o directorio utilizando <font color = "black">git diff -r HEAD path/to/file</font>, donde la ruta al archivo es relativa a donde se encuentra (por ejemplo, la ruta desde el directorio raíz del repositorio).
+
+</section>
+
+<br>
+
+# ¿Cómo puedo editar un archivo?
+
+<section style="text-align: justify;">
+
+<font color = "black">Unix</font> tiene una asombrosa variedad de editores de texto. Uno muy simple es el llamado <font color = "black">Nano</font>. Si escribe <font color = "black">nano filename</font>, se abrirá <font color = "black">filename</font> para editar (o crearlo si aún no existe). A continuación, puede moverse con las teclas de flecha, eliminar caracteres con la tecla de retroceso, etc. También puede realizar algunas otras operaciones con combinaciones de teclas de control:
+
+- Ctrl-K: elimina una línea.
+- Ctrl-U: eliminar una línea.
+- Ctrl-O: guarda el archivo ('O' significa 'salida').
+- Ctrl-X: salir del editor.
+
+</section>
+
+<br>
+
+# ¿Cómo confirmo (commit) los cambios?
+
+<section style="text-align: justify;">
+
+Para guardar los cambios en el área de preparación (<font color = "black">staging area</font>), se utiliza el comando <font color = "black">git commit</font>. Siempre guarda todo lo que está en el área de preparación como una unidad: cuando desee deshacer los cambios en un proyecto, deshacerá toda una confirmación o ninguna.
+
+Cuando confirma (<font color = "black">commit</font>) los cambios, Git requiere que ingrese un <font color = "black">mensaje de registro</font>. Esto tiene el mismo propósito que un comentario en un programa: le dice a la siguiente persona que examine el repositorio por qué realizó un cambio.
+
+Por defecto, Git lanza un editor de texto para que pueda escribir este mensaje. Para simplificar las cosas, puede usar <font color = "black">-m "algun mensaje entre comillas"</font> en la línea de comando para ingresar un mensaje de una sola línea como este: git commit -m "Program appears to have become self-aware."
+
+Si accidentalmente escribe mal un mensaje de confirmación, puede cambiarlo usando la instrucción <font color = "black">--amend</font>: git commit --amend - m "new message"
+
+</section>
+
+<br>
+
+# ¿Cómo puedo ver el historial de un repositorio?
+
+<section style="text-align: justify;">
+
+El comando <font color = "black">git log</font> se usa para ver el registro del historial del proyecto. Las entradas de registro se muestran más recientes primero, y se ven así:
+
+```{r Imagen lo que se ve en el historial, fig.align = 'center', out.width = "420", eval = TRUE, echo = FALSE, message = FALSE}
+
+knitr::include_graphics('Imagenes/git_log.png')
+```
+
+La línea <font color = "black">commit</font> muestra una ID única para la confirmación llamada <font color = "black">hash</font>. Las otras líneas le dicen quién realizó el cambio, cuándo y qué mensaje de registro escribieron para el cambio.
+</section>
+
+<br>
+
+# ¿Cómo puedo ver el historial de un archivo específico?
+
+<section style="text-align: justify;">
+
+El registro completo de un proyecto puede ser abrumador, por lo que a menudo es útil inspeccionar solo los cambios en archivos o directorios particulares. Puede hacerlo utilizando <font color = "black">git log path</font>, donde <font color = "black">path</font> es la ruta a un archivo o directorio específico. El registro de un archivo muestra los cambios realizados en ese archivo; el registro de un directorio muestra cuándo se agregaron o eliminaron archivos en ese directorio, en lugar de cuándo se cambió el contenido de los archivos del directorio.
+
+</section>
+
+<br>
+
+# ¿Cómo escribo un mejor mensaje de registro?
+
+<section style="text-align: justify;">
+
+Escribir un mensaje de registro de una línea con <font color = "black">git commit -m "message"</font> es lo suficientemente bueno para cambios muy pequeños, pero sus colaboradores (incluido su futuro yo) apreciarán más información. Si ejecuta <font color = "black">git commit</font> sin <font color = "black">-m "message"</font>, Git lanza un editor de texto con una plantilla como esta:
+
+```{r Imagen de lo que se ve  con git commit, fig.align = 'center', out.width = "420", eval = TRUE, echo = FALSE, message = FALSE}
+
+knitr::include_graphics('Imagenes/log_message.png')
+```
+
+Las líneas que comienzan con <font color = "black">#</font> son comentarios y no se guardarán. (Están allí para recordarle lo que debe hacer y los archivos que ha cambiado). Su mensaje debe ir en la parte superior y puede ser tan largo y detallado como desee.
+
+</section>
+
+<br>
+
+# ¿Cómo almacena git la información?
+
+<section style="text-align: justify;">
+
 </section>
