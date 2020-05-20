@@ -365,4 +365,91 @@ Con este comando, usted especifica el setting que desea cambiar y el value que d
 
 <section style="text-align: justify;">
 
+No tiene que poner todos los cambios que ha realizado recientemente en el área de preparación de una vez. Por ejemplo, suponga que está agregando una función <font color = "black">analysis.R</font> y detecta un error <font color = "black">cleanup.R</font>. Después de arreglarlo, desea guardar su trabajo. Dado que los cambios <font color = "black">cleanup.Rno</font> están directamente relacionados con el trabajo que está realizando <font color = "black">analysis.R</font>, debe guardar su trabajo en dos confirmaciones separadas.
+
+La sintaxis para organizar un solo archivo es <font color = "black">git add path/to/file</font>. Luego puede confrimar (commit) los cambios con <font color = "black">git commit -m ""</font>.
+
+Si comete un error y accidentalmente prepara un archivo que no debería tener, puede eliminar las adiciones <font color = "black">git reset HEAD</font> y volver a intentarlo.
+
 </section>
+
+<br>
+
+# ¿Cómo vuelvo a organizar los archivos?
+
+<section style="text-align: justify;">
+
+Las personas a menudo guardan su trabajo cada pocos minutos cuando usan un editor de texto de escritorio. Del mismo modo, es común usarlo git add periódicamente para guardar los cambios más recientes en un archivo en el área de preparación. Esto es particularmente útil cuando los cambios son experimentales y es posible que desee deshacerlos sin saturar el historial del repositorio.
+
+</section>
+
+<br>
+
+# ¿Cómo puedo deshacer los cambios en archivos sin clasificar?
+
+<section style="text-align: justify;">
+
+Supongamos que ha realizado cambios en un archivo, luego decida que desea deshacerlos . Su editor de texto puede hacer esto, pero una forma más confiable es dejar que Git haga el trabajo. El comando:
+
+```{r deshacer cambios en git, fig.align = 'center', out.width = "420", eval = TRUE, echo = FALSE, message = FALSE}
+
+knitr::include_graphics('Imagenes/deshacer_cambios.png')
+```
+
+descartará los cambios que aún no se han realizado. (El guión doble -- debe estar allí para separar el comando <font color = "black">git checkout</font> de los nombres del archivo o archivos que desea recuperar).
+
+<i>Use este comando con cuidado</i>: una vez que descarta los cambios de esta manera, desaparecen para siempre.
+
+</section>
+
+<br>
+
+# ¿Cómo puedo deshacer los cambios en los archivos almacenados?
+
+<section style="text-align: justify;">
+
+Al combinar <font color = "black">git reset</font> con <font color = "black">git checkout</font>, puede deshacer los cambios en un archivo en el que organizó los cambios. La sintaxis es la siguiente:
+
+```{r deshacer cambios alacenados en git, fig.align = 'center', out.width = "420", eval = TRUE, echo = FALSE, message = FALSE}
+
+knitr::include_graphics('Imagenes/deshacer_cambios_almacenados.png')
+```
+
+</section>
+
+<br>
+
+# ¿Cómo restauro una versión anterior de un archivo?
+
+<section style="text-align: justify;">
+
+Anteriormente vio cómo usar <font color = "black">git checkout</font> para deshacer los cambios que realizó desde la última confirmación. Este comando también se puede usar para retroceder aún más en el historial de un archivo y restaurar versiones de ese archivo desde una confirmación. De esta manera, puede pensar en comprometerse como guardar su trabajo y verificar que cargue esa versión guardada.
+
+La sintaxis para restaurar una versión anterior toma dos argumentos: el hash que identifica la versión que desea restaurar y el nombre del archivo.
+
+Por ejemplo, si <font color = "black">git log</font> muestra esto:
+
+```{r restaurar versión anterior en git, fig.align = 'center', out.width = "420", eval = TRUE, echo = FALSE, message = FALSE}
+
+knitr::include_graphics('Imagenes/restaurar_version.png')
+```
+
+luego <font color = "black">git checkout 2242bd report.txt</font> reemplazaría la versión actual de <font color = "black">report.txt</font> con la versión que se confirmó el 16 de octubre. Tenga en cuenta que esta es la misma sintaxis que utilizó para deshacer los cambios no organizados, excepto que <font color = "black">--</font> ha sido reemplazada por un hash.
+
+Restaurar un archivo no borra nada del historial del repositorio. En cambio, el acto de restaurar el archivo se guarda como otra confirmación, porque más tarde querrá deshacer su deshacer.
+
+Una cosa más: hay otra característica de <font color = "black">git log</font> que será útil aquí. Pasar <font color = "black">-</font> seguido de un número restringe la salida a esa cantidad de confirmaciones. Por ejemplo, <font color = "black">git log -3 report.txt</font> muestra las últimas tres confirmaciones involucradas en <font color = "black">report.txt</font>.
+
+</section>
+
+<br>
+
+# ¿Cómo puedo deshacer todos los cambios que he realizado?
+
+<section style="text-align: justify;">
+
+Hasta ahora, ha visto cómo deshacer los cambios en un solo archivo a la vez utilizando <font color = "black">git reset HEAD path/to/file</font>. Algunas veces querrá deshacer los cambios en muchos archivos.
+
+Una forma de hacerlo es dar <font color = "black">git reset</font> a un directorio. Por ejemplo, <font color = "black">git reset HEAD data</font> eliminará los archivos del directorio <font color = "black">data</font>.
+
+Del mismo modo <font color = "black">git checkout -- data</font>, restaurará los archivos en el directorio <font color = "black">data</font> a su estado anterior. Con git <font color = "black">checkout -- .</font> revertirá todos los archivos en el directorio actual.
