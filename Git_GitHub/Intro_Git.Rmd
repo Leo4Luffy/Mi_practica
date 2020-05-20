@@ -175,7 +175,14 @@ El comando <font color = "black">git log</font> se usa para ver el registro del 
 knitr::include_graphics('Imagenes/git_log.png')
 ```
 
-La línea <font color = "black">commit</font> muestra una ID única para la confirmación llamada <font color = "black">hash</font>. Las otras líneas le dicen quién realizó el cambio, cuándo y qué mensaje de registro escribieron para el cambio.
+La línea <font color = "black">commit</font> muestra una ID única para la confirmación (commit) llamada <font color = "black">hash</font>. Las otras líneas le dicen quién realizó el cambio, cuándo y qué mensaje de registro escribieron para el cambio.
+
+Cada confirmación (commit) de un repositorio tiene un identificador único llamado hash (ya que se genera ejecutando los cambios a través de un generador de números pseudoaleatorios llamado función hash ). Este hash normalmente se escribe como una cadena hexadecimal de 40 caracteres como 7c35a3ce607a14953f070f0f83b5d74c2296ef93, pero la mayoría de las veces, solo tiene que darle a Git los primeros 6 u 8 caracteres para identificar la confirmación que quiere observar.
+
+Los hashes son los que permiten a Git compartir datos de manera eficiente entre repositorios. <font color = "black">Si dos archivos son iguales, se garantiza que sus hashes sean iguales</font>. Del mismo modo, si dos confirmaciones contienen los mismos archivos y tienen los mismos antepasados, sus hashes también serán los mismos. Por lo tanto, Git puede decir qué información debe guardarse comparando hashes en lugar de comparar archivos completos.
+
+Recordatorio: presione la barra espaciadora para avanzar por la salida del <font color = "black">git log</font> y <font color = "black">q</font> salir de la pantalla paginada.
+
 </section>
 
 <br>
@@ -208,6 +215,153 @@ Las líneas que comienzan con <font color = "black">#</font> son comentarios y n
 <br>
 
 # ¿Cómo almacena git la información?
+
+<section style="text-align: justify;">
+
+Puede preguntarse qué información almacena cada confirmación (commit) que realiza. Git usa una estructura de tres niveles para esto:
+
+1. Una confirmación (commit) contiene metadatos como el autor, el mensaje de confirmación (commit) y la hora en que se realizó la confirmación (commit). En el diagrama a continuación, la confirmación (commit) más reciente se encuentra en la parte inferior (<font color = "black">feed0098</font>), debajo de sus confirmaciones (commits) principales.
+
+2. Cada confirmación (commit) también tiene un árbol <font color = "black">(Tree)</font>, que rastrea los nombres y ubicaciones en el repositorio cuando sucedió esa confirmación (commit). En la confirmación (commit) más antigua (superior), había dos archivos rastreados por el repositorio.
+
+3. Para cada uno de los archivos enumerados en el árbol, hay un <font color = "black">blob</font>. Contiene una instantánea comprimida del contenido del archivo cuando se realizó la confirmación. En el medio de la confirmación (commit), <font color = "black">report.md</font> y <font color = "black">draft.md</font> se cambiaron, por lo que los blobs se muestran junto a esa confirmación. <font color = "black">data/northern.csv</font> no cambió en esa confirmación, por lo que el árbol se vincula al blob de la confirmación anterior. La reutilización de blobs entre confirmaciones (commits) ayuda a acelerar las operaciones comunes y minimiza el espacio de almacenamiento.
+
+```{r Imagen de como almacena git la info, fig.align = 'center', out.width = "420", eval = TRUE, echo = FALSE, message = FALSE}
+
+knitr::include_graphics('Imagenes/info_en_git.png')
+```
+
+</section>
+
+<br>
+
+# ¿Cómo puedo ver una confirmación específica?
+
+<section style="text-align: justify;">
+
+Para ver los detalles de una confirmación específica, utilice el comando <font color = "black">git show</font> con los primeros caracteres del hash de la confirmación. Por ejemplo, el comando <font color = "black">git show 0da2f7</font> produce esto:
+
+```{r Imagen de lo que produce git show, fig.align = 'center', out.width = "420", eval = TRUE, echo = FALSE, message = FALSE}
+
+knitr::include_graphics('Imagenes/git_show.png')
+```
+
+La primera parte es la misma que la entrada de registro que muestra <font color = "black">git log</font>. La segunda parte muestra los cambios, como con <font color = "black">git diff</font>, las líneas con las que se quitó el cambio tienen el prefijo <font color = "black">-</font>, mientras que las líneas que agregó tienen el prefijo <font color = "black">+</font>.
+
+</section>
+
+<br>
+
+# ¿Cómo puedo ver quién cambió qué en un archivo?
+
+<section style="text-align: justify;">
+
+<font color = "black">git log </font> muestra el historial general de un proyecto o archivo, pero Git puede proporcionar aún más información. El comando <font color = "black">git annotate file</font> muestra quién realizó el último cambio en cada línea de un archivo y cuándo. Por ejemplo, las primeras tres líneas de salida se <font color = "black">git annotate report.txt</font> dan esto:
+
+```{r ver quién cambió qué en un archivo, fig.align = 'center', out.width = "420", eval = TRUE, echo = FALSE, message = FALSE}
+
+knitr::include_graphics('Imagenes/git_annotate_file.png')
+```
+
+Cada línea contiene cinco elementos, con elementos de dos a cuatro encerrados entre paréntesis. Al inspeccionar la primera línea, vemos:
+
+1. Los ocho primeros dígitos del hachs, 04307054.
+2. El autor Rep Loop.
+3. El momento de la confirmación, 2017-09-20 13:42:26 +0000.
+4. El número de línea, 1.
+5. El contenido de la línea # Seasonal Dental Surgeries (2017) 2017-18.
+
+</section>
+
+<br>
+
+# ¿Cómo puedo ver lo que cambió entre dos confirmaciones (commits)?
+
+<section style="text-align: justify;">
+
+<font color = "black">git show</font> con una <font color = "black">ID</font> de confirmación (commit) muestra los cambios realizados en una confirmación (commit) particular. Para ver los cambios entre dos confirmaciones (commits), puede usar <font color = "black">git diff ID1..ID2</font> dónde <font color = "black">ID1</font> y <font color = "black">ID2</font> identifican las dos confirmaciones (commits) que le interesan, y el conector es un par de puntos <font color = "black">..</font> . Por ejemplo, <font color = "black">git diff abc123..def456</font> muestra las diferencias entre las confirmaciones (commits) <font color = "black">abc123</font> y <font color = "black">def456</font>, mientras que git diff HEAD~1 .. HEAD~3 muestra las diferencias entre el estado del repositorio una confirmación en el pasado y su estado tres confirmaciones después en el pasado.
+
+</section>
+
+<br>
+
+# ¿Cómo agrego nuevos archivos?
+
+<section style="text-align: justify;">
+
+Git no rastrea archivos por defecto. En cambio, espera hasta que haya utilizado <font color = "black">git add</font> al menos una vez antes de comenzar a prestar atención a un archivo. Los archivos no rastreados (o no confirmados con commit) no tendrán un blob y no aparecerán en un árbol (Tree).
+
+Los archivos no rastreados no se beneficiarán del control de versiones, por lo que para asegurarse de que no se pierda nada, <font color = "black">git status</font> siempre le informará sobre los archivos que están en su repositorio pero que (todavía) no se rastrean.
+
+</section>
+
+<br>
+
+# ¿Cómo le digo a Git que ignore ciertos archivos?
+
+<section style="text-align: justify;">
+
+El análisis de datos a menudo produce archivos temporales o intermedios que no desea guardar. Puede decirle a Git que deje de prestar atención a los archivos que no le interesan creando un archivo en el directorio raíz de su repositorio llamado <font color = "black">.gitignore</font> y almacenando una lista de patrones comodín que especifican los archivos a los que no desea que Git preste atención. Por ejemplo, si <font color = "black">.gitignore</font> contiene:
+
+```{r ignorar un archivo, fig.align = 'center', out.width = "420", eval = TRUE, echo = FALSE, message = FALSE}
+
+knitr::include_graphics('Imagenes/gitignore.png')
+```
+
+entonces Git ignorará cualquier archivo o directorio llamado build (y, si es un directorio, cualquier cosa en él), así como cualquier archivo cuyo nombre termine en .mpl.
+
+</section>
+
+<br>
+
+# ¿Cómo puedo eliminar archivos no deseados?
+
+<section style="text-align: justify;">
+
+Git puede ayudarte a limpiar los archivos que le has dicho que no quieres. El comando <font color = "black">git clean -n</font> le mostrará una lista de archivos que están en el repositorio, pero cuyo historial Git no está rastreando actualmente. Un comando similar <font color = "black">git clean -f</font> eliminará esos archivos.
+
+Use este comando con cuidado: <font color = "black">git clean</font> solo funciona en archivos sin seguimiento, por lo que, por definición, su historial no se ha guardado. Si los eliminas <font color = "black">con git clean -f</font>, se han ido para siempre.
+
+</section>
+
+<br>
+
+# ¿Cómo puedo ver cómo está configurado Git?
+
+<section style="text-align: justify;">
+
+Como la mayoría de las piezas complejas de software, Git le permite cambiar su configuración predeterminada. Para ver cuáles son las configuraciones, puede usar el comando <font color = "black">git config --list</font> con una de las tres opciones adicionales:
+
+- --system: configuraciones para cada usuario en esta computadora.
+- --global: configuraciones para cada uno de sus proyectos.
+- --local: ajustes para un proyecto específico.
+
+Cada nivel prevalece sobre el nivel superior, por lo que la configuración local (por proyecto) tiene prioridad sobre la configuración global (por usuario), que a su vez tiene prioridad sobre la configuración del sistema (para todos los usuarios de la computadora).
+
+</section>
+
+<br>
+
+# ¿Cómo puedo cambiar mi configuración de Git?
+
+<section style="text-align: justify;">
+
+La mayoría de las configuraciones de Git deben dejarse como están. Sin embargo, hay dos que debe configurar en cada computadora que use: su nombre y su dirección de correo electrónico. Estos se registran en el registro cada vez que comete un cambio, y a menudo se utilizan para identificar a los autores del contenido de un proyecto para dar crédito (o asignar culpas, según las circunstancias).
+
+Para cambiar un valor de configuración para todos sus proyectos en una computadora en particular, ejecute el comando:
+
+```{r configuración en git, fig.align = 'center', out.width = "420", eval = TRUE, echo = FALSE, message = FALSE}
+
+knitr::include_graphics('Imagenes/configuracion_git.png')
+```
+
+Con este comando, usted especifica el setting que desea cambiar y el value que desea establecer. Las configuraciones que identifican su nombre y dirección de correo electrónico son user.name y user.email, respectivamente.
+
+</section>
+
+<br>
+
+# ¿Cómo puedo confirmar los cambios de forma selectiva?
 
 <section style="text-align: justify;">
 
