@@ -453,3 +453,264 @@ Hasta ahora, ha visto cómo deshacer los cambios en un solo archivo a la vez uti
 Una forma de hacerlo es dar <font color = "black">git reset</font> a un directorio. Por ejemplo, <font color = "black">git reset HEAD data</font> eliminará los archivos del directorio <font color = "black">data</font>.
 
 Del mismo modo <font color = "black">git checkout -- data</font>, restaurará los archivos en el directorio <font color = "black">data</font> a su estado anterior. Con git <font color = "black">checkout -- .</font> revertirá todos los archivos en el directorio actual.
+
+</section>
+
+<br>
+
+# ¿Qué es una rama (branch)?
+
+<section style="text-align: justify;">
+
+Si no usa el control de versiones, un flujo de trabajo común es crear diferentes subdirectorios para mantener diferentes versiones de su proyecto en diferentes estados, por ejemplo, <font color = "black">development</font> y <font color = "black">final</font>. Por supuesto, siempre terminas con <font color = "black">final-updated</font> y <font color = "black">final-updated-revised</font> también. El problema con esto es que resulta difícil resolverlo si tiene la versión correcta de cada archivo en el subdirectorio correcto y corre el riesgo de perder el trabajo.
+
+Una de las razones por las que Git es popular es su soporte para crear ramas (<font color = "black">branches</font>), lo que le permite tener múltiples versiones de su trabajo y le permite rastrear cada versión de manera sistemática.
+
+Cada rama (branch) es como un universo paralelo: los cambios que realiza en una rama (branch) no afectan a otras ramas (branches), hasta que las vuelva a fusionar.
+
+</section>
+
+<br>
+
+# ¿Cómo puedo ver qué ramas (branches) tiene mi repositorio?
+
+<section style="text-align: justify;">
+
+Por defecto, cada repositorio de Git tiene una rama (branch) llamada <font color = "black">master</font>. Para enumerar todas las ramas (branches) en un repositorio, puede ejecutar el comando <font color = "black">git branch</font>. La rama (branch) en la que se encuentra actualmente se mostrará <font color = "black">*</font> junto a su nombre.
+
+</section>
+
+<br>
+
+# ¿Cómo puedo ver las diferencias entre ramas (branches)?
+
+<section style="text-align: justify;">
+
+Las ramas (branches) y las revisiones están estrechamente conectadas, y los comandos que funcionan en este último generalmente funcionan en el primero. Por ejemplo, tal como <font color = "black">git diff revision-1..revision-2</font> muestra la diferencia entre dos versiones de un repositorio, <font color = "black">git diff branch-1..branch-2</font> muestra la diferencia entre dos ramas.
+
+</section>
+
+<br>
+
+# ¿Cómo puedo cambiar de una rama (branch) a otra?
+
+<section style="text-align: justify;">
+
+Anteriormente usó <font color = "black">git checkout</font> con un <font color = "black">hash</font> de confirmación para cambiar el estado del repositorio a ese hash. También puede usar <font color = "black">git checkout</font> con el nombre de una rama (branch) para cambiar a esa rama (branch).
+
+Con <font color = "black">git rm</font> se puede eliminar el archivo que esta dentro una rama (branch).
+
+</section>
+
+<br>
+
+# ¿Cómo puedo crear una rama (branch)?
+
+<section style="text-align: justify;">
+
+Podría esperar que al usar <font color = "black">git branch</font> puede crear una rama, y de hecho esto es posible. Sin embargo, lo más común que desea hacer es crear una rama y luego cambiar a esa rama.
+
+En el ejercicio anterior, uso <font color = "black">git checkout branch-name</font> para cambiar a una rama (branch). Para crear una rama (branch) y luego cambiar a ella en un solo paso, puede agrega una <font color = "black">-b</font>, llamando <font color = "black">git checkout -b branch-name</font>,
+
+El contenido de la nueva rama (branch) es inicialmente idéntico al contenido del original. Una vez que comienza a hacer cambios, solo afectan a la nueva rama (branch).
+
+</section>
+
+<br>
+
+# ¿Cómo puedo fusionar (merge) dos ramas (branches)?
+
+<section style="text-align: justify;">
+
+La ramificación le permite crear universos paralelos; fusionar (merging) es cómo los vuelves a unir. Cuando fusionas una rama (llámalo origen) en otra (llámalo destino), Git incorpora los cambios realizados en la rama de origen en la rama de destino. Si esos cambios no se superponen, el resultado es una nueva confirmación (commit) en la rama de destino que incluye todo, desde la bifurcación de origen.
+
+Para fusionar dos ramas, ejecuta <font color = "black">git merge source destination</font> (sin .. entre los dos nombres de rama). Git abre automáticamente un editor para que pueda escribir un mensaje de registro para la fusión; puede mantener su mensaje predeterminado o completar algo más informativo.
+
+</section>
+
+<br>
+
+# ¿Qué son los conflictos?
+
+<section style="text-align: justify;">
+
+A veces, los cambios en dos ramas (branches) entrarán en conflicto entre sí: por ejemplo, las correcciones de errores pueden tocar las mismas líneas de código, o los análisis en dos ramas diferentes pueden agregar registros nuevos (y diferentes) a un archivo de datos de resumen. En este caso, Git confía en ti para conciliar los cambios conflictivos.
+
+</section>
+
+<br>
+
+# ¿Cómo puedo fusionar (merge) dos ramas con conflictos?
+
+<section style="text-align: justify;">
+
+Cuando hay un conflicto durante una fusión, Git le dice que hay un problema, y ejecutar <font color = "black">git status</font> después de la fusión le recuerda qué archivos tienen conflictos que debe resolver imprimiendo <font color = "black">both modified:</font> junto a los nombres de los archivos.
+
+Dentro del archivo, Git deja marcadores que se ven así para decirle dónde ocurrieron los conflictos:
+
+```{r fusionar dos ramas con conflictos, fig.align = 'center', out.width = "420", eval = TRUE, echo = FALSE, message = FALSE}
+
+knitr::include_graphics('Imagenes/conflictos.png')
+```
+
+Para resolver el conflicto, edite el archivo para eliminar los marcadores y realice cualquier otro cambio necesario para conciliar los cambios, luego confirme esos cambios.
+
+</section>
+
+<br>
+
+# ¿Cómo puedo crear un nuevo repositorio?
+
+<section style="text-align: justify;">
+
+Hasta ahora, ha estado trabajando con repositorios preexistentes. Si desea crear un repositorio para un nuevo proyecto en el directorio de trabajo actual, simplemente puede decir <font color = "black">git init project-name</font>, donde "project-name" es el nombre que desea que tenga el directorio raíz del nuevo repositorio.
+
+Una cosa que no debes hacer es crear un repositorio Git dentro de otro. Si bien Git permite esto, la actualización de repositorios anidados se vuelve muy complicada muy rápidamente, ya que debe decirle a Git en cuál de los dos directorios .git se almacenará la actualización. Los proyectos muy grandes ocasionalmente necesitan hacer esto, pero la mayoría de los programadores y analistas de datos intentan evitar esta situación.
+
+</section>
+
+<br>
+
+# ¿Cómo puedo convertir un proyecto existente en un repositorio Git?
+
+<section style="text-align: justify;">
+
+Los usuarios experimentados de Git comienzan instintivamente nuevos proyectos creando repositorios. Sin embargo, si eres nuevo en Git o trabajas con personas que lo son, a menudo querrás convertir proyectos existentes en repositorios. Hacerlo es simple, solo ejecuta:
+
+<section style="text-align: left;">
+<p>git init</p>
+</section>
+
+en el directorio raíz del proyecto, o:
+
+<section style="text-align: left;">
+<p>git init /path/to/project</p>
+</section>
+
+desde cualquier otro lugar en su computadora.
+
+</section>
+
+<br>
+
+# ¿Cómo puedo crear una copia de un repositorio existente?
+
+<section style="text-align: justify;">
+
+A veces, se unirá a un proyecto que ya se está ejecutando, heredará un proyecto de otra persona o continuará trabajando en uno de sus propios proyectos en una nueva máquina. En cada caso, clonarás (<font color = "black">clone</font>) un repositorio existente en lugar de crear uno nuevo. La clonación de un repositorio hace exactamente lo que el nombre sugiere: crea una copia de un repositorio existente (incluido todo su historial) en un nuevo directorio.
+
+Para clonar un repositorio, use el comando <font color = "black">git clone URL</font>, donde <font color = "black">URL</font> identifica el repositorio que desea clonar. Esto normalmente será algo así como:
+
+<section style="text-align: left;">
+<p>https://github.com/datacamp/project.git</p>
+</section>
+
+Para clonar repositorios en el sistema de archivos local, puede usar una ruta a ese directorio, así:
+
+<section style="text-align: left;">
+<p>git clone /existing/project</p>
+</section>
+
+Cuando clona un repositorio, Git usa el nombre del repositorio existente como el nombre del directorio raíz del clon. Así, en ambos casos anteriores Git creará un nuevo directorio llamado projectdentro de su directorio de inicio. Si desea llamar al clon de otra manera, agregue el nombre del directorio que desea al comando:
+
+<section style="text-align: left;">
+<p>git clone /existing/project newprojectname</p>
+</section>
+
+</section>
+
+<br>
+
+# ¿Cómo puedo averiguar dónde se originó un repositorio clonado?
+
+<section style="text-align: justify;">
+
+Cuando clonas un repositorio, Git recuerda dónde estaba el repositorio original. Lo hace almacenando un <font color = "black">control remoto</font> (remote) en la configuración del nuevo repositorio. Un control remoto es como un marcador de navegador con un nombre y una URL.
+
+Si utiliza un servicio de alojamiento de repositorio git en línea como GitHub o Bitbucket, una tarea común sería clonar un repositorio de ese sitio para que funcione localmente en su computadora. Entonces la copia en el sitio web es el control remoto.
+
+Si está en un repositorio, puede enumerar los nombres de sus controles remotos utilizando <font color = "black">git remote</font>.
+
+Si desea más información, puede usar <font color = "black">git remote -v</font>, que muestra las URL del control remoto. Tenga en cuenta que "URL" es plural: es posible que un control remoto tenga varias URL asociadas con él para diferentes propósitos, aunque en la práctica cada control remoto casi siempre está emparejado con una sola URL.
+
+</section>
+
+<br>
+
+# ¿Cómo puedo definir los controles remotos?
+
+<section style="text-align: justify;">
+
+Cuando clonas un repositorio, Git crea automáticamente un control remoto llamado origin que apunta al repositorio original. Puede agregar más controles remotos usando:
+
+<section style="text-align: left;">
+<p>git remote add remote-name URL</p>
+</section>
+
+y eliminar los existentes usando:
+
+<section style="text-align: left;">
+<p>git remote rm remote-name</p>
+</section>
+
+Puede conectar dos repositorios Git de esta manera, pero en la práctica, casi siempre conectará repositorios que compartan una ascendencia común.
+
+</section>
+
+<br>
+
+# ¿Cómo puedo obtener cambios desde un repositorio remoto?
+
+<section style="text-align: justify;">
+
+Git realiza un seguimiento de los repositorios remotos para que pueda tirar (<font color = "black">pull</font>) de los cambios de los repositorios y empuje (<font color = "black">push</font>) cambios en ellos.
+
+Recuerde que el repositorio remoto a menudo es un repositorio en un servicio de alojamiento en línea como GitHub. Un flujo de trabajo típico es extraer el trabajo de sus colaboradores desde el repositorio remoto para tener la última versión de todo, hacer un trabajo usted mismo, y luego empujar (<font color = "black">push</font>) su trabajo al control remoto para que sus colaboradores tengan acceso a él.
+
+Obtener cambios es sencillo: el comando <font color = "black">git pull remote branch</font> obtiene todo la rama (branch) del repositorio remoto identificado por <font color = "black">remote</font> y lo fusiona en la rama (branch) actual de su repositorio local. Por ejemplo, si está en la rama (branch) <font color = "black">quarterly-report</font> de su repositorio local, el comando:
+
+<section style="text-align: left;">
+<p>git pull thunk latest-analysis</p>
+</section>
+
+obtendría cambios de la rama latest-analysis en el repositorio asociado con el remoto llamado thunk y los fusionaría en su rama (branch) quarterly-report.
+
+</section>
+
+<br>
+
+# ¿Qué sucede si trato de tirar (pull) cuando tengo cambios sin guardar?
+
+<section style="text-align: justify;">
+
+Del mismo modo que Git le impide cambiar de rama (branch) cuando tiene trabajo no guardado, también le impide realizar cambios desde un repositorio remoto cuando hacerlo puede sobrescribir las cosas que ha hecho localmente. La solución es simple: puede confirmar sus cambios locales o revertirlos, y luego intentar volver a realizarlos.
+
+</section>
+
+<br>
+
+# ¿Cómo puedo enviar mis cambios a un repositorio remoto?
+
+<section style="text-align: justify;">
+
+El complemento de <font color = "black">git pull</font> es <font color = "black">git push</font>, que empuja los cambios que ha realizado localmente en un repositorio remoto. La forma más común de usarlo es:
+
+<section style="text-align: left;">
+<p>git push remote-name branch-name</p>
+</section>
+
+que empuja el contenido de su rama <font color = "black">branch-name</font> a una rama con el mismo nombre en el repositorio remoto asociado con <font color = "black">remote-name</font>. Es posible usar diferentes nombres de rama en su extremo y en el extremo del control remoto, pero hacerlo rápidamente se vuelve confuso: casi siempre es mejor usar los mismos nombres para ramas en los repositorios.
+
+</section>
+
+<br>
+
+# ¿Qué sucede si mi impulso (push) entra en conflicto con el trabajo de otra persona?
+
+<section style="text-align: justify;">
+
+Sobrescribir su propio trabajo por accidente es malo; sobrescribir el de otra persona es peor.
+
+Para evitar que esto suceda, Git no le permite enviar cambios a un repositorio remoto a menos que haya fusionado el contenido del repositorio remoto en su propio trabajo.
+
+</section>

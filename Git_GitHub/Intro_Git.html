@@ -11292,7 +11292,7 @@ div.tocify {
 
 <h1 class="title toc-ignore">Introducción a Git - curso en datacamp</h1>
 <h4 class="author">Jorge Leonardo López Martínez</h4>
-<h4 class="date">20 mayo, 2020</h4>
+<h4 class="date">21 mayo, 2020</h4>
 
 </div>
 
@@ -11570,6 +11570,196 @@ div.tocify {
 <p>Hasta ahora, ha visto cómo deshacer los cambios en un solo archivo a la vez utilizando <font color="black">git reset HEAD path/to/file</font>. Algunas veces querrá deshacer los cambios en muchos archivos.</p>
 <p>Una forma de hacerlo es dar <font color="black">git reset</font> a un directorio. Por ejemplo, <font color="black">git reset HEAD data</font> eliminará los archivos del directorio <font color="black">data</font>.</p>
 <p>Del mismo modo <font color="black">git checkout – data</font>, restaurará los archivos en el directorio <font color="black">data</font> a su estado anterior. Con git <font color="black">checkout – .</font> revertirá todos los archivos en el directorio actual.</p>
+</section>
+<p><br></p>
+</div>
+<div id="qué-es-una-rama-branch" class="section level1">
+<h1><span class="header-section-number">28</span> ¿Qué es una rama (branch)?</h1>
+<section style="text-align: justify;">
+<p>Si no usa el control de versiones, un flujo de trabajo común es crear diferentes subdirectorios para mantener diferentes versiones de su proyecto en diferentes estados, por ejemplo, <font color="black">development</font> y <font color="black">final</font>. Por supuesto, siempre terminas con <font color="black">final-updated</font> y <font color="black">final-updated-revised</font> también. El problema con esto es que resulta difícil resolverlo si tiene la versión correcta de cada archivo en el subdirectorio correcto y corre el riesgo de perder el trabajo.</p>
+<p>Una de las razones por las que Git es popular es su soporte para crear ramas (<font color="black">branches</font>), lo que le permite tener múltiples versiones de su trabajo y le permite rastrear cada versión de manera sistemática.</p>
+<p>Cada rama (branch) es como un universo paralelo: los cambios que realiza en una rama (branch) no afectan a otras ramas (branches), hasta que las vuelva a fusionar.</p>
+</section>
+<p><br></p>
+</div>
+<div id="cómo-puedo-ver-qué-ramas-branches-tiene-mi-repositorio" class="section level1">
+<h1><span class="header-section-number">29</span> ¿Cómo puedo ver qué ramas (branches) tiene mi repositorio?</h1>
+<section style="text-align: justify;">
+<p>Por defecto, cada repositorio de Git tiene una rama (branch) llamada <font color="black">master</font>. Para enumerar todas las ramas (branches) en un repositorio, puede ejecutar el comando <font color="black">git branch</font>. La rama (branch) en la que se encuentra actualmente se mostrará <font color="black">*</font> junto a su nombre.</p>
+</section>
+<p><br></p>
+</div>
+<div id="cómo-puedo-ver-las-diferencias-entre-ramas-branches" class="section level1">
+<h1><span class="header-section-number">30</span> ¿Cómo puedo ver las diferencias entre ramas (branches)?</h1>
+<section style="text-align: justify;">
+<p>Las ramas (branches) y las revisiones están estrechamente conectadas, y los comandos que funcionan en este último generalmente funcionan en el primero. Por ejemplo, tal como <font color="black">git diff revision-1..revision-2</font> muestra la diferencia entre dos versiones de un repositorio, <font color="black">git diff branch-1..branch-2</font> muestra la diferencia entre dos ramas.</p>
+</section>
+<p><br></p>
+</div>
+<div id="cómo-puedo-cambiar-de-una-rama-branch-a-otra" class="section level1">
+<h1><span class="header-section-number">31</span> ¿Cómo puedo cambiar de una rama (branch) a otra?</h1>
+<section style="text-align: justify;">
+<p>Anteriormente usó <font color="black">git checkout</font> con un <font color="black">hash</font> de confirmación para cambiar el estado del repositorio a ese hash. También puede usar <font color="black">git checkout</font> con el nombre de una rama (branch) para cambiar a esa rama (branch).</p>
+<p>Con <font color="black">git rm</font> se puede eliminar el archivo que esta dentro una rama (branch).</p>
+</section>
+<p><br></p>
+</div>
+<div id="cómo-puedo-crear-una-rama-branch" class="section level1">
+<h1><span class="header-section-number">32</span> ¿Cómo puedo crear una rama (branch)?</h1>
+<section style="text-align: justify;">
+<p>Podría esperar que al usar <font color="black">git branch</font> puede crear una rama, y de hecho esto es posible. Sin embargo, lo más común que desea hacer es crear una rama y luego cambiar a esa rama.</p>
+<p>En el ejercicio anterior, uso <font color="black">git checkout branch-name</font> para cambiar a una rama (branch). Para crear una rama (branch) y luego cambiar a ella en un solo paso, puede agrega una <font color="black">-b</font>, llamando <font color="black">git checkout -b branch-name</font>,</p>
+<p>El contenido de la nueva rama (branch) es inicialmente idéntico al contenido del original. Una vez que comienza a hacer cambios, solo afectan a la nueva rama (branch).</p>
+</section>
+<p><br></p>
+</div>
+<div id="cómo-puedo-fusionar-merge-dos-ramas-branches" class="section level1">
+<h1><span class="header-section-number">33</span> ¿Cómo puedo fusionar (merge) dos ramas (branches)?</h1>
+<section style="text-align: justify;">
+<p>La ramificación le permite crear universos paralelos; fusionar (merging) es cómo los vuelves a unir. Cuando fusionas una rama (llámalo origen) en otra (llámalo destino), Git incorpora los cambios realizados en la rama de origen en la rama de destino. Si esos cambios no se superponen, el resultado es una nueva confirmación (commit) en la rama de destino que incluye todo, desde la bifurcación de origen.</p>
+<p>Para fusionar dos ramas, ejecuta <font color="black">git merge source destination</font> (sin .. entre los dos nombres de rama). Git abre automáticamente un editor para que pueda escribir un mensaje de registro para la fusión; puede mantener su mensaje predeterminado o completar algo más informativo.</p>
+</section>
+<p><br></p>
+</div>
+<div id="qué-son-los-conflictos" class="section level1">
+<h1><span class="header-section-number">34</span> ¿Qué son los conflictos?</h1>
+<section style="text-align: justify;">
+<p>A veces, los cambios en dos ramas (branches) entrarán en conflicto entre sí: por ejemplo, las correcciones de errores pueden tocar las mismas líneas de código, o los análisis en dos ramas diferentes pueden agregar registros nuevos (y diferentes) a un archivo de datos de resumen. En este caso, Git confía en ti para conciliar los cambios conflictivos.</p>
+</section>
+<p><br></p>
+</div>
+<div id="cómo-puedo-fusionar-merge-dos-ramas-con-conflictos" class="section level1">
+<h1><span class="header-section-number">35</span> ¿Cómo puedo fusionar (merge) dos ramas con conflictos?</h1>
+<section style="text-align: justify;">
+<p>Cuando hay un conflicto durante una fusión, Git le dice que hay un problema, y ejecutar <font color="black">git status</font> después de la fusión le recuerda qué archivos tienen conflictos que debe resolver imprimiendo <font color="black">both modified:</font> junto a los nombres de los archivos.</p>
+<p>Dentro del archivo, Git deja marcadores que se ven así para decirle dónde ocurrieron los conflictos:</p>
+<p><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAnIAAABoCAIAAAD6nooWAAAAiHpUWHRSYXcgcHJvZmlsZSB0eXBlIGV4aWYAAHjaVY5RCsQwCET/PcUewagZ9ThLaaA36PHXkC6h70OHIXlI530N+kwaC1n3QAJcWFrKt0LwQpmbcJu75uLZ2irJrkllBWQ4235oT/+nKwLDzR0dBw4pu5wqGjXrH00rzzNyS1x4afTdI95y+gFECSwuToj2SwAACgZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+Cjx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IlhNUCBDb3JlIDQuNC4wLUV4aXYyIj4KIDxyZGY6UkRGIHhtbG5zOnJkZj0iaHR0cDovL3d3dy53My5vcmcvMTk5OS8wMi8yMi1yZGYtc3ludGF4LW5zIyI+CiAgPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIKICAgIHhtbG5zOmV4aWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20vZXhpZi8xLjAvIgogICAgeG1sbnM6dGlmZj0iaHR0cDovL25zLmFkb2JlLmNvbS90aWZmLzEuMC8iCiAgIGV4aWY6UGl4ZWxYRGltZW5zaW9uPSI2MjYiCiAgIGV4aWY6UGl4ZWxZRGltZW5zaW9uPSIxMDQiCiAgIHRpZmY6SW1hZ2VXaWR0aD0iNjI2IgogICB0aWZmOkltYWdlSGVpZ2h0PSIxMDQiCiAgIHRpZmY6T3JpZW50YXRpb249IjEiLz4KIDwvcmRmOlJERj4KPC94OnhtcG1ldGE+CiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg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" width="420" style="display: block; margin: auto;" /></p>
+<p>Para resolver el conflicto, edite el archivo para eliminar los marcadores y realice cualquier otro cambio necesario para conciliar los cambios, luego confirme esos cambios.</p>
+</section>
+<p><br></p>
+</div>
+<div id="cómo-puedo-crear-un-nuevo-repositorio" class="section level1">
+<h1><span class="header-section-number">36</span> ¿Cómo puedo crear un nuevo repositorio?</h1>
+<section style="text-align: justify;">
+<p>Hasta ahora, ha estado trabajando con repositorios preexistentes. Si desea crear un repositorio para un nuevo proyecto en el directorio de trabajo actual, simplemente puede decir <font color="black">git init project-name</font>, donde “project-name” es el nombre que desea que tenga el directorio raíz del nuevo repositorio.</p>
+<p>Una cosa que no debes hacer es crear un repositorio Git dentro de otro. Si bien Git permite esto, la actualización de repositorios anidados se vuelve muy complicada muy rápidamente, ya que debe decirle a Git en cuál de los dos directorios .git se almacenará la actualización. Los proyectos muy grandes ocasionalmente necesitan hacer esto, pero la mayoría de los programadores y analistas de datos intentan evitar esta situación.</p>
+</section>
+<p><br></p>
+</div>
+<div id="cómo-puedo-convertir-un-proyecto-existente-en-un-repositorio-git" class="section level1">
+<h1><span class="header-section-number">37</span> ¿Cómo puedo convertir un proyecto existente en un repositorio Git?</h1>
+<section style="text-align: justify;">
+<p>Los usuarios experimentados de Git comienzan instintivamente nuevos proyectos creando repositorios. Sin embargo, si eres nuevo en Git o trabajas con personas que lo son, a menudo querrás convertir proyectos existentes en repositorios. Hacerlo es simple, solo ejecuta:</p>
+<section style="text-align: left;">
+<p>
+git init
+</p>
+</section>
+<p>en el directorio raíz del proyecto, o:</p>
+<section style="text-align: left;">
+<p>
+git init /path/to/project
+</p>
+</section>
+<p>desde cualquier otro lugar en su computadora.</p>
+</section>
+<p><br></p>
+</div>
+<div id="cómo-puedo-crear-una-copia-de-un-repositorio-existente" class="section level1">
+<h1><span class="header-section-number">38</span> ¿Cómo puedo crear una copia de un repositorio existente?</h1>
+<section style="text-align: justify;">
+<p>A veces, se unirá a un proyecto que ya se está ejecutando, heredará un proyecto de otra persona o continuará trabajando en uno de sus propios proyectos en una nueva máquina. En cada caso, clonarás (<font color="black">clone</font>) un repositorio existente en lugar de crear uno nuevo. La clonación de un repositorio hace exactamente lo que el nombre sugiere: crea una copia de un repositorio existente (incluido todo su historial) en un nuevo directorio.</p>
+<p>Para clonar un repositorio, use el comando <font color="black">git clone URL</font>, donde <font color="black">URL</font> identifica el repositorio que desea clonar. Esto normalmente será algo así como:</p>
+<section style="text-align: left;">
+<p>
+<a href="https://github.com/datacamp/project.git" class="uri">https://github.com/datacamp/project.git</a>
+</p>
+</section>
+<p>Para clonar repositorios en el sistema de archivos local, puede usar una ruta a ese directorio, así:</p>
+<section style="text-align: left;">
+<p>
+git clone /existing/project
+</p>
+</section>
+<p>Cuando clona un repositorio, Git usa el nombre del repositorio existente como el nombre del directorio raíz del clon. Así, en ambos casos anteriores Git creará un nuevo directorio llamado projectdentro de su directorio de inicio. Si desea llamar al clon de otra manera, agregue el nombre del directorio que desea al comando:</p>
+<section style="text-align: left;">
+<p>
+git clone /existing/project newprojectname
+</p>
+</section>
+</section>
+<p><br></p>
+</div>
+<div id="cómo-puedo-averiguar-dónde-se-originó-un-repositorio-clonado" class="section level1">
+<h1><span class="header-section-number">39</span> ¿Cómo puedo averiguar dónde se originó un repositorio clonado?</h1>
+<section style="text-align: justify;">
+<p>Cuando clonas un repositorio, Git recuerda dónde estaba el repositorio original. Lo hace almacenando un <font color="black">control remoto</font> (remote) en la configuración del nuevo repositorio. Un control remoto es como un marcador de navegador con un nombre y una URL.</p>
+<p>Si utiliza un servicio de alojamiento de repositorio git en línea como GitHub o Bitbucket, una tarea común sería clonar un repositorio de ese sitio para que funcione localmente en su computadora. Entonces la copia en el sitio web es el control remoto.</p>
+<p>Si está en un repositorio, puede enumerar los nombres de sus controles remotos utilizando <font color="black">git remote</font>.</p>
+<p>Si desea más información, puede usar <font color="black">git remote -v</font>, que muestra las URL del control remoto. Tenga en cuenta que “URL” es plural: es posible que un control remoto tenga varias URL asociadas con él para diferentes propósitos, aunque en la práctica cada control remoto casi siempre está emparejado con una sola URL.</p>
+</section>
+<p><br></p>
+</div>
+<div id="cómo-puedo-definir-los-controles-remotos" class="section level1">
+<h1><span class="header-section-number">40</span> ¿Cómo puedo definir los controles remotos?</h1>
+<section style="text-align: justify;">
+<p>Cuando clonas un repositorio, Git crea automáticamente un control remoto llamado origin que apunta al repositorio original. Puede agregar más controles remotos usando:</p>
+<section style="text-align: left;">
+<p>
+git remote add remote-name URL
+</p>
+</section>
+<p>y eliminar los existentes usando:</p>
+<section style="text-align: left;">
+<p>
+git remote rm remote-name
+</p>
+</section>
+<p>Puede conectar dos repositorios Git de esta manera, pero en la práctica, casi siempre conectará repositorios que compartan una ascendencia común.</p>
+</section>
+<p><br></p>
+</div>
+<div id="cómo-puedo-obtener-cambios-desde-un-repositorio-remoto" class="section level1">
+<h1><span class="header-section-number">41</span> ¿Cómo puedo obtener cambios desde un repositorio remoto?</h1>
+<section style="text-align: justify;">
+<p>Git realiza un seguimiento de los repositorios remotos para que pueda tirar (<font color="black">pull</font>) de los cambios de los repositorios y empuje (<font color="black">push</font>) cambios en ellos.</p>
+<p>Recuerde que el repositorio remoto a menudo es un repositorio en un servicio de alojamiento en línea como GitHub. Un flujo de trabajo típico es extraer el trabajo de sus colaboradores desde el repositorio remoto para tener la última versión de todo, hacer un trabajo usted mismo, y luego empujar (<font color="black">push</font>) su trabajo al control remoto para que sus colaboradores tengan acceso a él.</p>
+<p>Obtener cambios es sencillo: el comando <font color="black">git pull remote branch</font> obtiene todo la rama (branch) del repositorio remoto identificado por <font color="black">remote</font> y lo fusiona en la rama (branch) actual de su repositorio local. Por ejemplo, si está en la rama (branch) <font color="black">quarterly-report</font> de su repositorio local, el comando:</p>
+<section style="text-align: left;">
+<p>
+git pull thunk latest-analysis
+</p>
+</section>
+<p>obtendría cambios de la rama latest-analysis en el repositorio asociado con el remoto llamado thunk y los fusionaría en su rama (branch) quarterly-report.</p>
+</section>
+<p><br></p>
+</div>
+<div id="qué-sucede-si-trato-de-tirar-pull-cuando-tengo-cambios-sin-guardar" class="section level1">
+<h1><span class="header-section-number">42</span> ¿Qué sucede si trato de tirar (pull) cuando tengo cambios sin guardar?</h1>
+<section style="text-align: justify;">
+<p>Del mismo modo que Git le impide cambiar de rama (branch) cuando tiene trabajo no guardado, también le impide realizar cambios desde un repositorio remoto cuando hacerlo puede sobrescribir las cosas que ha hecho localmente. La solución es simple: puede confirmar sus cambios locales o revertirlos, y luego intentar volver a realizarlos.</p>
+</section>
+<p><br></p>
+</div>
+<div id="cómo-puedo-enviar-mis-cambios-a-un-repositorio-remoto" class="section level1">
+<h1><span class="header-section-number">43</span> ¿Cómo puedo enviar mis cambios a un repositorio remoto?</h1>
+<section style="text-align: justify;">
+<p>El complemento de <font color="black">git pull</font> es <font color="black">git push</font>, que empuja los cambios que ha realizado localmente en un repositorio remoto. La forma más común de usarlo es:</p>
+<section style="text-align: left;">
+<p>
+git push remote-name branch-name
+</p>
+</section>
+<p>que empuja el contenido de su rama <font color="black">branch-name</font> a una rama con el mismo nombre en el repositorio remoto asociado con <font color="black">remote-name</font>. Es posible usar diferentes nombres de rama en su extremo y en el extremo del control remoto, pero hacerlo rápidamente se vuelve confuso: casi siempre es mejor usar los mismos nombres para ramas en los repositorios.</p>
+</section>
+<p><br></p>
+</div>
+<div id="qué-sucede-si-mi-impulso-push-entra-en-conflicto-con-el-trabajo-de-otra-persona" class="section level1">
+<h1><span class="header-section-number">44</span> ¿Qué sucede si mi impulso (push) entra en conflicto con el trabajo de otra persona?</h1>
+<section style="text-align: justify;">
+<p>Sobrescribir su propio trabajo por accidente es malo; sobrescribir el de otra persona es peor.</p>
+<p>Para evitar que esto suceda, Git no le permite enviar cambios a un repositorio remoto a menos que haya fusionado el contenido del repositorio remoto en su propio trabajo.</p>
+</section>
 </div>
 
 
