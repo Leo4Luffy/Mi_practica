@@ -29,8 +29,9 @@ library(dplyr)
 library(tidyr)
 library(stringr)
 library(ggplot2)
-library(rsample) # Este paquete se uso porque contiene funciones de interés como por ejemplo, funciones para dividir el conjnto de datos en datos de entrenamiento y de prueba.
-library(tidymodels) # Este paquete consiste en una colección de paquetes para modelado y machine learning utilizando los principios del "tidyverse". Aquí https://www.tidymodels.org/find/ se encuentran todas las funciones disponibles en este paquete. Aquí https://www.tidymodels.org/help/ se pueden preparar preguntas para ayuda de tidymodels. 
+library(rsample) # Este paquete se uso porque contiene funciones de interés como por ejemplo, funciones para dividir el conjunto de datos en datos de entrenamiento y de prueba.
+library(tidymodels) # Este paquete consiste en una colección de paquetes para modelado y machine learning utilizando los principios del "tidyverse". Aquí https://www.tidymodels.org/find/ se encuentran todas las funciones disponibles en este paquete. Aquí https://www.tidymodels.org/help/ se pueden preparar preguntas para ayuda de tidymodels.
+library(themis) # Este paquete contiene funciones para tratar con datos no balanceados.
 library(raster)
 library(sf)
 library(ggsflabel)
@@ -102,7 +103,7 @@ ggplot(data = mapa_Col_sf) +
 
 <div class = "col-md-6">
 
-<section style="text-align: justify;"><p class="text-primary">La base de datos comprende el registro informativo del carácter intervalo entre partos en bovino criollo colombiano Romosinuano.</p></section>
+<section style="text-align: justify;"><p class="text-primary">La base de datos comprende el registro informativo del carácter intervalo entre partos en el bovino criollo colombiano Romosinuano.</p></section>
 
 <section style="text-align: justify;"><p class="text-primary">Dicha base de datos se caracteriza por presentar una <font color="black"><u>estructura de clúster de tipo longitudinal</u></font>, cuyo ejemplo se puede observar en la siguiente imagen:</p></section>
 
@@ -385,6 +386,8 @@ Base_datos_3 <- Base_datos_2 %>%
   dplyr::select(Hija, IEP, N_parto, Sexo_hija, Edad_parto, Epoca_parto, Ano_parto, D_abierto) %>%
   rename('Individuo' = Hija, 'IEP' = IEP, 'OP' = N_parto, 'SC' = Sexo_hija, 'EdP' = Edad_parto, 'ÉpP' = Epoca_parto, 'AP' = Ano_parto, 'DA' = D_abierto)
 
+write.table(Base_datos_3, file = 'Datos_Romo.csv', row.names = FALSE, col.names = TRUE, sep = ',', dec = '.') # Se importa lo anterior
+
 #glimpse(Base_datos_3) # Esta función es similar a la función str().
 
 edad_parto <- Base_datos_2 %>%
@@ -406,7 +409,7 @@ edad_parto <- Base_datos_2 %>%
 ```{r eval = require('DT'), tidy = FALSE, echo = FALSE, eval = TRUE, message = FALSE}
 
 DT::datatable(
-  head(Base_datos_3, 7394), 
+  head(Base_datos_3, 7395), 
   fillContainer = FALSE, options = list(pageLength = 5),
   caption = htmltools::tags$caption(
     style = 'caption-side: bottom; text-align: left;',
@@ -530,7 +533,7 @@ datos_prueba <- testing(division_datos)
   hlt_funs(color = 'deeppink', underline = TRUE)
 ```
 
-<section style="text-align: justify;"><p class="text-primary">Muchas veces además de dividir el conjunto de datos en entrenamiento y prueba, se suele elegir aleatoriamente X% (por ejemplo un 80%) del conjunto de datos de entrenamiento para que sea el conjunto de entrenamiento real y el % restante (100-X) para que sea el conjunto de validación. El modelo se entrena iterativamente y se valida en estos conjuntos diferentes. Esto se conoce comúnmente como <font color="black"><u>método de remuestreo</u></font>. <!--Básicamente, usa el conjunto de entrenamiento para generar múltiples divisiones de los conjuntos de entrenamiento y validación. La validación cruzada evita el ajuste excesivo y se está volviendo cada vez más popular, siendo la validación cruzada K-fold el método más popular de validación cruzada.--></p></section>
+<section style="text-align: justify;"><p class="text-primary">Muchas veces además de dividir el conjunto de datos en entrenamiento y prueba, se suele elegir aleatoriamente X% (por ejemplo un 80%) del conjunto de datos de entrenamiento para que sea el conjunto de entrenamiento real y el % restante (100-X) para que sea el conjunto de validación. El modelo se entrena iterativamente y se valida en estos conjuntos de datos diferentes. Esto se conoce comúnmente como <font color="black"><u>método de remuestreo</u></font>. <!--Básicamente, usa el conjunto de entrenamiento para generar múltiples divisiones de los conjuntos de entrenamiento y validación. La validación cruzada evita el ajuste excesivo y se está volviendo cada vez más popular, siendo la validación cruzada K-fold el método más popular de validación cruzada.--></p></section>
 
 </div>
 
@@ -851,6 +854,8 @@ boxplot_EpP <- Base_datos_3 %>%
 
 <!-- La distribución de probabilidad permite asignar a cada evento la probabilidad de que este ocurra o tenga éxito. Con el estudio de las probabilidades, se ha permitido una manera de estandarizar los sucesos y procesos que ocurren al azar, esto se ha logrado estimando las frecuencias en las que se obtiene un resultado en específico. -->
 
+<!-- Aquí (https://www.tidymodels.org/learn/models/parsnip-nnet/) muestran que este proceso de ver la distribución de los datos se realiza usando los datos de entrenamiento. -->
+
 ```{r Ejemplo de distribución normal de los datos, fig.align = 'center', eval = TRUE, echo = FALSE, message = FALSE, fig.showtext = TRUE, out.width = '220'}
 
 Normal <- function(n, Lower, Upper) { # Función para simular datos con distribución normal
@@ -1168,14 +1173,193 @@ balanceo_AP_DE <- datos_entrenamiento %>%
 
 ---
 
-<section style="text-align: center;"><h2><p class="text-info">Ajustando inicialmente un modelo básico de regresión</p></h2></section>
+<section style="text-align: center;"><h2><p class="text-info">Ajuste inicial de un modelo básico de regresión</p></h2></section>
 
 <br>
 
-```{r, fig.align = 'center', out.width = '570', eval = TRUE, echo = FALSE, message = FALSE}
+```{r, fig.align = 'center', out.width = '670', eval = TRUE, echo = FALSE, message = FALSE}
 
 knitr::include_graphics('Imagenes/paquete_recipes.png')
 ```
+
+---
+
+<section style="text-align: center;"><h2><p class="text-info">Ajuste inicial de un modelo básico de regresión</p></h2></section>
+
+<br>
+
+```{r Ajuste del modelo básico 1 usando el paquete tidymodels, echo = FALSE, eval = FALSE, message = FALSE}
+
+# Se especifica o construye el modelo básico de regresión con el uso del paquete parsnip (en base a https://www.tidymodels.org/start/models/) ----
+
+Reg_bas_mod <- linear_reg(mixture = 1) %>% # Se especifica aqui la forma funcional (o el tipo) del modelo a ajustar usando la función linear_reg() del paquete parsnip. En este caso corresponde a modelo de regresión lineal. Se establece también con "mixture = 1" que no se tendran en cuenta predictores irrelevantes y se elegirá un modelo más simple.
+  set_engine('lm') # Aquí se establece el método para ajustar o entrenar el modelo anterior usando "engine" (o el motor en español). En este caso, mínimos cuadrados ordinarios (lm).
+
+# Uso de recipe() del paquete tidymodels para indicar como será el preprocesamiento de los datos (en base a https://www.tidymodels.org/start/recipes/ y https://www.tidymodels.org/start/case-study/) ----
+
+Reg_bas_rec <- recipe(IEP ~ ., data = datos_entrenamiento) %>% # Aquí, la variable al lado izquierdo de "~" se considera la variabe respuesta, y las del lado derecho las variables predictoras. Se indico con "." todas las demás variables además de "IEP" como variables predictoras, y en "data" el conjunto de entrenamiento.
+  step_rm(Individuo) %>% # Con step_rm() se eliminan las variables que no se quieren en el modelo, en este caso, la identificación del individuo.
+  step_upsample(AP, over_ratio = 1) %>% # Con la función step_upsample() se replica de forma aleatoria y con reemplazo el número de observaciones de los niveles de la variable año de parto (y las otras variables predictoras). "over_ratio = 1", significa que el número de dichas observaciones de las clases minoritarias se muestrean para tener la misma frecuencia que el nivel más frecuente... el valor de 1 de over_ratio es el valor predeterminado. 
+  step_upsample(OP, over_ratio = 1) %>%
+  step_upsample(ÉpP, over_ratio = 1) %>%
+  step_upsample(SC, over_ratio = 1) %>%
+  step_dummy(all_nominal()) %>% # Aquí, los caracteres o factores (o variables nominales) se convierten en variables dummy o variables indicadoras.
+  step_BoxCox(IEP) %>% # Para tratar los datos de IEP con valores atípicos y distribución con sesgo a la derecha, se transforma esta variable usando las funciones step_BoxCox() y step_normalize(), como en el ejemplo de https://www.tidymodels.org/learn/models/parsnip-nnet/.
+  step_normalize(IEP)
+
+#recipe(IEP ~ ., data = datos_entrenamiento) %>% # De esta forma es posible ver como funciona la función step_upsample().
+  #step_upsample(AP, over_ratio = 1) %>%
+  #prep() %>%
+  #juice() %>%
+  #ggplot(aes(AP)) +
+  #geom_bar()
+
+# Una vez se construyo el modelo y se prepardo la receta, se usa un "model workflow" (flujo de trabajo modelo) para combinar ambos procesos juntos. Esto mediante la función workflow() del paquete tidymodels (en base a https://www.tidymodels.org/start/recipes/) ----
+
+Reg_bas_wflow <- workflow() %>%
+  add_model(Reg_bas_mod) %>% # Modelo ajustado anteriormente
+  add_recipe(Reg_bas_rec) # Receta anterior
+Reg_bas_wflow
+
+# Ahora, se crea un objeto que contiene los objetos anteriores de la receta creada y el modelo ajustado... luego, usando la función() del paquete broom se obtiene un "tibble ordenado" de los coeficientes del modelo (en base a https://www.tidymodels.org/start/recipes/) ----
+
+Reg_bas_fit <- Reg_bas_wflow %>%
+  fit(data = datos_entrenamiento)
+
+Reg_bas_fit %>%
+  pull_workflow_fit() %>%
+  tidy()
+```
+
+<div class = "row">
+
+<div class = "col-md-6">
+
+<section style="text-align: justify;"><p class="text-primary">Se <font color = "black"><u>construye</font></u> inicialmente el modelo:</p></section>
+
+```{r Construcción del modelo básico de regresión, echo = FALSE, eval = TRUE, message = FALSE}
+
+demo_code('
+Reg_bas_mod <- linear_reg(mixture = 1) %>%
+  set_engine("lm")
+') %>%
+  hlt_args(color = 'gray') %>%
+  hlt_funs(color = 'deeppink', underline = TRUE)
+```
+
+<section style="text-align: justify;"><p class="text-primary">Luego se prepara la <font color = "black"><u>receta</font></u>:</p></section>
+
+```{r Preprocesamiento de los datos usando recetas, echo = FALSE, eval = TRUE, message = FALSE}
+
+demo_code('
+Reg_bas_rec <- recipe(IEP ~ ., data = datos_entrenamiento) %>% 
+  step_rm(Individuo) %>%
+  step_upsample(AP) %>%
+  step_upsample(OP) %>%
+  step_upsample(ÉpP) %>%
+  step_upsample(SC) %>%
+  step_dummy(all_nominal()) %>%
+  step_BoxCox(IEP) %>%
+  step_normalize(IEP)
+') %>%
+  hlt_args(color = 'gray') %>%
+  hlt_funs(color = 'deeppink', underline = TRUE)
+```
+
+</div>
+
+<div class = "col-md-6">
+
+<section style="text-align: justify;"><p class="text-primary">Luego mediante un <font color = "black"><u>flujo de trabajo modelo</u></font> se combinan los dos pasos anteriores:</p></section>
+
+```{r Flujo de trabajo modelo para combinar el modelo y la receta, echo = FALSE, eval = TRUE, message = FALSE}
+
+demo_code('
+Reg_bas_wflow <- workflow() %>%
+  add_model(Reg_bas_mod) %>%
+  add_recipe(Reg_bas_rec)
+') %>%
+  hlt_args(color = 'gray') %>%
+  hlt_funs(color = 'deeppink', underline = TRUE)
+```
+
+<section style="text-align: justify;"><p class="text-primary">Finalmente, se accede a los coeficientes del modelo ajustado de <font color = "black"><u>forma ordenada</u></font>:
+
+```{r Obtención del modelo anteriormente ajustado, echo = FALSE, eval = TRUE, message = FALSE}
+
+demo_code('
+Reg_bas_fit <- Reg_bas_wflow %>%
+  fit(data = datos_entrenamiento)
+
+Resultado_reg_bas <- Reg_bas_fit %>%
+  pull_workflow_fit() %>%
+  tidy()
+') %>%
+  hlt_args(color = 'gray') %>%
+  hlt_funs(color = 'deeppink', underline = TRUE)
+```
+
+</div>
+
+</div>
+
+```{r Ajuste del modelo básico 2 usando el paquete tidymodels, echo = FALSE, eval = FALSE, message = FALSE}
+
+# ----
+
+Reg_bas_mod <- linear_reg(mixture = 1) %>%
+  set_engine('lm')
+
+# ----
+
+Reg_bas_rec_2 <- recipe(IEP ~ ., data = datos_entrenamiento) %>%
+  step_rm(Individuo) %>%
+  step_downsample(AP, under_ratio = 1) %>%  # Aquí con la función step_downsample() contario a la función anterior step_upsample() el número de observaciones de las clases mayoritarias se muestrean para tener la misma frecuencia que el nivel menos frecuente.
+  step_downsample(OP, under_ratio = 1) %>%
+  step_downsample(ÉpP, under_ratio = 1) %>%
+  step_downsample(SC, under_ratio = 1) %>%
+  step_dummy(all_nominal()) %>%
+  step_BoxCox(IEP) %>%
+  step_normalize(IEP)
+
+#recipe(IEP ~ ., data = datos_entrenamiento) %>% # De esta forma es posible ver como funciona la función step_downsample().
+  #step_downsample(AP, under_ratio = 1) %>%
+  #prep() %>%
+  #juice() %>%
+  #ggplot(aes(AP)) +
+  #geom_bar()
+
+# ----
+
+Reg_bas_wflow_2 <- workflow() %>%
+  add_model(Reg_bas_mod) %>%
+  add_recipe(Reg_bas_rec_2)
+Reg_bas_wflow_2
+
+# ----
+
+Reg_bas_fit_2 <- Reg_bas_wflow_2 %>% # Da un error creeria yo porque por medio de la función step_downsample() se lleva a un número de observaciones de cada nivel tal que no sea posible ajustar el modelo.
+  fit(data = datos_entrenamiento)
+
+Reg_bas_fit_2 %>%
+  pull_workflow_fit() %>%
+  tidy()
+```
+
+---
+
+<section style="text-align: center;"><h2><p class="text-info">Ajuste de un modelo básico de regresión</p></h2></section>
+
+<br>
+
+```{r Resultado del modelo de regresión básico, eval = TRUE, echo = FALSE, message = FALSE}
+
+Resultado_reg_bas
+```
+
+---
+
+<section style="text-align: center;"><h2><p class="text-info">Ajuste de un modelo de regresión mixto</p></h2></section>
 
 <!--
 En estas paginas comparten paso a paso el uso de varios paquetes del paquete tidymodels para ajustar un modelo de regresión logistica (entonces creo que se podria hacer lo mismo para modelos mixtos):
