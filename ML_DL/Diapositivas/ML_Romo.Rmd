@@ -535,6 +535,10 @@ datos_prueba <- testing(division_datos)
 
 <section style="text-align: justify;"><p class="text-primary">Muchas veces además de dividir el conjunto de datos en entrenamiento y prueba, se suele elegir aleatoriamente X% (por ejemplo un 80%) del conjunto de datos de entrenamiento para que sea el conjunto de entrenamiento real y el % restante (100-X) para que sea el conjunto de validación. El modelo se entrena iterativamente y se valida en estos conjuntos de datos diferentes. Esto se conoce comúnmente como <font color="black"><u>método de remuestreo</u></font>. <!--Básicamente, usa el conjunto de entrenamiento para generar múltiples divisiones de los conjuntos de entrenamiento y validación. La validación cruzada evita el ajuste excesivo y se está volviendo cada vez más popular, siendo la validación cruzada K-fold el método más popular de validación cruzada.--></p></section>
 
+<!--
+Aquí (https://nicd.ncl.ac.uk/blog/posts/building-a-classification-model-with-tidymodels/) indican que el propósito de dividir los datos en conjuntos de entrenamiento y prueba es evitar un ajuste excesivo y permitirnos comprender cómo se desempeñará nuestro modelo elegido en datos nuevos e invisibles. Por esa razón, el conjunto de prueba no se usa para seleccionar el modelo o el ajuste del hiperparámetro del modelo.
+-->
+
 </div>
 
 </div>
@@ -1171,33 +1175,46 @@ balanceo_AP_DE <- datos_entrenamiento %>%
 (balanceo_AP_DE) | (balanceo_OP_DE / balanceo_ÉpP_DE / balanceo_SC_DE)
 ```
 
----
-
-<section style="text-align: center;"><h2><p class="text-info">Ajuste inicial de un modelo básico de regresión</p></h2></section>
-
-<br>
-
-```{r, fig.align = 'center', out.width = '670', eval = TRUE, echo = FALSE, message = FALSE}
+```{r, fig.align = 'center', out.width = '670', eval = FALSE, echo = FALSE, message = FALSE}
 
 knitr::include_graphics('Imagenes/paquete_recipes.png')
+```
+
+<!--
+Si bien los datos de IEP usados en este estudio no tienen valores ausentes (NA), aquí (https://www.cienciadedatos.net/documentos/59_machine_learning_con_r_y_tidymodels) mencionan lo importante y básico que es conocer el número de observaciones disponibles y si todas ellas estan completas, puesto que los valores NA pueden influir sobre los modelos de machine learning. También si es el caso de presenterse valores NA, recomienda llevar a cabo imputación (tratar de estimar los valores ausentes empleando el resto de información disponible) como parte del preprocesado de datos únicamente en los datos de entrenamiento.
+-->
+
+```{r Función que calcula el número de datos ausentes por variable, echo = FALSE, eval = FALSE, message = FALSE}
+
+Base_datos_3 %>% map_dbl(.f = function(x){sum(is.na(x))}) # La función map_dbl es del paquete purrr.
+
+library(DataExplorer)
+
+plot_missing(
+  data    = Base_datos_3, 
+  title   = '',
+  ggtheme = theme_bw(),
+  theme_config = list(legend.position = '')
+)
 ```
 
 ---
 
 <section style="text-align: center;"><h2><p class="text-info">Ajuste inicial de un modelo básico de regresión</p></h2></section>
 
-<br>
-
 ```{r Ajuste del modelo básico 1 usando el paquete tidymodels, echo = FALSE, eval = FALSE, message = FALSE}
 
 # Se especifica o construye el modelo básico de regresión con el uso del paquete parsnip (en base a https://www.tidymodels.org/start/models/) ----
 
-Reg_bas_mod <- linear_reg(mixture = 1) %>% # Se especifica aqui la forma funcional (o el tipo) del modelo a ajustar usando la función linear_reg() del paquete parsnip. En este caso corresponde a modelo de regresión lineal. Se establece también con "mixture = 1" que no se tendran en cuenta predictores irrelevantes y se elegirá un modelo más simple.
+Reg_bas_mod <- linear_reg() %>% # Se especifica aqui la forma funcional (o el tipo) del modelo a ajustar usando la función linear_reg() del paquete parsnip. En este caso corresponde a modelo de regresión lineal.
   set_engine('lm') # Aquí se establece el método para ajustar o entrenar el modelo anterior usando "engine" (o el motor en español). En este caso, mínimos cuadrados ordinarios (lm).
 
 # Uso de recipe() del paquete tidymodels para indicar como será el preprocesamiento de los datos (en base a https://www.tidymodels.org/start/recipes/ y https://www.tidymodels.org/start/case-study/) ----
 
-Reg_bas_rec <- recipe(IEP ~ ., data = datos_entrenamiento) %>% # Aquí, la variable al lado izquierdo de "~" se considera la variabe respuesta, y las del lado derecho las variables predictoras. Se indico con "." todas las demás variables además de "IEP" como variables predictoras, y en "data" el conjunto de entrenamiento.
+Reg_bas_rec <- recipe(
+  formula = IEP ~ ., 
+  data = datos_entrenamiento
+  ) %>% # Aquí, la variable al lado izquierdo de "~" se considera la variabe respuesta, y las del lado derecho las variables predictoras. Se indico con "." todas las demás variables además de "IEP" como variables predictoras, y en "data" el conjunto de entrenamiento.
   step_rm(Individuo) %>% # Con step_rm() se eliminan las variables que no se quieren en el modelo, en este caso, la identificación del individuo.
   step_upsample(AP, over_ratio = 1) %>% # Con la función step_upsample() se replica de forma aleatoria y con reemplazo el número de observaciones de los niveles de la variable año de parto (y las otras variables predictoras). "over_ratio = 1", significa que el número de dichas observaciones de las clases minoritarias se muestrean para tener la misma frecuencia que el nivel más frecuente... el valor de 1 de over_ratio es el valor predeterminado. 
   step_upsample(OP, over_ratio = 1) %>%
@@ -1206,6 +1223,8 @@ Reg_bas_rec <- recipe(IEP ~ ., data = datos_entrenamiento) %>% # Aquí, la varia
   step_dummy(all_nominal()) %>% # Aquí, los caracteres o factores (o variables nominales) se convierten en variables dummy o variables indicadoras.
   step_BoxCox(IEP) %>% # Para tratar los datos de IEP con valores atípicos y distribución con sesgo a la derecha, se transforma esta variable usando las funciones step_BoxCox() y step_normalize(), como en el ejemplo de https://www.tidymodels.org/learn/models/parsnip-nnet/.
   step_normalize(IEP)
+
+# NOTA: Aquí (https://www.cienciadedatos.net/documentos/59_machine_learning_con_r_y_tidymodels) indica que todo preprocesado de datos debe realizarse con los datos de entrenamiento y luego aplicarse a los otros tipos de datos, lo cual es muy importante para no violar la condición de que ninguna información procedente de los datos de prueba participen o influyan en el ajuste del modelo.
 
 #recipe(IEP ~ ., data = datos_entrenamiento) %>% # De esta forma es posible ver como funciona la función step_upsample().
   #step_upsample(AP, over_ratio = 1) %>%
@@ -1240,7 +1259,7 @@ Reg_bas_fit %>%
 ```{r Construcción del modelo básico de regresión, echo = FALSE, eval = TRUE, message = FALSE}
 
 demo_code('
-Reg_bas_mod <- linear_reg(mixture = 1) %>%
+Reg_bas_mod <- linear_reg() %>%
   set_engine("lm")
 ') %>%
   hlt_args(color = 'gray') %>%
@@ -1252,7 +1271,10 @@ Reg_bas_mod <- linear_reg(mixture = 1) %>%
 ```{r Preprocesamiento de los datos usando recetas, echo = FALSE, eval = TRUE, message = FALSE}
 
 demo_code('
-Reg_bas_rec <- recipe(IEP ~ ., data = datos_entrenamiento) %>% 
+Reg_bas_rec <- recipe(
+  formula = IEP ~ .,
+  data = datos_entrenamiento
+  ) %>% 
   step_rm(Individuo) %>%
   step_upsample(AP) %>%
   step_upsample(OP) %>%
@@ -1368,4 +1390,7 @@ En estas paginas comparten paso a paso el uso de varios paquetes del paquete tid
 
 En esta pagina comparten paso a paso una forma de medir, basado en estadísticas de remuestreo, qué tan bien el modelo ajustado mediante los pasos anteriores predice nuevos datos:
 - https://www.tidymodels.org/start/resampling/... también dan un ejemplo de arboles de decisión y bosques aleatorios.
+
+En esta pagina comparten el paso a paso del uso de tidymodels, mediante un modelo de regresión lineal y bosque aleatorio:
+- https://hohenfeld.is/posts/an-introduction-to-tidymodels/.
 -->
