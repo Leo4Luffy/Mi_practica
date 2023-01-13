@@ -1,0 +1,21 @@
+manufacturer,model,displ,year,cyl,trans,drv,cty,hwy,fl,class
+nissan,altima,2.5,2008,4,auto(av),f,23,31,r,midsize
+audi,a4 quattro,2,2008,4,manual(m6),4,20,28,p,compact
+toyota,camry,3,1999,6,manual(m5),f,18,26,r,midsize
+toyota,4runner 4wd,3.4,1999,6,manual(m5),4,15,17,r,suv
+dodge,durango 4wd,4.7,2008,8,auto(l5),4,13,17,r,suv
+hyundai,sonata,2.5,1999,6,manual(m5),f,18,26,r,midsize
+dodge,dakota pickup 4wd,3.7,2008,6,manual(m6),4,15,19,r,pickup
+toyota,camry,3,1999,6,auto(l4),f,18,26,r,midsize
+honda,civic,1.6,1999,4,manual(m5),f,23,29,p,subcompact
+volkswagen,gti,2,1999,4,auto(l4),f,19,26,r,compact
+volkswagen,jetta,2.8,1999,6,manual(m5),f,17,24,r,compact
+dodge,caravan 2wd,3.3,2008,6,auto(l4),f,11,17,e,minivan
+land rover,range rover,4.2,2008,8,auto(s6),4,12,18,r,suv
+dodge,durango 4wd,3.9,1999,6,auto(l4),4,13,17,r,suv
+nissan,pathfinder 4wd,3.3,1999,6,manual(m5),4,15,17,r,suv
+audi,a4,1.8,1999,4,manual(m5),f,21,29,p,compact
+ford,explorer 4wd,4,1999,6,auto(l5),4,14,17,r,suv
+audi,a4,1.8,1999,4,auto(l5),f,18,29,p,compact
+dodge,dakota pickup 4wd,5.2,1999,8,manual(m5),4,11,17,r,pickup
+mercury,mountaineer 4wd,4.6,2008,8,auto(l6),4,13,19,r,suv

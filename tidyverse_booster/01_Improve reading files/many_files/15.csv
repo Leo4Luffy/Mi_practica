@@ -1,0 +1,21 @@
+manufacturer,model,displ,year,cyl,trans,drv,cty,hwy,fl,class
+toyota,corolla,1.8,1999,4,auto(l3),f,24,30,r,compact
+dodge,dakota pickup 4wd,5.2,1999,8,auto(l4),4,11,15,r,pickup
+dodge,durango 4wd,5.7,2008,8,auto(l5),4,13,18,r,suv
+volkswagen,new beetle,2,1999,4,auto(l4),f,19,26,r,subcompact
+dodge,ram 1500 pickup 4wd,5.9,1999,8,auto(l4),4,11,15,r,pickup
+audi,a4 quattro,2,2008,4,manual(m6),4,20,28,p,compact
+ford,mustang,3.8,1999,6,auto(l4),r,18,25,r,subcompact
+audi,a4 quattro,1.8,1999,4,auto(l5),4,16,25,p,compact
+dodge,caravan 2wd,3.8,1999,6,auto(l4),f,15,22,r,minivan
+volkswagen,passat,2.8,1999,6,auto(l5),f,16,26,p,midsize
+ford,mustang,4.6,2008,8,manual(m5),r,15,23,r,subcompact
+honda,civic,1.8,2008,4,manual(m5),f,26,34,r,subcompact
+ford,explorer 4wd,4,1999,6,auto(l5),4,14,17,r,suv
+nissan,pathfinder 4wd,3.3,1999,6,manual(m5),4,15,17,r,suv
+subaru,impreza awd,2.2,1999,4,auto(l4),4,21,26,r,subcompact
+subaru,impreza awd,2.5,2008,4,auto(s4),4,20,25,p,compact
+dodge,dakota pickup 4wd,4.7,2008,8,auto(l5),4,14,19,r,pickup
+toyota,4runner 4wd,3.4,1999,6,manual(m5),4,15,17,r,suv
+nissan,altima,2.5,2008,4,auto(av),f,23,31,r,midsize
+dodge,caravan 2wd,3.8,2008,6,auto(l6),f,16,23,r,minivan

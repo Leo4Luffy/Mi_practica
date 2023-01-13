@@ -1,0 +1,21 @@
+manufacturer,model,displ,year,cyl,trans,drv,cty,hwy,fl,class
+dodge,durango 4wd,3.9,1999,6,auto(l4),4,13,17,r,suv
+chevrolet,corvette,5.7,1999,8,auto(l4),r,15,23,p,2seater
+honda,civic,1.6,1999,4,auto(l4),f,24,32,r,subcompact
+toyota,toyota tacoma 4wd,4,2008,6,manual(m6),4,15,18,r,pickup
+hyundai,tiburon,2.7,2008,6,manual(m6),f,16,24,r,subcompact
+toyota,camry,3,1999,6,auto(l4),f,18,26,r,midsize
+toyota,corolla,1.8,2008,4,manual(m5),f,28,37,r,compact
+honda,civic,2,2008,4,manual(m6),f,21,29,p,subcompact
+ford,mustang,3.8,1999,6,auto(l4),r,18,25,r,subcompact
+dodge,caravan 2wd,3.8,1999,6,auto(l4),f,15,22,r,minivan
+subaru,impreza awd,2.5,1999,4,auto(l4),4,19,26,r,subcompact
+chevrolet,k1500 tahoe 4wd,5.3,2008,8,auto(l4),4,14,19,r,suv
+chevrolet,corvette,7,2008,8,manual(m6),r,15,24,p,2seater
+jeep,grand cherokee 4wd,4,1999,6,auto(l4),4,15,20,r,suv
+pontiac,grand prix,3.8,1999,6,auto(l4),f,16,26,p,midsize
+nissan,maxima,3,1999,6,manual(m5),f,19,25,r,midsize
+honda,civic,1.8,2008,4,auto(l5),f,25,36,r,subcompact
+audi,a4 quattro,3.1,2008,6,auto(s6),4,17,25,p,compact
+subaru,forester awd,2.5,2008,4,manual(m5),4,19,25,p,suv
+toyota,toyota tacoma 4wd,2.7,1999,4,auto(l4),4,16,20,r,pickup
