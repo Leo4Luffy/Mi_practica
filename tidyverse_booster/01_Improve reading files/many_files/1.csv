@@ -1,0 +1,21 @@
+manufacturer,model,displ,year,cyl,trans,drv,cty,hwy,fl,class
+audi,a4 quattro,3.1,2008,6,auto(s6),4,17,25,p,compact
+volkswagen,jetta,2,2008,4,manual(m6),f,21,29,p,compact
+subaru,forester awd,2.5,2008,4,manual(m5),4,20,27,r,suv
+audi,a4,3.1,2008,6,auto(av),f,18,27,p,compact
+honda,civic,1.6,1999,4,manual(m5),f,28,33,r,subcompact
+pontiac,grand prix,3.8,1999,6,auto(l4),f,17,27,r,midsize
+hyundai,tiburon,2.7,2008,6,manual(m6),f,16,24,r,subcompact
+mercury,mountaineer 4wd,5,1999,8,auto(l4),4,13,17,r,suv
+jeep,grand cherokee 4wd,4.7,1999,8,auto(l4),4,14,17,r,suv
+hyundai,sonata,3.3,2008,6,auto(l5),f,19,28,r,midsize
+dodge,ram 1500 pickup 4wd,5.7,2008,8,auto(l5),4,13,17,r,pickup
+toyota,camry solara,2.2,1999,4,manual(m5),f,21,29,r,compact
+dodge,caravan 2wd,3.8,1999,6,auto(l4),f,15,22,r,minivan
+volkswagen,passat,2.8,1999,6,auto(l5),f,16,26,p,midsize
+lincoln,navigator 2wd,5.4,2008,8,auto(l6),r,12,18,r,suv
+nissan,maxima,3.5,2008,6,auto(av),f,19,25,p,midsize
+volkswagen,jetta,2,1999,4,manual(m5),f,21,29,r,compact
+ford,explorer 4wd,5,1999,8,auto(l4),4,13,17,r,suv
+dodge,ram 1500 pickup 4wd,4.7,2008,8,manual(m6),4,12,16,r,pickup
+audi,a4,2,2008,4,manual(m6),f,20,31,p,compact

@@ -1,0 +1,21 @@
+manufacturer,model,displ,year,cyl,trans,drv,cty,hwy,fl,class
+ford,f150 pickup 4wd,5.4,1999,8,auto(l4),4,11,15,r,pickup
+dodge,durango 4wd,3.9,1999,6,auto(l4),4,13,17,r,suv
+jeep,grand cherokee 4wd,4.7,1999,8,auto(l4),4,14,17,r,suv
+audi,a6 quattro,4.2,2008,8,auto(s6),4,16,23,p,midsize
+ford,f150 pickup 4wd,5.4,2008,8,auto(l4),4,13,17,r,pickup
+ford,explorer 4wd,4,1999,6,auto(l5),4,14,17,r,suv
+chevrolet,corvette,7,2008,8,manual(m6),r,15,24,p,2seater
+dodge,caravan 2wd,3.3,2008,6,auto(l4),f,17,24,r,minivan
+toyota,camry,2.2,1999,4,manual(m5),f,21,29,r,midsize
+ford,mustang,3.8,1999,6,manual(m5),r,18,26,r,subcompact
+volkswagen,passat,2.8,1999,6,manual(m5),f,18,26,p,midsize
+dodge,dakota pickup 4wd,4.7,2008,8,auto(l5),4,14,19,r,pickup
+dodge,dakota pickup 4wd,4.7,2008,8,auto(l5),4,9,12,e,pickup
+toyota,camry solara,3,1999,6,auto(l4),f,18,26,r,compact
+dodge,dakota pickup 4wd,3.9,1999,6,manual(m5),4,14,17,r,pickup
+ford,expedition 2wd,4.6,1999,8,auto(l4),r,11,17,r,suv
+pontiac,grand prix,3.1,1999,6,auto(l4),f,18,26,r,midsize
+dodge,caravan 2wd,3,1999,6,auto(l4),f,17,24,r,minivan
+hyundai,sonata,3.3,2008,6,auto(l5),f,19,28,r,midsize
+audi,a4 quattro,1.8,1999,4,manual(m5),4,18,26,p,compact
